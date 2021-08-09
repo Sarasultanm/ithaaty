@@ -13,4 +13,8 @@ class UserLikes extends Model
     public function get_audio(){
         return $this->belongsTo('App\Models\Audio', 'like_audioid', 'id');
     }
+
+    public function get_user(){
+        return $this->belongsTo('App\Models\User', 'like_userid', 'id');
+    }
 }

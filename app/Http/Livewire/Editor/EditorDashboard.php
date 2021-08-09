@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\UserFollow;
 use App\Models\UserLikes;
 use App\Models\UserFav;
+use App\Models\UserNotifications;
 use App\Models\UserComments;
 use Auth;
 
@@ -119,12 +120,29 @@ class EditorDashboard extends Component
              $data->follow_type = "follow";
              $data->follow_status = "active";
              $data->save();
+
+             $notif = new UserNotifications;
+             $notif->notif_userid = Auth::User()->id;
+             $notif->notif_type = "follow";
+             $notif->notif_type_id = $data->id;
+             $notif->notif_message = "You are now following";
+             $notif->status = "active";
+             $notif->save();
+
+             $notif1 = new UserNotifications;
+             $notif1->notif_userid = $id;
+             $notif1->notif_type = "following";
+             $notif1->notif_type_id = $data->id;
+             $notif1->notif_message = "Start following you";
+             $notif1->status = "active";
+             $notif1->save();
+             
              session()->flash('status', 'Done Following');
              redirect()->to('/editor/dashboard');
 
         }
 
-        public function like($id){
+        public function like($id,$audio_editor){
 
              $data = new UserLikes;
              $data->like_userid = Auth::User()->id;
@@ -132,6 +150,24 @@ class EditorDashboard extends Component
              $data->like_type = "like";
              $data->like_status = "active";
              $data->save();
+
+             $notif = new UserNotifications;
+             $notif->notif_userid = Auth::User()->id;
+             $notif->notif_type = "like";
+             $notif->notif_type_id = $data->id;
+             $notif->notif_message = "You like the audio of";
+             $notif->status = "active";
+             $notif->save();
+
+             $notif1 = new UserNotifications;
+             $notif1->notif_userid = $audio_editor;
+             $notif1->notif_type = "liked";
+             $notif1->notif_type_id = $data->id;
+             $notif1->notif_message = "Like your audio";
+             $notif1->status = "active";
+             $notif1->save();
+
+
             
             $this->emit('refreshParent');
 
@@ -155,7 +191,7 @@ class EditorDashboard extends Component
             $this->comments = null;
         }
 
-        public function saveComment($id){
+        public function saveComment($id,$audio_editor){
 
              $data = new UserComments;
              $data->coms_userid = Auth::User()->id;
@@ -164,6 +200,23 @@ class EditorDashboard extends Component
              $data->coms_message = $this->comments;
              $data->coms_status = "active";
              $data->save();
+
+             $notif = new UserNotifications;
+             $notif->notif_userid = Auth::User()->id;
+             $notif->notif_type = "comments";
+             $notif->notif_type_id = $data->id;
+             $notif->notif_message = "You are commenting on the audio of";
+             $notif->status = "active";
+             $notif->save();
+
+             $notif1 = new UserNotifications;
+             $notif1->notif_userid = $audio_editor;
+             $notif1->notif_type = "commenting";
+             $notif1->notif_type_id = $data->id;
+             $notif1->notif_message = "commenting on your audio";
+             $notif1->status = "active";
+             $notif1->save();
+
             
              $this->clearFields();
 

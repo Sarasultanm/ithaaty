@@ -377,7 +377,7 @@
                   <div class="flex space-x-6">
                     <span class="inline-flex items-center text-sm">
                      @if( EditorDashboard::checkLike($audio->id) == 0 )	
-                      <button wire:click="like({{ $audio->id }})" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                      <button wire:click="like({{ $audio->id }},{{$audio->audio_editor}})" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                      @else
                       <button class="inline-flex space-x-2 text-indigo-400 hover:text-gray-500">
                      @endif 
@@ -530,7 +530,7 @@
                   <div class="flex space-x-6">
                     <span class="inline-flex items-center text-sm">
                      @if( EditorDashboard::checkLike($audio->id) == 0 )	
-                      <button wire:click="like({{ $audio->id }})" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                      <button wire:click="like({{ $audio->id }},{{$audio->audio_editor}})" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                      @else
                       <button class="inline-flex space-x-2 text-indigo-400 hover:text-gray-500">
                      @endif 	
@@ -578,7 +578,7 @@
                 </div>
                 <div class="mt-5">
 	                <div class="mt-1">
-	                  <input type="text" name="email" id="email" placeholder="Comments" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="comments" wire:keydown.enter="saveComment({{ $audio->id }})"  >
+	                  <input type="text" name="email" id="email" placeholder="Comments" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="comments" wire:keydown.enter="saveComment({{ $audio->id }},{{$audio->audio_editor}})"  >
 	                </div>
 		        </div>
 		       
