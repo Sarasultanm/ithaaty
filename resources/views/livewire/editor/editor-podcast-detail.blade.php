@@ -248,10 +248,12 @@
                           <img src="{{ asset('images/slider-img/slide5.jpg') }}" alt="" class="w-8 h-8">
                            <div class="ml-4 ">
                              <p class="text-sm font-medium text-gray-900">Facebook </p>
-                             <p class="text-sm text-gray-500">#sample</p>
+                             <?php $fb_string = $audio->audio_hashtags;    
+                              $fb_text=preg_replace('/#(\\w+)/','<a target="_blank" class="text-rose-500 font-bold" href=https://www.facebook.com/hashtag/$1>$0</a>',$fb_string); ?>
+                             <p class="text-sm text-gray-500"><?php echo $fb_text; ?></p>
                           </div>
                         </div>
-                       <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500">View</p>
+                       <!-- <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500">View</p> -->
                     </li>
 
                     <li class="py-3 flex justify-between items-center">
@@ -259,10 +261,10 @@
                           <img src="{{ asset('images/slider-img/slide5.jpg') }}" alt="" class="w-8 h-8">
                            <div class="ml-4 ">
                              <p class="text-sm font-medium text-gray-900">Instagram </p>
-                             <p class="text-sm text-gray-500">#sample</p>
+                             <p class="text-sm text-gray-500">{{$audio->audio_hashtags}}</p>
                           </div>
                         </div>
-                       <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500">View</p>
+                       <!-- <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500">View</p> -->
                     </li>
 
                     <li class="py-3 flex justify-between items-center">
@@ -270,10 +272,12 @@
                           <img src="{{ asset('images/slider-img/slide5.jpg') }}" alt="" class="w-8 h-8">
                            <div class="ml-4 ">
                              <p class="text-sm font-medium text-gray-900">Twitter </p>
-                             <p class="text-sm text-gray-500">#sample</p>
+                              <?php $twit_string = $audio->audio_hashtags;    
+                              $twit_text=preg_replace('/#(\\w+)/','<a target="_blank" class="text-rose-500 font-bold" href=https://twitter.com/search?q=$1&src=typed_query>$0</a>',$twit_string); ?>
+                             <p class="text-sm text-gray-500"><?php echo $twit_text; ?></p>
                           </div>
                         </div>
-                       <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500">View</p>
+                       <!-- <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500">View</p> -->
                     </li>
   
                   </ul>
