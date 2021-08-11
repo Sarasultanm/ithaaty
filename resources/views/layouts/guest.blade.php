@@ -16,6 +16,9 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="{{ asset('js/jquery.validate.js') }}"></script>
+        <script src="{{ asset('js/validation.js') }}"></script>
          @livewireStyles
     </head>
     <body>
@@ -23,5 +26,7 @@
             {{ $slot }}
         </div>
          @livewireScripts
+
+        
     </body>
 </html>

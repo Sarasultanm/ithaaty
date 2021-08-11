@@ -20,6 +20,7 @@ class EditorPodcastDetail extends Component
     public function render()
     {
 
-        return view('livewire.editor.editor-podcast-detail');
+    	$getHashtags = Audio::where('audio_hashtags', 'like', '%music%')->count();
+        return view('livewire.editor.editor-podcast-detail',compact('getHashtags'));
     }
 }

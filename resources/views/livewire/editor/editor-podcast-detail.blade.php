@@ -240,7 +240,18 @@
             
             <div class="pb-5">
                   <h3 class="font-medium text-gray-900">Hashtag Feeds</h3>
-                  <p class="text-rose-600 text-sm mx-0 font-bold">{{$audio->audio_hashtags}}</p>
+                  <p class="text-rose-600 text-sm mx-0 font-bold">{{$audio->audio_hashtags}} {{ $getHashtags }}</p>
+                  <?php 
+
+
+                   $str = $audio->audio_hashtags;
+                 $items_hastags = preg_match_all('/#\w+/iu', $str, $itens);
+                
+                for ($i=0; $i < $items_hastags ; $i++) { 
+                        echo $itens[0][$i];
+                }
+      
+                  ?>
                   <ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
   
 					<li class="py-3 flex justify-between items-center">

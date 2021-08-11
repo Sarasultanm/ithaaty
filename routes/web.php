@@ -26,6 +26,7 @@ use App\Http\Livewire\Editor\EditorPodcastDetail;
 use App\Http\Livewire\Editor\EditorContact;
 use App\Http\Livewire\Editor\EditorNotification;
 use App\Http\Livewire\Editor\EditorSubscribers;
+use App\Http\Livewire\Editor\EditorSubscriberOverview;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,6 +79,7 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 	Route::get('popular',EditorPopular::class)->name('editorPopular');
     Route::get('trending',EditorTrending::class)->name('editorTrending');
     Route::get('overview',EditorOverview::class)->name('editorOverview');
+    Route::get('overview/subscribers',EditorSubscriberOverview::class)->name('editorSubscriberOverview');
 
     Route::get('contacts',EditorContact::class)->name('editorCotanct');
     Route::get('subscribers',EditorSubscribers::class)->name('editorSubscribers');

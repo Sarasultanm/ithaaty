@@ -27,8 +27,8 @@ class EditorOverview extends Component
     	$nov = Userfollow::where('follow_userfollowing',Auth::user()->id)->whereMonth('created_at', date('11'))->whereYear('created_at', date('Y'))->count();
     	$dec = Userfollow::where('follow_userfollowing',Auth::user()->id)->whereMonth('created_at', date('12'))->whereYear('created_at', date('Y'))->count();
     	// $PrescriptionTbl::whereDate('created_at', date('Y-m-d'))->get();
-    
-        return view('livewire.editor.editor-overview',compact('recentLikes','recentComments','jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'));
+        $followers = UserFollow::where('follow_userfollowing',Auth::user()->id);
+        return view('livewire.editor.editor-overview',compact('recentLikes','recentComments','jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec','followers'));
 
     }
 }

@@ -45,7 +45,7 @@
 			      </dt>
 			      <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
 			        <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-			          0
+			          <a href="{{ route('editorSubscriberOverview') }}">{{ $followers->count() }}</a>
 			    	
 			        </div>
 
