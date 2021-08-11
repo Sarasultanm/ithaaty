@@ -57,6 +57,9 @@
 			      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
 			        <a  href="#">Likes & Comments</a>
 			      </li>
+			      <li @click="openTab = 3" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
+			        <a  href="#">Country</a>
+			      </li>
 			    
 			    </ul>
 			  </div>
