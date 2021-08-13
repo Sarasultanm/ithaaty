@@ -57,7 +57,7 @@
 			      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
 			        <a  href="#">Likes & Comments</a>
 			      </li>
-			      <li @click="openTab = 3" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
+			      <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
 			        <a  href="#">Country</a>
 			      </li>
 			    
@@ -151,10 +151,10 @@
 									  const dataBarChart = {
 									    labels: labelsBarChart,
 									    datasets: [{
-									      label: 'My First dataset',
+									      label: 'Likes per month',
 									      backgroundColor: 'hsl(252, 82.9%, 67.8%)',
 									      borderColor: 'hsl(252, 82.9%, 67.8%)',
-									      data: [0,1,2,3,4,5,6,7,8,9,10],
+									      data: [{{$jan_likes}},{{$feb_likes}},{{$mar_likes}},{{$apr_likes}},{{$may_likes}},{{$jun_likes}},{{$jul_likes}},{{$aug_likes}},{{$sep_likes}},{{$oct_likes}},{{$nov_likes}},{{$dec_likes}}],
 									    }]
 									  };
 
@@ -173,62 +173,124 @@
 
 						</div>
 	
-						<div class="mb-5">
-							
-						 <div class="shadow-lg rounded-lg overflow-hidden">
+
+						<div class="mt-5">
+							<div class="shadow-lg rounded-lg overflow-hidden">
 							  <div class="py-3 px-5 bg-gray-50">
 							      Comments
 							  </div>
-							  <canvas class="p-10 " id="chartBarOne"></canvas>
+							  <canvas class="p-10 " id="chartLine"></canvas>
 							</div>
 
-									<!-- Required chart.js -->
-									<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+							<!-- Required chart.js -->
+							<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-									<!-- Chart bar -->
-									<script>
+							<!-- Chart line -->
+							<script>
 
-									  const labelsBarChart1 = [
-									    'Jan',
-									    'Feb',
-									    'Marc',
-									    'Apri',
-									    'May',
-									    'Jun',
-									    'Jul',
-									    'Aug',
-									    'Sep',
-									    'Oct',
-									    'Nov',
-									    'Dec',
-									  ];
-									  const dataBarChart1 = {
-									    labels: labelsBarChart1,
-									    datasets: [{
-									      label: 'My First dataset',
-									      backgroundColor: 'hsl(252, 82.9%, 67.8%)',
-									      borderColor: 'hsl(252, 82.9%, 67.8%)',
-									      data: [0,1,2,3,4,5,6,7,8,9,10],
-									    }]
-									  };
+							    const labels = [
+							        'Jan',
+								    'Feb',
+								    'Marc',
+								    'Apri',
+								    'May',
+								    'Jun',
+								    'Jul',
+								    'Aug',
+								    'Sep',
+								    'Oct',
+								    'Nov',
+								    'Dec',
+							    ];
+							    const data = {
+							        labels: labels,
+							        datasets: [{
+							            label: 'Comments per month',
+							            backgroundColor: 'hsl(252, 82.9%, 67.8%)',
+							            borderColor: 'hsl(252, 82.9%, 67.8%)',
+							            data: [{{$jan_coms}},{{$feb_coms}},{{$mar_coms}},{{$apr_coms}},{{$may_coms}},{{$jun_coms}},{{$jul_coms}},{{$aug_coms}},{{$sep_coms}},{{$oct_coms}},{{$nov_coms}},{{$dec_coms}}],
+							        }]
+							    };
 
-									  const configBarChart1 = {
-									    type: 'bar',
-									    data: dataBarChart1,
-									    options: {}
-									  };
+							    const configLineChart = {
+							        type: 'line',
+							        data,
+							        options: {}
+							    };
 
-
-									  var chartBar1 = new Chart(
-									    document.getElementById('chartBarOne'),
-									    configBarChart1
-									  );
-									</script>
-
+							    var chartLine = new Chart(
+							        document.getElementById('chartLine'),
+							        configLineChart
+							    );
+							</script>
+							
 						</div>
 
 
+
+
+
+
 			  			</div>
+
+
+			  			<div x-show="openTab === 3">
+
+			  				<div class="shadow-lg rounded-lg overflow-hidden">
+							  <div class="py-3 px-5 bg-gray-50">
+							      Followers by Countro
+							  </div>
+							  <canvas class="p-10 " id="chartBar_country"></canvas>
+							</div>
+
+							<!-- Required chart.js -->
+							<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+							<!-- Chart bar -->
+							<script>
+
+							  const labelsBarChart_country = [
+							    'Jan',
+							    'Feb',
+							    'Marc',
+							    'Apri',
+							    'May',
+							    'Jun',
+							    'Jul',
+							    'Aug',
+							    'Sep',
+							    'Oct',
+							    'Nov',
+							    'Dec',
+							  ];
+							  const dataBarChart_country = {
+							    labels: labelsBarChart_country,
+							    datasets: [{
+							      label: 'My First dataset',
+							      backgroundColor: 'hsl(252, 82.9%, 67.8%)',
+							      borderColor: 'hsl(252, 82.9%, 67.8%)',
+							      data: [0,1,2,3,4,5,6,7,8,9,10],
+							    }]
+							  };
+
+							  const configBarChart_country = {
+							    type: 'bar',
+							    data: dataBarChart_country,
+							    options: {}
+							  };
+
+
+							  var chartBar_country = new Chart(
+							    document.getElementById('chartBar_country'),
+							    configBarChart_country
+							  );
+							</script>
+			  			
+			  			</div>	
+
+
+
+
 
 			    </div>
 
@@ -267,8 +329,22 @@
 				      </dt>
 				      <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
 				        <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-				         2
-				          
+				         {{ $followers->count() }}
+				         <?php $female=0;$male=0; ?> 
+				         @foreach ($followers->get() as $follows)
+
+				         @if($follows->get_user_following->gender == "Female")
+				         	<?php $female++; ?>
+				         @else
+				         	<?php $male++; ?>
+
+				         @endif
+				         	
+
+				         @endforeach
+
+				         
+
 				        </div>
 
 
@@ -293,12 +369,12 @@
 
 				  const dataPie = {
 				    labels: [
-				      'Female',
-				      'Male'
+				      'Female '+{{ $female }},
+				      'Male '+{{ $male }}
 				    ],
 				    datasets: [{
 				      label: 'My First Dataset',
-				      data: [300,100],
+				      data: [{{ $female }}	,{{ $male }}	],
 				      backgroundColor: [
 				        'rgb(133, 105, 241)',
 				        'rgb(101, 143, 241)'
