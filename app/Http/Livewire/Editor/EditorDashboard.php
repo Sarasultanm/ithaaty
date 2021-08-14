@@ -149,6 +149,7 @@ class EditorDashboard extends Component
              $data->like_audioid = $id;
              $data->like_type = "like";
              $data->like_status = "active";
+             $data->like_ownerid = $audio_editor;
              $data->save();
 
              $notif = new UserNotifications;
@@ -199,6 +200,7 @@ class EditorDashboard extends Component
              $data->coms_type = "comments";
              $data->coms_message = $this->comments;
              $data->coms_status = "active";
+             $data->coms_ownerid = $audio_editor;
              $data->save();
 
              $notif = new UserNotifications;
