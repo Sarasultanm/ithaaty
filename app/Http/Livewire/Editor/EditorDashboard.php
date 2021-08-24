@@ -11,6 +11,7 @@ use App\Models\UserLikes;
 use App\Models\UserFav;
 use App\Models\UserNotifications;
 use App\Models\UserComments;
+use App\Models\UserNotes;
 use Auth;
 
 use Livewire\WithFileUploads;
@@ -22,7 +23,7 @@ class EditorDashboard extends Component
 
 
 
-	    public $title,$season,$episode,$category,$summary,$audiofile,$uploadType,$embedlink,$comments,$hashtags;
+	    public $title,$season,$episode,$category,$summary,$audiofile,$uploadType,$embedlink,$comments,$hashtags,$notes_message,$notes_time;
  
 
         protected $listeners = [
@@ -190,6 +191,11 @@ class EditorDashboard extends Component
 
         public function clearFields(){
             $this->comments = null;
+           
+        }
+        public function clearFieldsNotes(){
+             $this->notes_time = null;
+            $this->notes_message = null;
         }
 
         public function saveComment($id,$audio_editor){
@@ -225,6 +231,43 @@ class EditorDashboard extends Component
             $this->emit('refreshParent');
 
         }
+
+        public function saveNotes($id,$audio_editor){
+
+             $data = new UserNotes;
+             $data->notes_userid = Auth::User()->id;
+             $data->notes_audioid = $id;
+             $data->notes_ownerid = $audio_editor;
+             $data->notes_time = $this->notes_time;
+             $data->notes_message = $this->notes_message;
+             $data->notes_status = "active";
+             $data->save();
+
+             $notif = new UserNotifications;
+             $notif->notif_userid = Auth::User()->id;
+             $notif->notif_type = "addnotes";
+             $notif->notif_type_id = $data->id;
+             $notif->notif_message = "You are adding notes on the audio of";
+             $notif->status = "active";
+             $notif->save();
+
+             $notif1 = new UserNotifications;
+             $notif1->notif_userid = $audio_editor;
+             $notif1->notif_type = "notes";
+             $notif1->notif_type_id = $data->id;
+             $notif1->notif_message = "adding notes on your audio";
+             $notif1->status = "active";
+             $notif1->save();
+
+            
+             $this->clearFieldsNotes();
+
+            $this->emit('refreshParent');
+
+        }
+
+
+
 
     public static function checkFollow($id){
 

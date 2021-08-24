@@ -21,4 +21,7 @@ class UserNotifications extends Model
         return $this->belongsTo('App\Models\UserComments', 'notif_type_id', 'id');
     }
 
+    public function get_notes(){
+        return $this->belongsTo('App\Models\UserNotes', 'notif_type_id', 'id');
+    }
 }

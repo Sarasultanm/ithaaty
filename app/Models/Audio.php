@@ -23,6 +23,10 @@ class Audio extends Model
         return $this->hasMany('App\Models\UserComments', 'coms_audioid','id');
     }
 
+    public function get_notes(){
+        return $this->hasMany('App\Models\UserNotes', 'notes_audioid','id');
+    }
+
 
 
 }

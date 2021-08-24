@@ -526,6 +526,14 @@
                     
                 </div>
                 <!-- like/ -->
+                <div 
+			    x-data="{
+			      openTab: 1,
+			      activeClasses: 'border-indigo-500 text-indigo-600',
+			      inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+			    }" 
+			  	>
+
                 <div class="mt-6 flex justify-between space-x-8">
                   <div class="flex space-x-6">
                     <span class="inline-flex items-center text-sm">
@@ -542,7 +550,7 @@
                         <span class="sr-only">likes</span>
                       </button>
                     </span>
-                    <span class="inline-flex items-center text-sm">
+                    <span class="inline-flex items-center text-sm" @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses" >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <!-- Heroicon name: solid/chat-alt -->
                         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -564,89 +572,151 @@
                       </button>
                     </span>
                   </div>
+
                   <div class="flex text-sm">
-                    <span class="inline-flex items-center text-sm">
+                    <span class="inline-flex items-center text-sm mr-3" @click="openTab = 2"  :class="openTab === 2 ? activeClasses : inactiveClasses"   >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                        <!-- Heroicon name: solid/share -->
-                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                          <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
-                        </svg>
-                        <span class="font-medium text-gray-900">Share</span>
+                       <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+						</svg>
+                        <span class="font-medium text-gray-900">Notes</span>
+                      </button>
+                    </span>
+                     <span class="inline-flex items-center text-sm" @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses" >
+                      <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+						</svg>
+                        <span class="font-medium text-gray-900">Transcript</span>
                       </button>
                     </span>
                   </div>
                 </div>
-                <div class="mt-5">
-	                <div class="mt-1">
-	                  <input type="text" name="email" id="email" placeholder="Comments" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="comments" wire:keydown.enter="saveComment({{ $audio->id }},{{$audio->audio_editor}})"  >
-	                </div>
-		        </div>
+                <div x-show="openTab === 1">
+                	<div class="mt-5">
+		                <div class="mt-1">
+		                  <input type="text" name="email" id="email" placeholder="Comments" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="comments" wire:keydown.enter="saveComment({{ $audio->id }},{{$audio->audio_editor}})"  >
+		                </div>
+			        </div>
+
+
+				       @if($audio->get_comments->count() != 0 )
+				        <div x-data="{ open: false }">
+				        	
+				       	<div class="mt-5">
+				        	<div class="flex space-x-3">
+			                    <div>
+			                      <p class="text-xs font-medium text-gray-900">
+			                        <a class="cursor-pointer hover:underline" @click="open = true">View Comments</a>
+			                      </p>
+			                    </div>
+			                  
+		                	</div>
+		 
+				        </div>
+				        <div class="mt-5" x-show="open" @click.away="open = false">
+				        	@foreach($audio->get_comments as $comments)
+			                <div class="flex space-x-3">
+			                	
+			                    <div class="flex-shrink-0">
+			                      <img class="h-5 w-5 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+			                    </div>
+			                    <div class="min-w-0 flex-1">
+			                     <div class=" bg-gray-100 p-2 rounded-md mb-3">	
+			                      <p class="text-xs font-medium text-gray-900">
+			                        <a href="/editor/users//{{ $audio->audio_editor }}" class="font-bold hover:underline">{{ $comments->get_user->name }}</a>
+			                      </p>
+			                      <p class="text-sm text-gray-500">
+			                        <a href="#" class="hover:underline">
+			                          <time datetime="2020-12-09T11:43:00">{{ $comments->coms_message }}</time>
+			                        </a>
+			                      </p>
+			                      </div>
+
+			                      
+			                    </div>
+			                  
+		                	</div>
+		                	@endforeach
+				        </div>
+
+
+				        </div>
+
+				        @endif
+
+			    </div>
+
+
+			    <div x-show="openTab === 2">
+		                <div class="mt-5 flex">
+		                   <input type="text" name="email" id="email" placeholder="Time" class="flex-1 mr-3 w-20  shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md" wire:model="notes_time" >
+		                  <input type="text" name="email" id="email" placeholder="Notes" class="shadow-sm mr-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="notes_message"  >
+		                  <button wire:click="saveNotes({{ $audio->id }},{{$audio->audio_editor}})" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" >
+							Save
+						  </button>
+		                </div>
+		                @if($audio->get_notes->count() != 0 )
+
+				        <div x-data="{ open: false }">
+				        	
+				       	<div class="mt-5">
+				        	<div class="flex space-x-3">
+			                    <div>
+			                      <p class="text-xs font-medium text-gray-900">
+			                        <a class="cursor-pointer hover:underline" @click="open = true">View Notes</a>
+			                      </p>
+			                    </div>
+			                  
+		                	</div>
+		 
+				        </div>
+				        <div class="mt-5" x-show="open" @click.away="open = false">
+				        	@foreach($audio->get_notes as $notes)
+				        	@if($notes->notes_userid == Auth::user()->id )
+			                <div class="flex space-x-3">
+			                	
+			                    <div class="flex-shrink-0">
+			                      <img class="h-5 w-5 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+			                    </div>
+			                    <div class="min-w-0 flex-1">
+			                     <div class=" bg-gray-100 p-2 rounded-md mb-3">	
+			                      <p class="text-xs font-medium text-gray-900">
+			                        <a href="/editor/users//{{ $audio->audio_editor }}" class="font-bold hover:underline">{{ $notes->get_user->name }}</a>
+			                      </p>
+			                      <p class="text-sm text-gray-500">
+			                       {{ $notes->notes_time }}  {{ $notes->notes_message }}
+			                      </p>
+			                      </div>
+
+			                      
+			                    </div>
+			                  
+		                	</div>
+		                	@endif
+		                	@endforeach
+				        </div>
+
+
+				        </div>
+
+
+				        @endif
+			    </div>
+
+			     <div x-show="openTab === 3">
+				     <div class="mt-5">
+		                <div class="mt-1">
+		                 <p>{{ $audio->audio_summary }}</p>
+		                </div>
+			        </div>
+
+			    </div>
+                
 		       
+		       </div>
 
-		       @if($audio->get_comments->count() != 0 )
-		        <div x-data="{ open: false }">
-		        	
-		       	<div class="mt-5">
-		        	<div class="flex space-x-3">
-	                    <div>
-	                      <p class="text-xs font-medium text-gray-900">
-	                        <a class="cursor-pointer hover:underline" @click="open = true">View Comments</a>
-	                      </p>
-	                    </div>
-	                  
-                	</div>
- 
-		        </div>
-		        <div class="mt-5" x-show="open" @click.away="open = false">
-		        	@foreach($audio->get_comments as $comments)
-	                <div class="flex space-x-3">
-	                	
-	                    <div class="flex-shrink-0">
-	                      <img class="h-5 w-5 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-	                    </div>
-	                    <div class="min-w-0 flex-1">
-	                     <div class=" bg-gray-100 p-2 rounded-md mb-3">	
-	                      <p class="text-xs font-medium text-gray-900">
-	                        <a href="/editor/users//{{ $audio->audio_editor }}" class="font-bold hover:underline">{{ $comments->get_user->name }}</a>
-	                      </p>
-	                      <p class="text-sm text-gray-500">
-	                        <a href="#" class="hover:underline">
-	                          <time datetime="2020-12-09T11:43:00">{{ $comments->coms_message }}</time>
-	                        </a>
-	                      </p>
-	                      </div>
-	                     <!--  <div class="reply">
-	                      	 <div class="flex space-x-3">
-	                      	 	 <div class="flex-shrink-0">
-				                      <img class="h-5 w-5 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-				                 </div>
-				                 <div class="min-w-0 flex-1">
-				                 	 <div class=" bg-gray-100 p-2 rounded-md mb-3">	
-					                      <p class="text-xs font-medium text-gray-900">
-					                        <a href="/editor/users//{{ $audio->audio_editor }}" class="font-bold hover:underline">{{ $comments->get_user->name }}</a>
-					                      </p>
-					                      <p class="text-sm text-gray-500">
-					                        <a href="#" class="hover:underline">
-					                          <time datetime="2020-12-09T11:43:00">{{ $comments->coms_message }}</time>
-					                        </a>
-					                      </p>
-					                 </div>
-				                 </div>
-	                      	 </div>
-
-
-	                      </div> -->
-	                      
-	                    </div>
-	                  
-                	</div>
-                	@endforeach
-		        </div>
-
-
-		        </div>
-
-		        @endif
+		        <!-- like/ -->
 
 
 		       
