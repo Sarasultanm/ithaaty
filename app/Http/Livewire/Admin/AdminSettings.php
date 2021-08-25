@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\User;
+use App\Models\Category;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -47,6 +48,20 @@ class AdminSettings extends Component
 
     }
 
+     public function addCategory(){
+
+        $data = new Category;
+        $data->category_name =  $this->categoryTitle;
+        $data->category_status = "active";
+        $data->category_owner = Auth::user()->id;
+        $data->save();
+
+        session()->flash('status', 'Category Successfully added');
+
+        redirect()->to('/admin/settings');
+
+    }
+
      public function mount(){
 
         $this->userName = Auth::user()->name;
@@ -58,6 +73,9 @@ class AdminSettings extends Component
 
     public function render()
     {
-        return view('livewire.admin.admin-settings');
+
+        $category_list = Category::where('category_status','active')->get();
+
+        return view('livewire.admin.admin-settings',compact('category_list'));
     }
 }

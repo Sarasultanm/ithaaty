@@ -293,7 +293,7 @@ class EditorDashboard extends Component
     {
 
     	$audioList = Audio::orderBy('id', 'DESC');
-        $categoryList = Category::orderBy('id', 'DESC')->where('category_owner',Auth::user()->id);
+        $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
         $randomList = User::inRandomOrder()->where('id','!=',Auth::user()->id)->take(3)->get();
         $mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1);
 

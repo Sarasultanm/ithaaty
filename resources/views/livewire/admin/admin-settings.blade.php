@@ -210,23 +210,22 @@
                                 </tr>
                               </thead>
                               <tbody class="bg-white divide-y divide-gray-200">
-                              
+                                @foreach($category_list as $cat)
                                   <tr>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                     <!--  <time datetime="2020-01-01">1/1/2020</time> -->
-                                     Name
+                                   {{ $cat->category_name }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                     Episodes
+                                     {{ $cat->category_status }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                     date
+                                     {{ $cat->created_at }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                       <a href="#" class="text-orange-600 hover:text-orange-900">Details</a>
                                     </td>
                                   </tr>
-                               
+                               @endforeach
                               </tbody>
                             </table>
                           </div>

@@ -119,8 +119,8 @@
                                           @if($categoryList->count() == 0 )
                                                  <span class="text-sm font-medium text-red-600">Add category in the settings</span>
                                                 @else
-                                                <select id="country" name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="category">
-                                                      <option>Select</option>
+                                                <select id="country" name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="ea_category">
+                                                      
                                                       @foreach($categoryList->get() as $cat)
                                                       <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
                                                       @endforeach

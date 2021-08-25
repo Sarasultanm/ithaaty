@@ -55,7 +55,7 @@ class EditorPodcast extends Component
             	'audio_name'=> $this->ea_name,
             	'audio_season'=> $this->ea_season,
             	'audio_episode'=> $this->ea_episode,
-            	'audio_category'=> $this->category,
+            	'audio_category'=> $this->ea_category,
             	'audio_summary'=> $this->ea_summary,
             	'audio_path'=> $this->ea_path,
             	'audio_type'=> $this->uploadType
@@ -71,7 +71,7 @@ class EditorPodcast extends Component
 
     public function render()
     {	
-    	$categoryList = Category::orderBy('id', 'DESC')->where('category_owner',Auth::user()->id);
+    	$categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
     	$audioList = Audio::orderBy('id', 'DESC')->where('audio_editor',Auth::user()->id);
     	$topPodcast = Audio::orderBy('id', 'DESC')->where('audio_editor',Auth::user()->id)->take(3)->get();
     	$following = UserFollow::where('follow_userid',Auth::user()->id);
