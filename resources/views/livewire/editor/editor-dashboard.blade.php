@@ -222,7 +222,7 @@
 	    				</div>
               	 		<div class="mt-1">
 				          <label for="about" class="block text-sm font-medium text-gray-700">
-				            Summary 
+				            Transcript
 				          </label>
 				          <div class="mt-1">
 				            <textarea id="about" name="about" rows="15" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="summary" ></textarea>
@@ -360,9 +360,7 @@
                	  
                    <div class="text-white p-10 audio-bg-blur" style="background-image: url({{ asset('images/audio-bg.jpg') }});">
 					<h2 class="font-bold text-xl m-0">{{ $audio->audio_name }}</h2>
-	                  <p class="mb-5">
-	                    {{ $audio->audio_summary }}
-	                  </p>  
+	                  
 
 	                 	<audio controls>
 						  <source src="{{ asset('audio/'.$audio->audio_path) }}" type="audio/mpeg"> 
@@ -514,9 +512,7 @@
                	  
                    <div class="text-white p-10 audio-bg-blur" style="background-image: url({{ asset('images/audio-bg.jpg') }});">
 					<h2 class="font-bold text-xl m-0">{{ $audio->audio_name }}</h2>
-	                  <p class="mb-5">
-	                    {{ $audio->audio_summary }}
-	                  </p>  
+	                 
 	                 	<div class="audio-embed-container">
 	                   	 <?php echo $audio->audio_path; ?>
 	                   </div>
