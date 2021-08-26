@@ -16,4 +16,6 @@ class UserNotes extends Model
     public function get_audio(){
         return $this->belongsTo('App\Models\Audio', 'notes_audioid', 'id');
     }
+
+    
 }
