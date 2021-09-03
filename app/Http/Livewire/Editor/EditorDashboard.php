@@ -12,6 +12,7 @@ use App\Models\UserFav;
 use App\Models\UserNotifications;
 use App\Models\UserComments;
 use App\Models\UserNotes;
+use App\Models\UserViews;
 use Auth;
 
 use Livewire\WithFileUploads;
@@ -174,6 +175,40 @@ class EditorDashboard extends Component
             $this->emit('refreshParent');
 
         }
+        public function view($id,$audio_editor){
+
+             $data = new UserViews;
+             $data->view_userid = Auth::User()->id;
+             $data->view_audioid = $id;
+             $data->view_type = "view";
+             $data->view_status = "active";
+             $data->view_ownerid = $audio_editor;
+             $data->save();
+
+             $notif = new UserNotifications;
+             $notif->notif_userid = Auth::User()->id;
+             $notif->notif_type = "view";
+             $notif->notif_type_id = $data->id;
+             $notif->notif_message = "You view the audio of";
+             $notif->status = "active";
+             $notif->save();
+
+             $notif1 = new UserNotifications;
+             $notif1->notif_userid = $audio_editor;
+             $notif1->notif_type = "viewed";
+             $notif1->notif_type_id = $data->id;
+             $notif1->notif_message = "View your audio";
+             $notif1->status = "active";
+             $notif1->save();
+
+
+            
+             $this->emit('refreshParent');
+
+             return redirect()->to('editor/podcast/view/'.$id);
+
+        }
+
 
         public function favorite($id){
 

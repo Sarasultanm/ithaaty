@@ -15,7 +15,7 @@ class Audio extends Model
     public function get_user(){
         return $this->belongsTo('App\Models\User', 'audio_editor', 'id');
     }
-     public function get_like(){
+    public function get_like(){
         return $this->hasMany('App\Models\UserLikes', 'like_audioid','id');
     }
 
@@ -25,6 +25,10 @@ class Audio extends Model
 
     public function get_notes(){
         return $this->hasMany('App\Models\UserNotes', 'notes_audioid','id');
+    }
+
+    public function get_view(){
+        return $this->hasMany('App\Models\UserViews', 'view_audioid','id');
     }
 
 

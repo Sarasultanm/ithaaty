@@ -245,7 +245,7 @@
 			      </div>
 
 			 
-          </form>
+          	</form>
 			    </div>
 			  </div>
 			</div>
@@ -426,6 +426,7 @@
                  <!-- like/ -->
               </article>
             </li>
+
             @else
 
             <li class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
@@ -508,11 +509,15 @@
                   </div>
                 </div>
                  
-                <div class="mt-2 text-sm text-gray-700 space-y-4">
-               	  
+                <div class="mt-2 text-sm text-gray-700 space-y-4 relative">
+               	  	<div class="absolute w-full h-full bg-gray-900 bg-opacity-50">
+               	  		<div class="flex justify-center items-center h-full"><button wire:click="view({{ $audio->id }},{{$audio->audio_editor}})" style="background: #f66d6a;" class="w-24 h-24 rounded-full focus:outline-none"><svg style="color: #d3e579;" class="h-full w-full" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button> </div>
+               	  	</div>
                    <div class="text-white p-10 audio-bg-blur" style="background-image: url({{ asset('images/audio-bg.jpg') }});">
 					<h2 class="font-bold text-xl m-0">{{ $audio->audio_name }}</h2>
-	                 
+	              <!--    <div>
+					  <button class="">Hello</button>
+					 </div> -->
 	                 	<div class="audio-embed-container">
 	                   	 <?php echo $audio->audio_path; ?>
 	                   </div>
@@ -563,7 +568,7 @@
                           <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                           <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
                         </svg>
-                        <span class="font-medium text-gray-900">0</span>
+                        <span class="font-medium text-gray-900">{{ $audio->get_view->count() }}</span>
                         <span class="sr-only">views</span>
                       </button>
                     </span>

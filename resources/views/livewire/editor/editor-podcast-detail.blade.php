@@ -78,14 +78,18 @@
 			   <div class="border-b border-gray-200">
 			  	<ul class="-mb-px flex" >
 			      <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
-			        <a  href="#">Summary</a>
+			        <a  href="#">Transcript</a>
 			      </li>
 			      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
 			        <a  href="#">Stats</a>
 			      </li>
-			      <li @click="openTab = 3"  :class="openTab === 3 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
+             <li @click="openTab = 3"  :class="openTab === 4 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
+              <a  href="#">Mood Meter</a>
+            </li>
+			      <li @click="openTab = 4"  :class="openTab === 3 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
 			        <a  href="#">Other Episodes</a>
 			      </li>
+
 			    </ul>
 			  </div>
 
@@ -99,7 +103,7 @@
 						  <p class="flex-auto  text-xs uppercase text-right mt-2">{{ $audio->audio_season }} : {{ $audio->audio_episode }}</p>           	
 		               </div> 
 		               <div class="mt-2 border-t border-gray-200 pt-2">
-		               		<h4 class="text-gray-700 font-bold text-md">Summary</h4>
+		               		<h4 class="text-gray-700 font-bold text-md">Transcript</h4>
 		               		<p class="mb-5">
 		                    	{{ $audio->audio_summary }}
 		                	</p> 
@@ -162,7 +166,7 @@
 
 			  	</div>	
 
-			  	<div x-show="openTab === 3">
+			  	<div x-show="openTab === 4">
 
 			  		<div class="grid gap-4 grid-cols-12">
 			  			 <div class="col-span-4 bg-white p-2 ">
