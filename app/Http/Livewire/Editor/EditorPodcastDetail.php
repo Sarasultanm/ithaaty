@@ -4,7 +4,9 @@ namespace App\Http\Livewire\Editor;
 
 use Livewire\Component;
 use App\Models\Audio;
-
+use App\Models\User;
+use App\Models\Category;
+use Auth;
 
 
 class EditorPodcastDetail extends Component
@@ -15,7 +17,7 @@ class EditorPodcastDetail extends Component
     {
         $this->audio = Audio::where('id',$id)->first();
     }
-
+    
 
     public function render()
     {

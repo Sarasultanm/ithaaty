@@ -12,7 +12,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.4"
+        "livewire/livewire": "^2.4",
+        "vedmant/laravel-feed-reader": "^1.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

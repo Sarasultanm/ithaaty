@@ -31,6 +31,10 @@ class Audio extends Model
         return $this->hasMany('App\Models\UserViews', 'view_audioid','id');
     }
 
+    public function get_references(){
+        return $this->hasMany('App\Models\AudioReferences', 'audioref_audioid','id');
+    }
+
 
 
 }

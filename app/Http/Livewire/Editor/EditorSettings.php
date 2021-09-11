@@ -9,12 +9,13 @@ use App\Models\Category;
 use App\Models\UserFollow;
 use Auth;
 use Illuminate\Support\Facades\Hash;
+use FeedReader;
 
 class EditorSettings extends Component
 {
 
 
-	 public $categoryTitle,$userName,$oldPass,$newPass;
+	 public $categoryTitle,$userName,$oldPass,$newPass,$rss_title,$rss_link,$rss_data,$item_title;
 
 
 
@@ -72,6 +73,35 @@ class EditorSettings extends Component
     }
 
 
+
+    public function loadRss(){
+
+        $data = FeedReader::read($this->rss_link);
+        // $items_feed = $data;
+        $result = [
+            'title' => $data->get_title(),
+            'description' => $data->get_description(),
+            'link' => $data->get_link(),
+            'image_url' => $data->get_image_url(),
+            'item_quantity' =>$data->get_item_quantity()
+        ];
+
+            foreach ($data->get_items(0,$data->get_item_quantity()) as $item) {
+                $i['title'] = $item->get_title();
+                $i['description'] = $item->get_description();
+                $i['link'] = $item->get_link();
+                $i['embed'] = str_replace( 'episodes/', 'embed/episodes/', $item->get_link() );
+
+
+
+                $result['items'][] = $i;
+            }
+
+
+        // $this->item_title = $result1;   
+        $this->rss_data =  $result;  
+
+    }
 
 
 

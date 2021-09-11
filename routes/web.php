@@ -29,6 +29,9 @@ use App\Http\Livewire\Editor\EditorNotification;
 use App\Http\Livewire\Editor\EditorSubscribers;
 use App\Http\Livewire\Editor\EditorSubscriberOverview;
 use App\Http\Livewire\Editor\EditorPodcastView;
+use App\Http\Livewire\Editor\EditorCreatePost;
+use App\Http\Livewire\Editor\EditorUpdatePost;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -92,6 +95,9 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 	Route::get('users',EditorViewUsers::class)->name('editorViewUser');
 	//Route::get('users/{id}', [MainController::class, 'viewUsers']);
 	Route::get('users/{id}',EditorViewUsers::class)->name('editorViewUser');
+
+	Route::get('podcast/create',EditorCreatePost::class)->name('editorPodcastCreate');
+	Route::get('podcast/update/{id}',EditorUpdatePost::class)->name('editorPodcastUpdate');
 
 });
 

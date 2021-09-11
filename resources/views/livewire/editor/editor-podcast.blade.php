@@ -71,8 +71,8 @@
                         </a>
                       </p>
                       <div class="text-xs font-bold text-gray-900 mt-5" x-data="{ open: false }">
-                        <a  wire:click="editdata({{$myaudio->id}})" class="hover:underline" @click="open = true" >Update</a>
-
+                        <!-- <a  wire:click="editdata({{$myaudio->id}})" class="hover:underline" @click="open = true" >Update</a> -->
+                        <a href="{{ route('editorPodcastUpdate',['id' => $myaudio->id]) }}"  class="hover:underline">Update</a>
                         <a href="{{ route('editorPodcastDetails',['id' => $myaudio->id]) }}" class="hover:underline float-right" >Details</a>
 
                                 <div x-show="open"

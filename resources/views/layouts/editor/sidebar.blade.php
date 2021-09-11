@@ -68,7 +68,7 @@
 
 
             <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
-               Analytics
+               Others
             </p>    
 
              <x-nav-link-custom :href="route('editorSubscribers')" :active="request()->routeIs('editorSubscribers')">
