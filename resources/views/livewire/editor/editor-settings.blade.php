@@ -287,13 +287,13 @@
 				                        </tr>
 				                      </thead>
 				                      <tbody class="bg-white divide-y divide-gray-200">
-				                      	@for ($i = 0; $i < $rss_data['item_quantity']; $i++)
+				                      	<!-- @for ($i = 0; $i < $rss_data['item_quantity']; $i++)
 
 										    {{ $rss_data["items"][$i]['title']  }}
 
 										    <iframe src="{{ $rss_data['items'][$i]['embed']  }}"" height="102px" width="400px" frameborder="0" scrolling="no"></iframe>
 
-										@endfor
+										@endfor -->
 
 				                     	<!-- <pre class="p-5"><?php var_dump($rss_data); ?></pre> -->
 
