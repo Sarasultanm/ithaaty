@@ -257,7 +257,7 @@
 				    <section aria-labelledby="billing_history_heading" class="mt-5">
 				          <div class="bg-white pt-6 shadow sm:rounded-md sm:overflow-hidden">
 				            <div class="px-4 sm:px-6">
-				              <h2 class="text-md leading-6 font-medium text-gray-900">{{ $rss_data['title'] }}</h2>
+				              <h2 class="text-md leading-6 font-medium text-gray-900"><?php echo ($rss_data['title'] == null) ? "null" : $rss_data['title']; ?></h2>
 				              <p class="text-md leading-6 font-normal text-gray-900">{{ $rss_data['description'] }}</p>
 				              <p class="text-md leading-6 font-normal text-gray-900">{{ $rss_data['link'] }}</p>
 				             <!--   <img src="{{ $rss_data['image_url'] }}"> -->
@@ -295,7 +295,7 @@
 
 										@endfor
 
-				                     	<pre class="p-5"><?php var_dump($rss_data); ?></pre>
+				                     	<!-- <pre class="p-5"><?php var_dump($rss_data); ?></pre> -->
 
 				                     <!-- 	
  -->				                     	
