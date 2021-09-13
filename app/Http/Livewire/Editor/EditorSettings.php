@@ -91,10 +91,51 @@ class EditorSettings extends Component
                 $i['description'] = $item->get_description();
                 $i['link'] = $item->get_link();
                 $i['embed'] = str_replace( 'episodes/', 'embed/episodes/', $item->get_link() );
+                $i['content'] = $item->get_content();
+                $i['links'] = $item->get_link();
+                $i['season'] = $item->get_item_tags('', 'season');
+                // $i['audio_link'] = $item->get_enclosures()->get_link();
+            // return $data[0]['data'];
+
+
+                foreach ($item->get_enclosures() as $enclosure)
+                {
+                    // echo $enclosure->embed();
+                    $i['enclosure_link'] = $enclosure->get_link();
+                }
+
+
+               
+                // $i['tags'] = $item->get_item_tags('','itunes:season');
+                // $i['episode'] = $item->get_episode();
+                // $media_group = $item->get_item_tags('http://search.yahoo.com/mrss/', 'group');
+                // $media_content = $media_group[0]['child']['http://search.yahoo.com/mrss/']['content'];
+                // $i['tags_group'] = $item->get_item_tags('','itunes:season');
+                // $i['season'] = $i['tags_group'][0]["itunes:season"];
+
+                // $i['season'] = $item->get_item_tags('itunes:season','itunes:season')[0]["itunes:season"];
+
+
+                // $data = new Audio;
+                // $data->audio_editor = Auth::user()->id;
+                // $data->audio_name = $item->get_title();
+                // $data->audio_season = $this->season;
+                // $data->audio_episode = $this->episode;
+                // $data->audio_category = $this->category;
+                // $data->audio_tags = "none";
+                // $data->audio_status = "active";
+                // $data->audio_summary = $this->summary;
+                // $data->audio_path = $this->embedlink;
+                // $data->audio_type = "Embed";
+                // $data->audio_hashtags = $this->hashtags;
+                // $data->save();
 
 
 
                 $result['items'][] = $i;
+
+
+
             }
 
 
