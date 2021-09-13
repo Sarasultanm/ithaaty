@@ -46,7 +46,7 @@
 			  >
 			  <div class="border-b border-gray-200">
 			  	<ul class="-mb-px flex" >
-			      <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
+			      <li @click="openTab = 4"  :class="openTab === 4 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
 			        <a>My Account </a>
 			      </li>
 			      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
@@ -55,14 +55,14 @@
 			      <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses" class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
 			        <a>Categories</a>
 			      </li>
-			      <li @click="openTab = 4" :class="openTab === 4 ? activeClasses : inactiveClasses" class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
+			      <li @click="openTab = 1" :class="openTab === 1 ? activeClasses : inactiveClasses" class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
 			        <a>RSS Feed</a>
 			      </li>
 			    </ul>
 			  </div>
 			
 			    <div class="w-full pt-4">
-			      <div x-show="openTab === 1">
+			      <div x-show="openTab === 4">
 			      	
 			      	 <section>
 
@@ -225,7 +225,7 @@
 				          </div>
 				        </section>
 			      </div>
-			     <div x-show="openTab === 4">
+			     <div x-show="openTab === 1">
 			     	<section aria-labelledby="payment_details_heading">
 
 			
@@ -253,7 +253,47 @@
 			            </div>
 
 				    </section>
+				    <section aria-labelledby="billing_history_heading" class="mt-5">
+				          <div class="bg-white pt-6 shadow sm:rounded-md sm:overflow-hidden">
+				            <div class="px-4 sm:px-6">
+				              <h2 class="text-md leading-6 font-medium text-gray-900">{{ $rss_data['title'] ?? 'none'  }}</h2>
+				              <p class="text-md leading-6 font-normal text-gray-900">{{ $rss_data['description'] ?? 'none'  }}</p>
+				              <p class="text-md leading-6 font-normal text-gray-900">{{ $rss_data['link'] ?? 'none'  }}</p>
+				           
+				            </div>
+				            <div class="mt-6 flex flex-col">
+				              <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+				                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+				                  <div class="overflow-hidden border-t border-gray-200">
+				                    <table class="min-w-full divide-y divide-gray-200">
+				                      <thead class="bg-gray-50">
+				                        <tr>
+				                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+				                            Title
+				                          </th>
+				                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+				                            Episodes
+				                          </th>
+				                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+				                            Date
+				                          </th>
+				                      
+				                          <th scope="col" class="relative px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+				                            <span class="sr-only">View receipt</span>
+				                          </th>
+				                        </tr>
+				                      </thead>
+				                      <tbody class="bg-white divide-y divide-gray-200">
+				                    
 
+				                      </tbody>
+				                    </table>
+				                  </div>
+				                </div>
+				              </div>
+				            </div>
+				          </div>
+				    </section>
 
 
 			     </div>	
