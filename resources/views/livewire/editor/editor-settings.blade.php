@@ -256,9 +256,9 @@
 				    <section aria-labelledby="billing_history_heading" class="mt-5">
 				          <div class="bg-white pt-6 shadow sm:rounded-md sm:overflow-hidden">
 				            <div class="px-4 sm:px-6">
-				              <h2 class="text-md leading-6 font-medium text-gray-900">{{ $rss_data['title'] ?? 'none'  }}</h2>
-				              <p class="text-md leading-6 font-normal text-gray-900">{{ $rss_data['description'] ?? 'none'  }}</p>
-				              <p class="text-md leading-6 font-normal text-gray-900">{{ $rss_data['link'] ?? 'none'  }}</p>
+				              <h2 class="text-md leading-6 font-medium text-gray-900">{{ $rss_data['title'] ?? ''  }}</h2>
+				              <p class="text-md leading-6 font-normal text-gray-900">{{ $rss_data['description'] ?? ''  }}</p>
+				              <p class="text-md leading-6 font-normal text-gray-900">{{ $rss_data['link'] ?? ''  }}</p>
 				           
 				            </div>
 				            <div class="mt-6 flex flex-col">
@@ -287,8 +287,8 @@
 				                      	<?php $rss_quatity = $rss_data['item_quantity'] ?? 0; ?>
 				                      @for ($i = 0; $i < $rss_quatity; $i++)
 
-										    {{ $rss_data["items"][$i]['title'] ?? ''  }}
-											 {{ $rss_data["items"][$i]['enclosure_link'] ?? '' }}	
+										   <!--  {{ $rss_data["items"][$i]['title'] ?? ''  }}
+											 {{ $rss_data["items"][$i]['enclosure_link'] ?? '' }}	 -->
 						
 										    <iframe src="{{ $rss_data['items'][$i]['embed'] ?? '' }}"" height="102px" width="400px" frameborder="0" scrolling="no"></iframe>
 
