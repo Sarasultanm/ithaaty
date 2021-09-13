@@ -284,7 +284,18 @@
 				                        </tr>
 				                      </thead>
 				                      <tbody class="bg-white divide-y divide-gray-200">
-				                    
+				                      	<?php $rss_quatity = $rss_data['item_quantity'] ?? 0; ?>
+				                      @for ($i = 0; $i < $rss_quatity; $i++)
+
+										    {{ $rss_data["items"][$i]['title'] ?? ''  }}
+											 {{ $rss_data["items"][$i]['enclosure_link'] ?? '' }}	
+						
+										    <iframe src="{{ $rss_data['items'][$i]['embed'] ?? '' }}"" height="102px" width="400px" frameborder="0" scrolling="no"></iframe>
+
+										@endfor
+
+				                     	 <!-- <pre class="p-5"><?php var_dump($rss_data); ?></pre>  -->
+
 
 				                      </tbody>
 				                    </table>
