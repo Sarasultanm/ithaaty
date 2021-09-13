@@ -93,6 +93,7 @@ class EditorSettings extends Component
                 $i['embed'] = str_replace( 'episodes/', 'embed/episodes/', $item->get_link() );
                 $i['content'] = $item->get_content();
                 $i['links'] = $item->get_link();
+                $i['id'] = $item->get_id();
                 $i['season'] = $item->get_item_tags('', 'season');
                 // $i['audio_link'] = $item->get_enclosures()->get_link();
             // return $data[0]['data'];

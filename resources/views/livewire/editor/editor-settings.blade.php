@@ -52,9 +52,9 @@
 			      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
 			        <a>Password</a>
 			      </li>
-			      <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses" class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
+			     <!--  <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses" class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
 			        <a>Categories</a>
-			      </li>
+			      </li> -->
 			      <li @click="openTab = 1" :class="openTab === 1 ? activeClasses : inactiveClasses" class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
 			        <a>RSS Feed</a>
 			      </li>
@@ -139,7 +139,7 @@
 
 
 			      </div>
-			      <div x-show="openTab === 3">
+<!-- 			      <div x-show="openTab === 3">
 			      	
 			      	<section aria-labelledby="payment_details_heading">
 
@@ -190,9 +190,7 @@
 				                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 				                            Date
 				                          </th>
-				                          <!--
-				                            `relative` is added here due to a weird bug in Safari that causes `sr-only` headings to introduce overflow on the body on mobile.
-				                          -->
+				                     
 				                          <th scope="col" class="relative px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 				                            <span class="sr-only">View receipt</span>
 				                          </th>
@@ -202,7 +200,7 @@
 				                        @foreach($categoryList->get() as $catlist)
 				                          <tr>
 				                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-				                             <!--  <time datetime="2020-01-01">1/1/2020</time> -->
+				                            
 				                             {{ $catlist->category_name }}
 				                            </td>
 				                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -224,7 +222,7 @@
 				            </div>
 				          </div>
 				        </section>
-			      </div>
+			      </div> -->
 			     <div x-show="openTab === 1">
 			     	<section aria-labelledby="payment_details_heading">
 
@@ -287,14 +285,14 @@
 				                      	<?php $rss_quatity = $rss_data['item_quantity'] ?? 0; ?>
 				                      @for ($i = 0; $i < $rss_quatity; $i++)
 
-										   <!--  {{ $rss_data["items"][$i]['title'] ?? ''  }}
-											 {{ $rss_data["items"][$i]['enclosure_link'] ?? '' }}	 -->
+										  {{ $rss_data["items"][$i]['title'] ?? ''  }}
+											 {{ $rss_data["items"][$i]['enclosure_link'] ?? '' }}
 						
 										    <iframe src="{{ $rss_data['items'][$i]['embed'] ?? '' }}"" height="102px" width="400px" frameborder="0" scrolling="no"></iframe>
 
 										@endfor
 
-				                     	 <!-- <pre class="p-5"><?php var_dump($rss_data); ?></pre>  -->
+				                     	
 
 
 				                      </tbody>
