@@ -14,6 +14,8 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/audio.css') }}">
+
+
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -22,6 +24,8 @@
 
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@5.3.2/dist/amplitude.js"></script>
 
+        <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet" />
+        <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet">
 
          @livewireStyles
     </head>
@@ -42,5 +46,6 @@
             </main>
         </div>
         @livewireScripts
+        <script src="https://vjs.zencdn.net/7.14.3/video.min.js"></script>
     </body>
 </html>

@@ -139,90 +139,7 @@
 
 
 			      </div>
-<!-- 			      <div x-show="openTab === 3">
-			      	
-			      	<section aria-labelledby="payment_details_heading">
 
-			           <form wire:submit.prevent="addCategory"> 
-			            <div class="shadow sm:rounded-md sm:overflow-hidden">
-			              <div class="bg-white py-6 px-4 sm:p-6">
-			                <div>
-			                  <h2 id="payment_details_heading" class="text-lg leading-6 font-medium text-gray-900">Category</h2>
-			                  <p class="mt-1 text-sm text-gray-500">Update your billing information. Please note that updating your location could affect your tax rates.</p>
-			                </div>
-
-			                <div class="mt-6 grid grid-cols-4 gap-6">
-			                  <div class="col-span-4 sm:col-span-2">
-			                    <input wire:model="categoryTitle" type="text" name="first_name" id="first_name" autocomplete="cc-given-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
-			                  </div>
-
-			                  <div class="col-span-4 sm:col-span-2 text-right">
-			                    <button type="submit" class="bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
-			                  Add
-			                </button>
-			                  </div>
-
-			                </div>
-			              </div>
-			             
-			            </div>
-			          </form>
-
-				    </section>
-				    <section aria-labelledby="billing_history_heading" class="mt-5">
-				          <div class="bg-white pt-6 shadow sm:rounded-md sm:overflow-hidden">
-				            <div class="px-4 sm:px-6">
-				              <h2 id="billing_history_heading" class="text-lg leading-6 font-medium text-gray-900">Category List</h2>
-				            </div>
-				            <div class="mt-6 flex flex-col">
-				              <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-				                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-				                  <div class="overflow-hidden border-t border-gray-200">
-				                    <table class="min-w-full divide-y divide-gray-200">
-				                      <thead class="bg-gray-50">
-				                        <tr>
-				                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-				                            Title
-				                          </th>
-				                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-				                            Episodes
-				                          </th>
-				                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-				                            Date
-				                          </th>
-				                     
-				                          <th scope="col" class="relative px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-				                            <span class="sr-only">View receipt</span>
-				                          </th>
-				                        </tr>
-				                      </thead>
-				                      <tbody class="bg-white divide-y divide-gray-200">
-				                        @foreach($categoryList->get() as $catlist)
-				                          <tr>
-				                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-				                            
-				                             {{ $catlist->category_name }}
-				                            </td>
-				                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-				                              {{ $catlist->episode() }}
-				                            </td>
-				                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-				                              {{ $catlist->created_at }}
-				                            </td>
-				                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-				                              <a href="#" class="text-orange-600 hover:text-orange-900">Details</a>
-				                            </td>
-				                          </tr>
-				                        @endforeach  
-				                      </tbody>
-				                    </table>
-				                  </div>
-				                </div>
-				              </div>
-				            </div>
-				          </div>
-				        </section>
-			      </div> -->
 			     <div x-show="openTab === 1">
 			     	<section aria-labelledby="payment_details_heading">
 
@@ -241,7 +158,7 @@
 
 			                  <div class="col-span-4 sm:col-span-2 text-right">
 			                    <button wire:click="loadRss()" class="bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
-			                  Add
+			                  Load RSS
 			                </button>
 			                  </div>
 
@@ -251,60 +168,38 @@
 			            </div>
 
 				    </section>
-				    <section aria-labelledby="billing_history_heading" class="mt-5">
-				          <div class="bg-white pt-6 shadow sm:rounded-md sm:overflow-hidden">
-				            <div class="px-4 sm:px-6">
-				              <h2 class="text-md leading-6 font-medium text-gray-900">{{ $rss_data['title'] ?? ''  }}</h2>
-				              <p class="text-md leading-6 font-normal text-gray-900">{{ $rss_data['description'] ?? ''  }}</p>
-				              <p class="text-md leading-6 font-normal text-gray-900">{{ $rss_data['link'] ?? ''  }}</p>
-				           
-				            </div>
-				            <div class="mt-6 flex flex-col">
-				              <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-				                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-				                  <div class="overflow-hidden border-t border-gray-200">
-				                    <table class="min-w-full divide-y divide-gray-200">
-				                      <thead class="bg-gray-50">
-				                        <tr>
-				                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-				                            Title
-				                          </th>
-				                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-				                            Episodes
-				                          </th>
-				                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-				                            Date
-				                          </th>
-				                      
-				                          <th scope="col" class="relative px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-				                            <span class="sr-only">View receipt</span>
-				                          </th>
-				                        </tr>
-				                      </thead>
-				                      <tbody class="bg-white divide-y divide-gray-200">
-				                      	<?php $rss_quatity = $rss_data['item_quantity'] ?? 0; ?>
-				                      @for ($i = 0; $i < $rss_quatity; $i++)
 
-										  {{ $rss_data["items"][$i]['title'] ?? ''  }}
-											 {{ $rss_data["items"][$i]['enclosure_link'] ?? '' }}
-						
-										    <iframe src="{{ $rss_data['items'][$i]['embed'] ?? '' }}"" height="102px" width="400px" frameborder="0" scrolling="no"></iframe>
+				     <section >
 
-										@endfor
+				    	<?php $rss_quatity = $rss_data['item_quantity'] ?? 0; ?>
+						 <?php for ($i = 0; $i < $rss_quatity; $i++){ ?>
+			            <div class="shadow sm:rounded-md sm:overflow-hidden mt-5">
+			              <div class="bg-white py-6 px-4 sm:p-6">
+			                <div class="grid grid-cols-4 gap-6">
+			                  <div class="col-span-1 ">
+			                  	<img class="w-full h-auto " loading="lazy" src="{{ $rss_data['image_url'] ?? ''  }}" alt="">
+			                  </div>
+			                  <div class="col-span-3 text-left relative">
+			                   		<h2 class="text-lg leading-6 font-bold text-gray-900">{{ $rss_data["items"][$i]['title'] ?? ''  }}</h2>
+			                   		<p class="mt-1 text-sm text-gray-500">Author : {{ $rss_data["author"] ?? ''  }}</p>
+			                  		<p class="mt-5 text-md text-gray-500">{{ $rss_data["items"][$i]['description'] ?? ''  }}</p>
+			                  		<div class="mt-5 mb-5">
+					       
+								</div>
 
-				                     	
+									
+			                  </div>
 
 
-				                      </tbody>
-				                    </table>
-				                  </div>
-				                </div>
-				              </div>
-				            </div>
-				          </div>
+			                </div>
+			              </div>
+			             
+			            </div>
+			             <?php } ?>
+			             
+					   
 				    </section>
-
-
+				
 			     </div>	
 			    </div>
 			  </div>

@@ -70,12 +70,13 @@
                           <time datetime="2020-12-09T11:43:00">{{ date_format($date,"M, Y") }}</time>  <span class="float-left">SE:{{ $myaudio->audio_season }} | EP:{{ $myaudio->audio_episode }}</span>
                         </a>
                       </p>
-                      <div class="text-xs font-bold text-gray-900 mt-5" x-data="{ open: false }">
+                    <!--   <div class="text-xs font-bold text-gray-900 mt-5" x-data="{ open: false }"> -->
+                      <div class="text-xs font-bold text-gray-900 mt-5">
                         <!-- <a  wire:click="editdata({{$myaudio->id}})" class="hover:underline" @click="open = true" >Update</a> -->
                         <a href="{{ route('editorPodcastUpdate',['id' => $myaudio->id]) }}"  class="hover:underline">Update</a>
                         <a href="{{ route('editorPodcastDetails',['id' => $myaudio->id]) }}" class="hover:underline float-right" >Details</a>
 
-                                <div x-show="open"
+                  <!--               <div x-show="open"
                                      x-transition:enter="ease-out duration-300"
                                      x-transition:enter-start="opacity-0"
                                      x-transition:enter-end="opacity-100"
@@ -88,7 +89,7 @@
                                       <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                                     </div>
 
-                                    <!-- This element is to trick the browser into centering the modal contents. -->
+                       
                                     <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
                                     <div 
@@ -104,7 +105,7 @@
 
                                         <div>
                                         <div class="mx-auto flex">
-                                          <!-- Heroicon name: outline/check -->
+                                
                                           <h3 class="text-lg leading-6 font-medium text-gray-900">
                                             Update Post
                                           </h3>
@@ -159,30 +160,30 @@
                                              Upload Type
                                             </legend>
                                             <div class="bg-white rounded-md -space-y-px mt-1">
-                                              <!-- Checked: "bg-indigo-50 border-indigo-200 z-10", Not Checked: "border-gray-200" -->
+                                            
                                               <label class="border-gray-200 rounded-tl-md rounded-tr-md relative border p-2 flex cursor-pointer">
                                                 <input wire:model="uploadType" value="uploadFile" type="radio" id="uploadAudio" class="h-4 w-4 mt-0.5 cursor-pointer text-indigo-600 border-gray-300 focus:ring-indigo-500" >
                                                 <div class="ml-3 flex flex-col">
-                                                  <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
+                                               
                                                   <span id="privacy-setting-0-label" class="text-gray-900 block text-sm font-medium">
                                                     Upload File
                                                   </span>
-                                                  <!-- Checked: "text-indigo-700", Not Checked: "text-gray-500" -->
+                                                 
                                                   <span id="privacy-setting-0-description" class="text-gray-500 block text-xs">
                                                     This project would be available to anyone who has the link
                                                   </span>
                                                 </div>
                                               </label>
 
-                                              <!-- Checked: "bg-indigo-50 border-indigo-200 z-10", Not Checked: "border-gray-200" -->
+                                              
                                               <label class="border-gray-200 relative border p-2 flex cursor-pointer">
                                                 <input wire:model="uploadType" value="embedLink" type="radio" id="embedAudio" class="h-4 w-4 mt-0.5 cursor-pointer text-indigo-600 border-gray-300 focus:ring-indigo-500" aria-labelledby="privacy-setting-1-label" aria-describedby="privacy-setting-1-description">
                                                 <div class="ml-3 flex flex-col">
-                                                  <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
+                                                 
                                                   <span id="privacy-setting-1-label" class="text-gray-900 block text-sm font-medium">
                                                    Embed Code
                                                   </span>
-                                                  <!-- Checked: "text-indigo-700", Not Checked: "text-gray-500" -->
+                                                 
                                                   <span id="privacy-setting-1-description" class="text-gray-500 block text-xs">
                                                     Only members of this project would be able to access
                                                   </span>
@@ -241,7 +242,7 @@
                                   
                                     </div>
                                   </div>
-                                </div>
+                                </div> -->
 
                       </div>
                     </div>

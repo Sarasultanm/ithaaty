@@ -124,9 +124,57 @@
 	              <!--    <div>
 					  <button class="">Hello</button>
 					 </div> -->
-	                 	<div class="audio-embed-container">
+
+					@if($audio->audio_type == "Upload")
+					
+
+					@elseif($audio->audio_type == "RSS") 
+
+					<video
+                    id="my-video{{ $audio->id }}"
+                    class="video-js vjs-theme-forest"
+                    controls
+                    preload="auto"
+                    width="auto"
+                    height="264"
+                    poster="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg"
+                    data-setup="{}"
+                  >
+                    <source src="{{ $audio->audio_path }}" type="video/mp4" />
+                    <source src="{{ $audio->audio_path }}" type="video/webm" />
+                    <p class="vjs-no-js">
+                      To view this video please enable JavaScript, and consider upgrading to a
+                      web browser that
+                      <a href="https://videojs.com/html5-video-support/" target="_blank"
+                        >supports HTML5 video</a
+                      >
+                    </p>
+                  </video>
+
+					@else
+
+					<div class="audio-embed-container">
 	                   	 <?php echo $audio->audio_path; ?>
 	                   </div>
+
+					@endif
+	                 	
+
+	                   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 						<p class="text-white text-xs uppercase mt-5">{{ $audio->created_at }}  | <span>01:37:50 <span>|</span></span> {{ $audio->audio_season }}:{{ $audio->audio_episode }}</p>           	
                    </div>

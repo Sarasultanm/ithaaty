@@ -15,7 +15,11 @@ class EditorSettings extends Component
 {
 
 
-	 public $categoryTitle,$userName,$oldPass,$newPass,$rss_title,$rss_link,$rss_data,$item_title;
+	 public $categoryTitle,$userName,$oldPass,$newPass,$rss_title,$rss_link,$rss_data,$item_title,$displayArr;
+
+     public $listMedia;
+     public $arr_category = array();
+     public $arr_checkbox = array();
 
 
 
@@ -78,35 +82,44 @@ class EditorSettings extends Component
 
         $data = FeedReader::read($this->rss_link);
         // $items_feed = $data;
+        // $xml = simplexml_load_file("https://www.w3schools.com/php/note.xml");
         $result = [
             'title' => $data->get_title(),
             'description' => $data->get_description(),
             'link' => $data->get_link(),
+            'author' => $data->get_author()->get_name(),
             'image_url' => $data->get_image_url(),
-            'item_quantity' =>$data->get_item_quantity()
+            'item_quantity' =>$data->get_item_quantity(),
+            // 'native_xml'=> var_dump($xml)
         ];
+
+     
+
 
             foreach ($data->get_items(0,$data->get_item_quantity()) as $item) {
                 $i['title'] = $item->get_title();
-                $i['description'] = $item->get_description();
+                $i['description'] = str_replace( ['<p>','</p>'], '',$item->get_description());
                 $i['link'] = $item->get_link();
                 $i['embed'] = str_replace( 'episodes/', 'embed/episodes/', $item->get_link() );
                 $i['content'] = $item->get_content();
                 $i['links'] = $item->get_link();
                 $i['id'] = $item->get_id();
-                $i['season'] = $item->get_item_tags('', 'season');
+                $i['category'] = $item->get_category();
+                // $i['season'] = $item->get_item_tags('itunes','season');
                 // $i['audio_link'] = $item->get_enclosures()->get_link();
             // return $data[0]['data'];
+                // $i['source'] = $xml->season;
+                // $i['season_daw'] =  $i['season']["data"];
 
 
                 foreach ($item->get_enclosures() as $enclosure)
                 {
                     // echo $enclosure->embed();
-                    $i['enclosure_link'] = $enclosure->get_link();
+                    //$i['enclosure_link'] = $enclosure->get_link();
+                     $i['enclosure_link'] = $enclosure->get_link();;
                 }
 
 
-               
                 // $i['tags'] = $item->get_item_tags('','itunes:season');
                 // $i['episode'] = $item->get_episode();
                 // $media_group = $item->get_item_tags('http://search.yahoo.com/mrss/', 'group');
@@ -117,19 +130,19 @@ class EditorSettings extends Component
                 // $i['season'] = $item->get_item_tags('itunes:season','itunes:season')[0]["itunes:season"];
 
 
-                // $data = new Audio;
-                // $data->audio_editor = Auth::user()->id;
-                // $data->audio_name = $item->get_title();
-                // $data->audio_season = $this->season;
-                // $data->audio_episode = $this->episode;
-                // $data->audio_category = $this->category;
-                // $data->audio_tags = "none";
-                // $data->audio_status = "active";
-                // $data->audio_summary = $this->summary;
-                // $data->audio_path = $this->embedlink;
-                // $data->audio_type = "Embed";
-                // $data->audio_hashtags = $this->hashtags;
-                // $data->save();
+                $data = new Audio;
+                $data->audio_editor = Auth::user()->id;
+                $data->audio_name = $item->get_title();
+                $data->audio_season = "1";
+                $data->audio_episode = "1";
+                $data->audio_category = "1";
+                $data->audio_tags = "none";
+                $data->audio_status = "active";
+                $data->audio_summary = str_replace( ['<p>','</p>'], '',$item->get_description());
+                $data->audio_path = $i['enclosure_link'];
+                $data->audio_type = "RSS";
+                $data->audio_hashtags = "";
+                $data->save();
 
 
 
@@ -142,7 +155,7 @@ class EditorSettings extends Component
 
         // $this->item_title = $result1;   
         $this->rss_data =  $result;  
-
+        // $this->native_xml = $xml;
     }
 
 
@@ -153,11 +166,31 @@ class EditorSettings extends Component
 
     }   
 
+    public function saveArray(){
+
+        $this->displayArr = $this->arr_checkbox;
+        // $this->listMedia = count($this->arr_checkbox);
+        // foreach ($this->arr_checkbox as $value) {
+          
+        //     if($value == true){
+        //         $this->displayArr = $value;
+        //     }
+
+
+        // }
+
+
+
+
+
+    }
+
+
     public function render()
     {
 
-    	$categoryList = Category::where('category_owner',Auth::user()->id);
-
+    	// $categoryList = Category::where('category_owner',Auth::user()->id);
+        $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
         return view('livewire.editor.editor-settings',compact('categoryList'));
     }
 }
