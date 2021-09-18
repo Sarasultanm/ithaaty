@@ -256,6 +256,22 @@
 
                 <div class="mt-6 flex justify-between space-x-8">
                   <div class="flex space-x-6">
+
+                   <!--  <span class="inline-flex items-center text-sm" @click="openTab = 4"  :class="openTab === 1 ? activeClasses : inactiveClasses" >
+                     @if( EditorDashboard::checkLike($audio->id) == 0 ) 
+                      <button  class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                     @else
+                       <button class="inline-flex space-x-2 text-green-600 hover:text-green-700" >
+                     @endif   
+                   
+                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                        </svg>
+                        <span class="font-medium text-gray-900">{{ $audio->get_like->count()  }}</span>
+                        <span class="sr-only">likes</span>
+                      </button>
+                    </span> -->
+
                     <span class="inline-flex items-center text-sm">
                      @if( EditorDashboard::checkLike($audio->id) == 0 ) 
                       <button wire:click="like({{ $audio->id }},{{$audio->audio_editor}})" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
@@ -270,6 +286,7 @@
                         <span class="sr-only">likes</span>
                       </button>
                     </span>
+
                     <span class="inline-flex items-center text-sm" @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses" >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <!-- Heroicon name: solid/chat-alt -->
@@ -280,6 +297,7 @@
                         <span class="sr-only">replies</span>
                       </button>
                     </span>
+
                     <span class="inline-flex items-center text-sm">
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <!-- Heroicon name: solid/eye -->
@@ -420,10 +438,45 @@
                 @endif
           </div>
 
-           <div x-show="openTab === 3">
+          <div x-show="openTab === 3">
              <div class="mt-5">
                     <div class="mt-1">
                      <p>{{ $audio->audio_summary }}</p>
+                    </div>
+              </div>
+
+          </div>
+          <div x-show="openTab === 4">
+             <div class="mt-5">
+                    <div class="mt-1">
+                     <ul>
+                                <li class="inline float-left mr-2">
+                                  <svg class="h-5 w-5"  xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                    </svg>
+                                </li>
+                                <li class="inline float-left mr-2">
+                                  <svg class="h-5 w-5"  xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                    </svg>
+                                </li>
+                                <li class="inline float-left mr-2">
+                                  <svg class="h-5 w-5"  xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                    </svg>
+                                </li>
+                                <li class="inline float-left mr-2">
+                                  <svg class="h-5 w-5"  xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                    </svg>
+                                </li>
+                                <li class="inline float-left mr-2">
+                                  <svg class="h-5 w-5"  xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                    </svg>
+                                </li>
+                                
+                            </ul>
                     </div>
               </div>
 
