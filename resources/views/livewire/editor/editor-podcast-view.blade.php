@@ -129,7 +129,7 @@
 					
 
 					@elseif($audio->audio_type == "RSS") 
-
+				
 					<video
                     id="my-video{{ $audio->id }}"
                     class="video-js vjs-theme-forest"
@@ -139,6 +139,7 @@
                     height="264"
                     poster="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg"
                     data-setup="{}"
+                    autoplay preload="auto"
                   >
                     <source src="{{ $audio->audio_path }}" type="video/mp4" />
                     <source src="{{ $audio->audio_path }}" type="video/webm" />
@@ -238,14 +239,14 @@
                       </button>
                     </span>
 
-              <!--        <span class="inline-flex items-center text-sm" @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses" >
+             <span class="inline-flex items-center text-sm" @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses" >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
 						</svg>
-                        <span class="font-medium text-gray-900">Transcript</span>
+                        <span class="font-medium text-gray-900">References</span>
                       </button>
-                    </span> -->
+                    </span> 
                     
                   </div>
                 </div>
@@ -364,7 +365,11 @@
 			     <div x-show="openTab === 3">
 				     <div class="mt-5">
 		                <div class="mt-1">
-		                 <p>{{ $audio->audio_summary }}</p>
+		                @foreach($audio->get_references as $reference)	
+		                
+		                 <a href="{{ $reference->audioref_link }}">{{ $reference->audioref_title }}</a><br>
+
+		                @endforeach 
 		                </div>
 			        </div>
 
