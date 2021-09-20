@@ -21,8 +21,8 @@ class EditorPodcastDetail extends Component
 
     public function render()
     {
-
+        $audioList = Audio::orderBy('id', 'DESC')->where('audio_editor',Auth::user()->id);
     	$getHashtags = Audio::where('audio_hashtags', 'like', '%music%')->count();
-        return view('livewire.editor.editor-podcast-detail',compact('getHashtags'));
+        return view('livewire.editor.editor-podcast-detail',compact('getHashtags','audioList'));
     }
 }

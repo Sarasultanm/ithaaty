@@ -19,6 +19,10 @@ class Audio extends Model
         return $this->hasMany('App\Models\UserLikes', 'like_audioid','id');
     }
 
+    public function get_react($like_type){
+        return $this->hasMany('App\Models\UserLikes', 'like_audioid','id')->where('like_type',$like_type);
+    }
+
     public function get_comments(){
         return $this->hasMany('App\Models\UserComments', 'coms_audioid','id');
     }

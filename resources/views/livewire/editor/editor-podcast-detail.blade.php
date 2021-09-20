@@ -111,17 +111,17 @@
 
 			   <div class="border-b border-gray-200">
 			  	<ul class="-mb-px flex" >
-			      <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
-			        <a  href="#">Transcript</a>
+			      <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
+			        <a  >Transcript</a>
 			      </li>
-			      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
-			        <a  href="#">Stats</a>
+			      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+			        <a  >Stats</a>
 			      </li>
-             <li @click="openTab = 3"  :class="openTab === 4 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
-              <a  href="#">Mood Meter</a>
+             <li @click="openTab = 3"  :class="openTab === 3 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
+              <a >Mood Meter</a>
             </li>
-			      <li @click="openTab = 4"  :class="openTab === 3 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
-			        <a  href="#">Other Episodes</a>
+			      <li @click="openTab = 4"  :class="openTab === 4 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
+			        <a >Other Episodes</a>
 			      </li>
 
 			    </ul>
@@ -200,6 +200,139 @@
 
 			  	</div>	
 
+          <div x-show="openTab === 3">
+
+            <div class="grid gap-4 grid-cols-12">
+
+            
+
+                <div class="sm:col-span-12 lg:col-span-4  p-2 ">
+                    <div class="relative bg-white py-6 px-4 sm:py-4 sm:px-4 shadow rounded-lg overflow-hidden">
+                      <dt>
+                        <div class="absolute rounded-md p-3" style="background: #f98b88;">
+                         
+                             <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                              <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                            </svg>
+                        </div>
+                        <p class="ml-16 text-sm font-medium text-gray-500 truncate">Likes</p>
+                      </dt>
+                      <dd class="ml-16  flex items-baseline">
+                        <p class="text-2xl font-semibold text-gray-900">
+                         {{ $audio->get_react('like')->count()  }}
+                        </p>
+                      </dd>
+                    </div>
+                </div>
+                
+
+                <div class="sm:col-span-12 lg:col-span-4  p-2 ">
+                    <div class="relative bg-white py-6 px-4 sm:py-4 sm:px-4  shadow rounded-lg overflow-hidden">
+                      <dt>
+                         <div class="absolute rounded-md p-3" style="background: #f98b88;">
+                         
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                        </div>
+                        <p class="ml-16 text-sm font-medium text-gray-500 truncate">Star</p>
+                      </dt>
+                      <dd class="ml-16  flex items-baseline">
+                        <p class="text-2xl font-semibold text-gray-900">
+                           {{ $audio->get_react('star')->count()  }}
+                        </p>
+                      </dd>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-12 lg:col-span-4  p-2 ">
+                    <div class="relative bg-white py-6 px-4 sm:py-4 sm:px-4  shadow rounded-lg overflow-hidden">
+                      <dt>
+                        <div class="absolute rounded-md p-3" style="background: #f98b88;">
+                        
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <p class="ml-16 text-sm font-medium text-gray-500 truncate">Happy</p>
+                      </dt>
+                      <dd class="ml-16  flex items-baseline">
+                        <p class="text-2xl font-semibold text-gray-900">
+                          {{ $audio->get_react('happy')->count()  }}
+                        </p>
+                      </dd>
+                    </div>
+                </div>
+
+
+                <div class="sm:col-span-12 lg:col-span-4  p-2 ">
+                    <div class="relative bg-white py-6 px-4 sm:py-4 sm:px-4  shadow rounded-lg overflow-hidden">
+                      <dt>
+                         <div class="absolute rounded-md p-3" style="background: #f98b88;">
+                          
+                            <svg xmlns="http://www.w3.org/2000/svg"  class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-7.536 5.879a1 1 0 001.415 0 3 3 0 014.242 0 1 1 0 001.415-1.415 5 5 0 00-7.072 0 1 1 0 000 1.415z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <p class="ml-16 text-sm font-medium text-gray-500 truncate">Sad</p>
+                      </dt>
+                      <dd class="ml-16  flex items-baseline">
+                        <p class="text-2xl font-semibold text-gray-900">
+                           {{ $audio->get_react('sad')->count()  }}
+                        </p>
+                      </dd>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-12 lg:col-span-4  p-2 ">
+                    <div class="relative bg-white py-6 px-4 sm:py-4 sm:px-4  shadow rounded-lg overflow-hidden">
+                      <dt>
+                         <div class="absolute rounded-md p-3" style="background: #f98b88;">
+                          
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
+                          </svg>
+                        </div>
+                        <p class="ml-16 text-sm font-medium text-gray-500 truncate">Dislike</p>
+                      </dt>
+                      <dd class="ml-16  flex items-baseline">
+                        <p class="text-2xl font-semibold text-gray-900">
+                           {{ $audio->get_react('dislike')->count()  }}
+                        </p>
+                      </dd>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-12 lg:col-span-4  p-2 ">
+                    <div class="relative bg-white py-6 px-4 sm:py-4 sm:px-4  shadow rounded-lg overflow-hidden">
+                      <dt>
+                         <div class="absolute rounded-md p-3" style="background: #f98b88;">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                              <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                            </svg>
+                            
+                          </svg>
+                        </div>
+                        <p class="ml-16 text-sm font-medium text-gray-500 truncate">Views</p>
+                      </dt>
+                      <dd class="ml-16  flex items-baseline">
+                        <p class="text-2xl font-semibold text-gray-900">
+                           {{ $audio->get_view->count()  }}
+                        </p>
+                      </dd>
+                    </div>
+                </div>
+
+
+
+
+            
+
+            </div>
+
+
+          </div>
 			  	<div x-show="openTab === 4">
 
 			  		<div class="grid gap-4 grid-cols-12">

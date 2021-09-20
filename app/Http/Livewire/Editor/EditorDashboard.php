@@ -144,12 +144,12 @@ class EditorDashboard extends Component
 
         }
 
-        public function like($id,$audio_editor){
+        public function like($id,$audio_editor,$like_type){
 
              $data = new UserLikes;
              $data->like_userid = Auth::User()->id;
              $data->like_audioid = $id;
-             $data->like_type = "like";
+             $data->like_type = $like_type;
              $data->like_status = "active";
              $data->like_ownerid = $audio_editor;
              $data->save();
@@ -175,6 +175,9 @@ class EditorDashboard extends Component
             $this->emit('refreshParent');
 
         }
+
+
+
         public function view($id,$audio_editor){
 
              $data = new UserViews;
