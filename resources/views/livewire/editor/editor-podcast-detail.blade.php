@@ -128,7 +128,7 @@
 			  </div>
 
 			  <div class="w-full pt-4">
-			  	<div x-show="openTab === 2">
+			  	<div x-show="openTab === 1">
 
 			  		<div class="bg-white mt-1 p-3">
 		               <div class="flex text-gray-900">
