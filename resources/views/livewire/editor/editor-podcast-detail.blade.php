@@ -128,7 +128,7 @@
 			  </div>
 
 			  <div class="w-full pt-4">
-			  	<div x-show="openTab === 1">
+			  	<div x-show="openTab === 2">
 
 			  		<div class="bg-white mt-1 p-3">
 		               <div class="flex text-gray-900">
@@ -146,9 +146,11 @@
 		            </div>
 			  	</div>
 			  	<div x-show="openTab === 2">
-			  							<div class="shadow-lg rounded-lg overflow-hidden">
+			  	
+          <div class="shadow-lg rounded-lg overflow-hidden">
 					  <div class="py-3 px-5 bg-gray-50">
-					      Audience
+					      Audience View
+                <span class="float-right">{{ $audio->get_view->count() }}</span>
 					  </div>
 					  <canvas class="p-10 " id="chartBar"></canvas>
 					</div>
@@ -176,10 +178,10 @@
 					  const dataBarChart = {
 					    labels: labelsBarChart,
 					    datasets: [{
-					      label: 'My First dataset',
+					      label: 'Audience View Count',
 					      backgroundColor: 'hsl(252, 82.9%, 67.8%)',
 					      borderColor: 'hsl(252, 82.9%, 67.8%)',
-					      data: [1,2,3,4,5,6,7,8,9,10,11,12],
+					      data: [{{$jan_views}},{{$feb_views}},{{$mar_views}},{{$apr_views}},{{$may_views}},{{$jun_views}},{{$jul_views}},{{$aug_views}},{{$sep_views}},{{$oct_views}},{{$nov_views}},{{$dec_views}}],
 					    }]
 					  };
 
@@ -196,6 +198,36 @@
 					  );
 					</script>
 
+          <div class="shadow-lg rounded-lg overflow-hidden mt-10">
+            <div class="py-3 px-5 bg-gray-50">
+                Word Counter
+            </div>
+            <div class="p-5 bg-white">
+              
+            @if($audio->get_comments->count() != 0)
+            <?php foreach($audio->get_comments as $comments){ ?> 
+                <?php 
+                    $getComs[] = $comments->coms_message;
+
+                  ?>
+            <?php } ?>
+             <?php 
+
+              $mergeComs = implode(' ', $getComs); 
+              $arryComs = explode(' ', $mergeComs);
+
+              for ($i=0; $i < str_word_count($mergeComs) ; $i++) {  ?> 
+              <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+
+
+               <?php echo $arryComs[$i]."(".substr_count($mergeComs, $arryComs[$i]).") "; ?>
+               </span>
+                <!--  $arraytwo[] = "str:".$arryComs[$i]."/val:".substr_count($mergeComs, $arryComs[$i]); -->
+             <?php  } ?>   
+
+             @endif      
+             </div>
+          </div>
 
 
 			  	</div>	
@@ -303,7 +335,7 @@
                     </div>
                 </div>
 
-                <div class="sm:col-span-12 lg:col-span-4  p-2 ">
+            <!-- <div class="sm:col-span-12 lg:col-span-4  p-2 ">
                     <div class="relative bg-white py-6 px-4 sm:py-4 sm:px-4  shadow rounded-lg overflow-hidden">
                       <dt>
                          <div class="absolute rounded-md p-3" style="background: #f98b88;">
@@ -322,7 +354,7 @@
                         </p>
                       </dd>
                     </div>
-                </div>
+                </div> -->
 
 
 
@@ -370,12 +402,12 @@
 
 			</div>
 
-			    <div class="mt-5 bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
+ <div class="mt-5 bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
             
             <div class="pb-5">
                   <h3 class="font-medium text-gray-900">Comments <span class="float-right">{{ $audio->get_comments->count() }}</span></h3>
                   <ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
-                 	@foreach($audio->get_comments as $comments)
+                 @foreach($audio->get_comments as $comments)
                     <li class="py-3 flex justify-between items-center">
                         <div class="flex items-center">
                           <img src="{{ asset('images/slider-img/slide5.jpg') }}" alt="" class="w-8 h-8">
@@ -384,12 +416,12 @@
                              <p class="text-sm text-gray-500">{{ $comments->coms_message }}</p>
                           </div>
                         </div>
-                       <!-- <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500">2</p> -->
+                     
                       </li> 
-  					@endforeach
+  					       @endforeach 
                   </ul>
               </div>
-           </div>
+           </div> 
 
 
 
