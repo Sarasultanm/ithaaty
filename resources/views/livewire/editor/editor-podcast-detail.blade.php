@@ -68,9 +68,9 @@
                       </video>
 
              @elseif($audio->audio_type == "RSS")
-             
+                  <!-- id="my-video{{ $audio->id }}" -->
                        <video
-                        id="my-video{{ $audio->id }}"
+                        id="my-video14"
                         class="video-js vjs-theme-forest vjs-fluid"
                         controls
                         preload="auto"
@@ -204,7 +204,7 @@
             </div>
             <div class="p-5 bg-white">
               
-            @if($audio->get_comments->count() != 0)
+          <!--   @if($audio->get_comments->count() != 0)
             <?php foreach($audio->get_comments as $comments){ ?> 
                 <?php 
                     $getComs[] = $comments->coms_message;
@@ -215,17 +215,33 @@
 
               $mergeComs = implode(' ', $getComs); 
               $arryComs = explode(' ', $mergeComs);
+              $marks = array('is','a','are','hi','Hi');
+
 
               for ($i=0; $i < str_word_count($mergeComs) ; $i++) {  ?> 
+
+                <?php if(!in_array($arryComs[$i],$marks)){ ?>
+
               <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
 
 
                <?php echo $arryComs[$i]."(".substr_count($mergeComs, $arryComs[$i]).") "; ?>
                </span>
-                <!--  $arraytwo[] = "str:".$arryComs[$i]."/val:".substr_count($mergeComs, $arryComs[$i]); -->
+
+                 <?php } ?>
              <?php  } ?>   
 
-             @endif      
+             @endif     -->
+
+             @if($wordCount !=0)
+
+             @foreach($wordCount as $words)
+              <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                  {{ $words }}
+               </span> 
+
+             @endforeach
+              @endif    
              </div>
           </div>
 

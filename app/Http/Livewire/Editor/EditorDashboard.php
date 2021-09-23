@@ -119,27 +119,43 @@ class EditorDashboard extends Component
              $data = new UserFollow;
              $data->follow_userid = Auth::User()->id;
              $data->follow_userfollowing = $id;
-             $data->follow_type = "follow";
+             $data->follow_type = "request";
              $data->follow_status = "active";
              $data->save();
 
+             // $notif = new UserNotifications;
+             // $notif->notif_userid = Auth::User()->id;
+             // $notif->notif_type = "follow";
+             // $notif->notif_type_id = $data->id;
+             // $notif->notif_message = "You are now following";
+             // $notif->status = "active";
+             // $notif->save();
+
+             // $notif1 = new UserNotifications;
+             // $notif1->notif_userid = $id;
+             // $notif1->notif_type = "following";
+             // $notif1->notif_type_id = $data->id;
+             // $notif1->notif_message = "Start following you";
+             // $notif1->status = "active";
+             // $notif1->save();
+
              $notif = new UserNotifications;
              $notif->notif_userid = Auth::User()->id;
-             $notif->notif_type = "follow";
+             $notif->notif_type = "request";
              $notif->notif_type_id = $data->id;
-             $notif->notif_message = "You are now following";
+             $notif->notif_message = "Sending a request to follow";
              $notif->status = "active";
              $notif->save();
 
              $notif1 = new UserNotifications;
              $notif1->notif_userid = $id;
-             $notif1->notif_type = "following";
+             $notif1->notif_type = "requested";
              $notif1->notif_type_id = $data->id;
-             $notif1->notif_message = "Start following you";
+             $notif1->notif_message = "Requesting to follow you";
              $notif1->status = "active";
              $notif1->save();
              
-             session()->flash('status', 'Done Following');
+             session()->flash('status', 'Follow Request has send');
              redirect()->to('/editor/dashboard');
 
         }

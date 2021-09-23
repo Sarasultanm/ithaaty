@@ -25,9 +25,14 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@5.3.2/dist/amplitude.js"></script>
 
         <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs-contrib-ads.css" />
+
+        
         <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet">
 
          @livewireStyles
+
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -47,5 +52,7 @@
         </div>
         @livewireScripts
         <script src="https://vjs.zencdn.net/7.14.3/video.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs.ads.min.js" ></script>
+
     </body>
 </html>

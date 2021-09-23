@@ -52,10 +52,20 @@
 			  <div class="border-b border-gray-200">
 			  	<ul class="-mb-px flex" >
 			      <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
-			        <a  href="#">Following</a>
+			        <a>Following</a>
 			      </li>
 			      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
-			        <a  href="#">Followers</a>
+			        <a>Followers</a>
+			      </li>
+			      <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
+			        <a>Request 
+			        	@if($request->count() != 0)
+			        	<span class="inline-flex items-center justify-center px-2 py-1 ml-2 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">{{ $request->count() }}</span>
+			        	@endif
+			        </a>
+			      </li>
+			      <li @click="openTab = 4" :class="openTab === 4 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
+			        <a>Rejected </a>
 			      </li>
 			    </ul>
 			  </div>
@@ -130,7 +140,80 @@
 			            </div>
 
              		@endforeach 
-             	</div>
+             		</div>
+
+			      </div>
+
+			      <div x-show="openTab === 3">
+			      	
+
+			      	<div class="grid grid-cols-12 gap-5">
+
+			      	@foreach($request->get() as $req)
+			            <div class="col-span-4 bg-white p-2 rounded-lg">
+			              <article aria-labelledby="question-title-81614">
+			                <div class="mt-2 text-sm text-gray-700 space-y-4">
+			                   <div class="text-white bg-cover h-36">
+			                       <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+			                             
+			                   </div>
+			                </div>
+			                <div>
+			                  <div class="flex space-x-3">
+			                    <div class="min-w-0 flex-1">
+			                      <p class="text-md font-bold text-gray-900 mt-2">
+			                        <a href="#" class="hover:underline">{{ $req->get_user_following->name }}</a>
+			                      </p>
+			                      <p class="text-xs text-gray-500">
+			                        <a wire:click="accept({{$req->id }},{{$req->follow_userid}})" class="hover:underline font-bold cursor-pointer">
+			                          Accept 
+			                        </a>
+			                        <a wire:click="reject({{$req->id }},{{$req->follow_userid}})" class="hover:underline font-bold float-right cursor-pointer">
+			                          Decline 
+			                        </a>
+			                      </p>
+			                    </div>
+			                   
+			                  </div>
+			                </div>
+			              </article>
+			            </div>
+
+             		@endforeach 
+             		</div>
+
+			      </div>
+
+			          <div x-show="openTab === 4">
+			      	
+
+			      	<div class="grid grid-cols-12 gap-5">
+
+			      	@foreach($reject->get() as $rej)
+			            <div class="col-span-4 bg-white p-2 rounded-lg">
+			              <article aria-labelledby="question-title-81614">
+			                <div class="mt-2 text-sm text-gray-700 space-y-4">
+			                   <div class="text-white bg-cover h-36">
+			                       <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+			                             
+			                   </div>
+			                </div>
+			                <div>
+			                  <div class="flex space-x-3">
+			                    <div class="min-w-0 flex-1">
+			                      <p class="text-md font-bold text-gray-900 mt-2">
+			                        <a href="#" class="hover:underline">{{ $rej->get_user_following->name }}</a>
+			                      </p>
+			                      <!--  -->
+			                    </div>
+			                   
+			                  </div>
+			                </div>
+			              </article>
+			            </div>
+
+             		@endforeach 
+             		</div>
 
 			      </div>
 
