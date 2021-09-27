@@ -96,6 +96,16 @@
 
 
 					  </div>
+					   <div class="flex-1 ml-2">
+					  	<label for="email" class="block text-sm font-medium text-gray-700">Status</label>
+	                      <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="status">
+	                        <option>Select</option>
+	                           <option value="public">Public</option>
+	                            <option value="private">Private</option>
+	             		 </select> 
+
+
+					  </div>
 					 
 					</div>
 				</div>

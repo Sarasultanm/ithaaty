@@ -12,7 +12,7 @@ use Auth;
 
 class EditorUpdatePost extends Component
 {
-	public $audio,$a_id,$title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link,$checkAudio;
+	public $audio,$a_id,$title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link,$checkAudio,$status;
 
 	protected $listeners = [
         'refreshParent' =>'$refresh'
@@ -22,6 +22,7 @@ class EditorUpdatePost extends Component
         'title' => 'required',
         'season' => 'required',
         'episode' => 'required',
+        'status' => 'required',
         'category' => 'required',
         'summary' => 'required',
         // 'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav',
@@ -50,7 +51,7 @@ class EditorUpdatePost extends Component
 	        $this->summary = $data->audio_summary;
 	        $this->embedlink = $data->audio_path;
 	        $this->hashtags = $data->audio_hashtags;
-
+            $this->status = $data->audio_status;
 
         }else{
         	$this->checkAudio = "false";
@@ -78,6 +79,7 @@ class EditorUpdatePost extends Component
             	'audio_summary'=> $this->summary,
             	'audio_path'=> $this->embedlink,
             	'audio_hashtags'=> $this->hashtags,
+                'audio_status'=> $this->status,
             ]);
     
 	     session()->flash('status', 'Podcast Updated.');

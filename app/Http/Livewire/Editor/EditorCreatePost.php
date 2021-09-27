@@ -15,7 +15,7 @@ class EditorCreatePost extends Component
 	
 	public $count = 0;
  	
-	public $title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link;
+	public $title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link,$status;
 
 	protected $listeners = [
         'refreshParent' =>'$refresh'
@@ -25,6 +25,7 @@ class EditorCreatePost extends Component
         'title' => 'required',
         'season' => 'required',
         'episode' => 'required',
+        'status' => 'required',
         'category' => 'required',
         'summary' => 'required',
         // 'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav',
@@ -51,7 +52,7 @@ class EditorCreatePost extends Component
         $data->audio_episode = $this->episode;
         $data->audio_category = $this->category;
         $data->audio_tags = "none";
-        $data->audio_status = "active";
+        $data->audio_status = $this->status;
         $data->audio_summary = $this->summary;
         $data->audio_path = $this->embedlink;
         $data->audio_type = "Embed";

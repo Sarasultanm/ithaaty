@@ -82,10 +82,7 @@
 	                <div class="flex">
 					  <div class="flex-1 mr-2">
 					  	<label for="email" class="block text-sm font-medium text-gray-700">Season</label>
-					  <!--   <div class="mt-1">
-	                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="season">
-	                    </div> -->
-
+					 
 	                    <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="season">
 	                        <option>Select</option>
 	                        @for ($s = 1; $s < 50; $s++)
@@ -96,14 +93,24 @@
 					  </div>
 					  <div class="flex-1 ml-2">
 					  	<label for="email" class="block text-sm font-medium text-gray-700">Episode</label>
-					 <!--   <div class="mt-1">
-	                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="episode">
-	                    </div> -->
+					 
 	                      <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="episode">
 	                        <option>Select</option>
 	                        @for ($e = 1; $e < 50; $e++)
 	                           <option value="{{ $e }}">{{ $e }}</option>
 							@endfor
+	             		 </select> 
+
+
+					  </div>
+					   <div class="flex-1 ml-2">
+					  	<label for="email" class="block text-sm font-medium text-gray-700">Status</label>
+					 
+	                      <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="status">
+	                        <option>Select</option>
+	                           <option value="public">Public</option>
+	                            <option value="private">Private</option>
+					
 	             		 </select> 
 
 

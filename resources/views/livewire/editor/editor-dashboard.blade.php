@@ -96,9 +96,18 @@
 
             @foreach($audioList->get() as $audio)
 
-            @if( EditorDashboard::checkFollow($audio->audio_editor) != 0 || $audio->audio_editor == Auth::user()->id )
 
 
+
+
+
+
+
+
+
+          <?php // if( EditorDashboard::checkFollow($audio->audio_editor) != 0 || $audio->audio_editor == Auth::user()->id ) ?>
+
+            @if( $audio->audio_status != 'private' || $audio->audio_editor == Auth::user()->id )
           
 
             <li class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
@@ -113,8 +122,22 @@
                         <a href="/editor/users/{{ $audio->audio_editor }}" class="hover:underline">{{ $audio->get_user->name }}</a>
                       </p>
                       <p class="text-sm text-gray-500">
-                        <a href="#" class="hover:underline">
-                          <time datetime="2020-12-09T11:43:00">{{ $audio->created_at }}</time>
+                        <a href="#" class="hover:underline flex">
+                         @if($audio->audio_status =='private' )
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+</svg><span class="ml-2 capitalize mt-1">Private</span>
+                          @else
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 float-left" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg><span class="ml-2 capitalize">Public</span>
+                            
+                          @endif
+                         
+
+                    
+
+
                         </a>
                       </p>
                     </div>
@@ -138,7 +161,7 @@
                            x-transition:leave="transition ease-in duration-75" 
                            x-transition:leave-start="transform opacity-100 scale-100" 
                            x-transition:leave-end="transform opacity-0 scale-95" 
-                          class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0-button" tabindex="-1">
+                          class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-30" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0-button" tabindex="-1">
                             <div class="py-1" role="none">
                               <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
                               @if( EditorDashboard::checkFav($audio->id) == 0 ) 
@@ -158,20 +181,43 @@
                               @endif  
                                 <!-- Heroicon name: solid/star -->
                                
-                              <a href="#" class="text-gray-700 flex px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
-                                <!-- Heroicon name: solid/code -->
+                          <!--     <a href="#" class="text-gray-700 flex px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
+                               
                                 <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                   <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                                 </svg>
                                 <span>Embed</span>
                               </a>
                               <a href="#" class="text-gray-700 flex px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0-item-2">
-                                <!-- Heroicon name: solid/flag -->
+                              
                                 <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                   <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd" />
                                 </svg>
                                 <span>Report content</span>
+                              </a> -->
+
+                            @if($audio->audio_editor == Auth::user()->id)  
+                              @if( $audio->audio_status == 'private')
+                               <a wire:click="publicAudio({{ $audio->id }})" class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0-item-2">
+                              
+                                <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                                <span>Public</span>
                               </a>
+                              @else
+                              <a wire:click="privateAudio({{ $audio->id }})" class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0-item-2">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+  </svg>
+                                <span>Private</span>
+                              </a>
+                                
+
+
+                              @endif
+
+                              @endif
                             </div>
                           </div>
                         </div>           

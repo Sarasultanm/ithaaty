@@ -243,6 +243,35 @@ class EditorDashboard extends Component
         }
 
 
+        public function publicAudio($id){
+
+             Audio::where('id',$id)
+            ->update([
+                'audio_status'=> 'public',
+            ]);
+            
+            session()->flash('status', 'Audio Status change to Public');
+
+            $this->emit('refreshParent');
+
+            redirect()->to('editor/dashboard'); 
+
+        }
+        public function privateAudio($id){
+
+             Audio::where('id',$id)
+            ->update([
+                'audio_status'=> 'private',
+            ]);
+            session()->flash('status', 'Audio Status change to Private');
+
+            $this->emit('refreshParent');
+
+            redirect()->to('editor/dashboard'); 
+
+        }
+
+
         public function clearFields(){
             $this->comments = null;
            
