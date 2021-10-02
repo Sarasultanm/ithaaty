@@ -26,21 +26,15 @@
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
-      <main class="lg:col-span-9 xl:col-span-6">
+      <main class="lg:col-span-9 xl:col-span-7">
 
         <div class="mt-4">
-          <!-- <div class="mb-5 w-full ">
-          	 <h1 class="font-bold text-gray-800 text-xl">Overview</h1> 
-          </div> -->
-
            <div class="w-full ">
           	 <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
           </div>
-          
-
           <!-- audio -->
-              <article class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg" aria-labelledby="question-title-81614">
-                <div>
+              <article >
+            <!--     <div>
                   <div class="flex space-x-3">
                     <div class="flex-shrink-0">
                       <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
@@ -55,88 +49,27 @@
                         </a>
                       </p>
                     </div>
-                    <div class="flex-shrink-0 self-center flex">
-
-	                   <div  x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false" class="relative inline-block text-left">
-	                        <div>
-	                          <button type="button" class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true" @click="open = !open">
-	                            <span class="sr-only">Open options</span>
-	                            <!-- Heroicon name: solid/dots-vertical -->
-	                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-	                              <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-	                            </svg>
-	                          </button>
-	                        </div>
-	                        <div 
-	                         x-show="open" 
-	                         x-transition:enter="transition ease-out duration-100" 
-	                         x-transition:enter-start="transform opacity-0 scale-95" 
-	                         x-transition:enter-end="transform opacity-100 scale-100" 
-	                         x-transition:leave="transition ease-in duration-75" 
-	                         x-transition:leave-start="transform opacity-100 scale-100" 
-	                         x-transition:leave-end="transform opacity-0 scale-95" 
-	                        class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0-button" tabindex="-1">
-	                          <div class="py-1" role="none">
-	                            <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-	                            @if( EditorPodcastView::checkFav($audio->id) == 0 )	
-	                            <a wire:click="favorite({{ $audio->id }})" class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0-item-0">
-	                            	<svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-	                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-	                              </svg>
-	                              <span>Add to favorites</span>
-	                            </a>
-	                            @else
-	                             <a class="bg-gray-100 text-gray-900 flex px-4 py-2 text-sm cursor-pointer " role="menuitem" tabindex="-1" id="options-menu-0-item-0">
-	                             	 <svg class="mr-3 h-5 w-5 text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-	                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-	                              </svg>
-	                              <span>Favorites</span>
-	                            </a>
-	                            @endif	
-	                              <!-- Heroicon name: solid/star -->
-	                             
-	                            <a href="#" class="text-gray-700 flex px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
-	                              <!-- Heroicon name: solid/code -->
-	                              <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-	                                <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-	                              </svg>
-	                              <span>Embed</span>
-	                            </a>
-	                            <a href="#" class="text-gray-700 flex px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0-item-2">
-	                              <!-- Heroicon name: solid/flag -->
-	                              <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-	                                <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd" />
-	                              </svg>
-	                              <span>Report content</span>
-	                            </a>
-	                          </div>
-	                        </div>
-	                      </div>           
-    	
-
-                    </div>
                   </div>
-                </div>
+                </div> -->
                  
-                <div class="mt-2 text-sm text-gray-700 space-y-4 relative">
-                   <div class="text-white p-10 audio-bg-blur" style="background-image: url({{ asset('images/audio-bg.jpg') }});">
-					<h2 class="font-bold text-xl m-0">{{ $audio->audio_name }}</h2>
-	              <!--    <div>
-					  <button class="">Hello</button>
-					 </div> -->
+                <div class="text-sm text-gray-700 space-y-4 relative">
+                   <div class="text-white">
+					           <!-- <h2 class="font-bold text-xl m-0">{{ $audio->audio_name }}</h2> -->
+	              
 
+           <div class="bg-white shadow p-1">        
 					@if($audio->audio_type == "Upload")
 					
 
 					@elseif($audio->audio_type == "RSS") 
 				
 					<video
-                    id="my-video{{ $audio->id }}"
-                    class="video-js vjs-theme-forest"
+                    id="my-video"
+                    class="video-js vjs-theme-forest vjs-fluid"
+
                     controls
                     preload="auto"
-                    width="auto"
-                    height="264"
+                    
                     poster="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg"
                     data-setup="{}"
                     autoplay preload="auto"
@@ -151,6 +84,81 @@
                       >
                     </p>
                   </video>
+                  <script>
+                    var player = videojs('my-video');
+                  
+                    player.markers({
+                       breakOverlay:{
+                          display: true
+                       },
+                       onMarkerClick: function(marker){
+                          $('.dynamic-demo-events').append('<li class="list-group-item">Marker click: '+marker.time+'</li>');
+                       },
+                       onMarkerReached: function(marker){
+                          $('.dynamic-demo-events').append('<li class="list-group-item">Marker reached: '+marker.time+'</li>');
+                       },
+                       markers: [
+                          {time: 6, text: "this", overlayText:"asd"},
+                          {time: 10,  text: "is", overlayText: "2"},
+                          {time: 15.6,text: "so", overlayText: "3"},
+                          {time: 19,  text: "cool", overlayText: "4"}
+                       ]
+                    });
+
+                    //setup control handlers
+                    $(".dynamic-demo-prev").click(function(){
+                       player.markers.prev();
+                    });
+                    $(".dynamic-demo-next").click(function(){
+                       player.markers.next();
+                    });
+                    $(".dynamic-demo-add-random").click(function(){
+                       var randomTime = Math.floor((Math.random() * parseInt(player.duration())) + 1);
+
+                       // come up with a random time
+                       player.markers.add([{
+                          time: randomTime,
+                          text: "I'm new",
+                          overlayText: "I'm new"
+                       }]);
+                    });
+                    $(".dynamic-demo-shift"). click(function(){
+                       var markers = player.markers.getMarkers();
+                       for(var i = 0; i < markers.length; i++) {
+                          markers[i].time += 1;
+                       }
+                       player.markers.updateTime();
+                    });
+                    $(".dynamic-demo-remove-first").click(function(){
+                       player.markers.remove([0]);
+                    });
+                    $(".dynamic-demo-remove-all").click(function(){
+                       player.markers.removeAll();
+                    });
+                    $(".dynamic-demo-destroy").click(function(){
+                       player.markers.destroy();
+                    });
+
+                    </script>
+                  
+                    
+                   
+                  <!--   <div class="btn-group" role="group" aria-label="...">
+                       <button class="dynamic-demo-prev btn btn-default" type="button">Prev</button>
+                       <button class="dynamic-demo-next btn btn-default" type="button">Next</button>
+                       <button class="dynamic-demo-add-random btn btn-default" type="button">Add random</button>
+                       <button class="dynamic-demo-shift btn btn-default" type="button">Shift 1 sec</button>
+                       <button class="dynamic-demo-remove-first btn btn-default" type="button">Remove 1st</button>
+                       <button class="dynamic-demo-remove-all btn btn-default" type="button">Remove all</button>
+                       <button class="dynamic-demo-destroy btn btn-default" type="button">Destroy</button>
+                    </div> -->
+
+
+
+
+
+
+
 
 					@else
 
@@ -159,30 +167,85 @@
 	                   </div>
 
 					@endif
-	                 	
 
-	                   
+          </div>  
+
+            <div class="bg-white mt-5">
+              <div class="">
+                @foreach($audio->get_sponsor as $sponsor)
+                  <div class="relative rounded-md border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                    <div class="flex-shrink-0">
+                      <img class="h-12 w-12" src="{{ asset('sponsor/'.$sponsor->audiospon_imgpath) }}" alt="">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <a href="#" class="focus:outline-none">
+                        <span class="absolute inset-0" aria-hidden="true"></span>
+                        <p class="text-md font-bold text-gray-900">
+                          {{ $sponsor->audiospon_name }}
+                        </p>
+                        <p class="text-sm text-gray-500 truncate">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 float-left mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                          </svg>
+                          {{ $sponsor->audiospon_website }}
+                        </p>
+                         <p class="text-sm text-gray-500 truncate">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5  float-left  mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                          {{ $sponsor->audiospon_location }}
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                 @endforeach 
+
+               
+                </div>
+            </div>
 
 
 
 
+	          <div class="text-black  px-2 pt-2 bg-white mt-5">
+               <h2 class="font-bold text-xl m-0">{{ $audio->audio_name }}</h2>
+               <!-- <?php echo json_encode($notes); ?>; -->
+          <!-- <br>Dispaly:     
+          <p id="demo"></p> -->
+                        <script>
+
+                           var notesArray = <?php echo json_encode($notes); ?>;
+                           var getNotes = JSON.parse(notesArray);
+
+                           document.getElementById("demo").innerHTML = getNotes['notes_time'];
+                        </script>
+                       
+            <p> 
 
 
+                @if($audio->audio_status =='private' )
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 float-left" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+</svg><span class="ml-2 capitalize mt-1 text-gray-500">Private</span>
+                          @else
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 float-left text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg><span class="ml-2 capitalize text-gray-500">Public</span>
+                            
+                          @endif
+                 
 
-
-
-
-
-
-
-
-
-						<p class="text-white text-xs uppercase mt-5">{{ $audio->created_at }}  | <span>01:37:50 <span>|</span></span> {{ $audio->audio_season }}:{{ $audio->audio_episode }}</p>           	
+               </p>
+               <p class="text-black text-xs uppercase mt-5">{{ $audio->created_at }}  | <span>01:37:50 <span>|</span></span> {{ $audio->audio_season }}:{{ $audio->audio_episode }}</p>             
                    </div>
+            </div>  	
+           
+						
                     
                 </div>
                 <!-- like/ -->
-                <div 
+                <div class="bg-white  px-2 pt-2 pb-2" 
 			    x-data="{
 			      openTab: 1,
 			      activeClasses: 'border-indigo-500 text-indigo-600',

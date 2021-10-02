@@ -7,13 +7,18 @@ use App\Models\Audio;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\AudioReferences;
+use App\Models\AudioSponsor;
 use Auth;
 
+use Livewire\WithFileUploads;
 
 class EditorUpdatePost extends Component
 {
-	public $audio,$a_id,$title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link,$checkAudio,$status;
+    use WithFileUploads;
 
+
+	public $audio,$a_id,$title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link,$checkAudio,$status;
+    public $spon_name,$spon_website,$spon_location,$spon_linkloc,$spon_image;
 	protected $listeners = [
         'refreshParent' =>'$refresh'
         ];
@@ -64,7 +69,7 @@ class EditorUpdatePost extends Component
     }
 
 
-    public function updatepost(){
+    public function updateInfo(){
 
     	$data = Audio::findOrFail($this->a_id);
 
@@ -77,18 +82,75 @@ class EditorUpdatePost extends Component
             	'audio_episode'=> $this->episode,
             	'audio_category'=> $this->category,
             	'audio_summary'=> $this->summary,
-            	'audio_path'=> $this->embedlink,
-            	'audio_hashtags'=> $this->hashtags,
                 'audio_status'=> $this->status,
             ]);
     
-	     session()->flash('status', 'Podcast Updated.');
+	     session()->flash('status', 'Podcast Info Updated.');
 
 		 redirect()->to('editor/podcast/update/'.$this->a_id);   
 
 		}else{
 		  redirect()->to('editor/dashboard');   	
 		} 
+
+
+    }
+
+    public function updateEmbed(){
+
+        $data = Audio::findOrFail($this->a_id);
+
+        if(Auth::user()->id == $data->audio_editor){
+
+         Audio::where('id',$this->a_id)
+            ->update([
+                'audio_path'=> $this->embedlink,
+                'audio_hashtags'=> $this->hashtags,
+            ]);
+    
+         session()->flash('status', 'Podcast Embed Updated.');
+
+         redirect()->to('editor/podcast/update/'.$this->a_id);   
+
+        }else{
+          redirect()->to('editor/dashboard');       
+        } 
+
+
+    }
+
+    public function addSponsor(){
+
+        $data = Audio::findOrFail($this->a_id);
+
+        if(Auth::user()->id == $data->audio_editor){
+
+            $spon = new AudioSponsor;
+            $spon->audiospon_userid = Auth::user()->id;
+            $spon->audiospon_audioid = $this->a_id;
+            $spon->audiospon_name = $this->spon_name;
+            $spon->audiospon_website = $this->spon_website;
+            $spon->audiospon_location = $this->spon_location;
+            $spon->audiospon_linktolocation = $this->spon_linkloc;
+            $spon->audiospon_imgpath = $this->spon_image->hashName();
+            $spon->audiospon_appearancetype = "empty";
+            $spon->audiospon_min1 = "empty";
+            $spon->audiospon_min2 = "empty";
+            $spon->audiospon_status = "empty";
+            $spon->save();  
+
+
+            $imagefile = $this->spon_image->hashName();
+            $path = $this->spon_image->storeAs('sponsor',$imagefile);
+
+    
+         session()->flash('status', 'Added new Sponsor');
+
+         redirect()->to('editor/podcast/update/'.$this->a_id);   
+
+        }else{
+          redirect()->to('editor/dashboard');       
+        } 
 
 
     }

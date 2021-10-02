@@ -9,12 +9,15 @@ use App\Models\UserFollow;
 use App\Models\UserLikes;
 use App\Models\UserViews;
 use App\Models\UserFav;
+use App\Models\UserNotes;
+use App\Models\AudioSponsor;
+
 use Auth;
 
 class EditorPodcastView extends Component
 {
 
-	public $audio;
+	public $audio,$notes;
 
 
     public static function checkFollow($id){
@@ -39,6 +42,7 @@ class EditorPodcastView extends Component
 	public function mount($id)
     {
         $this->audio = Audio::where('id',$id)->first();
+        $this->notes = UserNotes::where('notes_audioid',$id)->get();
     }
 
     public function render()

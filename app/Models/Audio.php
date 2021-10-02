@@ -39,6 +39,10 @@ class Audio extends Model
         return $this->hasMany('App\Models\AudioReferences', 'audioref_audioid','id');
     }
 
+    public function get_sponsor(){
+        return $this->hasMany('App\Models\AudioSponsor', 'audiospon_audioid','id');
+    }
+
 
 
 }
