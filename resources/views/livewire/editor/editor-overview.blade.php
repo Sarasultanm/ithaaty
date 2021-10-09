@@ -105,7 +105,7 @@
 					                Likes
 					              </th>
 					              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-					                Duration
+					                Views
 					              </th>
 					            <!--   <th scope="col" class="relative px-6 py-3">
 					                <span class="sr-only">Edit</span>
@@ -121,10 +121,10 @@
 					                  </div>
 					                  <div class="ml-4">
 					                    <div class="text-sm font-medium text-gray-900">
-					                      Podcast Title
+					                     {{ $topOneView->get_audio->audio_name }}
 					                    </div>
 					                    <div class="text-sm text-gray-500">
-					                      Guest: jane.cooper@example.com
+					                    
 					                    </div>
 					                  </div>
 					                </div>
@@ -135,11 +135,13 @@
 					              </td>
 					              <td class="px-6 py-4 whitespace-nowrap">
 					                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-					                  1
+					                  {{ $topOneView->get_like->count() }}
 					                </span>
 					              </td>
 					              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-					                8mins
+					                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+					                  {{ $topOneView->total }}
+					                </span>
 					              </td>
 					             <!--  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 					                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
@@ -213,7 +215,32 @@
 				</div>
 				<div class="col-span-4">
 
+
 				<aside class=" bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
+
+		          <div class="pb-5 space-y-6">
+		              <h3 class="font-medium text-gray-900">Most Views </h3>
+		              <ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
+		                 @foreach($mostViews as $mViews)
+		                  <li class="py-3 flex justify-between items-center">
+		                    <div class="flex items-center">
+		                      <img src="{{ asset('images/slider-img/slide5.jpg') }}" class="w-8 h-8 ">
+		                      <div class="ml-4 ">
+		                      	 <p class="text-sm font-medium text-gray-900">{{ $mViews->get_audio->audio_name }} </p>
+		                      <p class="text-sm text-gray-500">{{$mViews->get_audio->get_user->name}}</p>
+		                      </div>
+		                     
+		                    </div>
+		                    <button type="button" class="ml-6 bg-white rounded-md text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ $mViews->total }}<span class="sr-only"> Aimee Douglas</span></button>
+		                  </li>
+		                @endforeach
+		                  
+		              </ul>
+		          </div>
+
+        		</aside>
+
+				<aside class="mt-5 bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
 
 		          <div class="pb-5 space-y-6">
 		              <h3 class="font-medium text-gray-900">Recent Like</h3>

@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\UserLikes;
 use App\Models\UserComments;
 use App\Models\UserFollow;
+use App\Models\UserViews;
 use Auth;
 
 class EditorOverview extends Component
@@ -28,7 +29,14 @@ class EditorOverview extends Component
     	$dec = Userfollow::where('follow_userfollowing',Auth::user()->id)->whereMonth('created_at', date('12'))->whereYear('created_at', date('Y'))->count();
     	// $PrescriptionTbl::whereDate('created_at', date('Y-m-d'))->get();
         $followers = UserFollow::where('follow_userfollowing',Auth::user()->id);
-        return view('livewire.editor.editor-overview',compact('recentLikes','recentComments','jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec','followers'));
+
+        $mostViews = UserViews::where('view_ownerid',Auth::user()->id)->orderBy('total','DESC')->groupBy('view_audioid')->selectRaw('count(*) as total, view_audioid')->take(3)->get();
+
+        $topOneView = UserViews::where('view_ownerid',Auth::user()->id)->orderBy('total','DESC')->groupBy('view_audioid')->selectRaw('count(*) as total, view_audioid')->take(1)->first();
+
+
+
+        return view('livewire.editor.editor-overview',compact('recentLikes','recentComments','jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec','followers','mostViews','topOneView'));
 
     }
 }

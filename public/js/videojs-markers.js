@@ -14,7 +14,7 @@
       markerTip: {
          display: true,
          text: function(marker) {
-            return "Break: "+ marker.text;
+            return marker.text;
          },
          time: function(marker) {
             return marker.time;
@@ -24,7 +24,7 @@
          display: false,
          displayTime: 3,
          text: function(marker) {
-            return "Break overlay: " + marker.overlayText;
+            return marker.overlayText;
          },
          style: {
             'width':'100%',
@@ -37,6 +37,7 @@
       onMarkerClick: function(marker) {},
       onMarkerReached: function(marker) {},
       markers: []
+   
    };
    
    // create a non-colliding random number

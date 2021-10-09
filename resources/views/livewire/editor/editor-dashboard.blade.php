@@ -486,11 +486,20 @@
 
           <div x-show="openTab === 3">
              <div class="mt-5">
+                    <p class="text-md font-bold text-gray-900">Affiliate : </p>
                     <div class="mt-1">
-                      @foreach($audio->get_references as $refs)
-                     <p><a href="{{ $refs->audioref_link }}">{{ $refs->audioref_title }}</a></p>
+                      @foreach($audio->get_affiliate as $afi)
+                     <p class="text-sm"><a href="{{ $afi->audioafi_link }}">{{ $afi->audioafi_title }}</a></p>
                      @endforeach
                     </div>
+                    <p class="text-md font-bold text-gray-900">References : </p>
+                    <div class="mt-3">
+                      @foreach($audio->get_references as $refs)
+                     <p  class="text-sm"><a href="{{ $refs->audioref_link }}">{{ $refs->audioref_title }}</a></p>
+                     @endforeach
+                    </div>
+
+                     
               </div>
 
           </div>

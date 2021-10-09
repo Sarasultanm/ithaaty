@@ -51,7 +51,19 @@
                     </div>
                   </div>
                 </div> -->
-                 
+                 {{ $notes[0]['notes_message'] }}
+                 @if($audio->get_notes->count() != 0)
+
+                      @foreach($audio->get_notes as $notes)
+
+                       <input type="text" class="noteMessage shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="{{ $notes->notes_message}}">
+
+                      @endforeach
+
+
+                 @endif
+
+
                 <div class="text-sm text-gray-700 space-y-4 relative">
                    <div class="text-white">
 					           <!-- <h2 class="font-bold text-xl m-0">{{ $audio->audio_name }}</h2> -->
@@ -86,7 +98,9 @@
                   </video>
                   <script>
                     var player = videojs('my-video');
-                  
+                   
+         
+
                     player.markers({
                        breakOverlay:{
                           display: true
@@ -98,12 +112,21 @@
                           $('.dynamic-demo-events').append('<li class="list-group-item">Marker reached: '+marker.time+'</li>');
                        },
                        markers: [
-                          {time: 6, text: "this", overlayText:"asd"},
-                          {time: 10,  text: "is", overlayText: "2"},
-                          {time: 15.6,text: "so", overlayText: "3"},
-                          {time: 19,  text: "cool", overlayText: "4"}
+                          {time: 6,overlayText: "aaa" },
+                          {time: 10, overlayText: "2"},
+                          {time: 15.6,overlayText: "3"},
+                          {time: 19,overlayText: "4"}
                        ]
+
                     });
+
+                       // player.markers.add([{
+                       //    time: 9,
+                       //    overlayText: "I'm new"
+                       // }]);
+
+
+
 
                     //setup control handlers
                     $(".dynamic-demo-prev").click(function(){
@@ -143,15 +166,15 @@
                   
                     
                    
-                  <!--   <div class="btn-group" role="group" aria-label="...">
-                       <button class="dynamic-demo-prev btn btn-default" type="button">Prev</button>
+                 <div class="btn-group bg-gray-100" role="group" aria-label="...">
+                       <button class="bg-gray-900 dynamic-demo-prev btn btn-default" type="button">Prev</button>
                        <button class="dynamic-demo-next btn btn-default" type="button">Next</button>
-                       <button class="dynamic-demo-add-random btn btn-default" type="button">Add random</button>
+                       <button class="bg-gray-900 dynamic-demo-add-random btn btn-default" type="button">Add random</button>
                        <button class="dynamic-demo-shift btn btn-default" type="button">Shift 1 sec</button>
                        <button class="dynamic-demo-remove-first btn btn-default" type="button">Remove 1st</button>
                        <button class="dynamic-demo-remove-all btn btn-default" type="button">Remove all</button>
                        <button class="dynamic-demo-destroy btn btn-default" type="button">Destroy</button>
-                    </div> -->
+                    </div> 
 
 
 
@@ -173,7 +196,8 @@
             <div class="bg-white mt-5">
               <div class="">
                 @foreach($audio->get_sponsor as $sponsor)
-                  <div class="relative rounded-md border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                <div class="sponsorSlides transition duration-500 ease-in-out" style="display: none;">
+                  <div class="relative rounded-md border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 ">
                     <div class="flex-shrink-0">
                       <img class="h-12 w-12" src="{{ asset('sponsor/'.$sponsor->audiospon_imgpath) }}" alt="">
                     </div>
@@ -199,8 +223,25 @@
                       </a>
                     </div>
                   </div>
+                     </div>
                  @endforeach 
 
+                 <script>
+                  var myIndex = 0;
+                  carousel();
+
+                  function carousel() {
+                    var i;
+                    var x = document.getElementsByClassName("sponsorSlides");
+                    for (i = 0; i < x.length; i++) {
+                      x[i].style.display = "none";  
+                    }
+                    myIndex++;
+                    if (myIndex > x.length) {myIndex = 1}    
+                    x[myIndex-1].style.display = "block";  
+                    setTimeout(carousel, 4000); // Change image every 2 seconds
+                  }
+                  </script>
                
                 </div>
             </div>

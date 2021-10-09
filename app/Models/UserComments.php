@@ -13,7 +13,7 @@ class UserComments extends Model
         return $this->belongsTo('App\Models\User', 'coms_userid', 'id');
     }
 
-     public function get_audio(){
+    public function get_audio(){
         return $this->belongsTo('App\Models\Audio', 'coms_audioid', 'id');
     }
 }

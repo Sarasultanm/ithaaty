@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\AudioReferences;
 use App\Models\AudioSponsor;
+use App\Models\AudioAffiliate;
 use Auth;
 
 use Livewire\WithFileUploads;
@@ -18,7 +19,7 @@ class EditorUpdatePost extends Component
 
 
 	public $audio,$a_id,$title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link,$checkAudio,$status;
-    public $spon_name,$spon_website,$spon_location,$spon_linkloc,$spon_image;
+    public $spon_name,$spon_website,$spon_location,$spon_linkloc,$spon_image,$afi_link,$afi_title;
 	protected $listeners = [
         'refreshParent' =>'$refresh'
         ];
@@ -160,6 +161,10 @@ class EditorUpdatePost extends Component
        $this->ref_title = null;
        $this->ref_link = null;
    }
+    public function clearAfiFields(){
+       $this->afi_title = null;
+       $this->afi_link = null;
+   }
 
     public function addReference($audioid){
     	
@@ -178,6 +183,26 @@ class EditorUpdatePost extends Component
     	$this->emit('refreshParent');
 
     	// redirect()->to('editor/podcast/update/'.$this->a_id);  
+
+    }
+
+    public function addAffiliate($audioid){
+        
+        $data = new AudioAffiliate;
+        $data->audioafi_userid = Auth::user()->id;
+        $data->audioafi_audioid = $audioid;
+        $data->audioafi_title = $this->afi_title;
+        $data->audioafi_link = $this->afi_link;
+        $data->audioafi_status = "active";
+        $data->save();
+
+        session()->flash('status', 'New Affiliate Added');
+
+        $this->clearAfiFields();
+        
+        $this->emit('refreshParent');
+
+        // redirect()->to('editor/podcast/update/'.$this->a_id);  
 
     }
 
