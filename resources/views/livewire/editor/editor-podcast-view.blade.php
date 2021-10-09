@@ -51,17 +51,8 @@
                     </div>
                   </div>
                 </div> -->
-                 {{ $notes[0]['notes_message'] }}
-                 @if($audio->get_notes->count() != 0)
-
-                      @foreach($audio->get_notes as $notes)
-
-                       <input type="text" class="noteMessage shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="{{ $notes->notes_message}}">
-
-                      @endforeach
-
-
-                 @endif
+                 
+                
 
 
                 <div class="text-sm text-gray-700 space-y-4 relative">
@@ -166,7 +157,7 @@
                   
                     
                    
-                 <div class="btn-group bg-gray-100" role="group" aria-label="...">
+                 <!-- <div class="btn-group bg-gray-100" role="group" aria-label="...">
                        <button class="bg-gray-900 dynamic-demo-prev btn btn-default" type="button">Prev</button>
                        <button class="dynamic-demo-next btn btn-default" type="button">Next</button>
                        <button class="bg-gray-900 dynamic-demo-add-random btn btn-default" type="button">Add random</button>
@@ -174,7 +165,7 @@
                        <button class="dynamic-demo-remove-first btn btn-default" type="button">Remove 1st</button>
                        <button class="dynamic-demo-remove-all btn btn-default" type="button">Remove all</button>
                        <button class="dynamic-demo-destroy btn btn-default" type="button">Destroy</button>
-                    </div> 
+                    </div>  -->
 
 
 
