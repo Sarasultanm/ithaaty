@@ -67,12 +67,26 @@ class EditorPodcast extends Component
 
     }
 
+    public function getPostByCat($cat_id){
+
+        $data = Audio::where(['audio_editor'=>Auth::user()->id,'audio_category'=>$cat_id]);
+
+        return $data;
+
+    }
+
+    // public function mount($id)
+    // { 
+
+    //     $this->getPostByCat = $this->getPostByCat($id);
+    // }    
+
 
 
     public function render()
     {	
     	$categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
-    	$audioList = Audio::orderBy('id', 'DESC')->where('audio_editor',Auth::user()->id);
+    	$audioList = Audio::where('audio_editor',Auth::user()->id)->orderBy('id', 'DESC');
     	$topPodcast = Audio::orderBy('id', 'DESC')->where('audio_editor',Auth::user()->id)->take(3)->get();
     	$following = UserFollow::where('follow_userid',Auth::user()->id);
     	$favorite = UserFav::where('favs_userid',Auth::user()->id);

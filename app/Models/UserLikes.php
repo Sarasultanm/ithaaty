@@ -17,4 +17,8 @@ class UserLikes extends Model
     public function get_user(){
         return $this->belongsTo('App\Models\User', 'like_userid', 'id');
     }
+
+    public function get_owner(){
+        return $this->belongsTo('App\Models\User', 'like_ownerid', 'id');
+    }
 }

@@ -1,3 +1,5 @@
+   <?php use App\Http\Livewire\Editor\EditorPodcast; ?>
+
  <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Editor Dashboard') }}
@@ -37,9 +39,77 @@
 
            <div class="grid gap-4 grid-cols-12">
 
-            @foreach($audioList->get() as $myaudio)
+            @foreach($categoryList->get() as $category)
 
-            <div class="col-span-4 bg-white p-2 ">
+              @if( EditorPodcast::getPostByCat($category->id)->count() != 0 )  
+
+                 <div class="col-span-12 bg-white p-2 ">
+                  <h2 id="{{ $category->category_name }}-{{ $category->id }}" >{{ $category->category_name }}</h2>
+                 </div>
+                   <?php $getAudioData = EditorPodcast::getPostByCat($category->id)->get()  ?> 
+                   
+                    @foreach($getAudioData as $audioData)
+
+                      <div class="col-span-4 bg-white p-2 ">
+                        <article aria-labelledby="question-title-81614">
+                         <div>
+                            <div class="flex space-x-3">
+                              <div class="min-w-0 flex-1">
+                                <p class="text-md font-bold text-gray-900">
+                                  <a href="#" class="hover:underline">{{ $audioData->audio_name }}</a>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mt-2 text-sm text-gray-700 space-y-4">
+                             <div class="text-white bg-cover h-36" style="background-image: url('{{ asset('images/slider-img/slide1.jpg') }}');">    
+                             </div>
+                          </div>
+
+                          <div>
+                            <div class="flex space-x-3">
+                              <div class="min-w-0 flex-1">                      
+                                <p class="text-xs text-gray-500 mt-2">
+                                  <a class="hover:underline">
+                                   
+                                    <?php $date = date_create($audioData->created_at); ?>
+                                    <time datetime="2020-12-09T11:43:00">{{ date_format($date,"M, Y") }}</time>  <span class="float-left">SE:{{ $audioData->audio_season }} | EP:{{ $audioData->audio_episode }}</span>
+                                  </a>
+                                </p>
+                              <!--   <div class="text-xs font-bold text-gray-900 mt-5" x-data="{ open: false }"> -->
+                                <div class="text-xs font-bold text-gray-900 mt-5">
+                                  
+                                  <a href="{{ route('editorPodcastUpdate',['id' => $audioData->id]) }}"  class="hover:underline">Update</a>
+                                  <a href="{{ route('editorPodcastDetails',['id' => $audioData->id]) }}" class="hover:underline float-right" >Details</a>
+
+                                </div>
+                              </div>
+                             
+                            </div>
+                          </div>
+
+                        </article>
+                      </div>
+
+                    @endforeach
+
+
+
+              @endif
+
+            @endforeach
+
+
+
+
+
+
+
+
+
+     <!--        @foreach($audioList->get() as $myaudio)
+
+            <div class="col-span-4 bg-white p-2 mt-10">
               <article aria-labelledby="question-title-81614">
                <div>
                   <div class="flex space-x-3">
@@ -50,15 +120,9 @@
                     </div>
                   </div>
                 </div>
-
-
                 <div class="mt-2 text-sm text-gray-700 space-y-4">
-                  
-                   <div class="text-white bg-cover h-36" style="background-image: url('{{ asset('images/slider-img/slide1.jpg') }}');">
-          
-                              
+                   <div class="text-white bg-cover h-36" style="background-image: url('{{ asset('images/slider-img/slide1.jpg') }}');">    
                    </div>
-                    
                 </div>
 
                 <div>
@@ -70,9 +134,9 @@
                           <time datetime="2020-12-09T11:43:00">{{ date_format($date,"M, Y") }}</time>  <span class="float-left">SE:{{ $myaudio->audio_season }} | EP:{{ $myaudio->audio_episode }}</span>
                         </a>
                       </p>
-                    <!--   <div class="text-xs font-bold text-gray-900 mt-5" x-data="{ open: false }"> -->
+                   
                       <div class="text-xs font-bold text-gray-900 mt-5">
-                        <!-- <a  wire:click="editdata({{$myaudio->id}})" class="hover:underline" @click="open = true" >Update</a> -->
+                       
                         <a href="{{ route('editorPodcastUpdate',['id' => $myaudio->id]) }}"  class="hover:underline">Update</a>
                         <a href="{{ route('editorPodcastDetails',['id' => $myaudio->id]) }}" class="hover:underline float-right" >Details</a>
 
@@ -88,7 +152,8 @@
 
 
 
-             @endforeach
+             @endforeach -->
+
               </div>
        
 
@@ -137,7 +202,8 @@
                   <h3 class="font-medium text-gray-900">Categories</h3>
                   <ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
                       @foreach($categoryList->get() as $category)
-                      <li class="py-3 flex justify-between items-center">
+                      <li class="py-3 flex justify-between items-center" >
+                        <a href="#{{ $category->category_name }}-{{ $category->id }}">
                         <div class="flex items-center">
                           <img src="{{ asset('images/slider-img/slide1.jpg') }}" alt="" class="w-8 h-8 ">
                           <div class="ml-4 ">
@@ -146,6 +212,7 @@
                           </div>
                         </div>
                         <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500"></p>
+                      </a>
                       </li>
                      @endforeach
                      <!--  <li class="py-3 flex justify-between items-center">

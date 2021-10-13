@@ -57,6 +57,8 @@ class User extends Authenticatable
     public function get_audio(){
         return $this->hasMany('App\Models\Audio', 'audio_editor','id');
     }
+    
 
-
+   
+    
 }

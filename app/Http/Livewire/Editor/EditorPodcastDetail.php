@@ -15,7 +15,7 @@ class EditorPodcastDetail extends Component
 {
 	public $audio;
     public $jan_views,$feb_views,$mar_views,$apr_views,$may_views,$jun_views,$jul_views,$aug_views,$sep_views,$oct_views,$nov_views,$dec_views;
-    public $wordCount;
+    public $wordCount,$getEp;
 
 
 	public function mount($id)
@@ -36,8 +36,10 @@ class EditorPodcastDetail extends Component
         $this->wordCount = $this->wordCounter($id);
 
     }
-    
-
+    public function getEpisodes($audio_category){
+        $data = Audio::where(['audio_editor'=>Auth::user()->id,'audio_category'=>$audio_category])->orderBy('id', 'DESC');
+        return $data;
+    }
 
     public function wordCounter($id){
 

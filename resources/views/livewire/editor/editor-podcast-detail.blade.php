@@ -1,3 +1,4 @@
+    <?php use App\Http\Livewire\Editor\EditorPodcastDetail; ?>
  <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Editor Dashboard') }}
@@ -102,7 +103,7 @@
                 </div>
             </div>
        	
-          	<div x-data="{
+          <div x-data="{
 			      openTab: 1,
 			      activeClasses: 'border-indigo-500 text-indigo-600',
 			      inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
@@ -131,20 +132,20 @@
 			  	<div x-show="openTab === 1">
 
 			  		<div class="bg-white mt-1 p-3">
-		               <div class="flex text-gray-900">
-						  <h2 class="flex-auto font-bold text-xl">{{ $audio->audio_name }}</h2>
-		                  
-						  <p class="flex-auto  text-xs uppercase text-right mt-2">{{ $audio->audio_season }} : {{ $audio->audio_episode }}</p>           	
-		               </div> 
-		               <div class="mt-2 border-t border-gray-200 pt-2">
-		               		<h4 class="text-gray-700 font-bold text-md">Transcript</h4>
-		               		<p class="mb-5">
-		                    	{{ $audio->audio_summary }}
-		                	</p> 
-		               </div>
-		               
-		            </div>
+		          <div class="flex text-gray-900">
+                  <h2 class="flex-auto font-bold text-xl">{{ $audio->audio_name }}</h2>    
+                  <p class="flex-auto  text-xs uppercase text-right mt-2">{{ $audio->audio_season }} : {{ $audio->audio_episode }}</p>           	
+		          </div> 
+              <div class="mt-2 border-t border-gray-200 pt-2">
+                <h4 class="text-gray-700 font-bold text-md">Transcript</h4>
+                <p class="mb-5">
+                    {{ $audio->audio_summary }}
+                </p> 
+              </div>
+		        </div>
+
 			  	</div>
+
 			  	<div x-show="openTab === 2">
 			  	
           <div class="shadow-lg rounded-lg overflow-hidden">
@@ -384,30 +385,73 @@
 			  	<div x-show="openTab === 4">
 
 			  		<div class="grid gap-4 grid-cols-12">
-			  			 <div class="col-span-4 bg-white p-2 ">
-			  			 	<p class="text-md font-bold text-gray-900">
-	                       	 <a href="#" class="hover:underline"> Episode One Title </a>
-	                     	 </p>
-	                     	 <div class="mt-2 text-sm text-gray-700 space-y-4">
-			                   <div class="text-white bg-cover h-36" style="background-image: url('{{ asset('images/slider-img/slide1.jpg') }}');">
-			          			</div> 
-			                 </div> 
-			                 <div class="flex space-x-3">
-			                 	 <div class="min-w-0 flex-1">        
-			                 	 	<p class="text-xs text-gray-500 mt-2">
-				                        <a class="hover:underline">
-				                          <span class="float-left">SE:1  | EP: 1 </span>
-				                        </a>
-				                    </p>
-				                     <div class="text-xs font-bold text-gray-900 mt-5">
-				                     	 <a href="" class="hover:underline float-right" >Details</a>
-				                     </div>
+               @if( EditorPodcastDetail::getEpisodes($audio->audio_category)->count() > 1 )  
+
+                  <?php $getEpisodesList = EditorPodcastDetail::getEpisodes($audio->audio_category)->get()  ?> 
+
+                  @foreach($getEpisodesList as $episodeList)
+
+                  @if($episodeList->id != $audio->id)
+
+                
+                      <div class="col-span-4 bg-white p-2 ">
+                        <article aria-labelledby="question-title-81614">
+                         <div>
+                            <div class="flex space-x-3">
+                              <div class="min-w-0 flex-1">
+                                <p class="text-md font-bold text-gray-900">
+                                  <a href="#" class="hover:underline">{{ $episodeList->audio_name }}</a>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mt-2 text-sm text-gray-700 space-y-4">
+                             <div class="text-white bg-cover h-36" style="background-image: url('{{ asset('images/slider-img/slide1.jpg') }}');">    
+                             </div>
+                          </div>
+
+                          <div>
+                            <div class="flex space-x-3">
+                              <div class="min-w-0 flex-1">                      
+                                <p class="text-xs text-gray-500 mt-2">
+                                  <a class="hover:underline">
+                                   
+                                    <?php $date = date_create($episodeList->created_at); ?>
+                                    <time datetime="2020-12-09T11:43:00">{{ date_format($date,"M, Y") }}</time>  <span class="float-left">SE:{{ $episodeList->audio_season }} | EP:{{ $episodeList->audio_episode }}</span>
+                                  </a>
+                                </p>
+                              <!--   <div class="text-xs font-bold text-gray-900 mt-5" x-data="{ open: false }"> -->
+                                <div class="text-xs font-bold text-gray-900 mt-5">
+                                  
+                                  <a href="{{ route('editorPodcastUpdate',['id' => $episodeList->id]) }}"  class="hover:underline">Update</a>
+                                  <a href="{{ route('editorPodcastDetails',['id' => $episodeList->id]) }}" class="hover:underline float-right" >Details</a>
+
+                                </div>
+                              </div>
+                             
+                            </div>
+                          </div>
+
+                        </article>
+                      </div>
 
 
-			                 	 </div>
-			                 </div>
+                  @endif
 
-			  			 </div>
+                  @endforeach
+
+               @else
+
+               <div class="col-span-12 bg-white p-2 ">
+                <p class="text-md font-regular text-gray-900 w-full">
+                 <a href="#" class="hover:underline">No Available Episodes  </a>
+                 </p>
+               </div>
+                
+           
+
+               @endif
+			  
 			  		</div>
 
 
