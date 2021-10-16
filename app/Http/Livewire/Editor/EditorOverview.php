@@ -7,6 +7,7 @@ use App\Models\UserLikes;
 use App\Models\UserComments;
 use App\Models\UserFollow;
 use App\Models\UserViews;
+use App\Models\Audio;
 use Auth;
 
 class EditorOverview extends Component
@@ -35,8 +36,8 @@ class EditorOverview extends Component
         $topOneView = UserViews::where('view_ownerid',Auth::user()->id)->orderBy('total','DESC')->groupBy('view_audioid')->selectRaw('count(*) as total, view_audioid')->take(1)->first();
 
 
-
-        return view('livewire.editor.editor-overview',compact('recentLikes','recentComments','jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec','followers','mostViews','topOneView'));
+        $audioList = Audio::orderBy('id', 'DESC')->where('audio_editor',Auth::user()->id);
+        return view('livewire.editor.editor-overview',compact('recentLikes','recentComments','jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec','followers','mostViews','topOneView','audioList'));
 
     }
 }

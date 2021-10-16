@@ -10,13 +10,15 @@ use App\Models\UserFollow;
 use App\Models\UserFav;
 use App\Models\UserViews;
 use App\Models\UserLikes;
+use App\Models\UserFriends;
+use App\Models\UserNotifications;
 use Auth;
 
 
 class EditorViewUsers extends Component
 {
 
-    public $userInfo,$userPodcast,$userFav,$userCat,$userFollow,$recentLikes,$checkFollowing,$getTopView;
+    public $userInfo,$userPodcast,$userFav,$userCat,$userFollow,$recentLikes,$checkFollowing,$checkFriend,$getTopView;
 
     public function mount($id){
 
@@ -28,6 +30,7 @@ class EditorViewUsers extends Component
         $this->userFollow = UserFollow::orderBy('id', 'DESC')->where('follow_userid',$id)->get();
         $this->recentLikes = UserLikes::orderBy('id','DESC')->where('like_userid',$id)->take(3)->get();
         $this->checkFollowing = $this->get_if_following($id);
+        $this->checkFriend = $this->get_if_friends($id);
         // $this->getTopView = UserViews::where('view_ownerid',$id)->orderBy('total','DESC')->groupBy('view_audioid')->selectRaw('count(*) as total, view_audioid')->take(1)->first();
 
     }
@@ -53,6 +56,89 @@ class EditorViewUsers extends Component
 
     }
 
+     public function get_if_friends($id){
+
+        $request = UserFriends::where(['friend_userid'=>Auth::user()->id,'friend_requestid'=>$id]);
+        $friend = UserFriends::where(['friend_userid'=>$id,'friend_requestid'=>Auth::user()->id]);
+
+        // check if you are requesting to the users
+        if($request->count() != 0){
+            return $request->first()->friend_type;
+        }else{
+
+            if($friend->count() != 0){
+                return "Confirm Request";
+            }else{
+                return "Add Friend";
+            }
+            
+        }
+
+    }
+
+
+
+     public function addFriend($id){
+
+             $data = new UserFriends;
+             $data->friend_userid = Auth::User()->id;
+             $data->friend_requestid = $id;
+             $data->friend_type = "Send Request";
+             $data->friend_status = "active";
+             $data->save();
+
+             $notif = new UserNotifications;
+             $notif->notif_userid = Auth::User()->id;
+             $notif->notif_type = "request";
+             $notif->notif_type_id = $data->id;
+             $notif->notif_message = "Sending a request to be friend";
+             $notif->status = "active";
+             $notif->save();
+
+             $notif1 = new UserNotifications;
+             $notif1->notif_userid = $id;
+             $notif1->notif_type = "requested";
+             $notif1->notif_type_id = $data->id;
+             $notif1->notif_message = "Requesting to be friend";
+             $notif1->status = "active";
+             $notif1->save();
+             
+             session()->flash('status', 'Friend Request has send');
+             redirect()->to('/editor/users/'.$id);
+
+        }
+
+         public function confirmFriend($friend_id,$id){
+
+
+            UserFriends::where('id',$friend_id)
+            ->update([
+                'friend_type'=> 'friends',
+            ]);
+
+
+            $notif = new UserNotifications;
+             $notif->notif_userid = $follow_userid;
+             $notif->notif_type = "friend";
+             $notif->notif_type_id = $id;
+             $notif->notif_message = "You are now Friend";
+             $notif->status = "active";
+             $notif->save();
+
+             $notif1 = new UserNotifications;
+             $notif1->notif_userid = Auth::User()->id;
+             $notif1->notif_type = "friend now";
+             $notif1->notif_type_id = $id;
+             $notif1->notif_message = "Start friend you";
+             $notif1->status = "active";
+             $notif1->save();    
+
+            
+             
+             session()->flash('status', 'Friend Request has send');
+             redirect()->to('/editor/users/'.$id);
+
+        }
 	
 	public function render()
     {	

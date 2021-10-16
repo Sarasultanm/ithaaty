@@ -56,9 +56,25 @@
                   @if(Auth::user()->id != $userInfo->id )
 
                     <div class="mt-3 text-right sm:mt-5 absolute bottom-0 right-0">
-                          <button class=" inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">
-                            Add Friend
-                          </button>
+                           @if($checkFriend)
+                              @if($checkFriend == "Add Friend")
+                                <button wire:click="addFriend({{$userInfo->id}})" class=" inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Add Friend
+                                 </button> 
+
+                              @elseif($checkFriend == "Send Request")
+                              <button  class=" inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Send Request
+                              </button> 
+
+                              @elseif($checkFriend == "Confirm Request")
+
+                               <button  class=" inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Confirm Request
+                              </button> 
+
+                              @endif
+
+                              
+                            @endif
+                        
                         
                           <button class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">
                          @if($checkFollowing)
@@ -96,6 +112,9 @@
              <li @click="openTab = 3"  :class="openTab === 3 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
               <a >Following</a>
             </li>
+            <li @click="openTab = 4"  :class="openTab === 4 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
+              <a >Playlist</a>
+            </li>
 			      <!-- <li @click="openTab = 4"  :class="openTab === 4 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
 			        <a >Other Episodes</a>
 			      </li> -->
@@ -117,16 +136,18 @@
                 <div class="bg-white">
 
                 <div class=" mt-1 p-3">
+                  @if($audioList->count() != 0)
                   <div class="flex text-gray-900">
                    
                       <h2 class="flex-auto font-bold text-md">{{ $topOneView->get_audio->audio_name }}</h2>    
                       <p class="flex-auto  text-xs uppercase text-right mt-2">{{ $topOneView->get_audio->audio_season }} : {{ $topOneView->get_audio->audio_episode }}</p>           	
                   </div> 
+                  @endif
                 </div>
 
                 <div class="mt-2 text-sm text-gray-700 space-y-4">
                    <div class="text-white p-1 audio-bg-blur">
-        
+                      @if($audioList->count() != 0)
                       @if($topOneView->get_audio->audio_type == "Upload")
                                 <video
                                   id="my-video{{ $topOneView->get_audio->id }}"
@@ -178,6 +199,9 @@
                             </div>
 
                       @endif
+
+                      @endif
+
 
                    </div> 
                 </div>
@@ -325,7 +349,9 @@
 
             <div x-show="openTab === 4">
 
-              Other Eispdie
+              <div class="mb-5 w-full ">
+                      <h1 class="font-bold text-gray-800 text-xl">My Playlist</h1> 
+               </div> 
             </div>
           
           
