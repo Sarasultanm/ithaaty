@@ -43,18 +43,18 @@ class RegisteredUserController extends Controller
             'location' => 'required',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'roles' => 'editor',
-            'gender' => $request->gender,
-            'birthday' => $request->months." ".$request->days.", ".$request->years,
-            'country' => $request->location,
-            'age' => '0',
-        ]);
+        // $user = User::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        //     'roles' => 'editor',
+        //     'gender' => $request->gender,
+        //     'birthday' => $request->months." ".$request->days.", ".$request->years,
+        //     'country' => $request->location,
+        //     'age' => '0',
+        // ]);
 
-        event(new Registered($user));
+        // event(new Registered($user));
 
         session()->flash('status', 'Account Succesfully created');
 
