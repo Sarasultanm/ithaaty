@@ -67,8 +67,13 @@
 
                               @elseif($checkFriend == "Confirm Request")
 
-                               <button  class=" inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Confirm Request
+                               <button wire:click="confirmFriend({{$userInfo->id}})" class=" inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Confirm Request
                               </button> 
+
+                               @elseif($checkFriend == "Friends")
+
+                               <button class=" inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Friend
+                               </button> 
 
                               @endif
 
@@ -285,6 +290,47 @@
                   <h1 class="font-bold text-gray-800 text-xl">Friends</h1> 
               </div>
 
+               <div class="grid gap-4 grid-cols-10">
+               @foreach($friendList as $friends)
+
+                <div class="col-span-2 bg-white p-2 ">
+                  <article aria-labelledby="question-title-81614">
+
+                    <div class="mt-2 text-sm text-gray-700 space-y-4">
+                      
+                       <div class="text-white bg-cover h-36">
+                       
+                           <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                 
+                       </div>
+                        
+                    </div>
+
+                    <div>
+                      <div class="flex space-x-3">
+                        <div class="min-w-0 flex-1">
+                          <p class="text-md font-bold text-gray-900 mt-2">
+                            <a href="#" class="hover:underline">
+                              @if($friends->friend_userid == $userInfo->id )
+                                 {{ $friends->get_request_user->name}}
+                              @else   
+                                 {{ $friends->get_add_friend->name}}
+                              @endif
+                          </p>
+                          <p class="text-xs text-gray-500">
+                            <a class="hover:underline">
+                              Followers <span class="float-right">0,000,000</span>
+                            </a>
+                          </p>
+                        </div>
+                       
+                      </div>
+                    </div>
+
+                  </article>
+                </div>
+             @endforeach
+           </div>
 
 
 

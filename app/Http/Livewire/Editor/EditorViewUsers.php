@@ -67,7 +67,14 @@ class EditorViewUsers extends Component
         }else{
 
             if($friend->count() != 0){
-                return "Confirm Request";
+
+                
+                if($friend->first()->friend_type == "Send Request"){
+                    return "Confirm Request";
+                }else{
+                    return $friend->first()->friend_type;
+                }
+
             }else{
                 return "Add Friend";
             }
@@ -79,6 +86,7 @@ class EditorViewUsers extends Component
 
 
      public function addFriend($id){
+
 
              $data = new UserFriends;
              $data->friend_userid = Auth::User()->id;
@@ -108,19 +116,25 @@ class EditorViewUsers extends Component
 
         }
 
-         public function confirmFriend($friend_id,$id){
+         public function confirmFriend($friend_id){
 
+            $data = UserFriends::where(['friend_userid'=>$friend_id,'friend_requestid'=>Auth::user()->id]);
 
-            UserFriends::where('id',$friend_id)
-            ->update([
-                'friend_type'=> 'friends',
+            $data->update([
+                'friend_type'=> 'Friends',
             ]);
+            // UserFriends::where(['friend_userid'=>$id,'friend_requestid'=>Auth::user()->id])
+            // ->update([
+            //     'friend_type'=> 'friends',
+            // ]);
 
 
-            $notif = new UserNotifications;
-             $notif->notif_userid = $follow_userid;
+
+
+             $notif = new UserNotifications;
+             $notif->notif_userid = $friend_id;
              $notif->notif_type = "friend";
-             $notif->notif_type_id = $id;
+             $notif->notif_type_id = $data->first()->id;
              $notif->notif_message = "You are now Friend";
              $notif->status = "active";
              $notif->save();
@@ -128,15 +142,15 @@ class EditorViewUsers extends Component
              $notif1 = new UserNotifications;
              $notif1->notif_userid = Auth::User()->id;
              $notif1->notif_type = "friend now";
-             $notif1->notif_type_id = $id;
+             $notif1->notif_type_id = $data->first()->id;
              $notif1->notif_message = "Start friend you";
              $notif1->status = "active";
              $notif1->save();    
 
             
              
-             session()->flash('status', 'Friend Request has send');
-             redirect()->to('/editor/users/'.$id);
+             session()->flash('status', 'Friend Request Confirm');
+             redirect()->to('/editor/users/'.$friend_id);
 
         }
 	
@@ -152,7 +166,8 @@ class EditorViewUsers extends Component
 
         $topOneLikes = UserLikes::where('like_ownerid',Auth::user()->id)->orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1)->first();
         $audioList = Audio::orderBy('id', 'DESC')->where('audio_editor',Auth::user()->id);
-        return view('livewire.editor.editor-view-users',compact('audioList','topOneView','topOneLikes'));
+        $friendList = UserFriends::where('friend_userid',Auth::user()->id)->orWhere('friend_requestid',Auth::user()->id)->get();
+        return view('livewire.editor.editor-view-users',compact('audioList','topOneView','topOneLikes','friendList'));
     }
 
    
