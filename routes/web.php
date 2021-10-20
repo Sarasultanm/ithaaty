@@ -59,6 +59,7 @@ Route::get('/dashboard', function () {
 Route::get('/', [MainController::class, 'about']);
 
 Route::get('/post/{id}', [MainController::class, 'viewPost']);
+Route::get('/embed/{id}', [MainController::class, 'viewEmbed']);
 Route::get('/popular', [MainController::class, 'viewPopular'])->name('popular');
 Route::get('/trending', [MainController::class, 'viewTrending'])->name('trending');
 Route::get('/podcaster', [MainController::class, 'viewPodcaster'])->name('podcaster');

@@ -36,6 +36,16 @@ class MainController extends Controller
 		return view('post',compact('audio','randomList','mostlike'));
 	}
 
+	public function viewEmbed($id){
+
+		$audio = Audio::where('id',$id)->first();
+		$randomList = User::inRandomOrder()->take(3)->get();
+		$mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1);
+		return view('embed',compact('audio','randomList','mostlike'));
+	}
+
+
+
 	public function viewPopular(){
 
 		$randomList = User::inRandomOrder()->take(3)->get();

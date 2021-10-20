@@ -271,6 +271,17 @@ class EditorDashboard extends Component
 
         }
 
+        public function displayLink(){
+
+            
+            session()->flash('status', 'Copy Link');
+
+            $this->emit('refreshParent');
+
+           
+
+        }
+
 
         public function clearFields(){
             $this->comments = null;

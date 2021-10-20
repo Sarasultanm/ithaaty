@@ -61,111 +61,102 @@
 	              
 
            <div class="bg-white shadow p-1">        
-					@if($audio->audio_type == "Upload")
-					
+      					@if($audio->audio_type == "Upload")
+      					
 
-					@elseif($audio->audio_type == "RSS") 
-				
-					<video
-                    id="my-video"
-                    class="video-js vjs-theme-forest vjs-fluid"
+      					@elseif($audio->audio_type == "RSS") 
+      				
+      					<video
+                          id="my-video"
+                          class="video-js vjs-theme-forest vjs-fluid"
 
-                    controls
-                    preload="auto"
-                    
-                    poster="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg"
-                    data-setup="{}"
-                    autoplay preload="auto"
-                  >
-                    <source src="{{ $audio->audio_path }}" type="video/mp4" />
-                    <source src="{{ $audio->audio_path }}" type="video/webm" />
-                    <p class="vjs-no-js">
-                      To view this video please enable JavaScript, and consider upgrading to a
-                      web browser that
-                      <a href="https://videojs.com/html5-video-support/" target="_blank"
-                        >supports HTML5 video</a
-                      >
-                    </p>
-                  </video>
-                  <script>
-                    var player = videojs('my-video');
-                   
-         
+                          controls
+                          preload="auto"
+                          
+                          poster="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg"
+                          data-setup="{}"
+                          autoplay preload="auto"
+                        >
+                          <source src="{{ $audio->audio_path }}" type="video/mp4" />
+                          <source src="{{ $audio->audio_path }}" type="video/webm" />
+                      <!--<source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/mp4" />
+                          <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/webm" /> -->
+                          <p class="vjs-no-js">
+                            To view this video please enable JavaScript, and consider upgrading to a
+                            web browser that
+                            <a href="https://videojs.com/html5-video-support/" target="_blank"
+                              >supports HTML5 video</a
+                            >
+                          </p>
+                        </video>
+                        <script>
+                          var player = videojs('my-video');
+                          player.markers({
+                             breakOverlay:{
+                                display: true
+                             },
+                             onMarkerClick: function(marker){
+                                $('.dynamic-demo-events').append('<li class="list-group-item">Marker click: '+marker.time+'</li>');
+                             },
+                             onMarkerReached: function(marker){
+                                $('.dynamic-demo-events').append('<li class="list-group-item">Marker reached: '+marker.time+'</li>');
+                             },
+                             markers: [
+                                {time: 6,overlayText: "aaa" },
+                                {time: 10, overlayText: "2"},
+                                {time: 15.6,overlayText: "3"},
+                                {time: 19,overlayText: "4"}
+                             ]
 
-                    player.markers({
-                       breakOverlay:{
-                          display: true
-                       },
-                       onMarkerClick: function(marker){
-                          $('.dynamic-demo-events').append('<li class="list-group-item">Marker click: '+marker.time+'</li>');
-                       },
-                       onMarkerReached: function(marker){
-                          $('.dynamic-demo-events').append('<li class="list-group-item">Marker reached: '+marker.time+'</li>');
-                       },
-                       markers: [
-                          {time: 6,overlayText: "aaa" },
-                          {time: 10, overlayText: "2"},
-                          {time: 15.6,overlayText: "3"},
-                          {time: 19,overlayText: "4"}
-                       ]
+                          });
 
-                    });
+                        
+                          $(".dynamic-demo-prev").click(function(){
+                             player.markers.prev();
+                          });
+                          $(".dynamic-demo-next").click(function(){
+                             player.markers.next();
+                          });
+                          $(".dynamic-demo-add-random").click(function(){
+                             var randomTime = Math.floor((Math.random() * parseInt(player.duration())) + 1);
 
-                       // player.markers.add([{
-                       //    time: 9,
-                       //    overlayText: "I'm new"
-                       // }]);
+                            
+                             player.markers.add([{
+                                time: randomTime,
+                                text: "I'm new",
+                                overlayText: "I'm new"
+                             }]);
+                          });
+                          $(".dynamic-demo-shift"). click(function(){
+                             var markers = player.markers.getMarkers();
+                             for(var i = 0; i < markers.length; i++) {
+                                markers[i].time += 1;
+                             }
+                             player.markers.updateTime();
+                          });
+                          $(".dynamic-demo-remove-first").click(function(){
+                             player.markers.remove([0]);
+                          });
+                          $(".dynamic-demo-remove-all").click(function(){
+                             player.markers.removeAll();
+                          });
+                          $(".dynamic-demo-destroy").click(function(){
+                             player.markers.destroy();
+                          });
 
-
-
-
-                    //setup control handlers
-                    $(".dynamic-demo-prev").click(function(){
-                       player.markers.prev();
-                    });
-                    $(".dynamic-demo-next").click(function(){
-                       player.markers.next();
-                    });
-                    $(".dynamic-demo-add-random").click(function(){
-                       var randomTime = Math.floor((Math.random() * parseInt(player.duration())) + 1);
-
-                       // come up with a random time
-                       player.markers.add([{
-                          time: randomTime,
-                          text: "I'm new",
-                          overlayText: "I'm new"
-                       }]);
-                    });
-                    $(".dynamic-demo-shift"). click(function(){
-                       var markers = player.markers.getMarkers();
-                       for(var i = 0; i < markers.length; i++) {
-                          markers[i].time += 1;
-                       }
-                       player.markers.updateTime();
-                    });
-                    $(".dynamic-demo-remove-first").click(function(){
-                       player.markers.remove([0]);
-                    });
-                    $(".dynamic-demo-remove-all").click(function(){
-                       player.markers.removeAll();
-                    });
-                    $(".dynamic-demo-destroy").click(function(){
-                       player.markers.destroy();
-                    });
-
-                    </script>
-                  
-                    
-                   
-                 <!-- <div class="btn-group bg-gray-100" role="group" aria-label="...">
-                       <button class="bg-gray-900 dynamic-demo-prev btn btn-default" type="button">Prev</button>
-                       <button class="dynamic-demo-next btn btn-default" type="button">Next</button>
-                       <button class="bg-gray-900 dynamic-demo-add-random btn btn-default" type="button">Add random</button>
-                       <button class="dynamic-demo-shift btn btn-default" type="button">Shift 1 sec</button>
-                       <button class="dynamic-demo-remove-first btn btn-default" type="button">Remove 1st</button>
-                       <button class="dynamic-demo-remove-all btn btn-default" type="button">Remove all</button>
-                       <button class="dynamic-demo-destroy btn btn-default" type="button">Destroy</button>
-                    </div>  -->
+                          </script>
+                        
+                          
+                         
+                       <!-- <div class="btn-group bg-gray-100" role="group" aria-label="...">
+                             <button class="bg-gray-900 dynamic-demo-prev btn btn-default" type="button">Prev</button>
+                             <button class="dynamic-demo-next btn btn-default" type="button">Next</button>
+                             <button class="bg-gray-900 dynamic-demo-add-random btn btn-default" type="button">Add random</button>
+                             <button class="dynamic-demo-shift btn btn-default" type="button">Shift 1 sec</button>
+                             <button class="dynamic-demo-remove-first btn btn-default" type="button">Remove 1st</button>
+                             <button class="dynamic-demo-remove-all btn btn-default" type="button">Remove all</button>
+                             <button class="dynamic-demo-destroy btn btn-default" type="button">Destroy</button>
+                          </div>  -->
 
 
 
@@ -174,15 +165,15 @@
 
 
 
-					@else
+      					@else
 
-					<div class="audio-embed-container">
-	                   	 <?php echo $audio->audio_path; ?>
-	                   </div>
+      					<div class="audio-embed-container">
+      	                   	 <?php echo $audio->audio_path; ?>
+      	                   </div>
 
-					@endif
+      					@endif
 
-          </div>  
+            </div>  
 
             <div class="bg-white mt-5">
               <div class="">
@@ -257,20 +248,20 @@
 
 
                 @if($audio->audio_status =='private' )
-                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 float-left" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-</svg><span class="ml-2 capitalize mt-1 text-gray-500">Private</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 float-left" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg><span class="ml-2 capitalize mt-1 text-gray-500">Private</span>
                           @else
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 float-left text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg><span class="ml-2 capitalize text-gray-500">Public</span>
-                            
-                          @endif
+                    </svg><span class="ml-2 capitalize text-gray-500">Public</span>        
+                @endif
                  
 
                </p>
                <p class="text-black text-xs uppercase mt-5">{{ $audio->created_at }}  | <span>01:37:50 <span>|</span></span> {{ $audio->audio_season }}:{{ $audio->audio_episode }}</p>             
-                   </div>
+              </div>
+              
             </div>  	
            
 						
@@ -325,6 +316,19 @@
                   </div>
 
                   <div class="flex text-sm">
+                     <span class="inline-flex items-center text-sm mr-3" >
+                      <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                       <!-- <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg> -->
+
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>
+                        <span class="font-medium text-gray-900">Add To Playlist</span>
+                      </button>
+                    </span>
+
                     <span class="inline-flex items-center text-sm mr-3" @click="openTab = 2"  :class="openTab === 2 ? activeClasses : inactiveClasses"   >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

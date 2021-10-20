@@ -41,13 +41,10 @@
           }
         </style>
 
-
-
-
          @livewireStyles
-
-        <script src="https://vjs.zencdn.net/7.14.3/video.min.js"></script>
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs.ads.min.js" ></script>  -->
+      
+       <script src="https://vjs.zencdn.net/7.14.3/video.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs.ads.min.js" ></script>
         <script src="{{ asset('js/videojs-markers.js') }}" ></script>
 
     </head>
@@ -68,6 +65,6 @@
             </main>
         </div>
         @livewireScripts
-        
+       
     </body>
 </html>
