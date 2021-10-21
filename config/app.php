@@ -177,6 +177,8 @@ return [
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
         /* RSS Feed Reader */
         Vedmant\FeedReader\FeedReaderServiceProvider::class,
+        /* Social Media Share */
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
     ],
 
     /*
@@ -231,6 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
         'FeedReader' => Vedmant\FeedReader\Facades\FeedReader::class,
+        'Share' => Jorenvh\Share\ShareFacade::class,
     ],
 
 ];

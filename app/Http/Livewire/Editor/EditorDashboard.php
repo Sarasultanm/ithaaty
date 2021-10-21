@@ -14,6 +14,8 @@ use App\Models\UserComments;
 use App\Models\UserNotes;
 use App\Models\UserViews;
 use Auth;
+use Share;
+use URL;
 
 use Livewire\WithFileUploads;
 
@@ -282,6 +284,7 @@ class EditorDashboard extends Component
 
         }
 
+        
 
         public function clearFields(){
             $this->comments = null;
@@ -382,6 +385,14 @@ class EditorDashboard extends Component
         return $data;
     }    
 
+    public function shareButton($socialMedia,$id){
+        if($socialMedia == "facebook"){
+             $link ="https://www.facebook.com/sharer/sharer.php?u=https://ithaaty.com/post/".$id;
+        }else{
+            $link = "https://twitter.com/intent/tweet?url=https://ithaaty.com/post/".$id;
+        }
+        redirect()->to($link);
+    }
 
     public function render()
     {

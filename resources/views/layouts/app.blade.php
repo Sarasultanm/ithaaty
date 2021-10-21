@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
         <title>Ithaaty</title>
 
         <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">    
@@ -29,6 +30,8 @@
         <link rel="stylesheet" href="{{ asset('css/videojs.markers.min.css') }}">
         
         <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet">
+
+             <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta2/css/all.css"  />
         <style type="text/css">
           .vjs-marker{
             height: 10px;
@@ -39,6 +42,22 @@
             /*padding: 20px 0px 0px 0px;
             height: 10% !important;*/
           }
+
+            div#social-links {
+                margin: 0 auto;
+                max-width: 500px;
+            }
+            div#social-links ul li {
+                display: inline-block;
+            }          
+            div#social-links ul li a {
+                padding: 20px;
+                border: 1px solid #ccc;
+                margin: 1px;
+                font-size: 30px;
+                color: #222;
+                background-color: #ccc;
+            }
         </style>
 
          @livewireStyles

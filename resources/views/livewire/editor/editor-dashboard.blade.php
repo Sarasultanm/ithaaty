@@ -211,6 +211,25 @@
                                   </svg>
                                   <span>Copy Link</span>
                                 </a>
+                               
+                                <a wire:click="shareButton('facebook',{{ $audio->id }})" class="cursor-pointer pl-10 text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
+                                 
+                                  <i class="fab fa-facebook-square mr-3 h-5 w-5 text-gray-400" style="font-size: 20px;"></i>
+                                  <span>
+                                   Facebook
+                                  </span>
+                                </a>
+
+                                 <a wire:click="shareButton('twitter',{{ $audio->id }})" class="cursor-pointer pl-10 text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
+                                 
+                                  <i class="fab fa-twitter-square mr-3 h-5 w-5 text-gray-400" style="font-size: 20px;"></i>
+                                  <span>
+                                   Twitter
+                                  </span>
+                                </a>
+
+                               
+                               
                                 
                               </div>
 
