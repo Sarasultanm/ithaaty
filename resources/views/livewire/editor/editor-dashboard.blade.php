@@ -307,7 +307,7 @@
 
                         <video
                         id="my-video{{ $audio->id }}"
-                        class="video-js vjs-theme-forest z-10"
+                        class="video-js vjs-default-skin z-10"
                         controls
                         preload="auto"
                         width="auto"

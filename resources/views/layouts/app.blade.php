@@ -20,18 +20,23 @@
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="{{ asset('js/audio.js') }}" ></script>
+       <!--  <script src="{{ asset('js/audio.js') }}" ></script> -->
         <script src="{{ asset('js/app.js') }}" defer></script>
 
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@5.3.2/dist/amplitude.js"></script>
+        <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@5.3.2/dist/amplitude.js"></script> -->
 
-        <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs-contrib-ads.css" /> 
+     <!-- <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet" />
+       
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs-contrib-ads.css" /> -->
+        <!--  <link rel="stylesheet" href="{{ asset('css/video-js-v7.14.3.css') }}"> -->
+         <!--  -->
+        <!-- <link rel="stylesheet" href="{{ asset('css/videojs.markers.min.css') }}"> -->
+        <!-- <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet"> -->
+       <!--  <link rel="stylesheet" href="{{ asset('css/vjs-theme-forest-index.css') }}"> -->
         <link rel="stylesheet" href="{{ asset('css/videojs.markers.min.css') }}">
-        
-        <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet">
 
-             <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta2/css/all.css"  />
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta2/css/all.css"  />
+
         <style type="text/css">
           .vjs-marker{
             height: 10px;
@@ -62,10 +67,29 @@
 
          @livewireStyles
       
-       <script src="https://vjs.zencdn.net/7.14.3/video.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs.ads.min.js" ></script>
-        <script src="{{ asset('js/videojs-markers.js') }}" ></script>
+     <!--  <script src="https://vjs.zencdn.net/7.14.3/video.min.js"></script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs.ads.min.js" ></script>  -->
 
+    <!-- <link rel="stylesheet" href="{{ asset('css/video-js-v7.14.3.css') }}"> -->
+   
+
+   <!--  <link rel="stylesheet" href="{{ asset('css/videojs-contrib-ads-v6.9.0.css') }}"> 
+     <script src="{{ asset('js/videojs.ads.min-v6.9.0.js') }}"></script> -->
+
+      <!--  <link rel="stylesheet" href="{{ asset('css/videojs.ads.css') }}">
+-->
+     
+
+   
+      <link rel="stylesheet" href="{{ asset('css/video-js.min.css') }}">
+      <!--  <script src="{{ asset('js/video.min-v7.14.3.js') }}"></script> -->
+        <script src="{{ asset('js/video.js') }}"></script>
+
+        <link rel="stylesheet" href="{{ asset('css/videojs.ads.css') }}">
+        <script src="{{ asset('js/videojs.ads.js') }}"></script>
+
+        <!-- <script src="{{ asset('js/videojs-markers.js') }}" ></script> -->
+         <link rel="stylesheet" href="{{ asset('css/vjs-theme-forest-index.css') }}">
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

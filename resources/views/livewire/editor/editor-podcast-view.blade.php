@@ -68,19 +68,19 @@
       				
       					<video
                           id="my-video"
-                          class="video-js vjs-theme-forest vjs-fluid"
-
+                          class="video-js vjs-default-skin vjs-fluid"
                           controls
-                          preload="auto"
-                          
+                          width="100%"
+                          height="450px"
                           poster="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg"
-                          data-setup="{}"
-                          autoplay preload="auto"
+                           data-setup="{}"
+                        
+                          
                         >
-                          <source src="{{ $audio->audio_path }}" type="video/mp4" />
-                          <source src="{{ $audio->audio_path }}" type="video/webm" />
-                      <!--<source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/mp4" />
-                          <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/webm" /> -->
+                         <!--  <source src="{{ $audio->audio_path }}" type="video/mp4" />
+                          <source src="{{ $audio->audio_path }}" type="video/webm" /> -->
+                          <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/mp4" />
+                          <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/webm" />
                           <p class="vjs-no-js">
                             To view this video please enable JavaScript, and consider upgrading to a
                             web browser that
@@ -89,7 +89,80 @@
                             >
                           </p>
                         </video>
-                        <script>
+                      <script >
+                          videojs('my-video', {}, function() {
+                          var player = this;
+                          player.ads(); 
+                          var videolink = "<?php echo asset('ads/ads1.mp4'); ?>";
+
+                          var requestAds = function(){
+                            
+                            player.trigger('adsready');
+                          };
+                          
+                          if (player.currentSrc()) {
+                            requestAds();
+                          }
+
+                          player.on('contentupdate', requestAds);
+                          
+                          player.on('readyforpreroll', function() {
+                            player.ads.startLinearAdMode();
+                            
+                            player.src(videolink);
+                            
+                            player.one('durationchange', function(){
+                              player.play();
+                            });
+                        
+                            player.one('ended', function() {
+                              player.ads.endLinearAdMode();
+                            });
+
+                          });
+
+                        });
+                        </script> 
+
+                      
+ 
+               <!-- <script >
+                          videojs('my-video', {}, function() {
+                             var player = this;
+                              player.ads(); 
+                             
+                             var requestAds = function(){
+                                player.trigger('adsready');
+                              };
+                              
+                              if (player.currentSrc()) {
+                                requestAds();
+                              }
+                              player.on('contentupdate', requestAds);
+
+                              player.on('readyforpreroll', function() {
+                                player.ads.startLinearAdMode();
+                                
+                                player.src('http://127.0.0.1:8000/ads/ads1.mp4');
+                                
+                                player.one('durationchange', function(){
+                                  player.play();
+                                });
+                            
+                                player.one('ended', function() {
+                                  player.ads.endLinearAdMode();
+                                });
+
+                              });
+
+                              player.trigger('adsready');
+
+                          });
+
+
+
+                        </script> -->
+                       <!--  <script>
                           var player = videojs('my-video');
                           player.markers({
                              breakOverlay:{
@@ -144,7 +217,7 @@
                              player.markers.destroy();
                           });
 
-                          </script>
+                          </script> -->
                         
                           
                          

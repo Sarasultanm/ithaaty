@@ -14,7 +14,8 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <!-- CSS -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"> -->
+         <link rel="stylesheet" href="{{ asset('css/bootstrap.min-v4.2.1.css') }}">
        <!--  <link rel="stylesheet" href="assets/css/animate.css"> -->
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/media-queries.css') }}">
