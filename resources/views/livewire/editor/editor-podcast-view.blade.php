@@ -69,7 +69,7 @@
       				<script src="{{ asset('videojs/video.min.js') }}"></script>
               <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
 
-      					<video
+      					        <video
                           id="my-video"
                           class="video-js vjs-default-skin vjs-fluid"
                           controls
@@ -77,13 +77,11 @@
                           height="450px"
                           poster="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg"
                            data-setup="{}"
-                        
-                          
                         >
-                         <!--  <source src="{{ $audio->audio_path }}" type="video/mp4" />
-                          <source src="{{ $audio->audio_path }}" type="video/webm" /> -->
-                          <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/mp4" />
-                          <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/webm" />
+                          <source src="{{ $audio->audio_path }}" type="video/mp4" />
+                          <source src="{{ $audio->audio_path }}" type="video/webm" />
+                          <!-- <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/mp4" />
+                          <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/webm" /> -->
                           <p class="vjs-no-js">
                             To view this video please enable JavaScript, and consider upgrading to a
                             web browser that
@@ -109,7 +107,7 @@
                                 src: "https://ithaaty.com/ads/pepsi-ads.mp4",
                                 type:"video/mp4", 
                                 href: "url-to-go-on-midroll-click",
-                                offset:"10",
+                                offset:"1",
                                 skip:"5",
                                 id:"6"
                              }, {
