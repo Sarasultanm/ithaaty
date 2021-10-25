@@ -92,11 +92,42 @@
                             >
                           </p>
                         </video>
-                        <script>
+                 <!--        <script>
                         var player = videojs('my-video');
                         player.nuevo({ 
                           
                         });
+                        </script> -->
+
+                        <script>
+                           var player=videojs('my-video');
+                           var videolink = "<?php echo asset('ads/ads1.mp4'); ?>";
+                           player.nuevo({
+                          option1: value1, option2: value2
+                           })
+                           player.vroll([
+                             { 
+                                src: videolink,
+                                type:"video/mp4", 
+                                href: "url-to-go-on-midroll-click",
+                                offset:"10",
+                                skip:"5",
+                                id:"6"
+                             }, {
+                               src: videolink,
+                               type:"video/mp4",
+                               href: "url-to-go-on-midroll-click",
+                               offset:"10",
+                               skip:"8",
+                               id:"9"
+                             }, {
+                                src: videolink,
+                                type:"video/mp4",
+                                href: "url-to-go-on-midroll-click",
+                                offset:"50%",
+                                id:"10"
+                             }
+                          ]);
                         </script>
                      <!--  <script >
                           videojs('my-video', {}, function() {
