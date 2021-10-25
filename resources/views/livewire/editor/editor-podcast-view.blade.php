@@ -106,21 +106,21 @@
                            })
                            player.vroll([
                              { 
-                                src: "https://ithaaty.com/ads/ads1.mp4",
+                                src: "https://ithaaty.com/ads/pepsi-ads.mp4",
                                 type:"video/mp4", 
                                 href: "url-to-go-on-midroll-click",
                                 offset:"10",
                                 skip:"5",
                                 id:"6"
                              }, {
-                               src: "https://ithaaty.com/ads/ads1.mp4",
+                               src: "https://ithaaty.com/ads/pepsi-ads.mp4",
                                type:"video/mp4",
                                href: "url-to-go-on-midroll-click",
                                offset:"10",
                                skip:"8",
                                id:"9"
                              }, {
-                                src: "https://ithaaty.com/ads/ads1.mp4",
+                                src: "https://ithaaty.com/ads/pepsi-ads.mp4",
                                 type:"video/mp4",
                                 href: "url-to-go-on-midroll-click",
                                 offset:"50%",
