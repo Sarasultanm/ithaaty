@@ -65,7 +65,10 @@
       					
 
       					@elseif($audio->audio_type == "RSS") 
-      				
+
+      				<script src="{{ asset('videojs/video.min.js') }}"></script>
+              <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
+
       					<video
                           id="my-video"
                           class="video-js vjs-default-skin vjs-fluid"
@@ -89,7 +92,13 @@
                             >
                           </p>
                         </video>
-                      <script >
+                        <script>
+                        var player = videojs('my-video');
+                        player.nuevo({ 
+                          
+                        });
+                        </script>
+                     <!--  <script >
                           videojs('my-video', {}, function() {
                           var player = this;
                           player.ads(); 
@@ -122,7 +131,7 @@
                           });
 
                         });
-                        </script> 
+                        </script>  -->
 
                       
  

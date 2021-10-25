@@ -33,9 +33,11 @@
         <!-- <link rel="stylesheet" href="{{ asset('css/videojs.markers.min.css') }}"> -->
         <!-- <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet"> -->
        <!--  <link rel="stylesheet" href="{{ asset('css/vjs-theme-forest-index.css') }}"> -->
-        <link rel="stylesheet" href="{{ asset('css/videojs.markers.min.css') }}">
+      <!--   <link rel="stylesheet" href="{{ asset('css/videojs.markers.min.css') }}"> -->
 
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta2/css/all.css"  />
+
+        <link href="{{ asset('videojs/skins/treso/videojs.min.css') }}" rel="stylesheet" type="text/css" />
 
         <style type="text/css">
           .vjs-marker{
@@ -81,15 +83,15 @@
      
 
    
-      <link rel="stylesheet" href="{{ asset('css/video-js.min.css') }}">
+     <!--  <link rel="stylesheet" href="{{ asset('css/video-js.min.css') }}"> -->
       <!--  <script src="{{ asset('js/video.min-v7.14.3.js') }}"></script> -->
-        <script src="{{ asset('js/video.js') }}"></script>
+      <!--   <script src="{{ asset('js/video.js') }}"></script> -->
 
-        <link rel="stylesheet" href="{{ asset('css/videojs.ads.css') }}">
-        <script src="{{ asset('js/videojs.ads.js') }}"></script>
+       <!--  <link rel="stylesheet" href="{{ asset('css/videojs.ads.css') }}">
+        <script src="{{ asset('js/videojs.ads.js') }}"></script> -->
 
         <!-- <script src="{{ asset('js/videojs-markers.js') }}" ></script> -->
-         <link rel="stylesheet" href="{{ asset('css/vjs-theme-forest-index.css') }}">
+        <!--  <link rel="stylesheet" href="{{ asset('css/vjs-theme-forest-index.css') }}"> -->
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
