@@ -11,13 +11,20 @@ use App\Models\UserViews;
 use App\Models\UserFav;
 use App\Models\UserNotes;
 use App\Models\AudioSponsor;
+use App\Models\UserComments;
+use App\Models\UserNotifications;
 
 use Auth;
 
 class EditorPodcastView extends Component
 {
 
-	public $audio,$notes;
+	public $audio,$notes,$comments,$notes_message,$notes_time;
+
+
+     protected $listeners = [
+        'refreshParent' =>'$refresh'
+        ];
 
 
     public static function checkFollow($id){
@@ -44,6 +51,132 @@ class EditorPodcastView extends Component
         $this->audio = Audio::where('id',$id)->first();
         $this->notes = UserNotes::where('notes_audioid',$id)->get();
     }
+
+     public function like($id,$audio_editor,$like_type){
+
+             $data = new UserLikes;
+             $data->like_userid = Auth::User()->id;
+             $data->like_audioid = $id;
+             $data->like_type = $like_type;
+             $data->like_status = "active";
+             $data->like_ownerid = $audio_editor;
+             $data->save();
+
+             $notif = new UserNotifications;
+             $notif->notif_userid = Auth::User()->id;
+             $notif->notif_type = "like";
+             $notif->notif_type_id = $data->id;
+             $notif->notif_message = "You like the audio of";
+             $notif->status = "active";
+             $notif->save();
+
+             $notif1 = new UserNotifications;
+             $notif1->notif_userid = $audio_editor;
+             $notif1->notif_type = "liked";
+             $notif1->notif_type_id = $data->id;
+             $notif1->notif_message = "Like your audio";
+             $notif1->status = "active";
+             $notif1->save();
+
+
+            
+            $this->emit('refreshParent');
+
+        }
+
+    public function saveComment($id,$audio_editor){
+
+             $data = new UserComments;
+             $data->coms_userid = Auth::User()->id;
+             $data->coms_audioid = $id;
+             $data->coms_type = "comments";
+             $data->coms_message = $this->comments;
+             $data->coms_status = "active";
+             $data->coms_ownerid = $audio_editor;
+             $data->save();
+
+             $notif = new UserNotifications;
+             $notif->notif_userid = Auth::User()->id;
+             $notif->notif_type = "comments";
+             $notif->notif_type_id = $data->id;
+             $notif->notif_message = "You are commenting on the audio of";
+             $notif->status = "active";
+             $notif->save();
+
+             $notif1 = new UserNotifications;
+             $notif1->notif_userid = $audio_editor;
+             $notif1->notif_type = "commenting";
+             $notif1->notif_type_id = $data->id;
+             $notif1->notif_message = "commenting on your audio";
+             $notif1->status = "active";
+             $notif1->save();
+
+            
+             $this->clearFields();
+
+            // $this->emit('refreshParent');
+
+            redirect()->to('editor/podcast/view/'.$id); 
+
+    }
+
+    public function saveNotes($id,$audio_editor){
+
+             $data = new UserNotes;
+             $data->notes_userid = Auth::User()->id;
+             $data->notes_audioid = $id;
+             $data->notes_ownerid = $audio_editor;
+             $data->notes_time = $this->notes_time;
+             $data->notes_message = $this->notes_message;
+             $data->notes_status = "active";
+             $data->save();
+
+             $notif = new UserNotifications;
+             $notif->notif_userid = Auth::User()->id;
+             $notif->notif_type = "addnotes";
+             $notif->notif_type_id = $data->id;
+             $notif->notif_message = "You are adding notes on the audio of";
+             $notif->status = "active";
+             $notif->save();
+
+             $notif1 = new UserNotifications;
+             $notif1->notif_userid = $audio_editor;
+             $notif1->notif_type = "notes";
+             $notif1->notif_type_id = $data->id;
+             $notif1->notif_message = "adding notes on your audio";
+             $notif1->status = "active";
+             $notif1->save();
+
+            
+             $this->clearFieldsNotes();
+
+            $this->emit('refreshParent');
+
+            redirect()->to('editor/podcast/view/'.$id); 
+
+        }
+
+
+          public function clearFieldsNotes(){
+             $this->notes_time = null;
+            $this->notes_message = null;
+        }
+
+
+    public function clearFields(){
+            $this->comments = null;     
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     public function render()
     {	
