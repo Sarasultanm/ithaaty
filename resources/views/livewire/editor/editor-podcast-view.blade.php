@@ -80,6 +80,7 @@
                         >
                           <source src="{{ $audio->audio_path }}" type="video/mp4" />
                           <source src="{{ $audio->audio_path }}" type="video/webm" />
+                          <track kind="chapters" src="https://ithaaty.com/vtt/sample.vtt" srclang="en">
                           <!-- <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/mp4" />
                           <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/webm" /> -->
                           <p class="vjs-no-js">
