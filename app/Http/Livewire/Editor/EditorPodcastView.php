@@ -3,23 +3,36 @@
 namespace App\Http\Livewire\Editor;
 
 use Livewire\Component;
-use App\Models\User;
-use App\Models\Audio;
-use App\Models\UserFollow;
-use App\Models\UserLikes;
-use App\Models\UserViews;
-use App\Models\UserFav;
-use App\Models\UserNotes;
-use App\Models\AudioSponsor;
-use App\Models\UserComments;
-use App\Models\UserNotifications;
-
+// use App\Models\User;
+// use App\Models\Audio;
+// use App\Models\UserFollow;
+// use App\Models\UserLikes;
+// use App\Models\UserViews;
+// use App\Models\UserFav;
+// use App\Models\UserNotes;
+// use App\Models\AudioSponsor;
+// use App\Models\UserComments;
+// use App\Models\UserNotifications;
+// use App\Models\AdsListSetup;
+use App\Models\{
+    User,
+    Audio,
+    UserFollow,
+    UserLikes,
+    UserViews,
+    UserFav,
+    UserNotes,
+    AudioSponsor,
+    UserComments,
+    UserNotifications,
+    AdsListSetup
+};
 use Auth;
 
 class EditorPodcastView extends Component
 {
 
-	public $audio,$notes,$comments,$notes_message,$notes_time;
+	public $audio,$notes,$comments,$notes_message,$notes_time,$adsList,$numAds;
 
 
      protected $listeners = [
@@ -50,6 +63,8 @@ class EditorPodcastView extends Component
     {
         $this->audio = Audio::where('id',$id)->first();
         $this->notes = UserNotes::where('notes_audioid',$id)->get();
+        $this->adsList = AdsListSetup::where('adssetup_audioid',$id)->get();
+        $this->numAds = AdsListSetup::where('adssetup_audioid',$id)->count();
     }
 
      public function like($id,$audio_editor,$like_type){

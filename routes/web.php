@@ -11,6 +11,10 @@ use App\Http\Livewire\Admin\AdminDashboard;
 use App\Http\Livewire\Admin\AdminSettings;
 use App\Http\Livewire\Admin\AdminPopular;
 use App\Http\Livewire\Admin\AdminTrending;
+use App\Http\Livewire\Admin\AdminAds;
+use App\Http\Livewire\Admin\AdminAdsCreate;
+use App\Http\Livewire\Admin\AdminAdsDetails;
+use App\Http\Livewire\Admin\AdminAdsSetup;
 
 /*-- Editor ---*/
 use App\Http\Middleware\Editor;
@@ -70,7 +74,14 @@ Route::group(['middleware' => Administrator::class,'prefix'=>'admin'], function(
 	Route::get('settings',AdminSettings::class)->name('adminSettings');
 	Route::get('popular',AdminPopular::class)->name('adminPopular');
 	Route::get('trending',AdminTrending::class)->name('adminTrending');
+	Route::get('ads',AdminAds::class)->name('adminAds');
+	Route::get('ads/create',AdminAdsCreate::class)->name('adminAdsCreate');
+	Route::get('ads/details/{id}',AdminAdsDetails::class)->name('adminAdsDetails');
+	Route::get('ads/setup/{id}',AdminAdsSetup::class)->name('adminAdsSetup');
+
 });
+
+
 
 
 

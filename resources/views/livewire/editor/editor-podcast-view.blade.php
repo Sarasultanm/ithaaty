@@ -66,6 +66,7 @@
 
       					@elseif($audio->audio_type == "RSS") 
 
+
       				<script src="{{ asset('videojs/video.min.js') }}"></script>
               <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
 
@@ -97,41 +98,28 @@
                           
                         });
                         </script> -->
+                      <!--  <p class="text-black">{{ $numAds }}</p>  -->
+                        @if($numAds != 0)
+                        @foreach($adsList as $adsl)
+                          
+                            <?php 
+                                  $videlink[] = $adsl->get_adslist->adslist_videolink;
+                                  $skip[] = $adsl->get_adslist->adslist_adstype;
+                                  $displaytime[] = $adsl->get_adslist->adslist_displaytime;
+                             ?>
 
-                        <script>
-                           var player=videojs('my-video');
-                           player.nuevo({
-                         
-                           })
-                           player.vroll([
-                             { 
-                                src: "https://ithaaty.com/ads/pepsi-ads.mp4",
-                                type:"video/mp4", 
-                                href: "url-to-go-on-midroll-click",
-                                offset:"1",
-                                skip:"5",
-                                id:"6"
-                             }, {
-                               src: "https://ithaaty.com/ads/pepsi-ads.mp4",
-                               type:"video/mp4",
-                               href: "url-to-go-on-midroll-click",
-                               offset:"10",
-                               skip:"8",
-                               id:"9"
-                             }, {
-                                src: "https://ithaaty.com/ads/pepsi-ads.mp4",
-                                type:"video/mp4",
-                                href: "url-to-go-on-midroll-click",
-                                offset:"50%",
-                                id:"10"
-                             }
-                          ]);
-                        </script>
+                          @endforeach
+
+                        <script> var player=videojs('my-video'); </script> 
+                        @include('layouts.editor.ads-script')
+                        <script src="{{ asset('js/adsScript/'.$numAds.'-ads.js' ) }}" ></script> 
+
+                        @endif
                      <!--  <script >
                           videojs('my-video', {}, function() {
                           var player = this;
                           player.ads(); 
-                          var videolink = "<?php echo asset('ads/ads1.mp4'); ?>";
+                          var videolink = "<?php //echo asset('ads/ads1.mp4'); ?>";
 
                           var requestAds = function(){
                             
