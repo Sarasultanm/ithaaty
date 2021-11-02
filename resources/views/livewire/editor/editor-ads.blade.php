@@ -80,6 +80,25 @@
                     </div>
 				</div>
 		    </div>
+
+		     <div class="mt-5 w-full border-t-2 border-green-500 pt-5">
+	          	<div class="">
+	          		 <h1 class="flex-1  font-bold text-gray-800 text-xl">Add Supporting files</h1> 
+	          	  	<p class="mt-1 text-sm text-gray-500">
+	                    This information will be displayed publicly so be careful what you share.
+	                  </p>
+	          	</div>
+
+	          	 <div class="mt-5">
+                    <label for="email" class="block text-sm font-medium text-gray-700">Upload File</label>
+                    <div class="mt-1">
+                      <input type="file"  class="" wire:model="ads_logo">
+                    </div>
+				</div>
+	          	
+	          </div>
+
+
 			<div class="mt-3 text-right sm:mt-5 mb-5">
 				              			
 		        <button wire:click="addAds()" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
