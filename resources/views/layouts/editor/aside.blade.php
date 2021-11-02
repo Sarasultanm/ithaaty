@@ -2,6 +2,8 @@
  
  <aside class="hidden xl:block xl:col-span-4">
         <div class="sticky top-4 space-y-4">
+
+
           <section aria-labelledby="who-to-follow-heading">
             <div class="bg-white rounded-lg shadow">
               <div class="p-6">
@@ -52,6 +54,7 @@
               </div>
             </div>
           </section>
+
           <section aria-labelledby="trending-heading">
             <div class="bg-white rounded-lg shadow">
               <div class="p-6">
@@ -103,5 +106,91 @@
               </div>
             </div>
           </section>
+
+                    <section aria-labelledby="who-to-follow-heading">
+            <div class="">
+              <div class="">
+                <!-- <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900">
+                  Who to follow
+                </h2> -->
+                <div class="mt-6 flow-root">
+                  <div class="mb-2">
+                      <div class="relative rounded-md border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 ">
+                        <div class="flex-shrink-0">
+                          <img class="h-12 w-12" src="{{ asset('sponsor/sponsor1.jpg') }}" alt="">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                          <a href="#" class="focus:outline-none">
+                            <span class="absolute inset-0" aria-hidden="true"></span>
+                            <p class="text-md font-bold text-gray-900">
+                              Company Nmae
+                            </p>
+                            <p class="text-sm text-gray-500 truncate">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 float-left mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                              </svg>
+                              www.samplecompany.com
+                            </p>
+                             <p class="text-sm text-gray-500 truncate">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5  float-left  mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                              </svg>
+                              Sample Address 123 Street, Test
+                            </p>
+                          </a>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="mb-2">
+                      <div class="relative rounded-md border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 ">
+                        <div class="flex-shrink-0">
+                          <img class="h-12 w-12" src="{{ asset('sponsor/sponsor2.jpg') }}" alt="">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                          <a href="#" class="focus:outline-none">
+                            <span class="absolute inset-0" aria-hidden="true"></span>
+                            <p class="text-md font-bold text-gray-900">
+                              Company Name
+                            </p>
+                            <p class="text-sm text-gray-500 truncate">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 float-left mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                              </svg>
+                              www.samplecompany.com
+                            </p>
+                             <p class="text-sm text-gray-500 truncate">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5  float-left  mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                              </svg>
+                              Sample Address 123 Street, Test
+                            </p>
+                          </a>
+                        </div>
+                      </div>
+                  </div>
+
+                </div>
+                <div class="mt-6">
+                  <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    Promote you Company
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+
+
+
+
+
+
+
+
+
+
         </div>
       </aside>

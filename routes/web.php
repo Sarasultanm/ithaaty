@@ -27,6 +27,9 @@ use App\Http\Livewire\Editor\EditorPopular;
 use App\Http\Livewire\Editor\EditorOverview;
 use App\Http\Livewire\Editor\EditorPodcastDetail;
 use App\Http\Livewire\Editor\EditorNotes;
+use App\Http\Livewire\Editor\EditorAds;
+use App\Http\Livewire\Editor\EditorAdsCompany;
+use App\Http\Livewire\Editor\EditorAdsPodcast;
 
 use App\Http\Livewire\Editor\EditorContact;
 use App\Http\Livewire\Editor\EditorNotification;
@@ -110,6 +113,10 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 
 	Route::get('podcast/create',EditorCreatePost::class)->name('editorPodcastCreate');
 	Route::get('podcast/update/{id}',EditorUpdatePost::class)->name('editorPodcastUpdate');
+
+	Route::get('ads',EditorAds::class)->name('editorAds');
+	Route::get('ads/company',EditorAdsCompany::class)->name('editorAdsCompany');
+	Route::get('ads/podcast',EditorAdsPodcast::class)->name('editorAdsPodcast');
 
 });
 
