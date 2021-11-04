@@ -33,8 +33,11 @@
         <div class="mt-4">
 
          <div class="w-full ">
+          	
           	 <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
+          	 
           </div>
+
 
           <div class="mb-5 w-full ">
           	<div class="flex">
@@ -100,7 +103,7 @@
 					            </tr>
 					          </thead>
 					          <tbody class="bg-white divide-y divide-gray-200">
-					          @foreach($adslist->get() as $ads)
+					          @foreach($ads->get() as $adsitem)
 					            <tr>
 					              <td class="px-6 py-4 whitespace-nowrap">
 					                <div class="flex items-center">
@@ -109,13 +112,13 @@
 					                  </div>
 					                  <div class="ml-4">
 					                    <div class="text-sm font-medium text-gray-900">
-					                    {{ $ads->ads_name }}
+					                    {{ $adsitem->ads_name }}
 					                    </div>
 					                    <div class="text-sm text-gray-500">
-					                      {{ $ads->ads_location }}
+					                      {{ $adsitem->ads_location }}
 					                    </div>
 					                    <div class="text-sm text-gray-500">
-					                      <strong>   {{ $ads->ads_website }}</strong>
+					                      <strong>   {{ $adsitem->ads_website }}</strong>
 					                    </div>
 					                  </div>
 					                </div>
@@ -125,11 +128,11 @@
 					                <div class="text-sm text-gray-500"></div>
 					              </td>
 					              <td class="px-6 py-4 whitespace-nowrap">
-					              	 <div class="text-sm font-bold text-gray-500">Active</div>
+					              	 <div class="text-sm font-bold text-gray-500">{{ $adsitem->ads_website }}</div>
 					              </td>
 					              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 
-					           			 <a href="{{ route('adminAdsDetails',['id' => $ads->id]) }}" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-2 py-2 border-gray-200 text-base font-medium text-black hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Details
+					           			 <a href="{{ route('adminAdsDetails',['id' => $adsitem->id]) }}" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-2 py-2 border-gray-200 text-base font-medium text-black hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Details
                							 </a> 
 					               
 					              </td>
@@ -178,6 +181,9 @@
 								              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 								                Status
 								              </th>
+								               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+								                File Link
+								              </th>
 								              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 								                Action
 								              </th>
@@ -188,6 +194,7 @@
 								          </thead>
 								          <tbody class="bg-white divide-y divide-gray-200">
 								         
+								          	@foreach($adslist->get() as $ads)
 								            <tr>
 								              <td class="px-6 py-4 whitespace-nowrap">
 								                <div class="flex items-center">
@@ -196,10 +203,10 @@
 								                  </div>
 								                  <div class="ml-4">
 								                    <div class="text-sm font-medium text-gray-900">
-								                   Pepsi Ads
+								                    {{ $ads->adslist_name }}
 								                    </div>
 								                    <div class="text-sm text-gray-500">
-								                     https://ithaaty.com/ads/pepsi-ads.mp4
+								                      {{ $ads->adslist_videolink }}
 								                    </div>
 								                    <div class="text-sm text-gray-500">
 								                      <strong>   </strong>
@@ -209,65 +216,36 @@
 								              </td>
 								              <td class="px-6 py-4 whitespace-nowrap">
 								               <!--  <div class="text-sm text-gray-900">Category</div> -->
-								                <div class="text-sm text-gray-500">3</div>
+								                <div class="text-sm text-gray-500">{{ $ads->adslist_adstype }}</div>
 								              </td>
 								              <td class="px-6 py-4 whitespace-nowrap">
 								               <!--  <div class="text-sm text-gray-900">Category</div> -->
-								                <div class="text-sm text-gray-500">10%</div>
+								                <div class="text-sm text-gray-500">{{ $ads->adslist_displaytime }}</div>
 								              </td>
 								              <td class="px-6 py-4 whitespace-nowrap">
-								              	 <div class="text-sm font-bold text-gray-500">Pending</div>
+								              	 <div class="text-sm font-bold text-gray-500">{{ $ads->adslist_status }}</div>
+								              </td>
+								               <td class="px-6 py-4 whitespace-nowrap">
+								              	  <a href="{{ $ads->adslist_videolink }}" target="_blank" class="inline-flex justify-center shadow-sm text-base font-medium text-indigo-500 hover:text-indigo-800 hover:underline  sm:col-start-2 sm:text-sm">Open link
+			               						 </a> 
 								              </td>
 								              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-								           		 <a href="" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-2 py-2 border-gray-200 text-base font-medium text-black hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Check Video
+								              	  @if($ads->adslist_status == "Confirm")
+								           		 <a href="{{ route('adminAdsSetup',['id' => $ads->id]) }}" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-2 py-2 border-gray-200 text-base font-medium text-black hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Setup
 			               						 </a> 
-								               
-								              </td>
-								             <!--  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-								                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-								              </td> -->
-								            </tr>
-								           	
 
-								           	      <tr>
-								              <td class="px-6 py-4 whitespace-nowrap">
-								                <div class="flex items-center">
-								                  <div class="flex-shrink-0 h-10 w-10">
-								                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
-								                  </div>
-								                  <div class="ml-4">
-								                    <div class="text-sm font-medium text-gray-900">
-								                  	Big buck Bunny
-								                    </div>
-								                    <div class="text-sm text-gray-500">
-								                     https://ithaaty.com/ads/big_buck_bunny.mp4
-								                    </div>
-								                    <div class="text-sm text-gray-500">
-								                      <strong>   </strong>
-								                    </div>
-								                  </div>
-								                </div>
-								              </td>
-								              <td class="px-6 py-4 whitespace-nowrap">
-								               <!--  <div class="text-sm text-gray-900">Category</div> -->
-								                <div class="text-sm text-gray-500">0</div>
-								              </td>
-								              <td class="px-6 py-4 whitespace-nowrap">
-								               <!--  <div class="text-sm text-gray-900">Category</div> -->
-								                <div class="text-sm text-gray-500">10%</div>
-								              </td>
-								              <td class="px-6 py-4 whitespace-nowrap">
-								              	 <div class="text-sm font-bold text-gray-500">Approve</div>
-								              </td>
-								              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-								           		 <a href="" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-2 py-2 border-gray-200 text-base font-medium text-black hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Setup
-			               						 </a> 
-								               
+			               						 @else
+
+			               						 <button wire:click="confirmVideo({{$ads->id}})" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-2 py-2 border-gray-200 text-base font-medium text-black hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Approve
+			               						 </button> 
+
+								               	@endif
 								              </td>
 								             <!--  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 								                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
 								              </td> -->
 								            </tr>
+								            @endforeach
 
 
 								            <!-- More people... -->

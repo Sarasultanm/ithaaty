@@ -113,7 +113,7 @@
                 <!-- <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900">
                   Who to follow
                 </h2> -->
-                <div class="mt-6 flow-root">
+           <!--      <div class="mt-6 flow-root">
                   <div class="mb-2">
                       <div class="relative rounded-md border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 ">
                         <div class="flex-shrink-0">
@@ -172,9 +172,10 @@
                       </div>
                   </div>
 
-                </div>
+                </div> -->
+
                 <div class="mt-6">
-                  <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                  <a href="{{ route('editorAds') }}" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                     Promote you Company
                   </a>
                 </div>

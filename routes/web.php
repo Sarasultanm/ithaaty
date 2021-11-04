@@ -15,6 +15,8 @@ use App\Http\Livewire\Admin\AdminAds;
 use App\Http\Livewire\Admin\AdminAdsCreate;
 use App\Http\Livewire\Admin\AdminAdsDetails;
 use App\Http\Livewire\Admin\AdminAdsSetup;
+use App\Http\Livewire\Admin\AdminCreateAds;
+
 
 /*-- Editor ---*/
 use App\Http\Middleware\Editor;
@@ -81,6 +83,7 @@ Route::group(['middleware' => Administrator::class,'prefix'=>'admin'], function(
 	Route::get('ads/create',AdminAdsCreate::class)->name('adminAdsCreate');
 	Route::get('ads/details/{id}',AdminAdsDetails::class)->name('adminAdsDetails');
 	Route::get('ads/setup/{id}',AdminAdsSetup::class)->name('adminAdsSetup');
+	Route::get('ads/adsCreate',AdminCreateAds::class)->name('adminCreateAds');
 
 });
 
