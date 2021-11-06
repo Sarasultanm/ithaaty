@@ -92,10 +92,10 @@ class EditorPodcastView extends Component
              $notif1->notif_message = "Like your audio";
              $notif1->status = "active";
              $notif1->save();
-
-
             
-            $this->emit('refreshParent');
+            // $this->emit('refreshParent');
+
+            redirect()->to('editor/podcast/view/'.$id); 
 
         }
 

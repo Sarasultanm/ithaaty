@@ -28,9 +28,9 @@
                         </p>
                       </div>
                       <div class="flex-shrink-0">
-                        <button  wire:click="follow({{ $randomUsers->id }})" type="button" class="inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100">
+                        <button  wire:click="follow({{ $randomUsers->id }})" type="button" class="bg-custom-pink inline-flex items-center px-3 py-0.5 rounded-full  text-sm font-medium text-white">
                           <!-- Heroicon name: solid/plus -->
-                          <svg class="-ml-1 mr-0.5 h-5 w-5 text-rose-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <svg class="-ml-1 mr-0.5 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                           </svg>
                           <span>
