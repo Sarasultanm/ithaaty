@@ -18,6 +18,7 @@
          <link rel="stylesheet" href="{{ asset('css/bootstrap.min-v4.2.1.css') }}">
        <!--  <link rel="stylesheet" href="assets/css/animate.css"> -->
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/custom-css.css') }}">
         <link rel="stylesheet" href="{{ asset('css/media-queries.css') }}">
         <link rel="stylesheet" href="{{ asset('css/carousel.css') }}">   
 
@@ -58,21 +59,24 @@
                              x-transition:leave="transition ease-in duration-75" 
                              x-transition:leave-start="transform opacity-100 scale-100" 
                              x-transition:leave-end="transform opacity-0 scale-95" 
-                            class="mr-20 mt-3  w-56  absolute float-right origin-top-right right-0 shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0-button" tabindex="-1">
-                              <div class="py-1" role="none">
+                            class="mr-20 mt-3  w-56  absolute float-right origin-top-right right-0 shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0-button" tabindex="-1">
+                              <div class="p-1" role="none" style="background: #5f7c84;">
                                 <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                               
-                                 <a href="/login" class="bg-gray-100 text-gray-900 flex px-4 py-2 text-sm cursor-pointer " role="menuitem" tabindex="-1" id="options-menu-0-item-0">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" /></svg>
+                                <center>
+                                      <img src="{{ asset('images/logo.png')}}" class="w-1/2 py-2">
+                                </center>
+                                 
+                                 <a href="/login" class="border-t-2 border-white text-white hover-bg-custom-pink flex px-4 py-2 text-sm cursor-pointer " role="menuitem" tabindex="-1" id="options-menu-0-item-0">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" /></svg>
                                   <span>Login</span>
                                 </a>
                                
                                   <!-- Heroicon name: solid/star -->
                                  
-                                <a href="/register" class="text-gray-700 flex px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
+                                <a href="/register" class="hover-bg-custom-pink text-white flex px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
                                   <!-- Heroicon name: solid/code -->
               
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="text-white mr-3 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
                                   <span>Sign Up</span>
                                 </a>
             

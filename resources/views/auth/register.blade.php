@@ -14,21 +14,21 @@
 
             <!-- Name -->
             <div>
-                <x-label for="name" :value="__('Name')" />
+                <x-label for="name" :value="__('Name')"  class="text-white"/>
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>
 
             <!-- Email Address -->
             <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
+                <x-label for="email" :value="__('Email')" class="text-white"/>
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <x-label for="password" :value="__('Password')" class="text-white"/>
 
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
@@ -38,7 +38,7 @@
 
             <!-- Confirm Password -->
             <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
+                <x-label for="password_confirmation" :value="__('Confirm Password')" class="text-white"/>
 
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
@@ -47,7 +47,7 @@
 
             <div class="mt-4">
                
-                  <label  class="block text-sm font-medium text-gray-700">Birthday</label>
+                  <label  class="block text-sm font-medium text-white">Birthday</label>
                 <div class="flex space-x-4">
                   <select id="months" name="months" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                     <option selected="" disabled="">Month</option>
@@ -185,7 +185,7 @@
 
             <div class="mt-4">
                 <div>
-                  <label  class="block text-sm font-medium text-gray-700">Gender</label>
+                  <label  class="block text-sm font-medium text-white">Gender</label>
                   <select id="gender" name="gender" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                     <option selected="" disabled="">Select Gender</option>
                      <option value="Female">
@@ -201,7 +201,7 @@
 
             <div class="mt-4">
                 <div>
-                  <label  class="block text-sm font-medium text-gray-700">Country</label>
+                  <label  class="block text-sm font-medium text-white">Country</label>
                   <select id="location" name="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                     <option selected="" disabled="">Select Country</option>
                     <option value="Afganistan">Afghanistan</option>
@@ -463,7 +463,7 @@
 
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                <a class="underline text-sm text-white " href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
 
