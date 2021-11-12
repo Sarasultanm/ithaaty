@@ -92,176 +92,23 @@
                             >
                           </p>
                         </video>
-                 <!--        <script>
-                        var player = videojs('my-video');
-                        player.nuevo({ 
-                          
-                        });
-                        </script> -->
-                      <!--  <p class="text-black">{{ $numAds }}</p>  -->
-                        @if($numAds != 0)
-                        @foreach($adsList as $adsl)
+         
+                        @if($newNumAds != 0)
+                        @foreach($newAdsList as $adsl)
                           
                             <?php 
-                                  $videlink[] = $adsl->get_adslist->adslist_videolink;
-                                  $skip[] = $adsl->get_adslist->adslist_adstype;
-                                  $displaytime[] = $adsl->get_adslist->adslist_displaytime;
+                                  $videlink[] = $adsl->adslist_videolink;
+                                  $skip[] = $adsl->adslist_adstype;
+                                  $displaytime[] = $adsl->adslist_displaytime;
                              ?>
 
                           @endforeach
 
                         <script> var player=videojs('my-video'); </script> 
                         @include('layouts.editor.ads-script')
-                        <script src="{{ asset('js/adsScript/'.$numAds.'-ads.js' ) }}" ></script> 
+                        <script src="{{ asset('js/adsScript/'.$newNumAds.'-ads.js' ) }}" ></script> 
 
                         @endif
-                     <!--  <script >
-                          videojs('my-video', {}, function() {
-                          var player = this;
-                          player.ads(); 
-                          var videolink = "<?php //echo asset('ads/ads1.mp4'); ?>";
-
-                          var requestAds = function(){
-                            
-                            player.trigger('adsready');
-                          };
-                          
-                          if (player.currentSrc()) {
-                            requestAds();
-                          }
-
-                          player.on('contentupdate', requestAds);
-                          
-                          player.on('readyforpreroll', function() {
-                            player.ads.startLinearAdMode();
-                            
-                            player.src(videolink);
-                            
-                            player.one('durationchange', function(){
-                              player.play();
-                            });
-                        
-                            player.one('ended', function() {
-                              player.ads.endLinearAdMode();
-                            });
-
-                          });
-
-                        });
-                        </script>  -->
-
-                      
- 
-               <!-- <script >
-                          videojs('my-video', {}, function() {
-                             var player = this;
-                              player.ads(); 
-                             
-                             var requestAds = function(){
-                                player.trigger('adsready');
-                              };
-                              
-                              if (player.currentSrc()) {
-                                requestAds();
-                              }
-                              player.on('contentupdate', requestAds);
-
-                              player.on('readyforpreroll', function() {
-                                player.ads.startLinearAdMode();
-                                
-                                player.src('http://127.0.0.1:8000/ads/ads1.mp4');
-                                
-                                player.one('durationchange', function(){
-                                  player.play();
-                                });
-                            
-                                player.one('ended', function() {
-                                  player.ads.endLinearAdMode();
-                                });
-
-                              });
-
-                              player.trigger('adsready');
-
-                          });
-
-
-
-                        </script> -->
-                       <!--  <script>
-                          var player = videojs('my-video');
-                          player.markers({
-                             breakOverlay:{
-                                display: true
-                             },
-                             onMarkerClick: function(marker){
-                                $('.dynamic-demo-events').append('<li class="list-group-item">Marker click: '+marker.time+'</li>');
-                             },
-                             onMarkerReached: function(marker){
-                                $('.dynamic-demo-events').append('<li class="list-group-item">Marker reached: '+marker.time+'</li>');
-                             },
-                             markers: [
-                                {time: 6,overlayText: "aaa" },
-                                {time: 10, overlayText: "2"},
-                                {time: 15.6,overlayText: "3"},
-                                {time: 19,overlayText: "4"}
-                             ]
-
-                          });
-
-                        
-                          $(".dynamic-demo-prev").click(function(){
-                             player.markers.prev();
-                          });
-                          $(".dynamic-demo-next").click(function(){
-                             player.markers.next();
-                          });
-                          $(".dynamic-demo-add-random").click(function(){
-                             var randomTime = Math.floor((Math.random() * parseInt(player.duration())) + 1);
-
-                            
-                             player.markers.add([{
-                                time: randomTime,
-                                text: "I'm new",
-                                overlayText: "I'm new"
-                             }]);
-                          });
-                          $(".dynamic-demo-shift"). click(function(){
-                             var markers = player.markers.getMarkers();
-                             for(var i = 0; i < markers.length; i++) {
-                                markers[i].time += 1;
-                             }
-                             player.markers.updateTime();
-                          });
-                          $(".dynamic-demo-remove-first").click(function(){
-                             player.markers.remove([0]);
-                          });
-                          $(".dynamic-demo-remove-all").click(function(){
-                             player.markers.removeAll();
-                          });
-                          $(".dynamic-demo-destroy").click(function(){
-                             player.markers.destroy();
-                          });
-
-                          </script> -->
-                        
-                          
-                         
-                       <!-- <div class="btn-group bg-gray-100" role="group" aria-label="...">
-                             <button class="bg-gray-900 dynamic-demo-prev btn btn-default" type="button">Prev</button>
-                             <button class="dynamic-demo-next btn btn-default" type="button">Next</button>
-                             <button class="bg-gray-900 dynamic-demo-add-random btn btn-default" type="button">Add random</button>
-                             <button class="dynamic-demo-shift btn btn-default" type="button">Shift 1 sec</button>
-                             <button class="dynamic-demo-remove-first btn btn-default" type="button">Remove 1st</button>
-                             <button class="dynamic-demo-remove-all btn btn-default" type="button">Remove all</button>
-                             <button class="dynamic-demo-destroy btn btn-default" type="button">Destroy</button>
-                          </div>  -->
-
-
-
-
-
-
 
 
       					@else

@@ -25,14 +25,15 @@ use App\Models\{
     AudioSponsor,
     UserComments,
     UserNotifications,
-    AdsListSetup
+    AdsListSetup,
+    AdsList
 };
 use Auth;
 
 class EditorPodcastView extends Component
 {
 
-	public $audio,$notes,$comments,$notes_message,$notes_time,$adsList,$numAds;
+	public $audio,$notes,$comments,$notes_message,$notes_time,$adsList,$numAds,$newAdsList,$newNumAds;
 
 
      protected $listeners = [
@@ -65,6 +66,8 @@ class EditorPodcastView extends Component
         $this->notes = UserNotes::where('notes_audioid',$id)->get();
         $this->adsList = AdsListSetup::where('adssetup_audioid',$id)->get();
         $this->numAds = AdsListSetup::where('adssetup_audioid',$id)->count();
+        $this->newAdsList = AdsList::where('adslist_country',Auth::User()->country)->get();
+        $this->newNumAds = AdsList::where('adslist_country',Auth::User()->country)->count();
     }
 
      public function like($id,$audio_editor,$like_type){

@@ -72,7 +72,7 @@ class MainController extends Controller
 
 	public function about(){
 
-		$likes = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(8);
+		$likes = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(10);
 		$num = 1;
 		return view('about',compact('likes'))->with('num');
 	}

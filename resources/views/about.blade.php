@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="{{ asset('css/media-queries.css') }}">
         <link rel="stylesheet" href="{{ asset('css/carousel.css') }}">   
 
+          <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta2/css/all.css"  />
 
 
         <!-- Scripts -->
@@ -99,7 +100,7 @@
              </div>   
 
 
-             <div class="grid grid-cols-1 mt-20 absolute w-full" style="margin-top: -200px;">
+             <div class="grid grid-cols-1 mt-20 absolute w-full" style="margin-top: -270px;">
                  <div class="col-span-1">
               <!--        <div  class="flex bg-transparent">
                           <div class="flex-1 mx-2 text-white text-center h-60" style="background: #2e5157;">
@@ -188,26 +189,30 @@
                  </div>
              </div>
 
-              <div class="grid grid-cols-3 gap-4 p-10 bottom-0 absolute w-full bg-white">
+              <div class="grid grid-cols-3 gap-4 px-10 pt-5 pb-6 bottom-0 absolute w-full bg-white">
                  <div class="col-span-1">
                      <ul class="uppercase">
-                         <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">Facebook</a></li>
-                         <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">Instagram</a></li>
+                        <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">Home</a></li>
+                         <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">About Us</a></li>
+                         <li class="inline"><a href="/podcaster" class="text-gray-800 text-sm uppercase font-bold pr-3">Podcaster</a></li>
+                         <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">Ads</a></li>
+                         
                      </ul>
                  </div>
                  <div class="col-span-1">
                     <center>
-                      <ul class="uppercase">
-                         <li class="inline"><a href="/podcaster" class="text-gray-800 text-sm uppercase font-bold pr-3">Podcaster</a></li>
-                         <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">Home</a></li>
-                          <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">About Us</a></li>
-                     </ul>
+                        <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-custom-pink hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                          <svg class="-ml-0.5 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                          SEARCH
+                        </button>
                      </center>
                  </div>
                  <div class="col-span-1">
-                    <ul class="uppercase">
-                         <li class="inline"><a href="#" class="float-right text-gray-800 text-sm uppercase font-bold pr-3">Search</a> </li>
-                        
+                    <ul class="uppercase float-right">
+                         <li class="inline"><a href="#" class="text-gray-800 text-lg uppercase font-bold pr-3"><i class="fab fa-facebook"></i></a></li>
+                         <li class="inline"><a href="#" class="text-gray-800 text-lg uppercase font-bold pr-3"><i class="fab fa-instagram"></i></a></li>
                      </ul>
                  </div>
              </div>

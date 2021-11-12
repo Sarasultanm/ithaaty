@@ -1,10 +1,10 @@
- @if($numAds == 1)
+ @if($newNumAds == 1)
  <script>
     var adsVideoLinkOne = "<?php echo $videlink[0] ?>";
     var adsSkipOne = "<?php echo $skip[0] ?>";
     var adsDisplayOne = "<?php echo $displaytime[0] ?>";
  </script>
- @elseif($numAds == 2)
+ @elseif($newNumAds == 2)
  <script>
     var adsVideoLinkOne = "<?php echo $videlink[0] ?>";
     var adsVideoLinkTwo = "<?php echo $videlink[1] ?>";

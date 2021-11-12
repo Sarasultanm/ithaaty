@@ -16,7 +16,7 @@ class EditorAds extends Component
 	use WithFileUploads;
 
 	public $ads_name,$ads_website,$ads_location,$ads_logo,$ads_file;
-    public $ads_list,$adslist_name,$adslist_videolink,$adslist_adstype,$adslist_durationtype,$adslist_displaytime;
+    public $ads_list,$adslist_name,$adslist_videolink,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc;
 
 	public function saveAds(){
 
@@ -50,6 +50,10 @@ class EditorAds extends Component
         $data->adslist_durationtype = "none";
         $data->adslist_displaytime = $this->adslist_displaytime;
         $data->adslist_status = "Pending";
+        $data->adslist_agebracket = $this->adslist_agebracket;
+        $data->adslist_country = $this->adslist_country;
+        $data->adslist_weblink = $this->adslist_weblink;
+        $data->adslist_desc = $this->adslist_desc;
         $data->save();  
 
         session()->flash('status', 'New Add Added');
