@@ -305,14 +305,24 @@
 
                     @elseif($audio->audio_type == "RSS")
 
-                        <video
+                    <div class="flex bg-custom-pink p-4 rounded-md">
+                      <div >
+                        <img src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg" style="width:150px;">
+                      </div>
+                      <div class="flex-1 pl-5">
+                         <p class="text-2xl font-bold text-white">{{ $audio->audio_name }}</p>
+                         <p class="text-sm font-medium text-white">{{ $audio->audio_summary }}</p>
+                         <p class="text-sm font-medium text-white mt-5">Season {{ $audio->audio_season }} / Episode {{ $audio->audio_episode }} </p>
+                      </div>
+                    </div>
+                        <!-- <video
                         id="my-video{{ $audio->id }}"
                         class="video-js vjs-default-skin z-10"
                         controls
                         preload="auto"
                         width="auto"
                         height="264"
-                        poster="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg"
+                        poster=""
                         data-setup="{}"
                       >
                         <source src="{{ $audio->audio_path }}" type="video/mp4" />
@@ -324,7 +334,7 @@
                             >supports HTML5 video</a
                           >
                         </p>
-                      </video>
+                      </video> -->
 
                     @else
 

@@ -175,9 +175,10 @@
                 </div> -->
 
                 <div class="mt-6">
-                  <a href="{{ route('editorAds') }}" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                  <!-- <a href="{{ route('editorAds') }}" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                     Promote you Company
-                  </a>
+                  </a> -->
+                  <a href="{{ route('editorAds') }}" class="bg-custom-pink w-full block text-center px-4 py-4 border border-gray-300 shadow-sm text-sm font-bold text-white">PROMOTE YOUR COMPANY</a>
                 </div>
               </div>
             </div>
