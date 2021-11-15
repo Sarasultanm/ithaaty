@@ -22,7 +22,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
        <!--  <script src="{{ asset('js/audio.js') }}" ></script> -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-
+        <script src="{{ asset('js/custom-js.js') }}" ></script> 
         <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@5.3.2/dist/amplitude.js"></script> -->
 
      <!-- <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet" />

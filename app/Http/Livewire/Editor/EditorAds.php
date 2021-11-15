@@ -16,7 +16,7 @@ class EditorAds extends Component
 	use WithFileUploads;
 
 	public $ads_name,$ads_website,$ads_location,$ads_logo,$ads_file;
-    public $ads_list,$adslist_name,$adslist_videolink,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc;
+    public $ads_list,$adslist_name,$adslist_videolink,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc,$country_slc;
 
 	public function saveAds(){
 
@@ -77,6 +77,9 @@ class EditorAds extends Component
         $this->ads_list = $this->checkAdslist();
     }
 
+    public function addCountry(){
+        $this->adslist_country = $this->adslist_country."".$this->country_slc.",";
+    }
 
     public function render()
     {
