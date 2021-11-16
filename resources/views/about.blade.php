@@ -195,7 +195,7 @@
                         <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">Home</a></li>
                          <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">About Us</a></li>
                          <li class="inline"><a href="/podcaster" class="text-gray-800 text-sm uppercase font-bold pr-3">Podcaster</a></li>
-                         <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">Ads</a></li>
+                         <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">Ads with Us</a></li>
                          
                      </ul>
                  </div>
@@ -225,6 +225,7 @@
                     <ul class="uppercase float-right">
                          <li class="inline"><a href="#" class="text-gray-800 text-lg uppercase font-bold pr-3"><i class="fab fa-facebook"></i></a></li>
                          <li class="inline"><a href="#" class="text-gray-800 text-lg uppercase font-bold pr-3"><i class="fab fa-instagram"></i></a></li>
+                          <li class="inline"><a href="#" class="text-gray-800 text-lg uppercase font-bold pr-3"><i class="fab fa-twitter"></i></a></li>
                      </ul>
                  </div>
              </div>

@@ -75,6 +75,28 @@
               </span>
             </x-nav-link-custom>
 
+            <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
+               Social
+            </p>    
+
+             <x-nav-link-custom :href="route('editorActivity')" :active="request()->routeIs('editorActivity')">
+              <!-- Heroicon name: outline/fire -->
+            <svg xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+            </svg><span class="truncate">Activity</span>
+             </x-nav-link-custom>
+
+
+
+             <x-nav-link-custom :href="route('editorFriends')" :active="request()->routeIs('editorFriends')">
+              <!-- Heroicon name: outline/fire -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+              <span class="truncate">Friends</span>
+             </x-nav-link-custom>
+
+
 
             <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
                Others

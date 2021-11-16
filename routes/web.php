@@ -32,6 +32,10 @@ use App\Http\Livewire\Editor\EditorNotes;
 use App\Http\Livewire\Editor\EditorAds;
 use App\Http\Livewire\Editor\EditorAdsCompany;
 use App\Http\Livewire\Editor\EditorAdsPodcast;
+use App\Http\Livewire\Editor\EditorActivity;
+use App\Http\Livewire\Editor\EditorFriends;
+
+
 
 use App\Http\Livewire\Editor\EditorContact;
 use App\Http\Livewire\Editor\EditorNotification;
@@ -120,6 +124,9 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 	Route::get('ads',EditorAds::class)->name('editorAds');
 	Route::get('ads/company',EditorAdsCompany::class)->name('editorAdsCompany');
 	Route::get('ads/podcast',EditorAdsPodcast::class)->name('editorAdsPodcast');
+
+	Route::get('activity',EditorActivity::class)->name('editorActivity');
+	Route::get('friends',EditorFriends::class)->name('editorFriends');
 
 });
 
