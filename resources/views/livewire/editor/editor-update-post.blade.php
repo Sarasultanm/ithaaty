@@ -42,7 +42,7 @@
 
           	<div x-data="{
 			      openTab: 1,
-			      activeClasses: 'border-indigo-500 text-indigo-600',
+			      activeClasses: 'border-custom-pink text-custom-pink',
 			      inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
 			    }" 
 			    class="">
@@ -79,7 +79,7 @@
 			                  </p>
 			            </div>
 
-				        <div class="border-t-2 border-green-500 ">	
+				        <div class="border-t-2 border-custom-pink ">	
 				        	<div class="mt-5">
 			                    <label for="email" class="block text-sm font-medium text-gray-700">Title</label>
 			                    <div class="mt-1">
@@ -158,11 +158,11 @@
 						</div>
 
 
-						<div class="border-t-2 border-green-500 mt-16"></div>        
+						<div class="border-t-2 border-custom-pink mt-16"></div>        
 			        
 			              <div class="mt-3 text-right sm:mt-5 mb-20">
 			              			
-							        <button wire:click="updateInfo()" class="w-1/4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+							        <button wire:click="updateInfo()" class="w-1/4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
 							          Update Info
 							        </button>
 				    			
@@ -177,14 +177,14 @@
 
 					<div x-show="openTab === 2">
 						
-					<!-- <div class="border-t-2 border-green-500 mt-16"></div>   --> 
+					<!-- <div class="border-t-2 border-custom-pink mt-16"></div>   --> 
 		            <div class="mt-5">
 		                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Embed Code</h2>
 		                  <p class="mt-1 text-sm text-gray-500">
 		                    This information will be displayed publicly so be careful what you share.
 		                  </p>
 		            </div>
-		            <div class="border-t-2 border-green-500 "></div>   
+		            <div class="border-t-2 border-custom-pink "></div>   
 	            	<div class="mt-5">
 	                       <div class="mt-1">
 				            <textarea id="about" name="about" rows="4" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="embedlink" ></textarea>
@@ -199,11 +199,11 @@
 			          </div>
     				</div>
 
-    				<div class="border-t-2 border-green-500 mt-16"></div>        
+    				<div class="border-t-2 border-custom-pink mt-16"></div>        
 			        
 		              <div class="mt-3 text-right sm:mt-5 mb-20">
 		              			
-						        <button wire:click="updateEmbed()" class="w-1/4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+						        <button wire:click="updateEmbed()" class="w-1/4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
 						          Update Info
 						        </button>
 			    			
@@ -220,7 +220,7 @@
 		                  <p class="mt-1 text-sm text-gray-500">
 		                    Add a reference for you podcast
 		                  </p>
-		                  <div class="border-t-2 border-green-500 "></div>   
+		                  <div class="border-t-2 border-custom-pink "></div>   
 
 		                  <div class="flex">
 		                  	<div class="mt-5 w-40 mr-5">
@@ -239,13 +239,13 @@
 					        <div class=" w-15 mt-5">
 			                    <label for="email" class="block text-sm font-medium text-gray-700">&nbsp;</label>
 			                    <div class="mt-1">
-			                       <button wire:click="addReference({{ $a_id }})"  class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+			                       <button wire:click="addReference({{ $a_id }})"  class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
 						           Add Reference
 						        </button>
 			                    </div>
 					        </div>
 		                  </div>
-		                   <div class="border-t-2 border-green-500 mt-16"></div>        
+		                   <div class="border-t-2 border-custom-pink mt-16"></div>        
 		                  <div class="mt-5">
 		                  	<h2 class="text-lg leading-6 font-medium text-gray-900"> Reference List</h2>
 		                  	<ul role="list" class="divide-y divide-gray-200">
@@ -278,7 +278,7 @@
 			                  </p>
 			            </div>
 
-				        <div class="border-t-2 border-green-500 ">	
+				        <div class="border-t-2 border-custom-pink ">	
 				        	<div class="mt-5">
 			                    <label for="email" class="block text-sm font-medium text-gray-700">Company Name</label>
 			                    <div class="mt-1">
@@ -317,12 +317,12 @@
 					       
 					      <div class="mt-3 text-right sm:mt-5 mb-5">
 				              			
-								        <button wire:click="addSponsor()" class="w-1/4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+								        <button wire:click="addSponsor()" class="w-1/4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
 								          Add Sponsor
 								        </button>
 							</div>
 
-							 <div class="border-t-2 border-green-500 mt-5"></div>        
+							 <div class="border-t-2 border-custom-pink mt-5"></div>        
 							 <ul role="list" class="divide-y divide-gray-200">
 		                  	 @foreach($audio->get_sponsor as $sponsor )	
 							  <li class="py-4 flex">
@@ -345,7 +345,7 @@
 		                  <p class="mt-1 text-sm text-gray-500">
 		                    Add a affiliate for you podcast
 		                  </p>
-		                  <div class="border-t-2 border-green-500 "></div>   
+		                  <div class="border-t-2 border-custom-pink "></div>   
 
 		                  <div class="flex">
 		                  	<div class="mt-5 w-40 mr-5">
@@ -364,13 +364,13 @@
 					        <div class=" w-15 mt-5">
 			                    <label for="email" class="block text-sm font-medium text-gray-700">&nbsp;</label>
 			                    <div class="mt-1">
-			                       <button wire:click="addAffiliate({{ $a_id }})"  class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+			                       <button wire:click="addAffiliate({{ $a_id }})"  class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
 						           Add Affiliate
 						        </button>
 			                    </div>
 					        </div>
 		                  </div>
-		                   <div class="border-t-2 border-green-500 mt-16"></div>        
+		                   <div class="border-t-2 border-custom-pink mt-16"></div>        
 		                  <div class="mt-5">
 		                  	<h2 class="text-lg leading-6 font-medium text-gray-900"> Affiliate List</h2>
 		                  	<ul role="list" class="divide-y divide-gray-200">
@@ -421,11 +421,11 @@
 
 
 
-<!-- 		  <div class="border-t-2 border-green-500 mt-16"></div>        
+<!-- 		  <div class="border-t-2 border-custom-pink mt-16"></div>        
 			        
               <div class="mt-3 text-right sm:mt-5 mb-20">
               			<input type="text" class="hidden"  wire:model="a_id">
-				        <button wire:click="updatepost()" class="w-1/4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+				        <button wire:click="updatepost()" class="w-1/4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
 				          Update Podcast
 				        </button>
 	    			

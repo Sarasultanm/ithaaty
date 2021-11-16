@@ -39,7 +39,7 @@
              <div 
 			    x-data="{
 			      openTab: 1,
-			      activeClasses: 'border-indigo-500 text-indigo-600',
+			      activeClasses: 'border-custom-pink text-custom-pink',
 			      inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
 			    }" 
 			    class="p-6"
@@ -82,7 +82,7 @@
 			                  </div>
 
 			                  <div class="col-span-4 sm:col-span-4 text-right">
-			                    <button type="submit" class="bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">Update</button>
+			                    <button type="submit" class="bg-custom-pink border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">Update</button>
 			                  </div>
 
 			                </div>
@@ -123,7 +123,7 @@
 			                  </div>
 
 			                  <div class="col-span-4 sm:col-span-4 text-right">
-			                    <button type="submit" class="bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex float-right text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">Update</button>
+			                    <button type="submit" class="bg-custom-pink border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex float-right text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">Update</button>
 			                  </div>
 
 			                </div>
@@ -157,7 +157,7 @@
 			                  </div>
 
 			                  <div class="col-span-4 sm:col-span-2 text-right">
-			                    <button wire:click="loadRss()" class="bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
+			                    <button wire:click="loadRss()" class="bg-custom-pink border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
 			                  Load RSS
 			                </button>
 			                  </div>
