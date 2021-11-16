@@ -7,6 +7,15 @@ use App\Models\UserFriends;
 use Auth;
 class EditorFriends extends Component
 {
+
+
+	public function checkUses($id){
+		
+
+	}
+
+
+
     public function render()
     {
     	$friendList = UserFriends::where('friend_userid',Auth::user()->id)->orWhere('friend_requestid',Auth::user()->id)->get();

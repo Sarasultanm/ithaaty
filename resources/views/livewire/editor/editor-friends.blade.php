@@ -68,6 +68,8 @@
 			      	<div class="grid grid-cols-12 gap-5">
 
 					@foreach($friendList as $friends)
+
+						@if($friends->friend_type == "Friends")
 			            <div class="col-span-4 bg-white p-2 rounded-lg">
 			              <article aria-labelledby="question-title-81614">
 			                <div class="mt-2 text-sm text-gray-700 space-y-4">
@@ -80,7 +82,7 @@
 			                  <div class="flex space-x-3">
 			                    <div class="min-w-0 flex-1">
 			                      <p class="text-md font-bold text-gray-900 mt-2">    	
-			                        <a href="{{ route('editorViewUser',['id' => $friends->get_request_user->id ]) }}" class="hover:underline">{{ $friends->get_request_user->name }}</a>
+			                        <a href="{{ route('editorViewUser',['id' => $friends->get_add_friend->id ]) }}" class="hover:underline">{{ $friends->get_add_friend->name }}</a>
 			                      </p>
 			                      <p class="text-xs text-gray-500">
 			                        <a class="hover:underline">
@@ -93,6 +95,7 @@
 			                </div>
 			              </article>
 			            </div>
+			            @endif
 
              		@endforeach 
 					</div>
@@ -104,6 +107,43 @@
 
 			      	<div class="grid grid-cols-12 gap-5">
 
+			      		@foreach($friendList as $friends)
+
+						@if($friends->friend_type == "Send Request")
+			            <div class="col-span-4 bg-white p-2 rounded-lg">
+			              <article aria-labelledby="question-title-81614">
+			                <div class="mt-2 text-sm text-gray-700 space-y-4">
+			                   <div class="text-white bg-cover h-36">
+			                       <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+			                             
+			                   </div>
+			                </div>
+			                <div>
+			                  <div class="flex space-x-3">
+			                    <div class="min-w-0 flex-1">
+			                      <p class="text-md font-bold text-gray-900 mt-2">  
+			                      @if(Auth::user()->id == $friends->friend_userid )  
+			                      	 <a href="{{ route('editorViewUser',['id' => $friends->get_request_user->id ]) }}" class="hover:underline">{{ $friends->get_request_user->name }}</a>
+				                      </p>
+			                      @else
+				                      <a href="{{ route('editorViewUser',['id' => $friends->get_add_friend->id ]) }}" class="hover:underline">{{ $friends->get_add_friend->name }}</a>
+				                      </p>
+			                      @endif	
+			                       
+			                      <p class="text-xs text-gray-500">
+			                        <a class="hover:underline">
+			                         {{ $friends->friend_type }} 
+			                        </a>
+			                      </p>
+			                    </div>
+			                   
+			                  </div>
+			                </div>
+			              </article>
+			            </div>
+			            @endif
+			            
+             		@endforeach 
 			      
              		</div>
 
