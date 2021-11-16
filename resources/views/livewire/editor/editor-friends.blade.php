@@ -79,8 +79,8 @@
 			                <div>
 			                  <div class="flex space-x-3">
 			                    <div class="min-w-0 flex-1">
-			                      <p class="text-md font-bold text-gray-900 mt-2">
-			                        <a href="#" class="hover:underline">{{ $friends->get_request_user->name }}</a>
+			                      <p class="text-md font-bold text-gray-900 mt-2">    	
+			                        <a href="{{ route('editorViewUser',['id' => $friends->get_request_user->id ]) }}" class="hover:underline">{{ $friends->get_request_user->name }}</a>
 			                      </p>
 			                      <p class="text-xs text-gray-500">
 			                        <a class="hover:underline">
