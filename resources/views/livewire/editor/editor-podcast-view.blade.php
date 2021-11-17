@@ -95,30 +95,16 @@
                             >
                           </p>
                         </video>
-         
-                        @if($newNumAds != 0)
-                        @foreach($newAdsList as $adsl)
-                          
-                            <?php 
-                                  $videlink[] = $adsl->adslist_videolink;
-                                  $skip[] = $adsl->adslist_adstype;
-                                  $displaytime[] = $adsl->adslist_displaytime;
-                             ?>
-
-                          @endforeach
-
                         <script> 
                             var player=videojs('my-video'); 
                             player.nuevo({
-                              // qualityMenu: true,
+                              qualityMenu: true,
                               // buttonRewind: true,
                               // buttonForward: true
                             });
-                      </script> 
-                        @include('layouts.editor.ads-script')
-                        <script src="{{ asset('js/adsScript/'.$newNumAds.'-ads.js' ) }}" ></script> 
+                        </script> 
 
-                        @endif
+                       
 
 
       					@else
