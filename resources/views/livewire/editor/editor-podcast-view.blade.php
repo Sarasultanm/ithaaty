@@ -79,12 +79,10 @@
                           poster="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg"
                            data-setup="{}"
                         >
-                          <source src="{{ $audio->audio_path }}" type="video/mp4" />
-                          <source src="{{ $audio->audio_path }}" type="video/webm" />
-                          <source src="{{ $audio->audio_path }}" type="video/mp4" res="240" label="240p" />
-                          <source src="{{ $audio->audio_path }}" type="video/mp4" res="360" label="360p" />
-                          <source src="{{ $audio->audio_path }}" type="video/mp4" res="480" default label="480p"/>
-                          <source src="{{ $audio->audio_path }}" type="video/mp4" res="720" label="720p"/>
+                          <source src="{{ $audio->audio_path }}" res="240" label="240p" type="video/mp4">
+                          <source src="{{ $audio->audio_path }}" res="360" label="360p" type="video/mp4">
+                          <source src="{{ $audio->audio_path }}" default res="480" label="480p" type="video/mp4">
+                          <source src="{{ $audio->audio_path }}" res="720" label="720p" type="video/mp4">
                           <track kind="chapters" src="https://ithaaty.com/vtt/sample.vtt" srclang="en">
 
                           <!-- <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/mp4" />
@@ -112,8 +110,9 @@
                         <script> 
                             var player=videojs('my-video'); 
                             player.nuevo({
-                            buttonRewind: true,
-                              buttonForward: true
+                              // qualityMenu: true,
+                              // buttonRewind: true,
+                              // buttonForward: true
                             });
                       </script> 
                         @include('layouts.editor.ads-script')
