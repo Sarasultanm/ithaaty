@@ -99,12 +99,26 @@
                             var player=videojs('my-video'); 
                             player.nuevo({
                               qualityMenu: true,
-                              // buttonRewind: true,
-                              // buttonForward: true
+                              buttonRewind: true,
+                              buttonForward: true
                             });
-                        </script> 
+                        </script>
 
-                       
+                        @if($newNumAds != 0)
+                        @foreach($newAdsList as $adsl)
+                          
+                            <?php 
+                                  $videlink[] = $adsl->adslist_videolink;
+                                  $skip[] = $adsl->adslist_adstype;
+                                  $displaytime[] = $adsl->adslist_displaytime;
+                             ?>
+
+                          @endforeach
+
+                        @include('layouts.editor.ads-script')
+                        <script src="{{ asset('js/adsScript/'.$newNumAds.'-ads.js' ) }}" ></script> 
+
+                        @endif
 
 
       					@else
