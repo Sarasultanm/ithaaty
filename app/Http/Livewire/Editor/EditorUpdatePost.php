@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\AudioReferences;
 use App\Models\AudioSponsor;
 use App\Models\AudioAffiliate;
+use App\Models\UserQa;
 use Auth;
 
 use Livewire\WithFileUploads;
@@ -19,7 +20,7 @@ class EditorUpdatePost extends Component
 
 
 	public $audio,$a_id,$title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link,$checkAudio,$status;
-    public $spon_name,$spon_website,$spon_location,$spon_linkloc,$spon_image,$afi_link,$afi_title;
+    public $spon_name,$spon_website,$spon_location,$spon_linkloc,$spon_image,$afi_link,$afi_title,$qa_question;
 	protected $listeners = [
         'refreshParent' =>'$refresh'
         ];
@@ -161,9 +162,12 @@ class EditorUpdatePost extends Component
        $this->ref_title = null;
        $this->ref_link = null;
    }
-    public function clearAfiFields(){
+  public function clearAfiFields(){
        $this->afi_title = null;
        $this->afi_link = null;
+   }
+   public function clearQaFields(){
+       $this->qa_question = null;
    }
 
     public function addReference($audioid){
@@ -199,6 +203,24 @@ class EditorUpdatePost extends Component
         session()->flash('status', 'New Affiliate Added');
 
         $this->clearAfiFields();
+        
+        $this->emit('refreshParent');
+
+        // redirect()->to('editor/podcast/update/'.$this->a_id);  
+
+    }
+
+    public function addQuestion($audioid){
+        
+        $data = new UserQa;
+        $data->qa_audioid = $audioid;
+        $data->qa_question = $this->qa_question;
+        $data->qa_status = "active";
+        $data->save();
+
+        session()->flash('status', 'New Question Added');
+
+        $this->clearQaFields();
         
         $this->emit('refreshParent');
 

@@ -39,7 +39,7 @@ class Audio extends Model
         return $this->hasMany('App\Models\AudioReferences', 'audioref_audioid','id');
     }
 
-     public function get_affiliate(){
+    public function get_affiliate(){
         return $this->hasMany('App\Models\AudioAffiliate', 'audioafi_audioid','id');
     }
 
@@ -47,6 +47,9 @@ class Audio extends Model
         return $this->hasMany('App\Models\AudioSponsor', 'audiospon_audioid','id');
     }
 
+    public function get_question(){
+        return $this->hasMany('App\Models\UserQa', 'qa_audioid','id');
+    }    
 
 
 }

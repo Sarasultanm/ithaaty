@@ -26,14 +26,16 @@ use App\Models\{
     UserComments,
     UserNotifications,
     AdsListSetup,
-    AdsList
+    AdsList,
+    UserQa,
+    UserQanswer
 };
 use Auth;
 
 class EditorPodcastView extends Component
 {
 
-	public $audio,$notes,$comments,$notes_message,$notes_time,$adsList,$numAds,$newAdsList,$newNumAds;
+	public $audio,$notes,$comments,$notes_message,$notes_time,$adsList,$numAds,$newAdsList,$newNumAds,$qa_answer;
 
 
      protected $listeners = [
@@ -181,11 +183,41 @@ class EditorPodcastView extends Component
         }
 
 
-    public function clearFields(){
-            $this->comments = null;     
-    }
+        public function clearFields(){
+                $this->comments = null;     
+        }
 
+        public function saveAnswer($question_id,$audio_id){
 
+             $data = new UserQanswer;
+             $data->qn_qaid = $question_id;
+             $data->qn_audioid = $audio_id;
+             $data->qn_useranswerid = Auth::User()->id;
+             $data->qn_answer = $this->qa_answer;
+             $data->qn_status = "active";
+             $data->save();
+
+             // $notif = new UserNotifications;
+             // $notif->notif_userid = Auth::User()->id;
+             // $notif->notif_type = "like";
+             // $notif->notif_type_id = $data->id;
+             // $notif->notif_message = "You like the audio of";
+             // $notif->status = "active";
+             // $notif->save();
+
+             // $notif1 = new UserNotifications;
+             // $notif1->notif_userid = $audio_editor;
+             // $notif1->notif_type = "liked";
+             // $notif1->notif_type_id = $data->id;
+             // $notif1->notif_message = "Like your audio";
+             // $notif1->status = "active";
+             // $notif1->save();
+            
+            // $this->emit('refreshParent');
+
+            redirect()->to('editor/podcast/view/'.$audio_id); 
+
+        }
 
 
 

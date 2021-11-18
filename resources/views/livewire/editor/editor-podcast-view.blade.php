@@ -290,10 +290,9 @@
                        <!-- <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg> -->
-
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-</svg>
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
                         <span class="font-medium text-gray-900">Add To Playlist</span>
                       </button>
                     </span>
@@ -301,18 +300,27 @@
                     <span class="inline-flex items-center text-sm mr-3" @click="openTab = 2"  :class="openTab === 2 ? activeClasses : inactiveClasses"   >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-						</svg>
+            						  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            						</svg>
                         <span class="font-medium text-gray-900">Notes</span>
                       </button>
                     </span>
 
-             <span class="inline-flex items-center text-sm" @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses" >
+                    <span class="inline-flex items-center text-sm mr-3" @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses" >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-						</svg>
+          						  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          						</svg>
                         <span class="font-medium text-gray-900">References</span>
+                      </button>
+                    </span> 
+
+                     <span class="inline-flex items-center text-sm" @click="openTab = 5" :class="openTab === 5 ? activeClasses : inactiveClasses" >
+                      <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                      </svg>
+                        <span class="font-medium text-gray-900">Questions</span>
                       </button>
                     </span> 
                     
@@ -379,8 +387,8 @@
 		                   <input type="text" name="email" id="email" placeholder="Time" class="flex-1 mr-3 w-20  shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md" wire:model="notes_time" >
 		                  <input type="text" name="email" id="email" placeholder="Notes" class="shadow-sm mr-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="notes_message"  >
 		                  <button wire:click="saveNotes({{ $audio->id }},{{$audio->audio_editor}})" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" >
-							Save
-						  </button>
+							         Save
+						           </button>
 		                </div>
 		                @if($audio->get_notes->count() != 0 )
 
@@ -441,7 +449,7 @@
 		                </div>
 			        </div>
 
-			    </div>
+			     </div>
                 
                        <div x-show="openTab === 4">
              <div class="mt-5">
@@ -503,6 +511,39 @@
               </div>
 
           </div>
+
+          <div x-show="openTab === 5">
+             <div class="mt-5">
+                    <div class="mt-1">
+                    @foreach($audio->get_question as $question)  
+                     <div  x-data="{ open: false }">
+
+                     <div class="bg-gray-100 p-2 rounded-md mb-3 text-sm pointer" @click="open = true">{{ $question->qa_question   }}</div>
+                        <div  x-show="open" @click.away="open = false">
+                            @foreach($question->get_answer as $answerlist)
+                              <div class="bg-gray-100 p-2 rounded-md mb-3 text-xs ml-5">
+                                <p class="font-bold">{{ $answerlist->get_user->name }}</p>
+                                <p>{{ $answerlist->qn_answer }}</p>
+                              </div>
+                             
+                            @endforeach
+                           <div class="my-2 flex">
+                            <input type="text" name="email" id="email" placeholder="Write your answer here" class="shadow-sm mr-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="qa_answer"  >
+                            <button wire:click="saveAnswer({{$question->id}},{{ $question->qa_audioid }})" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-white bg-custom-pink focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" >
+                             Save
+                             </button>
+                        </div>
+                      </div>
+
+                     </div>
+                    @endforeach 
+                    </div>
+              </div>
+
+           </div>
+
+
+
 		       
 		       </div>
 
