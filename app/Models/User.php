@@ -58,6 +58,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Audio', 'audio_editor','id');
     }
     
+    public function get_playlist(){
+        return $this->hasMany('App\Models\UserPlaylist', 'playlist_userid','id');
+    }
 
    
     

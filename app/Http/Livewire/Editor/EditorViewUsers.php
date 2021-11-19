@@ -12,13 +12,15 @@ use App\Models\UserViews;
 use App\Models\UserLikes;
 use App\Models\UserFriends;
 use App\Models\UserNotifications;
+use App\Models\UserPlaylist;
+use App\Models\UserPlaylistItems;
 use Auth;
 
 
 class EditorViewUsers extends Component
 {
 
-    public $userInfo,$userPodcast,$userFav,$userCat,$userFollow,$recentLikes,$checkFollowing,$checkFriend,$getTopView;
+    public $userInfo,$userPodcast,$userFav,$userCat,$userFollow,$recentLikes,$checkFollowing,$checkFriend,$getTopView,$playlist_title,$playlist_status,$playlist_public,$playlist_private;
 
     public function mount($id){
 
@@ -31,6 +33,8 @@ class EditorViewUsers extends Component
         $this->recentLikes = UserLikes::orderBy('id','DESC')->where('like_userid',$id)->take(3)->get();
         $this->checkFollowing = $this->get_if_following($id);
         $this->checkFriend = $this->get_if_friends($id);
+        $this->playlist_public = UserPlaylist::orderBy('id','DESC')->where(['playlist_userid'=>$id,'playlist_status'=>'Public'])->get();
+        $this->playlist_private = UserPlaylist::orderBy('id','DESC')->where(['playlist_userid'=>$id,'playlist_status'=>'Private'])->get();
         // $this->getTopView = UserViews::where('view_ownerid',$id)->orderBy('total','DESC')->groupBy('view_audioid')->selectRaw('count(*) as total, view_audioid')->take(1)->first();
 
     }
@@ -154,6 +158,27 @@ class EditorViewUsers extends Component
 
         }
 	
+
+         public function createPlaylist(){
+
+            $data = new UserPlaylist;
+            $data->playlist_userid = Auth::User()->id;
+            $data->playlist_title = $this->playlist_title;
+            $data->playlist_status = $this->playlist_status;
+            $data->save();
+
+            session()->flash('status', 'New Playlist created');
+            redirect()->to('/editor/users/'.Auth::User()->id);
+
+         }
+
+
+
+
+
+
+
+
 	public function render()
     {	
     	// $categoryList = Category::orderBy('id', 'DESC');

@@ -28,7 +28,9 @@ use App\Models\{
     AdsListSetup,
     AdsList,
     UserQa,
-    UserQanswer
+    UserQanswer,
+    UserPlaylist,
+    UserPlaylistItems
 };
 use Auth;
 
@@ -221,7 +223,18 @@ class EditorPodcastView extends Component
 
 
 
+        public function addToPlaylist($playlist_id,$audio_id,$owner_id){
 
+            $data = new UserPlaylistItems;
+            $data->plitems_userid = Auth::user()->id;
+            $data->plitems_plid = $playlist_id;
+            $data->plitems_audioid = $audio_id;
+            $data->plitems_ownerid = $owner_id;
+            $data->plitems_status = "active";
+            $data->save();
+
+            redirect()->to('editor/podcast/view/'.$audio_id); 
+        }
 
 
 

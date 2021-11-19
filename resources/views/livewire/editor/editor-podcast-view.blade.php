@@ -227,7 +227,7 @@
                 <div class="bg-white  px-2 pt-2 pb-2" 
 			    x-data="{
 			      openTab: 1,
-			      activeClasses: 'border-indigo-500 text-indigo-600',
+			      activeClasses: 'font-bold text-green-600',
 			      inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
 			    }" 
 			  	>
@@ -285,42 +285,42 @@
                   </div>
 
                   <div class="flex text-sm">
-                     <span class="inline-flex items-center text-sm mr-3" >
+                     <span class="inline-flex items-center text-sm mr-3" @click="openTab = 6" :class="openTab === 6 ? activeClasses : inactiveClasses">
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                        <!-- <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg> -->
-                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" :class="openTab === 6 ? activeClasses : inactiveClasses" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span class="font-medium text-gray-900">Add To Playlist</span>
+                        <span class="text-gray-900" :class="openTab === 6 ? activeClasses : inactiveClasses" >Add To Playlist</span>
                       </button>
                     </span>
 
-                    <span class="inline-flex items-center text-sm mr-3" @click="openTab = 2"  :class="openTab === 2 ? activeClasses : inactiveClasses"   >
+                    <span class="inline-flex items-center text-sm mr-3" @click="openTab = 2"   >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                       <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                       <svg class="h-5 w-5" :class="openTab === 2 ? activeClasses : inactiveClasses" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             						  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             						</svg>
-                        <span class="font-medium text-gray-900">Notes</span>
+                        <span class="text-gray-900"  :class="openTab === 2 ? activeClasses : inactiveClasses" >Notes</span>
                       </button>
                     </span>
 
-                    <span class="inline-flex items-center text-sm mr-3" @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses" >
+                    <span class="inline-flex items-center text-sm mr-3" @click="openTab = 3" >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <svg class="h-5 w-5" :class="openTab === 3 ? activeClasses : inactiveClasses"  xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
           						  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           						</svg>
-                        <span class="font-medium text-gray-900">References</span>
+                        <span class="text-gray-900" :class="openTab === 3 ? activeClasses : inactiveClasses" >References</span>
                       </button>
                     </span> 
 
-                     <span class="inline-flex items-center text-sm" @click="openTab = 5" :class="openTab === 5 ? activeClasses : inactiveClasses" >
+                     <span class="inline-flex items-center text-sm" @click="openTab = 5" >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <svg class="h-5 w-5" :class="openTab === 5 ? activeClasses : inactiveClasses"  xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                       </svg>
-                        <span class="font-medium text-gray-900">Q&A</span>
+                        <span class="text-gray-900" :class="openTab === 5 ? activeClasses : inactiveClasses" >Q&A</span>
                       </button>
                     </span> 
                     
@@ -542,6 +542,40 @@
 
            </div>
 
+           <div x-show="openTab === 6">
+             <div class="mt-5">
+                    <div class="grid gap-4 grid-cols-9">
+
+                    @foreach(Auth::User()->get_playlist as $playlist)  
+                      <div class="col-span-3 bg-white p-1 border-2 border-gray-500 rounded-sm">
+                        <div class="mt-2 text-sm text-gray-700 space-y-4">
+                                     <div class="text-white bg-cover h-36">
+                                         <img class="h-full mx-auto my-0" src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg" alt="">        
+                                     </div>  
+                        </div>
+                        <center> 
+                        <p class="text-md font-bold text-gray-900 mt-2">{{ $playlist->playlist_title }}</p> 
+                        @if($playlist->checkPlaylist($audio->id)->count() == 0)
+                        <button wire:click="addToPlaylist({{ $playlist->id }},{{ $audio->id }},{{ $audio->audio_editor }})" type="button" class=" px-2.5 py-1.5 border border-gray-300 text-center w-full shadow-sm text-xs font-medium rounded text-white bg-custom-pink focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" >
+                               Add to Playlist
+                         </button>
+                         @else
+                         <button type="button" class=" px-2.5 py-1.5 border border-gray-300 text-center w-full shadow-sm text-xs font-medium rounded text-white bg-custom-pink focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" >
+                               Added
+                         </button>
+
+                         @endif
+
+
+                         </center>
+                      </div>
+                     
+                    @endforeach 
+                     </div>
+                 
+              </div>
+
+           </div>
 
 
 		       
