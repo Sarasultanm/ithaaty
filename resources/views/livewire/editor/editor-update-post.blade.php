@@ -66,7 +66,7 @@
 				      </li>
 
 				      <li @click="openTab = 6"  :class="openTab === 6 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
-				        <a>Question and Answer</a>
+				        <a>Q&A</a>
 				      </li>
 				    </ul>
 				</div>
