@@ -77,6 +77,9 @@ Route::get('/embed/{id}', [MainController::class, 'viewEmbed']);
 Route::get('/popular', [MainController::class, 'viewPopular'])->name('popular');
 Route::get('/trending', [MainController::class, 'viewTrending'])->name('trending');
 Route::get('/podcaster', [MainController::class, 'viewPodcaster'])->name('podcaster');
+Route::get('/aboutus', [MainController::class, 'viewAboutus'])->name('aboutus');
+Route::get('/advertise', [MainController::class, 'viewAdvertise'])->name('advertise');
+
 
 Route::group(['middleware' => Administrator::class,'prefix'=>'admin'], function(){
 

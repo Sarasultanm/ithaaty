@@ -193,9 +193,9 @@
                  <div class="col-span-1">
                      <ul class="uppercase">
                         <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">Home</a></li>
-                         <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">About Us</a></li>
+                         <li class="inline"><a href="/aboutus" class="text-gray-800 text-sm uppercase font-bold pr-3">About Us</a></li>
                          <li class="inline"><a href="/podcaster" class="text-gray-800 text-sm uppercase font-bold pr-3">Podcaster</a></li>
-                         <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">Ads with Us</a></li>
+                         <li class="inline"><a href="/advertise" class="text-gray-800 text-sm uppercase font-bold pr-3">Advertise With Us</a></li>
                          
                      </ul>
                  </div>

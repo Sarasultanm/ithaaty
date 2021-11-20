@@ -68,6 +68,21 @@ class MainController extends Controller
 		return view('podcaster',compact('randomList','mostlike','podcaster'));
 	}
 
+	public function viewAboutus(){
+
+		$randomList = User::inRandomOrder()->take(3)->get();
+		$mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->get();
+		$podcaster = User::where('roles','editor');
+		return view('about-page',compact('randomList','mostlike','podcaster'));
+	}
+
+	public function viewAdvertise(){
+
+		$randomList = User::inRandomOrder()->take(3)->get();
+		$mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->get();
+		$podcaster = User::where('roles','editor');
+		return view('ads-page',compact('randomList','mostlike','podcaster'));
+	}
 
 
 	public function about(){
