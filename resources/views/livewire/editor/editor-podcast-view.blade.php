@@ -125,7 +125,7 @@
 
       					<div class="audio-embed-container">
       	                   	 <?php echo $audio->audio_path; ?>
-      	                   </div>
+      	        </div>
 
       					@endif
 

@@ -71,11 +71,11 @@
           <!-- <button @click="open = true" class="w-full mb-5 text-center  px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500">
               New Post
             </button>  -->
-        
+          @if(Auth::user()->get_audio->count() != 0 )
          <a href="{{ route('editorPodcastCreate') }}" class="w-full mb-5 text-center  px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white font-bold" style="background-color: #f98b88;">
               New Post 
             </a>
-
+          @endif  
                       <!-- This example requires Tailwind CSS v2.0+ -->
 
             <!--  modal add post -->          
@@ -282,8 +282,8 @@
                     @if($audio->audio_type == "Upload")
 
                      <div class="flex bg-custom-pink p-4 rounded-md">
-                      <div >
-                        <img src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg" style="width:150px;">
+                      <div class="bg-custom-gray">
+                        <img src="{{ asset('images/logo.png') }}" style="width:150px;">
                       </div>
                       <div class="flex-1 pl-5">
                          <p class="text-2xl font-bold text-white">{{ $audio->audio_name }}</p>
@@ -349,9 +349,19 @@
 
                     @else
 
-                     <div class="audio-embed-container">
+                     <!-- <div class="audio-embed-container">
                        <?php echo $audio->audio_path; ?>
-                     </div>
+                     </div> -->
+                     <div class="flex bg-custom-pink p-4 rounded-md">
+                      <div class="bg-custom-gray">
+                        <img src="{{ asset('images/logo.png') }}" style="width:150px;">
+                      </div>
+                      <div class="flex-1 pl-5">
+                         <p class="text-2xl font-bold text-white">{{ $audio->audio_name }}</p>
+                         <p class="text-sm font-medium text-white">{{ $audio->audio_summary }}</p>
+                         <p class="text-sm font-medium text-white mt-5">Season {{ $audio->audio_season }} / Episode {{ $audio->audio_episode }} </p>
+                      </div>
+                    </div>
 
                     @endif 
 
