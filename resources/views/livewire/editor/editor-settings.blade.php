@@ -172,6 +172,7 @@
 				     <section >
 
 				    	<?php $rss_quatity = $rss_data['item_quantity'] ?? 0; ?>
+				    		{{ $rss_data['item_quantity']  }}
 						 <?php for ($i = 0; $i < $rss_quatity; $i++){ ?>
 			            <div class="shadow sm:rounded-md sm:overflow-hidden mt-5">
 			              <div class="bg-white py-6 px-4 sm:p-6">
