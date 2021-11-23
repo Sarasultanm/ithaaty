@@ -121,7 +121,7 @@ class EditorDashboard extends Component
              $data = new UserFollow;
              $data->follow_userid = Auth::User()->id;
              $data->follow_userfollowing = $id;
-             $data->follow_type = "request";
+             $data->follow_type = "follow";
              $data->follow_status = "active";
              $data->save();
 
