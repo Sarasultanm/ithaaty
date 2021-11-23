@@ -383,7 +383,7 @@
             <div x-show="openTab === 4">
                <div class="grid gap-4 grid-cols-10">
 
-                  <div class="col-span-7">
+                  <div class="col-span-10">
                     <div class=" w-full ">
                          <h1 class="font-bold text-gray-800 text-xl">My Playlist</h1> 
                     </div> 
@@ -407,11 +407,11 @@
                   </div>
 
                    <div x-show="openTab === 10">
-                     <div class="grid gap-4 grid-cols-9">
+                     <div class="grid gap-4 grid-cols-8">
                         @foreach($userInfo->get_playlist as $playlist)
                           @if($playlist->playlist_status == "Public")
                           
-                              <div class="col-span-3 bg-white p-2 ">
+                              <div class="col-span-2 bg-white p-2 ">
                                  <a href="{{ route('editorPlaylist',['id' => $playlist->id ]) }}" class="pointer">
                                   <div class="mt-2 text-sm text-gray-700 space-y-4">
                                      <div class="text-white bg-cover h-36">
@@ -441,11 +441,11 @@
                     </div>
 
                     <div x-show="openTab === 20">
-                       <div class="grid gap-4 grid-cols-9">
+                       <div class="grid gap-4 grid-cols-8">
                         @if(Auth::user()->id == $userInfo->id )
                         @foreach($userInfo->get_playlist as $playlist)
                           @if($playlist->playlist_status == "Private")
-                          <div class="col-span-3 bg-white p-2 ">
+                          <div class="col-span-2 bg-white p-2 ">
                             <a href="{{ route('editorPlaylist',['id' => $playlist->id ]) }}" class="pointer">
                               <div class="mt-2 text-sm text-gray-700 space-y-4">
                                  <div class="text-white bg-cover h-36">
@@ -489,33 +489,7 @@
                   </div>
 
 
-                  <div class="col-span-3">
-                     @if(Auth::user()->id == $userInfo->id )
-                        <div class=" bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
-                          <div class="pb-5">
-                              <h3 class="font-bold text-gray-900">Create a Playlist</h3>
-                              <div class="mt-1">
-                                    <label for="email" class="block text-sm font-medium text-gray-700">Title</label>
-                                    <div class="mt-1">
-                                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="playlist_title">
-
-                                    </div>
-                              </div>
-                              <div class="mt-1">
-                                <label for="email" class="block text-sm font-medium text-gray-700">Status</label>
-                                          <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="playlist_status">
-                                            <option>Select</option>
-                                            <option value="Public">Public</option>
-                                            <option value="Private">Private</option>
-                                     </select> 
-
-
-                              </div>
-                               <button wire:click="createPlaylist()" class="bg-custom-pink w-full block text-center px-2 py-2 border border-gray-300 shadow-sm text-sm font-bold text-white mt-2">Save</button>
-                          </div>
-                        </div>
-                      @endif
-                  </div>
+                  
 
                </div>
             

@@ -57,7 +57,7 @@
 			      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
 			        <a>Followers</a>
 			      </li>
-			      <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
+			     <!--  <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
 			        <a>Request 
 			        	@if($request->count() != 0)
 			        	<span class="inline-flex items-center justify-center px-2 py-1 ml-2 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">{{ $request->count() }}</span>
@@ -66,7 +66,7 @@
 			      </li>
 			      <li @click="openTab = 4" :class="openTab === 4 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
 			        <a>Rejected </a>
-			      </li>
+			      </li> -->
 			    </ul>
 			  </div>
 			
