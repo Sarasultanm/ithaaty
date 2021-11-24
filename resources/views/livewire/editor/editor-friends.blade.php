@@ -35,7 +35,9 @@
            <div class="w-full ">
           	 <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
           </div>
-          
+          	<div class=" w-full ">
+                <h1 class="font-bold text-gray-800 text-xl">Friends</h1> 
+         	</div> 
           <!-- This example requires Tailwind CSS v2.0+ -->
 			
 			<div class="grid grid-cols-12 mt-5 gap-5">

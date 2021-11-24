@@ -37,7 +37,9 @@
           </div>
           
           <!-- This example requires Tailwind CSS v2.0+ -->
-			<p class="text-base font-normal text-gray-900"> Notes</p>
+			<div class=" w-full ">
+                <h1 class="font-bold text-gray-800 text-xl">Notes</h1> 
+         </div> 
 
 				<div class="grid grid-cols-12 mt-5 gap-5">
 					<div class="col-span-12">

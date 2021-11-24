@@ -31,7 +31,9 @@
           <!-- <div class="mb-5 w-full ">
           	 <h1 class="font-bold text-gray-800 text-xl">Overview</h1> 
           </div> -->
-
+           <div class=" w-full ">
+                <h1 class="font-bold text-gray-800 text-xl">Analytics</h1> 
+         </div> 
            <div class="w-full ">
           	 <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
           </div>

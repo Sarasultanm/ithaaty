@@ -32,6 +32,9 @@
              <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
         </div>
 
+        <div class=" w-full ">
+                <h1 class="font-bold text-gray-800 text-xl">My Podcast</h1> 
+         </div> 
         <!--  updated -->
         <div class="grid grid-cols-12 mt-5 gap-5">
 

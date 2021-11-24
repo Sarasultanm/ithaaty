@@ -135,7 +135,7 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 
 	Route::get('playlist/{id}',EditorPlaylist::class)->name('editorPlaylist');
 	Route::get('playlist',EditorPlaylistDetails::class)->name('editorPlaylistDetails');
-
+	Route::get('following',EditorFollowing::class)->name('editorFollowing');
 });
 
 
