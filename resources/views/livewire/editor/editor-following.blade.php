@@ -80,6 +80,7 @@
 
 					@foreach($following->get() as $follow)
 			            <div class="col-span-2 bg-white p-2 rounded-lg">
+			            	<a href="{{ route('editorViewUser',['id' => $follow->follow_userfollowing ]) }}">
 			              <article aria-labelledby="question-title-81614">
 			                <div class="mt-2 text-sm text-gray-700 space-y-4">
 			                   <div class="text-white bg-cover h-36">
@@ -103,6 +104,7 @@
 			                  </div>
 			                </div>
 			              </article>
+			          </a>
 			            </div>
 
              		@endforeach 
