@@ -127,28 +127,36 @@ class EditorUpdatePost extends Component
 
         if(Auth::user()->id == $data->audio_editor){
 
-            $spon = new AudioSponsor;
-            $spon->audiospon_userid = Auth::user()->id;
-            $spon->audiospon_audioid = $this->a_id;
-            $spon->audiospon_name = $this->spon_name;
-            $spon->audiospon_website = $this->spon_website;
-            $spon->audiospon_location = $this->spon_location;
-            $spon->audiospon_linktolocation = $this->spon_linkloc;
-            $spon->audiospon_imgpath = $this->spon_image->hashName();
-            $spon->audiospon_appearancetype = "empty";
-            $spon->audiospon_min1 = "empty";
-            $spon->audiospon_min2 = "empty";
-            $spon->audiospon_status = "empty";
-            $spon->save();  
+            if($this->spon_image){ 
 
+                $spon = new AudioSponsor;
+                $spon->audiospon_userid = Auth::user()->id;
+                $spon->audiospon_audioid = $this->a_id;
+                $spon->audiospon_name = $this->spon_name;
+                $spon->audiospon_website = $this->spon_website;
+                $spon->audiospon_location = $this->spon_location;
+                $spon->audiospon_linktolocation = $this->spon_linkloc;
+                $spon->audiospon_imgpath = $this->spon_image->hashName();
+                $spon->audiospon_appearancetype = "empty";
+                $spon->audiospon_min1 = "empty";
+                $spon->audiospon_min2 = "empty";
+                $spon->audiospon_status = "empty";
+                $spon->save();  
 
-            $imagefile = $this->spon_image->hashName();
-            $path = $this->spon_image->storeAs('sponsor',$imagefile);
+                $imagefile = $this->spon_image->hashName();
+                $path = $this->spon_image->storeAs('sponsor',$imagefile);
 
-    
-         session()->flash('status', 'Added new Sponsor');
+                session()->flash('status', 'Added new Sponsor');
 
-         redirect()->to('editor/podcast/update/'.$this->a_id);   
+                redirect()->to('editor/podcast/update/'.$this->a_id); 
+
+            }else{
+
+                session()->flash('status', 'Sponsor Image not loaded');
+
+                redirect()->to('editor/podcast/update/'.$this->a_id); 
+
+            }
 
         }else{
           redirect()->to('editor/dashboard');       

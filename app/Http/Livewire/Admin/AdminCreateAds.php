@@ -16,27 +16,39 @@ class AdminCreateAds extends Component
 
 	public function saveData(){
 
-		$data = new Ads;
-		$data->ads_name = $this->company_name;
-		$data->ads_website = $this->company_web;
-		$data->ads_location = $this->company_location;
-		$data->ads_linktolocation = "empty";
-		$data->ads_logo = $this->company_file->hashName();
-		$data->ads_status = "empty";
-		$data->ads_ownerid = 1;
-		$data->ads_filetype = "empty";
-		$data->ads_filelink = "empty";
-		$data->ads_filepath = "empty";
-		$data->save();
+		if($this->company_file){ 
 
-		$imagefile = $this->company_file->hashName();
-        $path = $this->company_file->storeAs('samplestorage',$imagefile);
+			$data = new Ads;
+			$data->ads_name = $this->company_name;
+			$data->ads_website = $this->company_web;
+			$data->ads_location = $this->company_location;
+			$data->ads_linktolocation = "empty";
+			$data->ads_logo = $this->company_file->hashName();
+			$data->ads_status = "empty";
+			$data->ads_ownerid = 1;
+			$data->ads_filetype = "empty";
+			$data->ads_filelink = "empty";
+			$data->ads_filepath = "empty";
+			$data->save();
+
+			$imagefile = $this->company_file->hashName();
+	        $path = $this->company_file->storeAs('samplestorage',$imagefile);
 
 
-        session()->flash('status', 'Added new Company');
+	        session()->flash('status', 'Added new Company');
 
-        redirect()->to('admin/ads/');   
+	        redirect()->to('admin/ads/');   
 
+
+		}else{
+
+			session()->flash('status', 'Company image not loaded');
+
+	        redirect()->to('admin/ads/');  
+
+		}
+
+		
 
 	}
 

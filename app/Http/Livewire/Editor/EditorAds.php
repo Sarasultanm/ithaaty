@@ -20,24 +20,34 @@ class EditorAds extends Component
 
 	public function saveAds(){
 
-		$data = new Ads;
-        $data->ads_name = $this->ads_name;
-        $data->ads_website = $this->ads_website;
-        $data->ads_location = $this->ads_location;
-        $data->ads_linktolocation = "none";
-        $data->ads_logo = $this->ads_logo->hashName();
-        $data->ads_status = "Pending";
-        $data->ads_ownerid = Auth::user()->id;
-        $data->ads_filetype = "link";
-        $data->ads_filelink = $this->ads_file;
-        $data->ads_filepath = "none";
-        $data->save();  
+        if($this->ads_logo){ 
 
-        $imagefile = $this->ads_logo->hashName();
-        $path = $this->ads_logo->storeAs('ads/company',$imagefile);
+            $data = new Ads;
+            $data->ads_name = $this->ads_name;
+            $data->ads_website = $this->ads_website;
+            $data->ads_location = $this->ads_location;
+            $data->ads_linktolocation = "none";
+            $data->ads_logo = $this->ads_logo->hashName();
+            $data->ads_status = "Pending";
+            $data->ads_ownerid = Auth::user()->id;
+            $data->ads_filetype = "link";
+            $data->ads_filelink = $this->ads_file;
+            $data->ads_filepath = "none";
+            $data->save();  
 
-        session()->flash('status', 'Please wait for the admin confirmation about your company');
-        redirect()->to('editor/ads');   
+            $imagefile = $this->ads_logo->hashName();
+            $path = $this->ads_logo->storeAs('ads/company',$imagefile);
+
+            session()->flash('status', 'Please wait for the admin confirmation about your company');
+            redirect()->to('editor/ads');   
+
+        }else{
+
+            session()->flash('status', 'Ads Image not loaded');
+            redirect()->to('editor/ads');  
+        }
+
+		
 	}
 
     public function addAdsList($id){
