@@ -52,9 +52,11 @@
         </div>
 
             <div x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false"  class="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
-	          <a href="#" class="text-sm font-medium text-gray-900 hover:underline">
-	           <!--  Go Premium --> {{ Auth::user()->name }}
- 	          </a>
+	          <p class="text-sm font-medium text-gray-900 text-right">
+	           {{ Auth::user()->name }}<br>
+             <span class="text-gray-500 text-xs">{{ Auth::user()->email }}</span>
+ 	          </p>
+
           <a href="#" class="ml-5 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500">
             <span class="sr-only">View notifications</span>
             <!-- Heroicon name: outline/bell -->

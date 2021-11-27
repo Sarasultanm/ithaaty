@@ -57,7 +57,10 @@
 			        <a>Friend</a>
 			      </li>
 			      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
-			        <a>Friend Request</a>
+			        <a>Confirm Request</a>
+			      </li>
+			       <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
+			        <a>Sending Request</a>
 			      </li>
 
 
@@ -71,32 +74,64 @@
 
 					@foreach($friendList as $friends)
 
+
+						@if($friends->friend_status == "active")
+
 						@if($friends->friend_type == "Friends")
-			            <div class="col-span-4 bg-white p-2 rounded-lg">
-			              <article aria-labelledby="question-title-81614">
-			                <div class="mt-2 text-sm text-gray-700 space-y-4">
-			                   <div class="text-white bg-cover h-36">
-			                       <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-			                             
-			                   </div>
-			                </div>
-			                <div>
-			                  <div class="flex space-x-3">
-			                    <div class="min-w-0 flex-1">
-			                      <p class="text-md font-bold text-gray-900 mt-2">    	
-			                        <a href="{{ route('editorViewUser',['id' => $friends->get_add_friend->id ]) }}" class="hover:underline">{{ $friends->get_add_friend->name }}</a>
-			                      </p>
-			                      <p class="text-xs text-gray-500">
-			                        <a class="hover:underline">
-			                         {{ $friends->friend_type }} 
-			                        </a>
-			                      </p>
-			                    </div>
-			                   
-			                  </div>
-			                </div>
-			              </article>
-			            </div>
+
+
+			            <div class="col-span-4 p-2 rounded-lg">
+			            	 @if(Auth::user()->id == $friends->friend_userid )  
+				              <a href="{{ route('editorViewUser',['id' => $friends->get_request_user->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
+				              @else
+				               <a href="{{ route('editorViewUser',['id' => $friends->get_add_friend->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
+				              @endif
+				                <div class="mt-2 text-sm text-gray-700 space-y-4">
+				                   <div class="text-white bg-cover h-36">
+				                       <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">    
+				                   </div>
+				                </div>
+				                <div>
+				                  <div class="flex space-x-3">
+				                    <div class="min-w-0 flex-1">
+			                    	@if(Auth::user()->id == $friends->friend_userid )
+				                      <p class="text-md font-bold text-gray-900 mt-2 text-center">  
+				                      	{{ $friends->get_request_user->name }} 
+					                  </p>
+					                  <p class="text-xs font-regular text-gray-500  text-center">  
+				                      	{{ $friends->get_request_user->email }}
+					                  </p>
+					                @else
+					                 <p class="text-md font-bold text-gray-900 mt-2 text-center">  
+				                      	{{ $friends->get_add_friend->name }}
+					                  </p>
+					                  <p class="text-xs font-regular text-gray-500  text-center">  
+				                      	{{ $friends->get_add_friend->email }}
+					                  </p>
+					                @endif  
+
+					                  @if(Auth::user()->id == $friends->friend_userid )
+				                      <p class="my-2 text-center">
+				                        <button wire:click="removeFriend({{ $friends->get_request_user->id }})" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
+				                         Remove as Friend
+				                        </button>
+				                      </p>
+				                      @else
+				                      <p class="my-2 text-center">
+				                      <!--   <button wire:click="removeFriend({{ $friends->get_add_friend->id }})" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
+				                         Remove as Friend
+				                        </button> -->
+				                      </p>
+				                      @endif 
+				                    </div>
+				                   
+				                  </div>
+				                </div>
+				              </a>
+				            </div>
+
+				           @endif
+
 			            @endif
 
              		@endforeach 
@@ -109,48 +144,91 @@
 
 			      	<div class="grid grid-cols-12 gap-5">
 
-			      		@foreach($friendList as $friends)
+			      		@foreach($confirmrequest as $friend)
 
-						@if($friends->friend_type == "Send Request")
-			            <div class="col-span-4 bg-white p-2 rounded-lg">
-			              <article aria-labelledby="question-title-81614">
-			                <div class="mt-2 text-sm text-gray-700 space-y-4">
-			                   <div class="text-white bg-cover h-36">
-			                       <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-			                             
-			                   </div>
-			                </div>
-			                <div>
-			                  <div class="flex space-x-3">
-			                    <div class="min-w-0 flex-1">
-			                      <p class="text-md font-bold text-gray-900 mt-2">  
-			                      @if(Auth::user()->id == $friends->friend_userid )  
-			                      	 <a href="{{ route('editorViewUser',['id' => $friends->get_request_user->id ]) }}" class="hover:underline">{{ $friends->get_request_user->name }}</a>
+							@if($friend->friend_type == "Send Request")
+
+				            <div class="col-span-4 p-2 rounded-lg">
+				              <a href="{{ route('editorViewUser',['id' => $friend->get_add_friend->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
+				                <div class="mt-2 text-sm text-gray-700 space-y-4">
+				                   <div class="text-white bg-cover h-36">
+				                       <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">    
+				                   </div>
+				                </div>
+				                <div>
+				                  <div class="flex space-x-3">
+				                    <div class="min-w-0 flex-1">
+				                      <p class="text-md font-bold text-gray-900 mt-2 text-center">  
+				                      	{{ $friend->get_add_friend->name }}
+					                  </p>
+					                  <p class="text-xs font-regular text-gray-500  text-center">  
+				                      	{{ $friend->get_add_friend->email }}
+					                  </p>
+				                      <p class="my-2 text-center">
+				                        <button wire:click="confirmFriend({{ $friend->get_add_friend->id }})" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
+				                         Confirm Request
+				                        </button>
 				                      </p>
-			                      @else
-				                      <a href="{{ route('editorViewUser',['id' => $friends->get_add_friend->id ]) }}" class="hover:underline">{{ $friends->get_add_friend->name }}</a>
-				                      </p>
-			                      @endif	
-			                       
-			                      <p class="text-xs text-gray-500">
-			                        <a class="hover:underline">
-			                         {{ $friends->friend_type }} 
-			                        </a>
-			                      </p>
-			                    </div>
-			                   
-			                  </div>
-			                </div>
-			              </article>
-			            </div>
-			            @endif
-			            
-             		@endforeach 
+				                    </div>
+				                   
+				                  </div>
+				                </div>
+				              </a>
+				            </div>
+
+				            @endif
+				            
+	             		@endforeach 
 			      
              		</div>
 
 			      </div>
 
+
+			         <div x-show="openTab === 3">
+			      	
+
+			      	<div class="grid grid-cols-12 gap-5">
+
+				      	@foreach($friendrequest as $requestfriend)
+
+							@if($requestfriend->friend_type == "Send Request")
+				             <div class="col-span-4 p-2 rounded-lg">
+				              <a href="{{ route('editorViewUser',['id' => $requestfriend->get_request_user->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
+				                <div class="mt-2 text-sm text-gray-700 space-y-4">
+				                   <div class="text-white bg-cover h-36">
+				                       <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">    
+				                   </div>
+				                </div>
+				                <div>
+				                  <div class="flex space-x-3">
+				                    <div class="min-w-0 flex-1">
+				                      <p class="text-md font-bold text-gray-900 mt-2 text-center">  
+				                      	{{ $requestfriend->get_request_user->name }}
+					                  </p>
+					                  <p class="text-xs font-regular text-gray-500  text-center">  
+				                      	{{ $requestfriend->get_request_user->email }}
+					                  </p>
+				                      <p class="my-2 text-center">
+				                       <!--  <button wire:click="cancelRequest({{ $requestfriend->get_request_user->id }})" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
+				                        Cancel Request
+				                        </button> -->
+				                      </p>
+				                    </div>
+				                   
+				                  </div>
+				                </div>
+				              </a>
+				            </div>
+
+
+				            @endif
+				            
+	             		@endforeach 
+			      
+             		</div>
+
+			      </div>
 			     
 
 

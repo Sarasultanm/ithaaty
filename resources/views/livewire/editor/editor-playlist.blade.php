@@ -48,7 +48,7 @@
 	           <div class="col-span-8">
 	            	<p class="text-md font-regular text-white mt-2">{{ $playlist->playlist_status }} Playlist</p>
 	            	<p class="text-6xl font-bold text-white mt-2 mb-5">{{ $playlist->playlist_title }} </p>
-	            	<p class="text-white mt-2"><span class="text-xs font-bold ">{{ $playlist->get_user->name }}</span> , <span class="text-xs font-regular ">{{ $playlist->get_playlistItems->count() }} song</span> </p>
+	            	<p class="text-white mt-2"><span class="text-xs font-bold ">{{ $playlist->get_user->name }}</span> , <span class="text-xs font-regular ">{{ $playlist->get_playlistItems->count() }} podcast</span> </p>
 	            </div>
 	        </div>
 
@@ -92,25 +92,28 @@
 					          </thead>
 					          <tbody class="bg-white divide-y divide-gray-200">
 					          	@foreach($playlist->get_playlistItems as $playlistItems)
-					            <tr>
-					            <td class="px-6 py-4 whitespace-nowrap">
-					              	 <div class="text-sm font-bold text-gray-500">#</div>
-					              </td>
-					              <td class="px-6 py-4 whitespace-nowrap">
-					                <div class="flex items-center">
-					                  <div class="flex-shrink-0 h-10 w-10">
-					                    <img class="h-10 w-10 " src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg" alt="">
-					                  </div>
-					                  <div class="ml-4">
-					                    <div class="text-sm font-medium text-gray-900">
-					                      {{ $playlistItems->get_audio->audio_name }}
-					                    </div>
-					                    <div class="text-sm text-gray-500">
-					                     <strong>{{ $playlistItems->get_user->name }}</strong>
-					                    </div>
-					                  </div>
-					                </div>
-					              </td>
+					            <tr class="a">
+					     
+					            	<td class="px-6 py-4 whitespace-nowrap ">
+					              		 <div class="text-sm font-bold text-gray-500">#</div>
+					             	 </td>
+						              <td class="px-6 py-4 whitespace-nowrap">
+						              	<a href="{{ route('editorPodcastView',['id' => $playlistItems->get_audio->id ]) }}" target="_blank" class="pointer">
+						                <div class="flex items-center">
+						                  <div class="flex-shrink-0 h-10 w-10">
+						                    <img class="h-10 w-10 " src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg" alt="">
+						                  </div>
+						                  <div class="ml-4">
+						                    <div class="text-sm font-medium text-gray-900">
+						                      {{ $playlistItems->get_audio->audio_name }}
+						                    </div>
+						                    <div class="text-sm text-gray-500">
+						                     <strong>{{ $playlistItems->get_user->name }}</strong>
+						                    </div>
+						                  </div>
+						                </div>
+						            	</a>
+						              </td>
 					              <!-- <td class="px-6 py-4 whitespace-nowrap">
 					              
 					                <div class="text-sm text-gray-500"></div>
@@ -118,10 +121,10 @@
 					              <!-- <td class="px-6 py-4 whitespace-nowrap">
 					              	 <div class="text-sm font-bold text-gray-500">asdasd</div>
 					              </td> -->
-					              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-					             	12/12/12
-					               
-					              </td>
+						              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+						             	12/12/12
+						               
+						              </td>
 					             <!--  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 					                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
 					              </td> -->

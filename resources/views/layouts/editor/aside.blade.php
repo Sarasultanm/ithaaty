@@ -15,16 +15,17 @@
                     @foreach($randomList as $randomUsers)
 
                     @if( EditorDashboard::checkFollow($randomUsers->id) == 0 )
-                    <li class="flex items-center py-4 space-x-3">
+                    <li>
+                      <a href="{{ route('editorViewUser',['id' => $randomUsers->id]) }}" class="flex items-center py-4 space-x-3 pointer hover:bg-gray-100">
                       <div class="flex-shrink-0">
                         <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                       </div>
                       <div class="min-w-0 flex-1">
                         <p class="text-sm font-medium text-gray-900">
-                          <a href="#">{{ $randomUsers->name }}</a>
+                        {{ $randomUsers->name }}
                         </p>
                         <p class="text-sm text-gray-500">
-                          <a href="#">{{ $randomUsers->email }}</a>
+                         {{ $randomUsers->email }}
                         </p>
                       </div>
                       <div class="flex-shrink-0">
@@ -38,6 +39,7 @@
                           </span>
                         </button>
                       </div>
+                      </a>
                     </li>
                     @endif
                     @endforeach

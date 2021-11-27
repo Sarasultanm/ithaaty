@@ -9,7 +9,7 @@ class UserFriends extends Model
 {
     use HasFactory;
 
-     public function get_request_user(){
+    public function get_request_user(){
         return $this->belongsTo('App\Models\User', 'friend_requestid', 'id');
     }
 

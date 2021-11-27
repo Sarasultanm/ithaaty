@@ -29,5 +29,9 @@ class UserNotifications extends Model
          return $this->belongsTo('App\Models\User', 'notif_userid', 'id'); 
     }
 
+    public function get_friend_info(){
+        return $this->belongsTo('App\Models\UserFriends', 'notif_type_id', 'id');
+    }
 
+    
 }
