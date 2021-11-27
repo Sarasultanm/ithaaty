@@ -112,9 +112,9 @@
 
 					                  @if(Auth::user()->id == $friends->friend_userid )
 				                      <p class="my-2 text-center">
-				                        <button wire:click="removeFriend({{ $friends->get_request_user->id }})" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
+				                       <!--  <button wire:click="removeFriend({{ $friends->get_request_user->id }})" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
 				                         Remove as Friend
-				                        </button>
+				                        </button> -->
 				                      </p>
 				                      @else
 				                      <p class="my-2 text-center">
