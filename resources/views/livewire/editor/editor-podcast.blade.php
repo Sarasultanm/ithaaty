@@ -32,13 +32,23 @@
              <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
         </div>
 
-        <div class=" w-full ">
-                <h1 class="font-bold text-gray-800 text-xl">My Podcast</h1> 
+        <div class=" w-full flex">
+            <div class="flex-1">
+               <h1 class="font-bold text-gray-800 text-xl">My Podcast</h1> 
+            </div>
+            <div>
+                @if(Auth::user()->get_audio->count() != 0)
+                <a href="{{ route('editorPodcastCreate') }}" class=" inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Add Podcast</a>
+                @endif
+            </div>
+               
+              
          </div> 
         <!--  updated -->
         <div class="grid grid-cols-12 mt-5 gap-5">
-
-          <div class="col-span-8">
+         @if(Auth::user()->get_audio->count() != 0)
+        <!-- col-8 -->
+        <div class="col-span-8">
 
            <div class="grid gap-4 grid-cols-12">
 
@@ -104,154 +114,150 @@
 
 
 
+              </div>
+       
+      </div>
+      <!-- col-8 -->
 
-
-
-
-
-
-     <!--        @foreach($audioList->get() as $myaudio)
-
-            <div class="col-span-4 bg-white p-2 mt-10">
-              <article aria-labelledby="question-title-81614">
-               <div>
-                  <div class="flex space-x-3">
-                    <div class="min-w-0 flex-1">
-                      <p class="text-md font-bold text-gray-900">
-                        <a href="#" class="hover:underline">{{ $myaudio->audio_name }}</a>
-                      </p>
+      <!-- col-4 -->
+      <div class="col-span-4">
+          <aside >
+                <div class=" bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
+                  <div class="pb-5 space-y-6">
+                        <h3 class="font-medium text-gray-900">Favorites</h3>
+                        <ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
+                            @foreach($favorite->get() as $fav)
+                            <li class="py-3 flex justify-between items-center">
+                              <div class="flex items-center">
+                                <img src="{{ asset('images/slider-img/slide1.jpg') }}" alt="" class="w-8 h-8 ">
+                                <div class="ml-4 ">
+                                   <p class="text-sm font-medium text-gray-900">{{ $fav->get_audio->audio_name }}</p>
+                                   <p class="text-sm text-gray-500">{{ $fav->get_audio->get_user->email }}</p>
+                                </div>
+                              </div>
+                              <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500"></p>
+                            </li>
+                           @endforeach
+                        </ul>
                     </div>
-                  </div>
-                </div>
-                <div class="mt-2 text-sm text-gray-700 space-y-4">
-                   <div class="text-white bg-cover h-36" style="background-image: url('{{ asset('images/slider-img/slide1.jpg') }}');">    
-                   </div>
                 </div>
 
-                <div>
-                  <div class="flex space-x-3">
-                    <div class="min-w-0 flex-1">                      
-                      <p class="text-xs text-gray-500 mt-2">
-                        <a class="hover:underline">
-                          <?php $date = date_create($myaudio->created_at); ?>
-                          <time datetime="2020-12-09T11:43:00">{{ date_format($date,"M, Y") }}</time>  <span class="float-left">SE:{{ $myaudio->audio_season }} | EP:{{ $myaudio->audio_episode }}</span>
-                        </a>
-                      </p>
-                   
-                      <div class="text-xs font-bold text-gray-900 mt-5">
-                       
-                        <a href="{{ route('editorPodcastUpdate',['id' => $myaudio->id]) }}"  class="hover:underline">Update</a>
-                        <a href="{{ route('editorPodcastDetails',['id' => $myaudio->id]) }}" class="hover:underline float-right" >Details</a>
+                <div class="mt-5 bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
+                  <div class="pb-5 space-y-6">
+                        <h3 class="font-medium text-gray-900">Categories</h3>
+                        <ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
+                            @foreach($categoryList->get() as $category)
+                            <li class="py-3 flex justify-between items-center" >
+                              <a href="#{{ $category->category_name }}-{{ $category->id }}">
+                              <div class="flex items-center">
+                                <img src="{{ asset('images/slider-img/slide1.jpg') }}" alt="" class="w-8 h-8 ">
+                                <div class="ml-4 ">
+                                   <p class="text-sm font-medium text-gray-900">{{ $category->category_name }}</p>
+                                   <!-- <p class="text-sm text-gray-500">Guest: user@gmail.com</p> -->
+                                </div>
+                              </div>
+                              <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500"></p>
+                            </a>
+                            </li>
+                           @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </aside> 
+        </div>  
+        <!-- col-4 -->
+        @else
+
+        <div class="col-span-12">
+
+
+                  <div class="shadow sm:rounded-md sm:overflow-hidden">
+                    <div class="bg-white py-6 px-4 sm:p-6">
+                      <div>
+                        <h2 id="payment_details_heading" class="text-lg leading-6 font-medium text-gray-900">RSS Link</h2>
+                        <p class="mt-1 text-sm text-gray-500">Your RSS feed allows your podcast to appear in other podcast apps, in some cases automatically.</p>
+                      </div>
+
+                      <div class="mt-6 grid grid-cols-4 gap-6">
+                        <div class="col-span-4 sm:col-span-2">
+                          <input wire:model="rss_link" type="text" name="first_name" id="first_name" autocomplete="cc-given-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-2 text-right">
+                          <button wire:click="loadRss()" class="bg-custom-pink border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white">
+                        Load RSS
+                      </button>
+                        </div>
 
                       </div>
                     </div>
                    
                   </div>
-                </div>
 
-              </article>
-            </div>
+                 <section >
+
+                  <?php $rss_quatity = $rss_data['item_quantity'] ?? 0; ?>
+             
+                 <?php for ($i = 0; $i < $rss_quatity; $i++){ ?>
+                      <div class="shadow sm:rounded-md sm:overflow-hidden mt-5">
+                        <div class="bg-white py-6 px-4 sm:p-6">
+                          <div class="grid grid-cols-4 gap-6">
+                            <div class="col-span-1 ">
+                              <img class="w-full h-auto " loading="lazy" src="{{ $rss_data['image_url'] ?? ''  }}" alt="">
+                            </div>
+                            <div class="col-span-3 text-left relative">
+                                <h2 class="text-lg leading-6 font-bold text-gray-900">{{ $rss_data["items"][$i]['title'] ?? ''  }}</h2>
+                                <p class="mt-1 text-sm text-gray-500">Author : {{ $rss_data["author"] ?? ''  }}</p>
+                                <p class="mt-5 text-md text-gray-500">{{ $rss_data["items"][$i]['description'] ?? ''  }}</p>
+                                <div class="mt-5 mb-5">
+                     
+                    </div>
+
+                      
+                            </div>
 
 
-
-
-             @endforeach -->
-
-              </div>
-       
-
-
-
-
-
-
-
-
-          </div>
-
-          <div class="col-span-4">
-            
-        <aside >
-
-          <div class=" bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
-            
-            <div class="pb-5 space-y-6">
-                  <h3 class="font-medium text-gray-900">Favorites</h3>
-                  <ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
-                      @foreach($favorite->get() as $fav)
-                      <li class="py-3 flex justify-between items-center">
-                        <div class="flex items-center">
-                          <img src="{{ asset('images/slider-img/slide1.jpg') }}" alt="" class="w-8 h-8 ">
-                          <div class="ml-4 ">
-                             <p class="text-sm font-medium text-gray-900">{{ $fav->get_audio->audio_name }}</p>
-                             <p class="text-sm text-gray-500">{{ $fav->get_audio->get_user->email }}</p>
                           </div>
                         </div>
-                        <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500"></p>
-                      </li>
-                     @endforeach
+                       
+                      </div>
+                       <?php } ?>
+                </section>
 
-                  </ul>
-              </div>
+                  <div class="relative my-10">
+                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                      <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center">
+                      <span class="px-2 bg-white text-sm text-gray-500">
+                        OR
+                      </span>
+                    </div>
+                  </div>
 
 
-
-
-          </div>
-
-           <div class="mt-5 bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
-            
-            <div class="pb-5 space-y-6">
-                  <h3 class="font-medium text-gray-900">Categories</h3>
-                  <ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
-                      @foreach($categoryList->get() as $category)
-                      <li class="py-3 flex justify-between items-center" >
-                        <a href="#{{ $category->category_name }}-{{ $category->id }}">
-                        <div class="flex items-center">
-                          <img src="{{ asset('images/slider-img/slide1.jpg') }}" alt="" class="w-8 h-8 ">
-                          <div class="ml-4 ">
-                             <p class="text-sm font-medium text-gray-900">{{ $category->category_name }}</p>
-                             <!-- <p class="text-sm text-gray-500">Guest: user@gmail.com</p> -->
-                          </div>
+                  <div class="shadow sm:rounded-md sm:overflow-hidden">
+                    <div class="bg-white py-6 px-4 sm:p-6">
+                      <div class="grid grid-cols-4 gap-6">
+                        <div class="col-span-4 sm:col-span-2">
+                         <h2 id="payment_details_heading" class="text-lg leading-6 font-medium text-gray-900">Upload Podcast</h2>
+                        <p class="mt-1 text-sm text-gray-500">Quisque sit amet ipsum maximus, vulputate elit non, mattis libero. Ut sed justo ligula.</p>
                         </div>
-                        <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500"></p>
-                      </a>
-                      </li>
-                     @endforeach
-                     <!--  <li class="py-3 flex justify-between items-center">
-                        <div class="flex items-center">
-                          <img src="{{ asset('images/slider-img/slide5.jpg') }}" alt="" class="w-8 h-8">
-                           <div class="ml-4 ">
-                             <p class="text-sm font-medium text-gray-900">Category Title</p>
-                          </div>
+
+                        <div class="col-span-4 sm:col-span-2 text-right mt-5">
+                          <a  href="{{ route('editorPodcastCreate') }}" class="bg-custom-pink border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white ">
+                             Create Podcast
+                            </a>
                         </div>
-                       <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500">2</p>
-                      </li> -->
-  
-                  </ul>
-              </div>
 
-              
+                      </div>
+                    </div>
+                   
+                  </div>
 
+        </div>
 
-          </div>
-
-
-
-
-          </aside> 
-
-
-
-
-
-
-
-
-
-          </div>  
-
-
+        @endif
 
         </div>  
 

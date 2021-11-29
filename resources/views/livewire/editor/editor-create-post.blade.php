@@ -51,8 +51,8 @@
                     <label for="email" class="block text-sm font-medium text-gray-700">Title</label>
                     <div class="mt-1">
                       <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="title">
-
                     </div>
+                    @error('title') <span class="text-xs text-red-600">Empty fields</span> @enderror
 		        </div>
 
               	 <div class="mt-5">
@@ -69,13 +69,15 @@
              		 </select> 
 
       	 			@endif
-	    					
+	    			@error('category') <span class="text-xs text-red-600">Empty fields</span> @enderror
+
 	    		</div>
 
              	
                 <div class="mt-5">
 	                <div class="flex">
 					  <div class="flex-1 mr-2">
+
 					  	<label for="email" class="block text-sm font-medium text-gray-700">Season</label>
 	                    <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="season">
 	                        <option>Select</option>
@@ -83,7 +85,7 @@
 	                           <option value="{{ $s }}">{{ $s }}</option>
 							@endfor
 	             		 </select> 
-
+	             		 @error('season') <span class="text-xs text-red-600">Empty fields</span> @enderror
 					  </div>
 					  <div class="flex-1 ml-2">
 					  	<label for="email" class="block text-sm font-medium text-gray-700">Episode</label>
@@ -93,7 +95,7 @@
 	                           <option value="{{ $e }}">{{ $e }}</option>
 							@endfor
 	             		 </select> 
-
+	             		 @error('episode') <span class="text-xs text-red-600">Empty fields</span> @enderror
 
 					  </div>
 					   <div class="flex-1 ml-2">
@@ -103,7 +105,7 @@
 	                           <option value="public">Public</option>
 	                            <option value="private">Private</option>
 	             		 </select> 
-
+	             		 @error('status') <span class="text-xs text-red-600">Empty fields</span> @enderror
 
 					  </div>
 					 
@@ -117,6 +119,7 @@
 				          <div class="mt-1">
 				            <textarea id="about" name="about" rows="15" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="summary" ></textarea>
 				          </div>
+				          @error('summary') <span class="text-xs text-red-600">Empty fields</span> @enderror
 	    				</div>
 
 			</div>
@@ -155,6 +158,7 @@
 			                    <div class="mt-1">
 			                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="ref_title">
 			                    </div>
+			                     @error('ref_title') <span class="text-xs text-red-600">Empty fields</span> @enderror
 					        </div>
 
 					        <div class="flex-auto mt-5">
@@ -162,6 +166,7 @@
 			                    <div class="mt-1">
 			                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="ref_link">
 			                    </div>
+			                     @error('ref_link') <span class="text-xs text-red-600">Empty fields</span> @enderror
 					        </div>
 		                  </div>
 		            </div> 
@@ -178,11 +183,11 @@
               	    	<div class="w-1/2 float-left">&nbsp;
               	    		
               	    		<ul>
-              	    			<li>@error('title') <span class="text-xs text-red-600">Title is empty</span> @enderror</li>
-              	    			<li>@error('season') <span class="text-xs text-red-600">Season is empty</span> @enderror</li>
-              	    			<li>@error('episode') <span class="text-xs text-red-600">Episode is empty</span> @enderror</li>
-              	    			<li>@error('category') <span class="text-xs text-red-600">Category is empty</span> @enderror</li>
-              	    			<li>@error('summary') <span class="text-xs text-red-600">Transcript is empty</span> @enderror</li>
+              	    			<li></li>
+              	    			<li></li>
+              	    			<li></li>
+              	    			<li></li>
+              	    			<li></li>
               	    		</ul>
               	    		 
               	    	</div>

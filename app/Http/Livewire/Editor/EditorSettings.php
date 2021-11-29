@@ -137,7 +137,7 @@ class EditorSettings extends Component
                 $data->audio_episode = "1";
                 $data->audio_category = "1";
                 $data->audio_tags = "none";
-                $data->audio_status = "active";
+                $data->audio_status = "public";
                 $data->audio_summary = str_replace( ['<p>','</p>'], '',$item->get_description());
                 $data->audio_path = $i['enclosure_link'];
                 $data->audio_type = "RSS";

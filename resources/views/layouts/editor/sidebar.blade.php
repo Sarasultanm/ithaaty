@@ -25,7 +25,7 @@
                Podcast
               </p>
 
-             @if(Auth::user()->get_audio->count() != 0)
+            
              <x-nav-link-custom :href="route('editorPodcast')" :active="request()->routeIs('editorPodcast','editorPodcastUpdate','editorPodcastDetails')">
               <!-- Heroicon name: outline/fire -->
               <svg xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -33,7 +33,7 @@
               </svg><span class="truncate">My Podcast</span>
             </x-nav-link-custom>
            
-
+             @if(Auth::user()->get_audio->count() != 0)
             <x-nav-link-custom :href="route('editorOverview')" :active="request()->routeIs('editorOverview')">
               <!-- Heroicon name: outline/fire -->
               <svg xmlns="http://www.w3.org/2000/svg"   fill="none" viewBox="0 0 24 24" stroke="currentColor">
