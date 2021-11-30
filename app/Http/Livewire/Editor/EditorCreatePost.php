@@ -15,7 +15,9 @@ class EditorCreatePost extends Component
 	
 	public $count = 0;
  	
-	public $title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link,$status;
+	public $title,$season,$episode,$category,$summary,$embedlink,$hashtags,$status;
+
+    public $showSummary = true;
 
 	protected $listeners = [
         'refreshParent' =>'$refresh'
@@ -27,12 +29,12 @@ class EditorCreatePost extends Component
         'episode' => 'required',
         'status' => 'required',
         'category' => 'required',
-        'summary' => 'required',
+        // 'summary' => 'required',
         // 'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav',
         'embedlink' => 'required',
         'hashtags' => 'required',
-        'ref_title' => 'required',
-        'ref_link' => 'required',
+        // 'ref_title' => 'required',
+        // 'ref_link' => 'required',
 	];
 
     public function increment()
@@ -45,6 +47,12 @@ class EditorCreatePost extends Component
 
         $this->validate();
 
+        if(empty($this->summary)){
+            $newSummary = "";
+        }else{
+            $newSummary = $this->summary;
+        }
+        
     	$data = new Audio;
         $data->audio_editor = Auth::user()->id;
         $data->audio_name = $this->title;
@@ -53,20 +61,20 @@ class EditorCreatePost extends Component
         $data->audio_category = $this->category;
         $data->audio_tags = "none";
         $data->audio_status = $this->status;
-        $data->audio_summary = $this->summary;
+        $data->audio_summary = $newSummary;
         $data->audio_path = $this->embedlink;
         $data->audio_type = "Embed";
         $data->audio_hashtags = $this->hashtags;
         $data->save();
 
 
-        $ref = new AudioReferences;
-        $ref->audioref_userid = Auth::user()->id;
-        $ref->audioref_audioid = $data->id;
-        $ref->audioref_title = $this->ref_title;
-        $ref->audioref_link  = $this->ref_link;
-        $ref->audioref_status  = "active";
-        $ref->save();
+        // $ref = new AudioReferences;
+        // $ref->audioref_userid = Auth::user()->id;
+        // $ref->audioref_audioid = $data->id;
+        // $ref->audioref_title = $this->ref_title;
+        // $ref->audioref_link  = $this->ref_link;
+        // $ref->audioref_status  = "active";
+        // $ref->save();
 
 
 

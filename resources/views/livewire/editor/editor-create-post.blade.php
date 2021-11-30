@@ -112,15 +112,31 @@
 					</div>
 				</div>
 
-				<div class="mt-5">
-				          <label for="about" class="block text-sm font-medium text-gray-700">
-				            Transcript
-				          </label>
-				          <div class="mt-1">
+				<div class="mt-5" x-data="{ on: false }" >
+						<div class="flex">
+							<div class="flex-1">
+								 <label for="about" class="text-sm font-medium text-gray-700 mr-2" :class="{ 'hidden': on, 'block': !(on) }">
+						            Transcript
+						         </label>
+							</div>
+							<div>
+								 <label for="about" class="block text-xs font-medium text-gray-700 float-left mr-2 mt-1">
+						            Toggle to hide textbox:
+						         </label>
+								 <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200  bg-gray-500  " role="switch" aria-checked="false" :aria-checked="on.toString()" @click="on = !on" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-custom-pink': on, 'bg-gray-500': !(on) }">
+								    <span class="sr-only">Use setting</span>
+								    <span aria-hidden="true" class="inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': on, 'translate-x-0': !(on) }" style="margin-top:2px;"></span>
+								</button>
+								
+							</div>
+						</div>
+				          <div class="mt-1" :class="{ 'hidden': on, 'block': !(on) }">
 				            <textarea id="about" name="about" rows="15" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="summary" ></textarea>
 				          </div>
-				          @error('summary') <span class="text-xs text-red-600">Empty fields</span> @enderror
+				          
 	    				</div>
+
+	    			
 
 			</div>
 
@@ -145,31 +161,8 @@
 			            <textarea rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="hashtags" ></textarea>
 			          </div>
     				</div>
-		            <div class="mt-5">
-		                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Reference</h2>
-		                  <p class="mt-1 text-sm text-gray-500">
-		                    Add a reference for you podcast
-		                  </p>
 
 
-		                  <div class="flex">
-		                  	<div class="mt-5 w-40 mr-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">Title</label>
-			                    <div class="mt-1">
-			                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="ref_title">
-			                    </div>
-			                     @error('ref_title') <span class="text-xs text-red-600">Empty fields</span> @enderror
-					        </div>
-
-					        <div class="flex-auto mt-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">Link</label>
-			                    <div class="mt-1">
-			                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="ref_link">
-			                    </div>
-			                     @error('ref_link') <span class="text-xs text-red-600">Empty fields</span> @enderror
-					        </div>
-		                  </div>
-		            </div> 
 
 	   
 
