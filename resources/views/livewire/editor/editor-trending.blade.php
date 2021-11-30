@@ -29,24 +29,36 @@
       <main class="col-span-10">
 
         <div class="mt-4">
-          <div class="mb-5 w-full ">
-          	 <h1 class="font-bold text-gray-800 text-xl">Trending for you</h1> 
-          </div>
+         
 
            <div class="w-full ">
           	 <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
           </div>
          	
          <div class="mt-4">
-          <div class="mb-5 w-full ">
-          </div>  
-              <table class="min-w-full divide-y divide-gray-200">
+             <div class="mt-4 mt-4 p-5 bg-custom-gray rounded-md">
+              <div class="grid gap-4 grid-cols-12">
+                  <div class="col-span-3">
+                      <div class="text-sm text-gray-700">
+                         <div class="text-white bg-cover h-36">
+                             <img class="h-full mx-auto my-0" src="{{ asset('images/logo.png') }}" alt="">
+                         </div>
+                      </div>
+                  </div>
+                 <div class="col-span-7">
+                    <p class="text-md font-regular text-white mt-2">Playlist</p>
+                    <p class="text-6xl font-bold text-white mt-2 mb-5">Trending </p>
+                    <p class="text-white mt-2"><span class="text-xs font-bold ">Text here</span> , <span class="text-xs font-regular ">text podcast</span> </p>
+                  </div>
+              </div>
+
+
+            </div>           
+<!--               <table class="min-w-full divide-y divide-gray-200">
                 <tbody class=" divide-y divide-gray-200">
                   @foreach($topPodcast as $tops)  
                     <tr class="border-b-2">
-                    <!--   <td class="w-16">
-                      <img src="{{ asset('images/slider-img/slide1.jpg') }}" class="w-full"> 
-                      </td> -->
+                    
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       	 <small>Trending</small><br>
                          <strong>{{ $tops->audio_name }}</strong>
@@ -60,7 +72,7 @@
 	                        <div>
 	                          <button type="button" class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true" @click="open = !open">
 	                            <span class="sr-only">Open options</span>
-	                            <!-- Heroicon name: solid/dots-vertical -->
+	                           
 	                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 	                              <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
 	                            </svg>
@@ -76,7 +88,7 @@
 	                         x-transition:leave-end="transform opacity-0 scale-95" 
 	                        class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0-button" tabindex="-1">
 	                          <div class="py-1" role="none">
-	                            <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+	                           
 	                      		
 	                            <a wire:click="" class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0-item-0">
 	                            	<svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -89,14 +101,14 @@
 
 
 	                            <a href="#" class="text-gray-700 flex px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
-	                              <!-- Heroicon name: solid/code -->
+	                              
 	                              <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 	                                <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
 	                              </svg>
 	                              <span>Embed</span>
 	                            </a>
 	                            <a href="#" class="text-gray-700 flex px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0-item-2">
-	                              <!-- Heroicon name: solid/flag -->
+	                            
 	                              <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 	                                <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd" />
 	                              </svg>
@@ -112,7 +124,79 @@
                     </tr>
                   @endforeach
                 </tbody>
-              </table>  
+              </table>   -->
+
+              <div class="mt-2 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase w-2">
+                         #
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/4">
+                         Title
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                         
+                        </th>
+                       <!--  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Post
+                        </th> -->
+                       <!--  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Date Added
+                        </th> -->
+                      <!--   <th scope="col" class="relative px-6 py-3">
+                          <span class="sr-only">Edit</span>
+                        </th> -->
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                     @foreach($topPodcast as $tops)  
+                      <tr class="a">
+               
+                        <td class="px-6 py-4 whitespace-nowrap ">
+                             <div class="text-sm font-bold text-gray-500">#</div>
+                         </td>
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            <a href="" target="_blank" class="pointer">
+                            <div class="flex items-center">
+                              <div class="flex-shrink-0 h-10 w-10">
+                                <img class="h-10 w-10 " src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg" alt="">
+                              </div>
+                              <div class="ml-4">
+                                <div class="text-sm font-medium text-gray-900">
+                                  
+                                   <small>Trending</small><br>
+                                     <strong>{{ $tops->audio_name }}</strong>
+                                </div>
+                                <div class="text-sm text-gray-500">
+                                 <strong>  Likes {{ $tops->get_like->count()  }}</strong>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                          </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                        
+                          <div class="text-sm text-gray-500"> &nbsp;</div>
+                        </td> 
+                        <!-- <td class="px-6 py-4 whitespace-nowrap">
+                           <div class="text-sm font-bold text-gray-500">asdasd</div>
+                        </td> -->
+                         <!--  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          12/12/12
+                           
+                          </td> -->
+                       <!--  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                        </td> -->
+                      </tr>
+                      @endforeach
+                      <!-- More people... -->
+                    </tbody>
+                  </table>
+                </div>
+
         </div>
 
 

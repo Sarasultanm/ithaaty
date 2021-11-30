@@ -33,17 +33,6 @@
 	                       <img class="h-full mx-auto my-0" src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg" alt="">
 	                   </div>
 	                </div>
-	               <!--  <div>
-	                  <div class="flex space-x-3">
-	                    <div class="min-w-0 flex-1">
-	                      <p class="text-md font-bold text-gray-900 mt-2">
-	                        <a href="#" class="hover:underline">Playlist Name</a>
-	                      </p> 
-	                    </div>
-	                   
-	                  </div>
-	                </div> -->
-
 	            </div>
 	           <div class="col-span-8">
 	            	<p class="text-md font-regular text-white mt-2">{{ $playlist->playlist_status }} Playlist</p>
@@ -134,6 +123,7 @@
 					          </tbody>
 					        </table>
 					      </div>
+					      
 					    </div>
 					  </div>
 

@@ -5,11 +5,14 @@ namespace App\Http\Livewire\Editor;
 use Livewire\Component;
 use App\Models\UserNotifications;
 use App\Models\UserFriends;
+use Livewire\WithPagination;
 use Auth;
 
 
 class EditorActivity extends Component
 {
+
+    use WithPagination;
 
 	public function get_if_friends($id){
 
@@ -42,8 +45,13 @@ class EditorActivity extends Component
 
     public function render()
     {
-    	$notif_list = UserNotifications::orderBy('id', 'DESC')->get();
+    	// $notif_list = UserNotifications::orderBy('id', 'DESC')->get();
 
-        return view('livewire.editor.editor-activity',compact('notif_list'));
+     //    return view('livewire.editor.editor-activity',compact('notif_list'));
+
+        return view('livewire.editor.editor-notification',[
+            'notif_list'=> UserNotifications::orderBy('id', 'DESC')->paginate(100),
+        ]);
+
     }
 }
