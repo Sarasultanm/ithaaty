@@ -88,7 +88,7 @@
 				              @endif
 				                <div class="mt-2 text-sm text-gray-700 space-y-4">
 				                   <div class="text-white bg-cover h-36">
-				                       <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">    
+				                       <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">    
 				                   </div>
 				                </div>
 				                <div>
@@ -152,7 +152,7 @@
 				              <a href="{{ route('editorViewUser',['id' => $friend->get_add_friend->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
 				                <div class="mt-2 text-sm text-gray-700 space-y-4">
 				                   <div class="text-white bg-cover h-36">
-				                       <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">    
+				                       <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">    
 				                   </div>
 				                </div>
 				                <div>
@@ -197,7 +197,7 @@
 				              <a href="{{ route('editorViewUser',['id' => $requestfriend->get_request_user->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
 				                <div class="mt-2 text-sm text-gray-700 space-y-4">
 				                   <div class="text-white bg-cover h-36">
-				                       <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">    
+				                       <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">    
 				                   </div>
 				                </div>
 				                <div>

@@ -147,32 +147,13 @@
                                          </div>
 
                                         @endif 
+                                       
                                         <?php $num++; ?>
+                                        
 
                                     @endforeach
 
-                                   
-                                   <!--  <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                                        <img src="{{ asset('images/slider-img/slide2.jpg') }}" class="img-fluid mx-auto d-block" alt="img2">
-                                    </div>
-                                    <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                                        <img src="{{ asset('images/slider-img/slide3.jpg') }}" class="img-fluid mx-auto d-block" alt="img3">
-                                    </div>
-                                    <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                                        <img src="{{ asset('images/slider-img/slide4.jpg') }}" class="img-fluid mx-auto d-block" alt="img4">
-                                    </div>
-                                    <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                                        <img src="{{ asset('images/slider-img/slide5.jpg') }}" class="img-fluid mx-auto d-block" alt="img5">
-                                    </div>
-                                    <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                                        <img src="{{ asset('images/slider-img/slide6.jpg') }}" class="img-fluid mx-auto d-block" alt="img6">
-                                    </div>
-                                    <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                                        <img src="{{ asset('images/slider-img/slide7.jpg') }}" class="img-fluid mx-auto d-block" alt="img7">
-                                    </div>
-                                    <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                                        <img src="{{ asset('images/slider-img/slide8.jpg') }}" class="img-fluid mx-auto d-block" alt="img8">
-                                    </div> -->
+                             
                                 </div>
                                 <a class="carousel-control-prev" href="#carousel-example" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
