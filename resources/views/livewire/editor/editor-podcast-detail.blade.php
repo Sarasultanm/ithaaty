@@ -200,7 +200,7 @@
 					    labels: labelsBarChart,
 					    datasets: [{
 					      label: 'Audience View Count',
-					      backgroundColor: 'hsl(252, 82.9%, 67.8%)',
+					      backgroundColor: '#f98b88',
 					      borderColor: 'hsl(252, 82.9%, 67.8%)',
 					      data: [{{$jan_views}},{{$feb_views}},{{$mar_views}},{{$apr_views}},{{$may_views}},{{$jun_views}},{{$jul_views}},{{$aug_views}},{{$sep_views}},{{$oct_views}},{{$nov_views}},{{$dec_views}}],
 					    }]
