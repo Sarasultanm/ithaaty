@@ -46,7 +46,7 @@
 			        Total Subscribers
 			      </dt>
 			      <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-			        <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
+			        <div class="flex items-baseline text-2xl font-semibold text-custom-pink">
 			          <a href="{{ route('editorSubscriberOverview') }}">{{ $followers->count() }}</a>
 			    	
 			        </div>
@@ -60,7 +60,7 @@
 			        Avg. Open Rate
 			      </dt>
 			      <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-			        <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
+			        <div class="flex items-baseline text-2xl font-semibold text-custom-pink">
 			          0%
 	
 			        </div>
@@ -74,7 +74,7 @@
 			        Avg. Watch Time
 			      </dt>
 			      <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-			        <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
+			        <div class="flex items-baseline text-2xl font-semibold text-custom-pink">
 			          0%
 			          
 			        </div>
@@ -190,7 +190,7 @@
 							    labels: labelsBarChart,
 							    datasets: [{
 							      label: 'My First dataset',
-							      backgroundColor: 'hsl(252, 82.9%, 67.8%)',
+							      backgroundColor: '#f98b88',
 							      borderColor: 'hsl(252, 82.9%, 67.8%)',
 							      data: [{{$jan}},{{$feb}},{{$mar}},{{$apr}},{{$may}},{{$jun}},{{$jul}},{{$aug}},{{$sep}},{{$oct}},{{$nov}},{{$dec}}],
 							    }]

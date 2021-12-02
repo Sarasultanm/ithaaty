@@ -59,7 +59,7 @@ class EditorPodcastDetail extends Component
             for ($i=0; $i < str_word_count($mergeComs) ; $i++){
 
                 if(!in_array($arryComs[$i],$marks)){
-                    $wordArray[] = $arryComs[$i]."(".substr_count($mergeComs, $arryComs[$i]).") ";
+                    $wordArray[] = $arryComs[$i]."(".substr_count($mergeComs, $arryComs[$i]).")";
                }
 
 
@@ -74,7 +74,7 @@ class EditorPodcastDetail extends Component
 
     public function wordFilter(){
 
-        return array('is','a','are','hi','Hi');
+        return array('is','a','are','hi','Hi',' ');
 
     }
 

@@ -70,25 +70,45 @@
 
              @elseif($audio->audio_type == "RSS")
                   <!-- id="my-video{{ $audio->id }}" -->
-                       <video
-                        id="my-video14"
-                        class="video-js vjs-theme-forest vjs-fluid"
-                        controls
-                        preload="auto"
-                       
-                        poster="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg"
-                        data-setup="{}"
-                      >
-                        <source src="{{ $audio->audio_path }}" type="video/mp4" />
-                        <source src="{{ $audio->audio_path }}" type="video/webm" />
-                        <p class="vjs-no-js">
-                          To view this video please enable JavaScript, and consider upgrading to a
-                          web browser that
-                          <a href="https://videojs.com/html5-video-support/" target="_blank"
-                            >supports HTML5 video</a
-                          >
-                        </p>
-                      </video> 
+
+                      <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                        
+                        <script src="{{ asset('videojs/video.min.js') }}"></script>
+                        <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
+
+                        <video
+                          id="my-video"
+                          class="video-js vjs-default-skin vjs-fluid"
+                          controls
+                          width="100%"
+                          height="450px"
+                          poster="{{ asset('images/slider-img/'.$defaul_img) }}"
+                           data-setup="{}"
+                        >
+                          <source src="{{ $audio->audio_path }}" res="240" label="240p" type="video/mp4">
+                          <source src="{{ $audio->audio_path }}" res="360" label="360p" type="video/mp4">
+                          <source src="{{ $audio->audio_path }}" default res="480" label="480p" type="video/mp4">
+                          <source src="{{ $audio->audio_path }}" res="720" label="720p" type="video/mp4">
+                          <track kind="chapters" src="https://ithaaty.com/vtt/sample.vtt" srclang="en">
+
+                          <!-- <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/mp4" />
+                          <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/webm" /> -->
+                          <p class="vjs-no-js">
+                            To view this video please enable JavaScript, and consider upgrading to a
+                            web browser that
+                            <a href="https://videojs.com/html5-video-support/" target="_blank"
+                              >supports HTML5 video</a
+                            >
+                          </p>
+                        </video>
+                        <script> 
+                            var player=videojs('my-video'); 
+                            player.nuevo({
+                              qualityMenu: true,
+                              buttonRewind: true,
+                              buttonForward: true
+                            });
+                        </script>
 
           	@else
 
@@ -406,7 +426,8 @@
                             </div>
                           </div>
                           <div class="mt-2 text-sm text-gray-700 space-y-4">
-                             <div class="text-white bg-cover h-36" style="background-image: url('{{ asset('images/slider-img/slide1.jpg') }}');">    
+                             <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                             <div class="text-white bg-cover h-36" style="background-image: url('{{ asset('images/slider-img/'.$defaul_img) }}');">    
                              </div>
                           </div>
 

@@ -10,7 +10,7 @@
                  Transcript
                 </h2>
                 <div class="mt-6 flow-root text-sm">
-                  <p>{{ $audio->audio_summary }}</p>
+                  <p class="truncated">{{ $audio->audio_summary }}</p>
                 </div>
               </div>
             </div>

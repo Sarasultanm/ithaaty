@@ -1,3 +1,5 @@
+
+
  <?php use App\Http\Livewire\Editor\EditorDashboard; ?>
 
 
@@ -283,11 +285,13 @@
 
                      <div class="flex bg-custom-pink p-4 rounded-md">
                       <div class="bg-custom-gray">
-                        <img src="{{ asset('images/logo.png') }}" style="width:150px;">
+                        <!-- <img src="{{ asset('images/logo.png') }}" style="width:150px;"> -->
+                        <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                        <img src="{{ asset('images/slider-img/'.$defaul_img) }}" style="width:150px;">
                       </div>
                       <div class="flex-1 pl-5">
                          <p class="text-2xl font-bold text-white">{{ $audio->audio_name }}</p>
-                         <p class="text-sm font-medium text-white">{{ $audio->audio_summary }}</p>
+                         <p class="text-sm font-medium text-white">{{ substr($audio->audio_summary, 0, 50) }}</p>
                          <p class="text-sm font-medium text-white mt-5">Season {{ $audio->audio_season }} / Episode {{ $audio->audio_episode }} </p>
                       </div>
                     </div>
@@ -318,11 +322,12 @@
 
                     <div class="flex bg-custom-pink p-4 rounded-md">
                       <div >
-                        <img src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg" style="width:150px;">
+                        <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                        <img src="{{ asset('images/slider-img/'.$defaul_img) }}" style="width:150px;">
                       </div>
                       <div class="flex-1 pl-5">
                          <p class="text-2xl font-bold text-white">{{ $audio->audio_name }}</p>
-                         <p class="text-sm font-medium text-white">{{ $audio->audio_summary }}</p>
+                         <p class="text-sm font-medium text-white">{{ substr($audio->audio_summary, 0, 50) }}</p>
                          <p class="text-sm font-medium text-white mt-5">Season {{ $audio->audio_season }} / Episode {{ $audio->audio_episode }} </p>
                       </div>
                     </div>
@@ -354,11 +359,13 @@
                      </div> -->
                      <div class="flex bg-custom-pink p-4 rounded-md">
                       <div class="bg-custom-gray">
-                        <img src="{{ asset('images/logo.png') }}" style="width:150px;">
+                       <!--  <img src="{{ asset('images/logo.png') }}" style="width:150px;"> -->
+                        <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                        <img src="{{ asset('images/slider-img/'.$defaul_img) }}" style="width:150px;">
                       </div>
                       <div class="flex-1 pl-5">
                          <p class="text-2xl font-bold text-white">{{ $audio->audio_name }}</p>
-                         <p class="text-sm font-medium text-white">{{ $audio->audio_summary }}</p>
+                         <p class="text-sm font-medium text-white">{{ substr($audio->audio_summary, 0, 50) }}...</p>
                          <p class="text-sm font-medium text-white mt-5">Season {{ $audio->audio_season }} / Episode {{ $audio->audio_episode }} </p>
                       </div>
                     </div>
@@ -722,8 +729,6 @@
 
         </div>
 </div>
-
-
 
 
 

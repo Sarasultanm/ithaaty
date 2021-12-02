@@ -11,7 +11,20 @@ class EditorPlaylistDetails extends Component
 
 	public $playlist_title,$playlist_status,$playlist_public,$playlist_private;
 
+
+
+     protected $rules = [
+        'playlist_title' => 'required',
+        'playlist_status' => 'required',
+    ];
+
+
+
+
+
 	public function createPlaylist(){
+
+            $this->validate();
 
             $data = new UserPlaylist;
             $data->playlist_userid = Auth::User()->id;

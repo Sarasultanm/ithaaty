@@ -1,11 +1,19 @@
 .bg-custom-pink{ background-color: #f98b88;  }
-
-.bg-custom-gray{ background-color: #5f7c84; }
-
-.bg-custom-green{ background-color: #d3e579; }
-
 .border-custom-pink{ border-color:#f98b88;  }
 .text-custom-pink{ color:#f98b88;  }
+
+.bg-custom-gray{ background-color: #5f7c84; }
+.border-custom-gray{ border-color:#5f7c84;  }
+.text-custom-gray{ color:#5f7c84;  }
+
+.bg-custom-green{ background-color: #d3e579; }
+.border-custom-green{ border-color:#d3e579;  }
+.text-custom-green{ color:#d3e579;  }
+
+
+
+
+
 
 
 .hover-bg-custom-pink:hover{

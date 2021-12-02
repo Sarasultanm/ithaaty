@@ -1,4 +1,7 @@
-   <?php use App\Http\Livewire\Editor\EditorPodcast; ?>
+<?php 
+  use App\Http\Livewire\Editor\EditorPodcast;
+
+ ?>
 
  <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -38,7 +41,7 @@
             </div>
             <div>
                 @if(Auth::user()->get_audio->count() != 0)
-                <a href="{{ route('editorPodcastCreate') }}" class=" inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Add Podcast</a>
+                <a href="{{ route('editorPodcastCreate') }}" class=" inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white sm:col-start-2 sm:text-sm">Add Podcast</a>
                 @endif
             </div>
                
@@ -75,7 +78,8 @@
                             </div>
                           </div>
                           <div class="mt-2 text-sm text-gray-700 space-y-4">
-                             <div class="text-white bg-cover h-36" style="background-image: url('{{ asset('images/slider-img/slide1.jpg') }}');">    
+                             <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                             <div class="text-white bg-cover h-36" style="background-image: url('{{ asset('images/slider-img/'.$defaul_img) }}');">    
                              </div>
                           </div>
 
@@ -129,7 +133,8 @@
                             @foreach($favorite->get() as $fav)
                             <li class="py-3 flex justify-between items-center">
                               <div class="flex items-center">
-                                <img src="{{ asset('images/slider-img/slide1.jpg') }}" alt="" class="w-8 h-8 ">
+                                <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                                <img src="{{ asset('images/slider-img/'.$defaul_img) }}" alt="" class="w-8 h-8 ">
                                 <div class="ml-4 ">
                                    <p class="text-sm font-medium text-gray-900">{{ $fav->get_audio->audio_name }}</p>
                                    <p class="text-sm text-gray-500">{{ $fav->get_audio->get_user->email }}</p>
@@ -150,7 +155,8 @@
                             <li class="py-3 flex justify-between items-center" >
                               <a href="#{{ $category->category_name }}-{{ $category->id }}">
                               <div class="flex items-center">
-                                <img src="{{ asset('images/slider-img/slide1.jpg') }}" alt="" class="w-8 h-8 ">
+                                 <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                                <img src="{{ asset('images/slider-img/'.$defaul_img) }}" alt="" class="w-8 h-8 ">
                                 <div class="ml-4 ">
                                    <p class="text-sm font-medium text-gray-900">{{ $category->category_name }}</p>
                                    <!-- <p class="text-sm text-gray-500">Guest: user@gmail.com</p> -->

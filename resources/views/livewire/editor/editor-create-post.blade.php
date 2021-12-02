@@ -46,7 +46,7 @@
                   </p>
              </div>
 
-	        <div class="border-t-2 border-green-500 ">	
+	        <div class="border-t-2 border-custom-pink ">	
 	        	<div class="mt-5">
                     <label for="email" class="block text-sm font-medium text-gray-700">Title</label>
                     <div class="mt-1">
@@ -141,7 +141,7 @@
 			</div>
 
 
-		            <div class="border-t-2 border-green-500 mt-16"></div>   
+		            <div class="border-t-2 border-custom-pink mt-16"></div>   
 		            <div class="mt-5">
 		                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Embed Code</h2>
 		                  <p class="mt-1 text-sm text-gray-500">
@@ -185,7 +185,7 @@
               	    		 
               	    	</div>
               	  		<div class="w-1/2 float-left text-right">
-              	  			<button type="submit" class="w-1/2 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+              	  			<button type="submit" class="w-1/2 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white sm:col-start-2 sm:text-md">
 				          Save
 				        	</button>
               	  		</div>

@@ -93,6 +93,8 @@
         <!-- <script src="{{ asset('js/videojs-markers.js') }}" ></script> -->
         <!--  <link rel="stylesheet" href="{{ asset('css/vjs-theme-forest-index.css') }}"> -->
     </head>
+    
+    
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
@@ -105,11 +107,14 @@
             </header>
 
             <!-- Page Content -->
+           
             <main>
                 {{ $slot }}
             </main>
+           
         </div>
         @livewireScripts
        
     </body>
+  
 </html>

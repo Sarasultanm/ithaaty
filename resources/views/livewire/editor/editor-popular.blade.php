@@ -40,6 +40,7 @@
                   <div class="col-span-3">
                       <div class="text-sm text-gray-700">
                          <div class="text-white bg-cover h-36">
+
                              <img class="h-full mx-auto my-0" src="{{ asset('images/logo.png') }}" alt="">
                          </div>
                       </div>
@@ -162,7 +163,8 @@
                             <a href="{{ route('editorPodcastView',['id' => $tops->id ]) }}" target="_blank" class="pointer">
                             <div class="flex items-center">
                               <div class="flex-shrink-0 h-10 w-10">
-                                <img class="h-10 w-10 " src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg" alt="">
+                                <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                                <img class="h-10 w-10 " src="{{ asset('images/slider-img/'.$defaul_img) }}" alt="">
                               </div>
                               <div class="ml-4">
                                 <div class="text-sm font-medium text-gray-900">

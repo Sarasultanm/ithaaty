@@ -51,7 +51,7 @@
         	 
         	<!-- table list -->
 
-        	<div class="border-t-2 border-green-500 ">	
+        	<div class="border-t-2 border-custom-pink ">	
 	        	<div class="mt-5">
                     <label for="email" class="block text-sm font-medium text-gray-700">Company Name</label>
                     <div class="mt-1">
@@ -83,7 +83,7 @@
 				</div>
 		    </div>
 
-		     <div class="mt-5 w-full border-t-2 border-green-500 pt-5">
+		     <div class="mt-5 w-full border-t-2 border-custom-pink pt-5">
 	          	<div class="">
 	          		 <h1 class="flex-1  font-bold text-gray-800 text-xl">Add Supporting files</h1> 
 	          	  	<p class="mt-1 text-sm text-gray-500">
@@ -105,7 +105,7 @@
 	       </div>
   			<div class="mt-3 text-right sm:mt-5 mb-5">
   				              			
-  		        <button wire:click="saveAds()" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+  		        <button wire:click="saveAds()" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
   		         Save 
   		        </button>
   			</div>
@@ -155,7 +155,7 @@
                           </a>
                         </div>
                         <div class="flex">
-                           <button class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2  text-base font-medium text-black border-gray-300 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+                           <button class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2  text-base font-medium text-black border-gray-300 sm:col-start-2 sm:text-md">
                              {{ $checkAds->first()->ads_status }}
                             </button>
                         </div>
@@ -182,7 +182,7 @@
               <!-- tab list -->
             <div x-data="{
                   openTab: 1,
-                  activeClasses: 'border-green-500 text-green-600 font-bold',
+                  activeClasses: 'border-custom-pink text-custom-pink font-bold',
                   inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }" 
                 class="">
@@ -247,7 +247,7 @@
                                       </div>
                             </div>
 
-                            <div class="border-t-2 pb-10 border-green-500 ">
+                            <div class="border-t-2 pb-10 border-custom-pink ">
                                <div class="mt-5 w-full flex">
                                   <div class="flex-1">
                                     <!--  <h1 class="font-bold text-gray-800 text-xl">Submit</h1> 
@@ -269,7 +269,7 @@
                                        <p class="mt-1 text-sm text-gray-500">
                                           Please click the link below to see the documents
                                         </p>
-                                         <a href="{{ $checkAds->first()->ads_filelink }}" class="mt-5 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2  text-base font-medium text-white border-gray-300 bg-green-500 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+                                         <a href="{{ $checkAds->first()->ads_filelink }}" class="mt-5 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2  text-base font-medium text-white border-gray-300 bg-custom-pink  sm:col-start-2 sm:text-md">
                                              Check Documents
                                             </a>
                                        

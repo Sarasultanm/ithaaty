@@ -1,4 +1,8 @@
-  <?php use App\Http\Livewire\Editor\EditorPodcastView; ?>
+  <?php 
+    use App\Http\Livewire\Editor\EditorPodcastView; 
+    use Illuminate\Support\Str;
+
+  ?>
  <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Podcast View') }}
@@ -66,9 +70,10 @@
 
       					@elseif($audio->audio_type == "RSS") 
 
-
-      				<script src="{{ asset('videojs/video.min.js') }}"></script>
-              <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
+                        <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                        
+                				<script src="{{ asset('videojs/video.min.js') }}"></script>
+                        <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
 
       					        <video
                           id="my-video"
@@ -76,7 +81,7 @@
                           controls
                           width="100%"
                           height="450px"
-                          poster="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg"
+                          poster="{{ asset('images/slider-img/'.$defaul_img) }}"
                            data-setup="{}"
                         >
                           <source src="{{ $audio->audio_path }}" res="240" label="240p" type="video/mp4">

@@ -66,7 +66,8 @@
                                  <a href="{{ route('editorPlaylist',['id' => $plist->id ]) }}" class="pointer">
                                   <div class="mt-2 text-sm text-gray-700 space-y-4">
                                      <div class="text-white bg-cover h-36">
-                                         <img class="h-full mx-auto my-0" src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg" alt="">        
+                                        <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                                        <img class="h-full mx-auto my-0" src="{{ asset('images/slider-img/'.$defaul_img) }}" alt="">        
                                      </div>  
                                   </div>
                                   <div>
@@ -100,7 +101,9 @@
                             <a href="{{ route('editorPlaylist',['id' => $plist->id ]) }}" class="pointer">
                               <div class="mt-2 text-sm text-gray-700 space-y-4">
                                  <div class="text-white bg-cover h-36">
-                                     <img class="h-full mx-auto my-0" src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg" alt="">        
+                                  <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                                        <img class="h-full mx-auto my-0" src="{{ asset('images/slider-img/'.$defaul_img) }}" alt=""> 
+                                    
                                  </div>  
                               </div>
                               <div>
@@ -151,6 +154,7 @@
                                       <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="playlist_title">
 
                                     </div>
+                                    @error('playlist_title') <span class="text-xs text-red-600">Empty fields</span> @enderror
                               </div>
                               <div class="mt-1">
                                 <label for="email" class="block text-sm font-medium text-gray-700">Status</label>
@@ -159,7 +163,7 @@
                                             <option value="Public">Public</option>
                                             <option value="Private">Private</option>
                                      </select> 
-
+                                      @error('playlist_status') <span class="text-xs text-red-600">Select status</span> @enderror
 
                               </div>
                                <button wire:click="createPlaylist()" class="bg-custom-pink w-full block text-center px-2 py-2 border border-gray-300 shadow-sm text-sm font-bold text-white mt-2">Save</button>
