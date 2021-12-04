@@ -43,7 +43,7 @@
         	 
         	<!-- table list -->
 
-        	<div class="border-t-2 border-green-500 ">	
+        	<div class="border-t-2 border-custom-pink ">	
 	        	<div class="mt-5">
                     <label for="email" class="block text-sm font-medium text-gray-700">Company Name</label>
                     <div class="mt-1">
@@ -68,15 +68,49 @@
 		        </div>
 
 		         <div class="mt-5">
+               <div x-data="{ isUploading: false, progress: 0, success: false, error:false }" 
+                 x-on:livewire-upload-start="isUploading = true"
+                 x-on:livewire-upload-finish="isUploading = false,success = true" 
+                 x-on:livewire-upload-error="isUploading = false,error= true"
+                 x-on:livewire-upload-progress="progress = $event.detail.progress">
+
                     <label for="email" class="block text-sm font-medium text-gray-700">Upload Logo</label>
                     <div class="mt-1">
                       <input type="file"  class="" wire:model="ads_logo">
                     </div>
-				</div>
+
+                    <div class="mt-5">
+                      <div x-show="isUploading"  class="relative pt-1">
+                        <div class="text-center text-gray-700">
+                          Please wait while uploading the file .. <input x-bind:value="`${progress}%`" disabled style="width: 60px;">
+                        </div>
+                        <div  class="overflow-hidden h-2 text-xs flex rounded bg-purple-200 progress">
+                          <div x-bind:style="`width:${progress}%`"
+                            class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom-pink"
+                          ></div>
+                        </div>
+
+                      </div>
+                      <p x-show="success" class="text-center text-custom-pink font-bold text-gray-800 text-sm">File Upload Complete</p> 
+                       <p x-show="error" class="text-center font-bold text-red-800 text-sm">*Error to upload the file</p> 
+                    </div>
+
+                  <!--   <div class="mt">
+                      @if($ads_logo)
+                         <p class="flex-1 font-regular text-gray-800 text-sm">File Upload Complete</p> 
+                      @endif
+                    </div>
+ -->
+
+                   </div>
+
+				    </div>
+
+
 		    </div>
   			<div class="mt-3 text-right sm:mt-5 mb-5">
   				              			
-  		        <button wire:click="addAds()" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+  		        <button wire:click="addAds()" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
   		         Save 
   		        </button>
   			</div>
