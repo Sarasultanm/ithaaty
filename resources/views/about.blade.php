@@ -100,7 +100,7 @@
              </div>   
 
 
-             <div class="grid grid-cols-1 mt-20 absolute w-full" style="margin-top: -270px;">
+             <div class="grid grid-cols-1 mt-20 absolute w-full" style="margin-top: -235px;">
                  <div class="col-span-1">
               <!--        <div  class="flex bg-transparent">
                           <div class="flex-1 mx-2 text-white text-center h-60" style="background: #2e5157;">
@@ -135,14 +135,14 @@
                                           <?php $slide_pic = "slide".$num; ?>
                                          <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 active">
                                             <a href="/post/{{ $likec->like_audioid }}">
-                                                <img src="{{ asset('images/slider-img/'.$slide_pic.'.jpg') }}" class="img-fluid mx-auto d-block" alt="img1">
+                                                <img src="{{ asset('images/slider-img/'.$slide_pic.'.jpg') }}" class="img-fluid mx-auto d-block p-3" alt="img1">
                                             </a>
                                          </div>
                                         @else
                                          <?php $slide_pic = "slide".$num; ?>
                                              <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
                                             <a href="/post/{{ $likec->like_audioid }}">
-                                                <img src="{{ asset('images/slider-img/'.$slide_pic.'.jpg') }}" class="img-fluid mx-auto d-block" alt="img1">
+                                                <img src="{{ asset('images/slider-img/'.$slide_pic.'.jpg') }}" class="img-fluid mx-auto d-block p-3" alt="img1">
                                             </a>
                                          </div>
 
@@ -170,7 +170,7 @@
                  </div>
              </div>
 
-              <div class="grid grid-cols-3 gap-4 px-10 pt-5 pb-6 bottom-0 absolute w-full bg-white">
+              <div class="grid grid-cols-3 gap-4 px-10 pt-4 pb-6 bottom-0 absolute w-full bg-white">
                  <div class="col-span-1">
                      <ul class="uppercase">
                         <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">Home</a></li>
