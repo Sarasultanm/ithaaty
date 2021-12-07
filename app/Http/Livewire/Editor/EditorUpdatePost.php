@@ -21,6 +21,7 @@ class EditorUpdatePost extends Component
 
 	public $audio,$a_id,$title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link,$checkAudio,$status;
     public $spon_name,$spon_website,$spon_location,$spon_linkloc,$spon_image,$afi_link,$afi_title,$qa_question;
+    
 	protected $listeners = [
         'refreshParent' =>'$refresh'
         ];

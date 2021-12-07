@@ -78,6 +78,45 @@ class EditorPodcastDetail extends Component
 
     }
 
+    public function removeAudio($id,$status){
+
+        // $radio = Input::get('displayOptions');
+        // $radio = $request->input('displayOptions');
+
+        $data = Audio::findOrFail($id);
+
+        if(Auth::user()->id == $data->audio_editor){
+
+            if($status == "draft"){
+                
+                Audio::where('id',$id)->update(['audio_status'=> $status,]);
+                session()->flash('status', 'Podcast Updated and save to draft.');
+
+            }elseif($status == "restore"){
+
+                Audio::where('id',$id)->update(['audio_status'=> "private",]);
+                session()->flash('status', 'Podcast Updated and restore.');
+            }
+
+         redirect()->to('editor/podcast/details/'.$id);   
+
+        }else{
+          redirect()->to('editor/dashboard');       
+        } 
+       
+
+    
+
+
+    }
+
+
+
+
+
+
+
+
 
     public function render()
     {

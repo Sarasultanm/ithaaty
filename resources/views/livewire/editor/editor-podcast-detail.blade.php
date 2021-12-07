@@ -145,7 +145,7 @@
 			        <a >Other Episodes</a>
 			      </li>
             <li @click="openTab = 5"  :class="openTab === 5 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
-              <a >Remove</a>
+              <a >Display Options</a>
             </li>
 
 			    </ul>
@@ -483,7 +483,74 @@
 
           <div x-show="openTab === 5">
 
-            
+              <div class="grid gap-4 grid-cols-12">
+                  <div class="col-span-12 bg-white pt-4 px-3 pb-8">
+                    <div>
+                      <div class="border-b border-gray-200 pb-2">
+                        <label class="text-base font-medium text-gray-900">Display Options</label>
+                        <p class="text-sm leading-5 text-gray-500">How do you prefer to remove your podcast?</p>
+                      </div>
+                      <fieldset class="mt-4">
+                        <legend class="sr-only">Plan</legend>
+                        <div class="space-y-5">
+                          @if($audio->audio_status == "draft")
+
+                            <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                              <input id="small" aria-describedby="small-description"  type="radio" class="focus:ring-gray-200 h-4 w-4 text-custom-pink border-custom-pink" value="restore"  wire:click="removeAudio({{ $audio->id }},'restore')">
+                            </div>
+                            <div class="ml-3 text-sm">
+                              <label for="small" class="font-bold text-gray-700">Restore</label>
+                              <p  class="text-gray-500 text-xs">This audio/video will restore to your podcast and set into a default <b>Private</b> status. To make it public just update the status into the Update Settings.</p>
+                            </div>
+                          </div>
+
+                          @else
+
+                          <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                              <input id="small" aria-describedby="small-description"  type="radio" class="focus:ring-gray-200 h-4 w-4 text-custom-pink border-custom-pink" value="draft"  wire:click="removeAudio({{ $audio->id }},'draft')">
+                            </div>
+                            <div class="ml-3 text-sm">
+                              <label for="small" class="font-bold text-gray-700">Move to Draft</label>
+                              <p  class="text-gray-500 text-xs">This audio/video will not be visible to any users or follower, but you can still see it into your <b>"My Podcast"</b> page and restore it.</p>
+                            </div>
+                          </div>
+
+
+                          @endif
+                    
+
+                          <div class="relative flex items-start">
+                            <div class="flex items-center h-5">
+                              <input id="medium" aria-describedby="medium-description"  type="radio" class="focus:ring-gray-200 h-4 w-4 text-custom-pink border-custom-pink" value="permanent">
+                            </div>
+                            <div class="ml-3 text-sm">
+                              <label for="medium" class="font-bold text-gray-700">Delete Permanently</label>
+                             <p  class="text-gray-500 text-xs">This audio/video will delete permanenlty into your account.</p>
+                            </div>
+                          </div>
+
+             
+                        </div>
+                      </fieldset>
+
+                    </div>
+                  <!--   <div class="mt-5">
+                        <button  class=" inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white sm:col-start-2 sm:text-sm">Save Options</button>
+                    </div> -->
+
+
+
+
+
+
+
+                  </div>
+                     
+
+                </div> 
+
 
           </div>
 
