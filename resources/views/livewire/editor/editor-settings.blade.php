@@ -200,6 +200,31 @@
 			             
 					   
 				    </section>
+
+
+				    <section class="mt-5">
+
+			
+			            <div class="shadow sm:rounded-md sm:overflow-hidden">
+			              <div class="bg-white py-6 px-4 sm:p-6">
+			                <div class="grid grid-cols-4 gap-6">
+			                  <div class="col-span-4 sm:col-span-2">
+			                    <h2 id="payment_details_heading" class="text-lg leading-6 font-medium text-gray-900">Generete your RSS link.</h2>
+			                  <p class="mt-1 text-sm text-gray-500">Your RSS feed allows your podcast to appear in other podcast apps</p>
+			                  </div>
+
+			                  <div class="col-span-4 sm:col-span-2 text-right mt-4">
+			                    <a class="bg-custom-pink border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white">
+			                   Open Rss
+			                </a>
+			                  </div>
+
+			                </div>
+			              </div>
+			             
+			            </div>
+
+				    </section>
 				
 			     </div>	
 			    </div>

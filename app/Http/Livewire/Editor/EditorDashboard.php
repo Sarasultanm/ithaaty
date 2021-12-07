@@ -397,7 +397,7 @@ class EditorDashboard extends Component
     public function render()
     {
 
-    	$audioList = Audio::orderBy('id', 'DESC');
+    	$audioList = Audio::orderBy('id','DESC')->where('audio_status', '!=' ,'Delete');
         $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
         $randomList = User::inRandomOrder()->where('id','!=',Auth::user()->id)->take(3)->get();
         $mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1);

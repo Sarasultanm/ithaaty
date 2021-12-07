@@ -144,6 +144,9 @@
 			      <li @click="openTab = 4"  :class="openTab === 4 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
 			        <a >Other Episodes</a>
 			      </li>
+            <li @click="openTab = 5"  :class="openTab === 5 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
+              <a >Remove</a>
+            </li>
 
 			    </ul>
 			  </div>
@@ -478,6 +481,11 @@
 
 			  	</div>		
 
+          <div x-show="openTab === 5">
+
+            
+
+          </div>
 
 			  </div>	
 

@@ -43,7 +43,8 @@
                     </div>
                    
                 </div>
-                <div class="col-span-1 bg-no-repeat" style="background-image: url({{ asset('images/right-img.png')}});background-size: 100%;">
+                <div class="col-span-1 bg-no-repeat" style="background-image: url({{ asset('images/right-img.png')}});background-size: cover;height: 78%;
+    background-position: center center;">
 
                     <div x-data="{ open: false }" class="w-full bg-transparent relatives float-left">
                    
@@ -100,7 +101,7 @@
              </div>   
 
 
-             <div class="grid grid-cols-1 mt-20 absolute w-full" style="margin-top: -235px;">
+             <div class="grid grid-cols-1 mt-20 absolute w-full" style="margin-top: -220px;">
                  <div class="col-span-1">
               <!--        <div  class="flex bg-transparent">
                           <div class="flex-1 mx-2 text-white text-center h-60" style="background: #2e5157;">
@@ -135,14 +136,14 @@
                                           <?php $slide_pic = "slide".$num; ?>
                                          <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 active">
                                             <a href="/post/{{ $likec->like_audioid }}">
-                                                <img src="{{ asset('images/slider-img/'.$slide_pic.'.jpg') }}" class="img-fluid mx-auto d-block p-3" alt="img1">
+                                                <img src="{{ asset('images/slider-img/'.$slide_pic.'.jpg') }}" class="img-fluid mx-auto d-block p-5" alt="img1">
                                             </a>
                                          </div>
                                         @else
                                          <?php $slide_pic = "slide".$num; ?>
                                              <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
                                             <a href="/post/{{ $likec->like_audioid }}">
-                                                <img src="{{ asset('images/slider-img/'.$slide_pic.'.jpg') }}" class="img-fluid mx-auto d-block p-3" alt="img1">
+                                                <img src="{{ asset('images/slider-img/'.$slide_pic.'.jpg') }}" class="img-fluid mx-auto d-block p-5" alt="img1">
                                             </a>
                                          </div>
 
@@ -224,7 +225,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" ></script>
         <script src="{{ asset('js/jquery.backstretch.min.js') }}"></script>
         <script src="{{ asset('js/wow.min.js') }}"></script>
-        <script src="{{ asset('js/scripts.js') }}"></script>
+        <!-- <script src="{{ asset('js/scripts.js') }}"></script> -->
     </body>
 
 </html>

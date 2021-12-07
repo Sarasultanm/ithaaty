@@ -32,7 +32,7 @@ class EditorCreatePost extends Component
         // 'summary' => 'required',
         // 'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav',
         'embedlink' => 'required',
-        'hashtags' => 'required',
+        // 'hashtags' => 'required',
         // 'ref_title' => 'required',
         // 'ref_link' => 'required',
 	];
@@ -47,11 +47,11 @@ class EditorCreatePost extends Component
 
         $this->validate();
 
-        if(empty($this->summary)){
-            $newSummary = "";
-        }else{
-            $newSummary = $this->summary;
-        }
+        // if(empty($this->summary)){
+        //     $newSummary = "";
+        // }else{
+        //     $newSummary = $this->summary;
+        // }
         
     	$data = new Audio;
         $data->audio_editor = Auth::user()->id;
@@ -61,10 +61,10 @@ class EditorCreatePost extends Component
         $data->audio_category = $this->category;
         $data->audio_tags = "none";
         $data->audio_status = $this->status;
-        $data->audio_summary = $newSummary;
+        $data->audio_summary = (empty($this->summary)) ? "" : $this->summary;
         $data->audio_path = $this->embedlink;
         $data->audio_type = "Embed";
-        $data->audio_hashtags = $this->hashtags;
+        $data->audio_hashtags = (empty($this->hashtags)) ? "" : $this->hashtags;
         $data->save();
 
 

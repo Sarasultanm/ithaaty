@@ -134,7 +134,7 @@
 				            <textarea id="about" name="about" rows="15" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="summary" ></textarea>
 				          </div>
 				          
-	    				</div>
+	    		</div>
 
 	    			
 
@@ -153,14 +153,39 @@
 				            <textarea id="about" name="about" rows="4" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="embedlink" ></textarea>
 				          </div>
 	                </div>
-	                <div class="mt-5">
+
+	              <!--   <div class="mt-5">
 			          <label for="about" class="block text-sm font-medium text-gray-700">
 			            Hashtags 
 			          </label>
 			          <div class="mt-1">
 			            <textarea rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="hashtags" ></textarea>
 			          </div>
-    				</div>
+    				</div> -->
+
+    				<div class="mt-5" x-data="{ on: false }" >
+						<div class="flex">
+							<div class="flex-1">
+								 <label for="about" class="text-sm font-medium text-gray-700 mr-2" :class="{ 'hidden': on, 'block': !(on) }">
+						            Hashtags
+						         </label>
+							</div>
+							<div>
+								 <label for="about" class="block text-xs font-medium text-gray-700 float-left mr-2 mt-1">
+						            Toggle to hide textbox:
+						         </label>
+								 <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200  bg-gray-500  " role="switch" aria-checked="false" :aria-checked="on.toString()" @click="on = !on" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-custom-pink': on, 'bg-gray-500': !(on) }">
+								    <span class="sr-only">Use setting</span>
+								    <span aria-hidden="true" class="inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': on, 'translate-x-0': !(on) }" style="margin-top:2px;"></span>
+								</button>
+								
+							</div>
+						</div>
+				          <div class="mt-1" :class="{ 'hidden': on, 'block': !(on) }">
+				            <textarea id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="hashtags" ></textarea>
+				          </div>
+				          
+	    		   </div>
 
 
 
