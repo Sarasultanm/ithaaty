@@ -31,7 +31,7 @@
     </head>
     <body  style="background: #5f7c84;">
         <div class="font-sans text-gray-900 antialiased">
-             <div class="grid grid-cols-2 gap-4" style="background: #5f7c84;height: 800px;">
+             <div class="grid grid-cols-2 gap-4" style="background: #5f7c84;height: 100vh">
                 <div class="col-span-1 text-white">
                     <img src="{{ asset('images/logo.png')}}" style="width:300px;margin: 40px 30px 40px 30px;">
                     <div class="px-24 pb-10">
@@ -43,10 +43,9 @@
                     </div>
                    
                 </div>
-                <div class="col-span-1 bg-no-repeat" style="background-image: url({{ asset('images/right-img.png')}});background-size: cover;height: 78%;
-    background-position: center center;">
-
-                    <div x-data="{ open: false }" class="w-full bg-transparent relatives float-left">
+                <div class="col-span-1" style="background: #f98b88;">
+                  <div class=" bg-no-repeat" style="background-image: url({{ asset('images/right-img.png')}});background-size: cover;height: 78%;background-position: center center;">
+                        <div x-data="{ open: false }" class="w-full bg-transparent relatives float-left">
                    
                             <button  @click="open = !open" class=" bg-transparent text-white font-bold float-right relative">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -84,7 +83,9 @@
             
                               </div>
                             </div>
-                          </div>
+                     </div>
+                  </div>
+                
 
 
 
@@ -101,7 +102,7 @@
              </div>   
 
 
-             <div class="grid grid-cols-1 mt-20 absolute w-full" style="margin-top: -220px;">
+             <div class="grid grid-cols-1 mt-20 absolute w-full" style="margin-top: -395px;">
                  <div class="col-span-1">
               <!--        <div  class="flex bg-transparent">
                           <div class="flex-1 mx-2 text-white text-center h-60" style="background: #2e5157;">

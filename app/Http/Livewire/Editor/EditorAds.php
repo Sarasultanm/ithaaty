@@ -16,7 +16,7 @@ class EditorAds extends Component
 	use WithFileUploads;
 
 	public $ads_name,$ads_website,$ads_location,$ads_logo,$ads_file;
-    public $ads_list,$adslist_name,$adslist_videolink,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc,$country_slc;
+    public $ads_list,$adslist_name,$adslist_videolink,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc,$country_slc,$agebracket_list;
 
 	public function saveAds(){
 
@@ -90,6 +90,23 @@ class EditorAds extends Component
     public function addCountry(){
         $this->adslist_country = $this->adslist_country."".$this->country_slc.",";
     }
+
+     public function addBracket(){
+        if($this->agebracket_list == "age0"){
+            $bracketText = "No specific";
+        }elseif($this->agebracket_list == "age1"){
+            $bracketText = "18 - 24 years";
+        }elseif($this->agebracket_list == "age2"){
+            $bracketText = "25 - 40 years";
+        }elseif($this->agebracket_list == "age3"){
+            $bracketText = "41 - 60 years";
+        }elseif($this->agebracket_list == "age4"){
+            $bracketText = "61 - 80 years";
+        }
+        $this->adslist_agebracket = $this->adslist_agebracket."".$bracketText.",";
+    }
+
+
 
     public function render()
     {

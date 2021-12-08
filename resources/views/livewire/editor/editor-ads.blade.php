@@ -302,7 +302,7 @@
                                           <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Status
                                           </th>
-                                          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                          <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Action
                                           </th>
                                         <!--   <th scope="col" class="relative px-6 py-3">
@@ -342,15 +342,18 @@
                                           <td class="px-6 py-4 whitespace-nowrap">
                                              <div class="text-sm font-bold text-gray-500">{{ $ads->adslist_status }}</div>
                                           </td>
-                                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Update</a> / 
+                                             <a href="#" class="text-indigo-600 hover:text-indigo-900">Stats</a>
                                             @if($ads->adslist_status == "Confirm")
                                           <!--  <a href="{{ route('adminAdsSetup',['id' => $ads->id]) }}" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-2 py-2 border-gray-200 text-base font-medium text-black hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Setup
                                              </a>  -->
                                             @endif
                                           </td>
-                                         <!--  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+
+                                         <!-- <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                          </td> -->
+                                          </td>  -->
                                         </tr>
                                         @endforeach
                                         <!-- More people... -->
@@ -406,12 +409,12 @@
                                   <label for="email" class="block text-sm font-medium text-gray-700">Skip Duration</label>
                                           <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"   wire:model="adslist_adstype">
                                               <option>Select</option>
-                                              <option value="0">0</option>
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">5</option>
+                                              <option value="0">No Skip</option>
+                                              <!-- <option value="1">1</option>
+                                              <option value="2">2</option>
+                                              <option value="3">3</option>
+                                              <option value="4">4</option> -->
+                                              <option value="5">5 sec</option>
                                        </select> 
 
                                 </div>
@@ -451,6 +454,7 @@
                               </div>
                             </div>
                           </div>
+                          
                           <div class="border-b-2 pb-10 pt-5 border-green-500 ">
                                <h1 class="flex-1 font-bold text-gray-800 text-xl ">Segments</h1> 
                                <p class="mt-1 text-sm text-gray-500">
@@ -711,7 +715,7 @@
                                    </select> 
                                      </div>
                                      <div>
-                                        <button wire:click="addCountry()" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+                                        <button wire:click="addCountry()" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
                                          Add Country
                                         </button>
                                      </div>
@@ -727,7 +731,35 @@
 
                                  <div class="mt-5">
                                    <label for="email" class="block text-sm font-medium text-gray-700">Age Bracket</label>
-                                   <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"   wire:model="adslist_agebracket">
+                                   <div class="flex">
+                                     <div class="flex-1 pr-5">
+                                      <select class="mt-1 mr-5 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="agebracket_list" wire:keydown.enter="addBracket()">
+                                      <option value="age0">No specific</option>
+                                      <option value="age1">18 - 24 years</option>
+                                      <option value="age2">25 - 40 years</option>
+                                      <option value="age3">41 - 60 years</option>
+                                      <option value="age4">61 - 80 years</option>
+                                      
+                                   </select> 
+                                     </div>
+                                     <div>
+                                        <button wire:click="addBracket()" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+                                         Add Bracket
+                                        </button>
+                                     </div>
+                                   </div>
+                                   <div class="">
+                                        <!-- <label  class="block text-sm font-medium text-gray-700">Description</label> -->
+                                        <div class="mt-1">
+                                          <textarea id="countryList" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " wire:model="adslist_agebracket"></textarea>
+                                        </div>
+                                </div>
+                                
+                                 </div> 
+
+                             <!--     <div class="mt-5">
+                                   <label for="email" class="block text-sm font-medium text-gray-700">Age Bracket</label>
+                                   <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
                                    <option>Select</option>
                                       <option value="age0">No specific</option>
                                       <option value="age1">18 - 24 years</option>
@@ -735,7 +767,8 @@
                                       <option value="age3">41 - 60 years</option>
                                       <option value="age4">61 - 80 years</option>
                                    </select> 
-                                 </div> 
+                                 </div>  -->
+
 
 
 
@@ -820,7 +853,7 @@
 
                           <div class="mt-3 text-right sm:mt-5 mb-5">
                                                 
-                                <button wire:click="addAdsList({{$checkAds->first()->id}})" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+                                <button wire:click="addAdsList({{$checkAds->first()->id}})" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
                                  Save Video 
                                 </button>
                           </div>
