@@ -16,9 +16,9 @@ class EditorAds extends Component
 	use WithFileUploads;
 
 	public $ads_name,$ads_website,$ads_location,$ads_logo,$ads_file;
-    public $ads_list,$adslist_name,$adslist_videolink,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc,$country_slc,$agebracket_list;
+    public $ads_list,$adslist_name,$adslist_videolink,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc,$country_slc,$agebracket_list,$adslist_days,$adslist_videotype,$adslist_end;
 
-    public $compSkip = 0,$compDisplay = 0,$compTotal = 0;
+    public $compSkip = 50,$compDisplay = 100,$compDays = 3,$compTotal = 450;
 
 	public function saveAds(){
 
@@ -54,22 +54,38 @@ class EditorAds extends Component
 
     public function addAdsList($id){
 
-        $data = new AdsList;
-        $data->adslist_id = $id;
-        $data->adslist_name = $this->adslist_name;
-        $data->adslist_videolink = $this->adslist_videolink;
-        $data->adslist_adstype = $this->adslist_adstype;
-        $data->adslist_durationtype = "none";
-        $data->adslist_displaytime = $this->adslist_displaytime;
-        $data->adslist_status = "Pending";
-        $data->adslist_agebracket = $this->adslist_agebracket;
-        $data->adslist_country = $this->adslist_country;
-        $data->adslist_weblink = $this->adslist_weblink;
-        $data->adslist_desc = $this->adslist_desc;
-        $data->save();  
+        if($adslist_videotype == 'link'){
+
+            $data = new AdsList;
+            $data->adslist_id = $id;
+            $data->adslist_name = $this->adslist_name;
+            $data->adslist_videolink = $this->adslist_videolink;
+            $data->adslist_adstype = $this->adslist_adstype;
+            $data->adslist_durationtype = "none";
+            $data->adslist_displaytime = $this->adslist_displaytime;
+            $data->adslist_status = "Pending";
+            $data->adslist_agebracket = $this->adslist_agebracket;
+            $data->adslist_country = $this->adslist_country;
+            $data->adslist_weblink = $this->adslist_weblink;
+            $data->adslist_desc = $this->adslist_desc;
+            $data->adslist_days = $this->adslist_days;
+            $data->adslist_videotype = $this->adslist_videotype;
+            $data->adslist_end = "none";
+            
+            
+            $data->save();  
+
+        }
+
+
+       
 
         session()->flash('status', 'New Add Added');
         redirect()->to('editor/ads');   
+
+
+
+
     }
 
     public function checkAdslist(){
@@ -118,6 +134,19 @@ class EditorAds extends Component
             }elseif($value == '5'){
                  $this->compSkip = 25;
             }
+        }elseif($options == 'days'){
+            if($value == 'Select'){
+            $this->compDays = 0;
+            }elseif($value == '3'){
+                 $this->compDays = 3;
+            }elseif($value == '7'){
+                 $this->compDays = 7;
+            }elseif($value == '9'){
+                 $this->compDays = 9;
+            }elseif($value == '12'){
+                 $this->compDays = 12;
+            }
+
         }else{
             if($value == 'Select'){
             $this->compDisplay = 0;
@@ -147,7 +176,7 @@ class EditorAds extends Component
 
         }
         
-        $this->compTotal = $this->compSkip + $this->compDisplay;
+        $this->compTotal = ( $this->compSkip + $this->compDisplay ) * $this->compDays;
         
 
 

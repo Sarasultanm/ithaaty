@@ -18,20 +18,31 @@ class AdminAdsCreate extends Component
 
 	public function addAds(){
 
-        $data = new Ads;
-        $data->ads_name = $this->ads_name;
-        $data->ads_website = $this->ads_website;
-        $data->ads_location = $this->ads_location;
-        $data->ads_linktolocation = "none";
-        $data->ads_logo = $this->ads_logo->hashName();
-        $data->ads_status = "active";
-        $data->save();  
+        if($this->ads_logo){
 
-        $imagefile = $this->ads_logo->hashName();
-        $path = $this->ads_logo->storeAs('ads/company',$imagefile);
+            $data = new Ads;
+            $data->ads_name = $this->ads_name;
+            $data->ads_website = $this->ads_website;
+            $data->ads_location = $this->ads_location;
+            $data->ads_linktolocation = "none";
+            $data->ads_logo = $this->ads_logo->hashName();
+            $data->ads_status = "active";
+            $data->save();  
 
-        session()->flash('status', 'Added new Company');
-        redirect()->to('admin/ads/');   
+            $imagefile = $this->ads_logo->hashName();
+            $path = $this->ads_logo->storeAs('ads/company',$imagefile);
+
+            session()->flash('status', 'Added new Company');
+            redirect()->to('admin/ads/');   
+
+        }else{
+
+            session()->flash('status', 'Company image not loaded');
+            redirect()->to('admin/ads/');   
+
+        } 
+
+        
     }
 
 

@@ -397,77 +397,106 @@
                                         </div>
                                 </div>
                       </div>
+
+
                       <div class="border-b-2 pb-10 border-green-500 mt-4">            
-                        <h1 class="flex-1 font-bold text-gray-800 text-xl ">Media</h1> 
-                               <p class="mt-1 text-sm text-gray-500">
+                            <h1 class="flex-1 font-bold text-gray-800 text-xl ">Media</h1> 
+                            <p class="mt-1 text-sm text-gray-500">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales quis tortor at cursus.
-                               </p>
-                                <div class="mt-5">
-                                        <label for="email" class="block text-sm font-medium text-gray-700">Video Link</label>
-                                        <div class="mt-1">
-                                          <input type="text" name="website" id="website" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="adslist_videolink">
+                            </p>
 
-                                        </div>
+                             <div x-data="{
+                                  openTab: 'link',
+                                  activeClasses: 'border-custom-pink text-custom-pink font-bold',
+                                  inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                }" 
+                                class="">
+
+
+                                <div class="border-b border-gray-200">
+                                    <ul class="-mb-px flex" >
+                                      <li @click="openTab = 'link'"  :class="openTab === 'link' ? activeClasses : inactiveClasses"   class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
+                                        <a>Link</a>
+                                      </li>
+                                      <li @click="openTab = 'upload'" :class="openTab === 'upload' ? activeClasses : inactiveClasses"  class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                                        <a>Upload</a>
+                                      </li>
+                                    </ul>
                                 </div>
-                      </div>
-                     <div class="border-b-2 pb-10 border-green-500 mt-4">            
-                        <h1 class="flex-1 font-bold text-gray-800 text-xl ">Duration</h1> 
-                               <p class="mt-1 text-sm text-gray-500">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales quis tortor at cursus.
-                               </p>             
+
+
+                                <div  x-show="openTab === 'link'">
+
+                                  <div class="mt-5">
+                                      <label for="email" class="block text-sm font-medium text-gray-700">Video Link</label>
+                                      <div class="mt-1">
+                                        <input type="text" name="website" id="website" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="adslist_videolink">
+
+                                      </div>
+                                  </div>
+
+                                </div>
+
+                                 <div  x-show="openTab === 'upload'">
 
                                 <div class="mt-5">
-                                  <div class="flex">
-                                        <div class="flex-1 mr-2">
-                                                  <label for="email" class="block text-sm font-medium text-gray-700">Skip Duration</label>
-                                                  <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:click="adsComputation($event.target.value,'skip')"  wire:model="adslist_adstype">
-                                                      <option>Select</option>
-                                                      <option value="0">No Skip</option>
-                                                      <!-- <option value="1">1</option>
-                                                      <option value="2">2</option>
-                                                      <option value="3">3</option>
-                                                      <option value="4">4</option> -->
-                                                      <option value="5">5 sec</option>
-                                                  </select> 
-                                        </div>
-                                        <div class="flex-1 ml-2">
-                                                  <label for="email" class="block text-sm font-medium text-gray-700">Display Time</label>
-                                                  <div class="mt-1">
-                                                    <!-- <input type="text" name="website" id="website" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="adslist_displaytime"> -->
-                                                     <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:click="adsComputation($event.target.value,'display')"     wire:model="adslist_displaytime">
-                                                          <option>Select</option>
-                                                          <option value="1%">1%(Preroll)</option>
-                                                          <option value="10%">10%</option>
-                                                          <option value="20%">20%</option>
-                                                          <option value="30%">30%</option>
-                                                          <option value="40%">40%</option>
-                                                          <option value="50%">50%(Midroll)</option>
-                                                          <option value="60%">60%</option>
-                                                          <option value="70%">70%</option>
-                                                          <option value="80%">80%</option>
-                                                          <option value="90%">90%</option>
-                                                          <option value="100%">100%(Postroll)</option>
-                                                      </select> 
-                                                  </div>
-                                        </div>
-                                        <div class="flex-1 ml-2">
-                                                  <label for="email" class="block text-sm font-medium text-gray-700">Days</label>
-                                                  <div class="mt-1">
-                                                    <!-- <input type="text" name="website" id="website" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="adslist_displaytime"> -->
-                                                     <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
-                                                          <option>Select</option>
-                                                          <option value="1%">3 days</option>
-                                                          <option value="10%">7 days</option>
-                                                          <option value="20%">9 days</option>
-                                                          <option value="30%">12 days</option>
-                                                      </select> 
-                                                  </div>
-                                        </div>
+                                     <div x-data="{ isUploading: false, progress: 0, success: false, error:false }" 
+                                       x-on:livewire-upload-start="isUploading = true"
+                                       x-on:livewire-upload-finish="isUploading = false,success = true" 
+                                       x-on:livewire-upload-error="isUploading = false,error= true"
+                                       x-on:livewire-upload-progress="progress = $event.detail.progress">
+
+                                          <label for="email" class="block text-sm font-medium text-gray-700">Upload Logo</label>
+                                          <div class="mt-1">
+                                            <input type="file"  class="" wire:model="adslist_videolink">
+                                          </div>
+
+                                          <div class="mt-5">
+                                            <div x-show="isUploading"  class="relative pt-1">
+                                              <div class="text-center text-gray-700">
+                                                Please wait while uploading the file .. <input x-bind:value="`${progress}%`" disabled style="width: 60px;">
+                                              </div>
+                                              <div  class="overflow-hidden h-2 text-xs flex rounded bg-purple-200 progress">
+                                                <div x-bind:style="`width:${progress}%`"
+                                                  class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom-pink"
+                                                ></div>
+                                              </div>
+                                            </div>
+                                            <p x-show="success" class="text-center text-custom-pink font-bold text-gray-800 text-sm">File Upload Complete</p> 
+                                             <p x-show="error" class="text-center font-bold text-red-800 text-sm">*Error to upload the file</p> 
+                                          </div>
+
+                                         </div>
+
                                   </div>
+
+
+
+                                </div>
+
+                                <div class="mt-5 hidden">
+                                      <label for="email" class="block text-sm font-medium text-gray-700">Video Type</label>
+                                      <div class="mt-1">
+                                        <input type="text" name="website" id="website" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " x-bind:value="openTab" wire:model="adslist_videotype">
+
+                                      </div>
+                                  </div>
+
                             </div>
-                          </div>
+
+
+
+
+
+                            
+                      </div>
+
+
+
+
+                  
                           
-                          <div class="border-b-2 pb-10 pt-5 border-green-500 ">
+                      <div class="border-b-2 pb-10 pt-5 border-green-500 ">
                                <h1 class="flex-1 font-bold text-gray-800 text-xl ">Segments</h1> 
                                <p class="mt-1 text-sm text-gray-500">
                                     Please click the link below to see the documents
@@ -849,23 +878,96 @@
                               </div>
 
 
-                          </div>  
+                          </div> 
+
+                             <div class="border-0 pb-10 border-green-500 mt-4">            
+                        <h1 class="flex-1 font-bold text-gray-800 text-xl ">Duration</h1> 
+                               <p class="mt-1 text-sm text-gray-500">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales quis tortor at cursus.
+                               </p>             
+
+                                <div class="mt-5">
+                                  <div class="flex">
+                                        <div class="flex-1 mr-2">
+                                                  <label for="email" class="block text-sm font-medium text-gray-700">Skip Duration</label>
+                                                  <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:click="adsComputation($event.target.value,'skip')"  wire:model="adslist_adstype">
+                                                     <!--  <option>Select</option> -->
+                                                      <option value="0">No Skip</option>
+                                                      <!-- <option value="1">1</option>
+                                                      <option value="2">2</option>
+                                                      <option value="3">3</option>
+                                                      <option value="4">4</option> -->
+                                                      <option value="5">5 sec</option>
+                                                  </select> 
+                                        </div>
+                                        <div class="flex-1 ml-2">
+                                                  <label for="email" class="block text-sm font-medium text-gray-700">Display Time</label>
+                                                  <div class="mt-1">
+                                                    <!-- <input type="text" name="website" id="website" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="adslist_displaytime"> -->
+                                                     <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:click="adsComputation($event.target.value,'display')"     wire:model="adslist_displaytime">
+                                                          <!-- <option>Select</option> -->
+                                                          <option value="1%">1%(Preroll)</option>
+                                                          <option value="10%">10%</option>
+                                                          <option value="20%">20%</option>
+                                                          <option value="30%">30%</option>
+                                                          <option value="40%">40%</option>
+                                                          <option value="50%">50%(Midroll)</option>
+                                                          <option value="60%">60%</option>
+                                                          <option value="70%">70%</option>
+                                                          <option value="80%">80%</option>
+                                                          <option value="90%">90%</option>
+                                                          <option value="100%">100%(Postroll)</option>
+                                                      </select> 
+                                                  </div>
+                                        </div>
+                                        <div class="flex-1 ml-2">
+                                                  <label for="email" class="block text-sm font-medium text-gray-700">Days</label>
+                                                  <div class="mt-1">
+                                                    <!-- <input type="text" name="website" id="website" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="adslist_displaytime"> -->
+                                                     <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="adslist_days" wire:click="adsComputation($event.target.value,'days')"  >
+                                                         <!--  <option>Select</option> -->
+                                                          <option value="3">3 days</option>
+                                                          <option value="7">7 days</option>
+                                                          <option value="9">9 days</option>
+                                                          <option value="12">12 days</option>
+                                                      </select> 
+                                                  </div>
+                                        </div>
+                                  </div>
+                            </div>
+                          </div>
+
+
 
                           <div class="border-b-2 pb-10 pt-5 border-green-500 lg:px-0 sm:px-3">
                                <h1 class="flex-1 font-bold text-gray-800 text-xl ">Payment Summary</h1> 
                                <p class="mt-1 mb-3 text-sm text-gray-500">
-                                  Actual amount spend for your ads
+                                 Your ad will run for {{ $compDays }} days.
                                </p>
-                               <div class="bg-white py-2 px-3 rounded-md lg:w-1/6 sm:w-1/2">
+                               <div class="bg-white py-2 px-3 rounded-md  lg:w-1/4 sm:w-1/2">
                                  <p class="mt-1 text-sm text-gray-800">
                                    Skip Duration :${{ $compSkip }}
                                  </p>
                                   <p class="mt-1 text-sm text-gray-800">
                                    Display Time :${{ $compDisplay }}
                                  </p>
+                                 <p class="mt-1 text-sm text-gray-800">
+                                   Days : {{ $compDays }} days 
+                                 </p>
+                                 <?php 
+                                 $date = date_create(now());
+                                 date_add($date, date_interval_create_from_date_string($compDays." days"));
+                                 //echo date_format($date, "M d, Y");
+                                 ?>
+                                 <p class="mt-1 text-sm text-gray-800">
+                                   End Date : {{ date_format($date, "M d, Y") }}
+                                 </p>
                                 </div>
-                                <p class="mt-3 text-md text-white bg-custom-pink py-2 px-3  rounded-md  lg:w-1/6 sm:w-1/2">
-                                 Total Budget : <b class="font-bold">${{ $compTotal }}</b>
+                                <p class="mt-3 text-md text-white bg-custom-pink py-2 px-3  rounded-md  lg:w-1/4 sm:w-1/2">
+                                 Total Budget : <b class="font-bold float-right">${{ $compTotal }}</b><br>
+                                  <small> ${{ $compSkip + $compDisplay }} a day x {{ $compDays }} days</small>
+                                  
+                              
                                </p>
 
                           </div>
@@ -875,9 +977,9 @@
 
                           <div class="mt-3 text-right sm:mt-5 mb-5">
                                                 
-                                <button wire:click="addAdsList({{$checkAds->first()->id}})" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+                               <!--  <button wire:click="addAdsList({{$checkAds->first()->id}})" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
                                  Save Video 
-                                </button>
+                                </button> -->
                           </div>
 
 
