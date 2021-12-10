@@ -18,6 +18,8 @@ class EditorAds extends Component
 	public $ads_name,$ads_website,$ads_location,$ads_logo,$ads_file;
     public $ads_list,$adslist_name,$adslist_videolink,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc,$country_slc,$agebracket_list;
 
+    public $compSkip = 0,$compDisplay = 0,$compTotal = 0;
+
 	public function saveAds(){
 
         if($this->ads_logo){ 
@@ -106,6 +108,50 @@ class EditorAds extends Component
         $this->adslist_agebracket = $this->adslist_agebracket."".$bracketText.",";
     }
 
+
+    public function adsComputation($value,$options){
+        if($options == 'skip'){
+            if($value == 'Select'){
+            $this->compSkip = 0;
+            }elseif($value == '0'){
+                 $this->compSkip = 50;
+            }elseif($value == '5'){
+                 $this->compSkip = 25;
+            }
+        }else{
+            if($value == 'Select'){
+            $this->compDisplay = 0;
+            }elseif($value == '1%'){
+                 $this->compDisplay = 100;
+            }elseif($value == '10%'){
+                 $this->compDisplay = 90;
+            }elseif($value == '20%'){
+                 $this->compDisplay = 80;
+            }elseif($value == '30%'){
+                 $this->compDisplay = 70;
+            }elseif($value == '40%'){
+                 $this->compDisplay = 60;
+            }elseif($value == '50%'){
+                 $this->compDisplay = 50;
+            }elseif($value == '60%'){
+                 $this->compDisplay = 40;
+            }elseif($value == '70%'){
+                 $this->compDisplay = 30;
+            }elseif($value == '80%'){
+                 $this->compDisplay = 20;
+            }elseif($value == '90%'){
+                 $this->compDisplay = 10;
+            }elseif($value == '100%'){
+                 $this->compDisplay = 5;
+            }
+
+        }
+        
+        $this->compTotal = $this->compSkip + $this->compDisplay;
+        
+
+
+    }
 
 
     public function render()
