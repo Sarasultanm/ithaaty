@@ -405,7 +405,7 @@
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales quis tortor at cursus.
                             </p>
 
-                             <div x-data="{
+                        <div x-data="{
                                   openTab: 'link',
                                   activeClasses: 'border-custom-pink text-custom-pink font-bold',
                                   inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
@@ -415,7 +415,7 @@
 
                                 <div class="border-b border-gray-200">
                                     <ul class="-mb-px flex" >
-                                      <li @click="openTab = 'link'"  :class="openTab === 'link' ? activeClasses : inactiveClasses"   class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
+                                      <li @click="openTab = 'link'"  :class="openTab === 'link' ? activeClasses : inactiveClasses"   class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
                                         <a>Link</a>
                                       </li>
                                       <li @click="openTab = 'upload'" :class="openTab === 'upload' ? activeClasses : inactiveClasses"  class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
@@ -425,68 +425,71 @@
                                 </div>
 
 
-                                <div  x-show="openTab === 'link'">
+                                <div  x-show="openTab === 'link'" >
 
-                                  <div class="mt-5">
-                                      <label for="email" class="block text-sm font-medium text-gray-700">Video Link</label>
-                                      <div class="mt-1">
-                                        <input type="text" name="website" id="website" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="adslist_videolink">
+                                    <div class="mt-5">
+                                          <label for="email" class="block text-sm font-medium text-gray-700">Video Link</label>
+                                          <div class="mt-1">
+                                            <input type="text" name="website" id="website" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="adslist_videolink">
 
+                                          </div>
+                                          <div class="items-center mt-5">
+                                          <input id="push" name="notification-method" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 float-left" value="link"  wire:model="adslist_videotype">
+                                          <label for="push" class="ml-5 block text-sm font-medium text-gray-700">
+                                            Agree for video link
+                                          </label>
+                                        </div>
                                       </div>
-                                  </div>
 
                                 </div>
 
                                  <div  x-show="openTab === 'upload'">
 
-                                <div class="mt-5">
-                                     <div x-data="{ isUploading: false, progress: 0, success: false, error:false }" 
-                                       x-on:livewire-upload-start="isUploading = true"
-                                       x-on:livewire-upload-finish="isUploading = false,success = true" 
-                                       x-on:livewire-upload-error="isUploading = false,error= true"
-                                       x-on:livewire-upload-progress="progress = $event.detail.progress">
+                                    <div class="mt-5">
+                                             <div x-data="{ isUploading: false, progress: 0, success: false, error:false }" 
+                                               x-on:livewire-upload-start="isUploading = true"
+                                               x-on:livewire-upload-finish="isUploading = false,success = true" 
+                                               x-on:livewire-upload-error="isUploading = false,error= true"
+                                               x-on:livewire-upload-progress="progress = $event.detail.progress">
 
-                                          <label for="email" class="block text-sm font-medium text-gray-700">Upload Logo</label>
-                                          <div class="mt-1">
-                                            <input type="file"  class="" wire:model="adslist_videolink">
+                                                  <label for="email" class="block text-sm font-medium text-gray-700">Upload Logo</label>
+                                                  <div class="mt-1">
+                                                    <input type="file"  class="" wire:model="adslist_videoupload">
+                                                  </div>
+
+                                                  <div class="mt-5">
+                                                    <div x-show="isUploading"  class="relative pt-1">
+                                                      <div class="text-center text-gray-700">
+                                                        Please wait while uploading the file .. <input x-bind:value="`${progress}%`" disabled style="width: 60px;">
+                                                      </div>
+                                                      <div  class="overflow-hidden h-2 text-xs flex rounded bg-purple-200 progress">
+                                                        <div x-bind:style="`width:${progress}%`"
+                                                          class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom-pink"
+                                                        ></div>
+                                                      </div>
+                                                    </div>
+                                                    <p x-show="success" class="text-center text-custom-pink font-bold text-gray-800 text-sm">File Upload Complete</p> 
+                                                     <p x-show="error" class="text-center font-bold text-red-800 text-sm">*Error to upload the file</p> 
+                                                  </div>
+
+                                                 </div>
+
+                                                  <div class="items-center mt-5">
+                                                    <input id="push" name="notification-method" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 float-left"  value="upload"  wire:model="adslist_videotype">
+                                                    <label for="push" class="ml-5 block text-sm font-medium text-gray-700">
+                                                      Agree for file upload
+                                                    </label>
+                                                  </div>
+
                                           </div>
-
-                                          <div class="mt-5">
-                                            <div x-show="isUploading"  class="relative pt-1">
-                                              <div class="text-center text-gray-700">
-                                                Please wait while uploading the file .. <input x-bind:value="`${progress}%`" disabled style="width: 60px;">
-                                              </div>
-                                              <div  class="overflow-hidden h-2 text-xs flex rounded bg-purple-200 progress">
-                                                <div x-bind:style="`width:${progress}%`"
-                                                  class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom-pink"
-                                                ></div>
-                                              </div>
-                                            </div>
-                                            <p x-show="success" class="text-center text-custom-pink font-bold text-gray-800 text-sm">File Upload Complete</p> 
-                                             <p x-show="error" class="text-center font-bold text-red-800 text-sm">*Error to upload the file</p> 
-                                          </div>
-
-                                         </div>
-
-                                  </div>
 
 
 
                                 </div>
 
-                                <div class="mt-5 hidden">
-                                      <label for="email" class="block text-sm font-medium text-gray-700">Video Type</label>
-                                      <div class="mt-1">
-                                        <input type="text" name="website" id="website" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " x-bind:value="openTab" wire:model="adslist_videotype">
-
-                                      </div>
-                                  </div>
+                             
 
                             </div>
-
-
-
-
 
                             
                       </div>
@@ -977,9 +980,9 @@
 
                           <div class="mt-3 text-right sm:mt-5 mb-5">
                                                 
-                               <!--  <button wire:click="addAdsList({{$checkAds->first()->id}})" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+                               <button wire:click="addAdsList({{$checkAds->first()->id}})" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
                                  Save Video 
-                                </button> -->
+                                </button>
                           </div>
 
 

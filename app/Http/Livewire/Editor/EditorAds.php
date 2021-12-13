@@ -16,7 +16,7 @@ class EditorAds extends Component
 	use WithFileUploads;
 
 	public $ads_name,$ads_website,$ads_location,$ads_logo,$ads_file;
-    public $ads_list,$adslist_name,$adslist_videolink,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc,$country_slc,$agebracket_list,$adslist_days,$adslist_videotype,$adslist_end;
+    public $ads_list,$adslist_name,$adslist_videolink,$adslist_videoupload,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc,$country_slc,$agebracket_list,$adslist_days,$adslist_videotype,$adslist_end;
 
     public $compSkip = 50,$compDisplay = 100,$compDays = 3,$compTotal = 450;
 
@@ -54,7 +54,9 @@ class EditorAds extends Component
 
     public function addAdsList($id){
 
-        if($adslist_videotype == 'link'){
+
+        
+        if($this->adslist_videotype === "link"){
 
             $data = new AdsList;
             $data->adslist_id = $id;
@@ -75,13 +77,45 @@ class EditorAds extends Component
             
             $data->save();  
 
+            session()->flash('status', 'New ads added as link');
+            redirect()->to('editor/ads');   
+
+        }elseif($this->adslist_videotype === "upload"){
+
+             if($this->adslist_videoupload){
+
+            $data = new AdsList;
+            $data->adslist_id = $id;
+            $data->adslist_name = $this->adslist_name;
+            $data->adslist_videolink = $this->adslist_videoupload->hashName();
+            $data->adslist_adstype = $this->adslist_adstype;
+            $data->adslist_durationtype = "none";
+            $data->adslist_displaytime = $this->adslist_displaytime;
+            $data->adslist_status = "Pending";
+            $data->adslist_agebracket = $this->adslist_agebracket;
+            $data->adslist_country = $this->adslist_country;
+            $data->adslist_weblink = $this->adslist_weblink;
+            $data->adslist_desc = $this->adslist_desc;
+            $data->adslist_days = $this->adslist_days;
+            $data->adslist_videotype = $this->adslist_videotype;
+            $data->adslist_end = "none";
+            $data->save(); 
+
+             session()->flash('status', 'New ads added as file');
+            redirect()->to('editor/ads');     
+
+            }else{
+                 session()->flash('status', 'Video ads not uploaded!');
+                redirect()->to('editor/ads');   
+            }
+
+
         }
 
 
        
 
-        session()->flash('status', 'New Add Added');
-        redirect()->to('editor/ads');   
+        
 
 
 
@@ -103,6 +137,9 @@ class EditorAds extends Component
 
     public function mount(){
         $this->ads_list = $this->checkAdslist();
+        $this->adslist_displaytime = "1%";
+        $this->adslist_adstype = "0";
+        $this->adslist_days = "3";
     }
 
     public function addCountry(){
@@ -182,6 +219,9 @@ class EditorAds extends Component
 
     }
 
+    // public function insertValue($text){
+    //     $this->adslist_videotype == $text;
+    // }
 
     public function render()
     {
