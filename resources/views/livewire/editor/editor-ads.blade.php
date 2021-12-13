@@ -378,7 +378,7 @@
                                         <label for="email" class="block text-sm font-medium text-gray-700">Title</label>
                                         <div class="mt-1">
                                           <input type="text" name="name" id="name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " wire:model="adslist_name">
-
+                                          @error('adslist_name') <span class="text-xs text-red-600">Empty fields</span> @enderror
                                         </div>
                                 </div>
 
@@ -386,6 +386,7 @@
                                         <label for="email" class="block text-sm font-medium text-gray-700">Description</label>
                                         <div class="mt-1">
                                           <textarea class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " wire:model="adslist_desc"></textarea>
+                                          @error('adslist_desc') <span class="text-xs text-red-600">Empty fields</span> @enderror
                                         </div>
                                 </div>
 
@@ -393,7 +394,7 @@
                                         <label for="email" class="block text-sm font-medium text-gray-700">Website Url</label>
                                         <div class="mt-1">
                                           <input type="text" name="name" id="name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " wire:model="adslist_weblink">
-
+                                          @error('adslist_weblink') <span class="text-xs text-red-600">Empty fields</span> @enderror
                                         </div>
                                 </div>
                       </div>
@@ -434,11 +435,12 @@
 
                                           </div>
                                           <div class="items-center mt-5">
-                                          <input id="push" name="notification-method" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 float-left" value="link"  wire:model="adslist_videotype">
-                                          <label for="push" class="ml-5 block text-sm font-medium text-gray-700">
-                                            Agree for video link
-                                          </label>
-                                        </div>
+                                            <input id="push" name="notification-method" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 float-left" value="link"  wire:model="adslist_videotype">
+                                            <label for="push" class="ml-5 block text-sm font-medium text-gray-700">
+                                              Agree for video link
+                                            </label>
+                                            @error('adslist_videotype') <span class="text-xs text-red-600">Please check this button</span> @enderror
+                                          </div>
                                       </div>
 
                                 </div>
@@ -479,6 +481,7 @@
                                                     <label for="push" class="ml-5 block text-sm font-medium text-gray-700">
                                                       Agree for file upload
                                                     </label>
+                                                     @error('adslist_videotype') <span class="text-xs text-red-600">Please check this button</span> @enderror
                                                   </div>
 
                                           </div>
@@ -768,6 +771,7 @@
                                         <!-- <label  class="block text-sm font-medium text-gray-700">Description</label> -->
                                         <div class="mt-1">
                                           <textarea id="countryList" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " wire:model="adslist_country"></textarea>
+                                          @error('adslist_country') <span class="text-xs text-red-600">Empty fields</span> @enderror
                                         </div>
                                 </div>
                                 
@@ -796,6 +800,7 @@
                                         <!-- <label  class="block text-sm font-medium text-gray-700">Description</label> -->
                                         <div class="mt-1">
                                           <textarea id="countryList" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " wire:model="adslist_agebracket"></textarea>
+                                           @error('adslist_agebracket') <span class="text-xs text-red-600">Empty fields</span> @enderror
                                         </div>
                                 </div>
                                 

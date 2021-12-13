@@ -20,6 +20,22 @@ class EditorAds extends Component
 
     public $compSkip = 50,$compDisplay = 100,$compDays = 3,$compTotal = 450;
 
+
+    protected $rules = [
+        'adslist_name' => 'required',
+        'adslist_desc' => 'required',
+        'adslist_weblink' => 'required',
+        'adslist_videotype' => 'required',
+        'adslist_country' => 'required',
+        'adslist_agebracket' => 'required',
+        'adslist_adstype' => 'required',
+        'adslist_displaytime' => 'required',
+        'adslist_days' => 'required',
+        // 'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav',
+        
+    ];
+
+
 	public function saveAds(){
 
         if($this->ads_logo){ 
@@ -54,7 +70,7 @@ class EditorAds extends Component
 
     public function addAdsList($id){
 
-
+        $this->validate();
         
         if($this->adslist_videotype === "link"){
 
@@ -99,6 +115,7 @@ class EditorAds extends Component
             $data->adslist_days = $this->adslist_days;
             $data->adslist_videotype = $this->adslist_videotype;
             $data->adslist_end = "none";
+
             $data->save(); 
 
              session()->flash('status', 'New ads added as file');
