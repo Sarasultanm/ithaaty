@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Ads;
 use App\Models\AdsList;
 use App\Models\User;
+use App\Models\UserGallery;
 use Auth;
 use Livewire\WithFileUploads;
 

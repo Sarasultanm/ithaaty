@@ -49,7 +49,12 @@ class Audio extends Model
 
     public function get_question(){
         return $this->hasMany('App\Models\UserQa', 'qa_audioid','id');
-    }    
+    }   
+
+    public function get_profilephoto(){
+        return $this->hasMany('App\Models\UserGallery', 'gallery_userid','id')->where(['gallery_type'=>'profile','gallery_typestatus'=>'active']);
+        // return $this->belongsTo('App\Models\User', 'audio_editor', 'id');
+    } 
 
 
 }

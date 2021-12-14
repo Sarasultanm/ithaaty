@@ -7,21 +7,69 @@ use App\Models\User;
 use App\Models\Audio;
 use App\Models\Category;
 use App\Models\UserFollow;
+use App\Models\UserGallery;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use FeedReader;
+use Livewire\WithFileUploads;
+
 
 class EditorSettings extends Component
 {
 
+     use WithFileUploads;
 
-	 public $categoryTitle,$userName,$oldPass,$newPass,$rss_title,$rss_link,$rss_data,$item_title,$displayArr;
+	 public $categoryTitle,$userName,$oldPass,$newPass,$rss_title,$rss_link,$rss_data,$item_title,$displayArr,$profilePhoto,$checkProfilePhoto;
 
      public $listMedia;
      public $arr_category = array();
      public $arr_checkbox = array();
 
 
+    public function savePhoto()
+    {
+        $this->validate([
+            'profilePhoto' => 'image|max:1024',
+        ]);
+
+        $checkProfile = UserGallery::where(['gallery_userid'=>Auth::user()->id,'gallery_type'=>'profile','gallery_typestatus'=>'active']);
+
+        if($checkProfile->count() == 0){
+
+            $data = New UserGallery;
+            $data->gallery_userid = Auth::user()->id;
+            $data->gallery_type = "profile";
+            $data->gallery_typestatus = "active";
+            $data->gallery_path = $this->profilePhoto->hashName();
+            $data->gallery_status = "active";
+            $data->save();
+
+        }else{  
+
+            UserGallery::where('id',$checkProfile->first()->id)
+            ->update([
+                'gallery_typestatus'=> 'draft',
+            ]);
+
+            $data = New UserGallery;
+            $data->gallery_userid = Auth::user()->id;
+            $data->gallery_type = "profile";
+            $data->gallery_typestatus = "active";
+            $data->gallery_path = $this->profilePhoto->hashName();
+            $data->gallery_status = "active";
+            $data->save();
+
+        }
+
+       
+        // $data->ads_logo = $this->ads_logo->hashName();
+        $imagefile = $this->profilePhoto->hashName();
+        $path = $this->profilePhoto->storeAs('users/profile_img',$imagefile);
+
+        session()->flash('status', 'Profile Picture Updated');
+        redirect()->to('/editor/settings');
+
+    }
 
 	 public function addCategory(){
 
@@ -48,7 +96,6 @@ class EditorSettings extends Component
         Auth::user()->update(['name'=>$this->userName]);    
 
         session()->flash('status', 'Update Success');
-
         redirect()->to('/editor/settings');
 
 
@@ -163,6 +210,7 @@ class EditorSettings extends Component
     public function mount(){
 
         $this->userName = Auth::user()->name;
+        // $this->checkProfilePhoto = Auth::user()->get_gallery('profile','active');
 
     }   
 
@@ -191,6 +239,7 @@ class EditorSettings extends Component
 
     	// $categoryList = Category::where('category_owner',Auth::user()->id);
         $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
+
         return view('livewire.editor.editor-settings',compact('categoryList'));
     }
 }

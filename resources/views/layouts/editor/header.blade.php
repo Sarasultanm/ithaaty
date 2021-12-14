@@ -70,7 +70,12 @@
             <div>
               <button type="button" class="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true"  @click="open = !open" aria-haspopup="true" x-bind:aria-expanded="open">
                 <span class="sr-only">Open user menu</span>
-                <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                @if(Auth::user()->get_profilephoto->count() == 0)
+                <img class="h-8 w-8 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">
+                @else
+                <?php $img_path = Auth::user()->get_profilephoto->first()->gallery_path; ?>
+                <img class="h-8 w-8 rounded-full" src="{{ asset('users/profile_img/'.$img_path) }}" alt="">
+                @endif
               </button>
             </div>
 

@@ -53,7 +53,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UserFollow', 'follow_userfollowing','id');
     }
 
-
     public function get_audio(){
         return $this->hasMany('App\Models\Audio', 'audio_editor','id');
     }
@@ -62,6 +61,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UserPlaylist', 'playlist_userid','id');
     }
 
-   
+    public function get_gallery($type,$status){
+        return $this->hasMany('App\Models\UserGallery', 'gallery_userid','id')->where(['gallery_type'=>$type,'gallery_typestatus'=>$status]);
+    }
+
+    public function get_profilephoto(){
+        return $this->hasMany('App\Models\UserGallery', 'gallery_userid','id')->where(['gallery_type'=>'profile','gallery_typestatus'=>'active']);
+    }
     
 }
