@@ -88,7 +88,27 @@
 				              @endif
 				                <div class="mt-2 text-sm text-gray-700 space-y-4">
 				                   <div class="text-white bg-cover h-36">
-				                       <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">    
+				                      <!--  <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">    --> 
+				                      @if(Auth::user()->id == $friends->friend_userid )
+				                      		
+				                      		@if($friends->get_request_user->get_profilephoto->count() == 0)
+					                         <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">
+					                        @else
+					                          <?php $friendprofile_path = $friends->get_request_user->get_profilephoto->first()->gallery_path; ?>
+					                          <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('users/profile_img/'.$friendprofile_path) }}" alt="">
+					                        @endif 
+
+				                      @else
+				                      		@if($friends->get_add_friend->get_profilephoto->count() == 0)
+					                         <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">
+					                        @else
+					                          <?php $friendprofile_path = $friends->get_add_friend->get_profilephoto->first()->gallery_path; ?>
+					                          <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('users/profile_img/'.$friendprofile_path) }}" alt="">
+					                        @endif 
+
+				                      @endif  
+
+				                        
 				                   </div>
 				                </div>
 				                <div>

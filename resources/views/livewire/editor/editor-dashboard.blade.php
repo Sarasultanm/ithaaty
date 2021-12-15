@@ -117,7 +117,13 @@
                 <div>
                   <div class="flex space-x-3">
                     <div class="flex-shrink-0">
-                      <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                      @if($audio->get_user->get_profilephoto->count() == 0)
+                         <img class="h-10 w-10 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">
+                      @else
+                        <?php $profile_path = $audio->get_user->get_profilephoto->first()->gallery_path; ?>
+                        <img class="h-10 w-10 rounded-full" src="{{ asset('users/profile_img/'.$profile_path) }}" alt="">
+                      @endif
+                      
                     </div>
                     <div class="min-w-0 flex-1">
                       <p class="text-sm font-medium text-gray-900">
@@ -319,8 +325,12 @@
 
                     <div class="flex bg-custom-pink p-4 rounded-md">
                       <div >
-                        <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
-                        <img src="{{ asset('images/slider-img/'.$defaul_img) }}" style="width:150px;">
+                        @if($audio->get_thumbnail->count() == 0)
+                           <img src="{{ asset('images/default_podcast.jpg') }}" style="width:150px;">
+                        @else
+                          <?php $img_path = $audio->get_thumbnail->first()->gallery_path; ?>
+                           <img src="{{ asset('users/podcast_img/'.$img_path) }}" style="width:150px;">
+                        @endif
                       </div>
                       <div class="flex-1 pl-5">
                          <p class="text-2xl font-bold text-white">{{ $audio->audio_name }}</p>
@@ -487,7 +497,13 @@
                       <div class="flex space-x-3">
                         
                           <div class="flex-shrink-0">
-                            <img class="h-5 w-5 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                           <!--  <img class="h-5 w-5 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""> -->
+                            @if($comments->get_user->get_profilephoto->count() == 0)
+                               <img class="h-5 w-5 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">
+                            @else
+                              <?php $commentsprofile_path = $comments->get_user->get_profilephoto->first()->gallery_path; ?>
+                              <img class="h-5 w-5 rounded-full" src="{{ asset('users/profile_img/'.$commentsprofile_path) }}" alt="">
+                            @endif
                           </div>
                           <div class="min-w-0 flex-1">
                            <div class=" bg-gray-100 p-2 rounded-md mb-3"> 

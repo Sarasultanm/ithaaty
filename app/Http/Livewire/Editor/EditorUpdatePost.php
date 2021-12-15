@@ -10,6 +10,7 @@ use App\Models\AudioReferences;
 use App\Models\AudioSponsor;
 use App\Models\AudioAffiliate;
 use App\Models\UserQa;
+use App\Models\UserGallery;
 use Auth;
 
 use Livewire\WithFileUploads;
@@ -21,6 +22,7 @@ class EditorUpdatePost extends Component
 
 	public $audio,$a_id,$title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link,$checkAudio,$status;
     public $spon_name,$spon_website,$spon_location,$spon_linkloc,$spon_image,$afi_link,$afi_title,$qa_question;
+    public $profilePhoto,$thumbnail;
     
 	protected $listeners = [
         'refreshParent' =>'$refresh'
@@ -60,7 +62,7 @@ class EditorUpdatePost extends Component
 	        $this->embedlink = $data->audio_path;
 	        $this->hashtags = $data->audio_hashtags;
             $this->status = $data->audio_status;
-
+            // $this->thumbnail = UserGallery::where(['gallery_userid'=>$id,'gallery_type'=>'podcast','gallery_typestatus'=>'active'])
         }else{
         	$this->checkAudio = "false";
         }
@@ -163,6 +165,51 @@ class EditorUpdatePost extends Component
           redirect()->to('editor/dashboard');       
         } 
 
+
+    }
+
+    public function saveThumbnail($audioid)
+    {
+        $this->validate([
+            'thumbnail' => 'image|max:1024',
+        ]);
+
+        $checkThumbnail = UserGallery::where(['gallery_userid'=>$audioid,'gallery_type'=>'podcast','gallery_typestatus'=>'active']);
+
+        if($checkThumbnail->count() == 0){
+
+            $data = New UserGallery;
+            $data->gallery_userid = $audioid;
+            $data->gallery_type = "podcast";
+            $data->gallery_typestatus = "active";
+            $data->gallery_path = $this->thumbnail->hashName();
+            $data->gallery_status = "active";
+            $data->save();
+
+        }else{  
+
+            UserGallery::where('id',$checkThumbnail->first()->id)
+            ->update([
+                'gallery_typestatus'=> 'draft',
+            ]);
+
+            $data = New UserGallery;
+            $data->gallery_userid = $audioid;
+            $data->gallery_type = "podcast";
+            $data->gallery_typestatus = "active";
+            $data->gallery_path = $this->thumbnail->hashName();
+            $data->gallery_status = "active";
+            $data->save();
+
+        }
+
+       
+        // $data->ads_logo = $this->ads_logo->hashName();
+        $imagefile = $this->thumbnail->hashName();
+        $path = $this->thumbnail->storeAs('users/podcast_img',$imagefile);
+
+        session()->flash('status', 'Thumbnail Updated');
+        redirect()->to('editor/podcast/update/'.$audioid);   
 
     }
 

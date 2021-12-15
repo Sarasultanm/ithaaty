@@ -31,7 +31,13 @@
               <article aria-labelledby="question-title-81614">
                 <div class="mt-2 text-sm text-gray-700 space-y-4">
                    <div class="text-white bg-cover h-36">
-                       <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                        @if($userInfo->get_profilephoto->count() == 0)
+                               <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">
+                        @else
+                          <?php $userviewprofile = $userInfo->get_profilephoto->first()->gallery_path; ?>
+                          <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('users/profile_img/'.$userviewprofile) }}" alt="">
+                        @endif   
+                       <!-- <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""> -->
                    </div>
                 </div>
                 <div>

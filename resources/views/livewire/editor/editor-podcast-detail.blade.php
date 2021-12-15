@@ -566,7 +566,13 @@
                  @foreach($audio->get_comments as $comments)
                     <li class="py-3 flex justify-between items-center">
                         <div class="flex items-center">
-                          <img src="{{ asset('images/slider-img/slide5.jpg') }}" alt="" class="w-8 h-8">
+                         <!--  <img src="{{ asset('images/slider-img/slide5.jpg') }}" alt="" class="w-8 h-8"> -->
+                            @if($comments->get_user->get_profilephoto->count() == 0)
+                               <img class="w-8 h-8" src="{{ asset('images/default_user.jpg') }}" alt="">
+                            @else
+                              <?php $podDetailsimg = $comments->get_user->get_profilephoto->first()->gallery_path; ?>
+                              <img class="w-8 h-8" src="{{ asset('users/profile_img/'.$podDetailsimg) }}" alt="">
+                            @endif
                            <div class="ml-4 ">
                              <p class="text-sm font-medium text-gray-900">{{ $comments->get_user->name }}</p>
                              <p class="text-sm text-gray-500">{{ $comments->coms_message }}</p>

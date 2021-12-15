@@ -86,29 +86,29 @@
 			            </div>
 
 				        <div class="border-t-2 border-custom-pink ">	
-				        	<div class="mt-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">Title</label>
-			                    <div class="mt-1">
-			                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="title">
-			                    </div>
-					        </div>
+				    		<div class="mt-5">
+						                    <label for="email" class="block text-sm font-medium text-gray-700">Title</label>
+						                    <div class="mt-1">
+						                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="title">
+						                    </div>
+								        </div>
 
-			              	 <div class="mt-5">
+						              	 <div class="mt-5">
 
-								<label for="email" class="block text-sm font-medium text-gray-700">Category</label>
-								@if($categoryList->count() == 0 )
-			      	 			 <span class="text-sm font-medium text-red-600">Add category in the settings</span>
-			      	 			@else
-			      	 			<select id="country" name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="category">
-			                        <option>Select</option>
-			                        @foreach($categoryList->get() as $cat)
-			                        <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
-			                        @endforeach
-			             		 </select> 
+											<label for="email" class="block text-sm font-medium text-gray-700">Category</label>
+											@if($categoryList->count() == 0 )
+						      	 			 <span class="text-sm font-medium text-red-600">Add category in the settings</span>
+						      	 			@else
+						      	 			<select id="country" name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="category">
+						                        <option>Select</option>
+						                        @foreach($categoryList->get() as $cat)
+						                        <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
+						                        @endforeach
+						             		 </select> 
 
-			      	 			@endif
-				    					
-				    		</div>
+						      	 			@endif
+							    					
+							    		</div>
 
 			             	
 			                <div class="mt-5">
@@ -166,6 +166,74 @@
 							            <textarea id="about" name="about" rows="15" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="summary" ></textarea>
 							          </div>
 				    		</div>
+
+
+				    		<div class="mt-5">
+				    				<div class="block text-sm font-medium text-gray-700"> Thumbnail </div>
+				    				<div class="mt-2 w-1/4">
+				    					 <div x-data="{ isUploading: false, progress: 0, success: false, error:false }" 
+                                               x-on:livewire-upload-start="isUploading = true"
+                                               x-on:livewire-upload-finish="isUploading = false,success = true" 
+                                               x-on:livewire-upload-error="isUploading = false,error= true"
+                                               x-on:livewire-upload-progress="progress = $event.detail.progress">
+
+			                                <div class="hidden relative rounded-md overflow-hidden lg:block">
+			                                 @if($this->audio->get_thumbnail->count() == 0)
+
+				                                  @if($thumbnail)
+							                    		  <img class="relative rounded-md w-auto" src="{{ $thumbnail->temporaryUrl() }}" alt="">
+							                      @else
+							                    		  <img class="relative rounded-md w-auto " src="{{ asset('images/default_podcast.jpg') }}" alt=""> 
+							                      @endif
+
+			                                 @else
+
+			                                 	  @if($thumbnail) 
+							                    		  <img class="relative rounded-md w-auto" src="{{ $thumbnail->temporaryUrl() }}" alt="">
+							                      @else
+							                      		  <?php 
+							                      		  	$img_path = $this->audio->get_thumbnail->first()->gallery_path; 
+							                      		  ?>
+							                    		  <img class="relative rounded-md w-auto" src="{{ asset('users/podcast_img/'.$img_path) }}" alt=""> 
+							                      @endif
+
+			                                 @endif
+						                   
+						                      
+						                      <label for="desktop-user-photo" class="absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100">
+						                        <button>Change</button>
+						                        <span class="sr-only"> user photo</span>
+						                        <input type="file" id="desktop-user-photo" name="user-photo" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md" wire:model="thumbnail">
+						                      </label>
+						                    </div>
+
+                                               <div class="mt-5">
+                                                <div x-show="isUploading"  class="relative pt-1">
+                                                 
+                                                  <div  class="overflow-hidden h-2 text-xs flex rounded bg-purple-200 progress">
+                                                    <div x-bind:style="`width:${progress}%`"
+                                                      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom-pink"
+                                                    ></div>
+                                                  </div>
+                                                </div>
+                                                <center>
+                                                	<button wire:click="saveThumbnail({{$this->a_id}})" x-show="success" class="py-2 px-4 text-center  text-white bg-custom-pink font-bold text-sm">Save Changes</button>
+                                                </center>
+                                              
+
+                                                 <p x-show="error" class="text-center font-bold text-red-800 text-sm">*Error to upload the file</p> 
+                                              </div>
+
+                                		</div>
+
+
+				    				</div>
+				    		</div>
+
+
+
+
+
 
 						</div>
 

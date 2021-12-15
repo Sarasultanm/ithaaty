@@ -56,5 +56,10 @@ class Audio extends Model
         // return $this->belongsTo('App\Models\User', 'audio_editor', 'id');
     } 
 
+    public function get_thumbnail(){
+        return $this->hasMany('App\Models\UserGallery', 'gallery_userid','id')->where(['gallery_type'=>'podcast','gallery_typestatus'=>'active']);
+    // return $this->belongsTo('App\Models\User', 'audio_editor', 'id');
+    } 
+
 
 }

@@ -71,10 +71,10 @@
               <button type="button" class="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true"  @click="open = !open" aria-haspopup="true" x-bind:aria-expanded="open">
                 <span class="sr-only">Open user menu</span>
                 @if(Auth::user()->get_profilephoto->count() == 0)
-                <img class="h-8 w-8 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">
+                   <img class="h-8 w-8 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">
                 @else
-                <?php $img_path = Auth::user()->get_profilephoto->first()->gallery_path; ?>
-                <img class="h-8 w-8 rounded-full" src="{{ asset('users/profile_img/'.$img_path) }}" alt="">
+                  <?php $img_path = Auth::user()->get_profilephoto->first()->gallery_path; ?>
+                  <img class="h-8 w-8 rounded-full" src="{{ asset('users/profile_img/'.$img_path) }}" alt="">
                 @endif
               </button>
             </div>
