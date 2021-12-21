@@ -12,7 +12,7 @@ use Auth;
 use Illuminate\Support\Facades\Hash;
 use FeedReader;
 use Livewire\WithFileUploads;
-
+use Illuminate\Support\Facades\Storage;
 
 class EditorSettings extends Component
 {
@@ -62,9 +62,14 @@ class EditorSettings extends Component
         }
 
        
-        // $data->ads_logo = $this->ads_logo->hashName();
+        
         $imagefile = $this->profilePhoto->hashName();
-        $path = $this->profilePhoto->storeAs('users/profile_img',$imagefile);
+        // local
+        $local_storage = $this->profilePhoto->storeAs('users/profile_img',$imagefile);
+        // s3
+        $s3_storage = $this->profilePhoto->store('users/profile_img/', 's3');
+
+        
 
         session()->flash('status', 'Profile Picture Updated');
         redirect()->to('/editor/settings');

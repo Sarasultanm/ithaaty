@@ -57,6 +57,8 @@ class EditorAds extends Component
             $imagefile = $this->ads_logo->hashName();
             $path = $this->ads_logo->storeAs('ads/company',$imagefile);
 
+             // $s3_storage = $this->ads_logo->store('ads/company/', 's3');
+
             session()->flash('status', 'Please wait for the admin confirmation about your company');
             redirect()->to('editor/ads');   
 

@@ -52,6 +52,7 @@ class RegisteredUserController extends Controller
             'birthday' => $request->months." ".$request->days.", ".$request->years,
             'country' => $request->location,
             'age' => '0',
+            'plan' => '1',
         ]);
 
         // event(new Registered($user));

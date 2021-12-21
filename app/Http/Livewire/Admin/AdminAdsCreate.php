@@ -17,6 +17,10 @@ class AdminAdsCreate extends Component
 
 
 	public function addAds(){
+       
+        // $this->validate([
+        //     'ads_logo' => 'image|max:1024',
+        // ]);
 
         if($this->ads_logo){
 
@@ -27,10 +31,16 @@ class AdminAdsCreate extends Component
             $data->ads_linktolocation = "none";
             $data->ads_logo = $this->ads_logo->hashName();
             $data->ads_status = "active";
+            $data->ads_ownerid = Auth::user()->id;
+            $data->ads_filetype = "none";
+            $data->ads_filelink = "none";
+            $data->ads_filepath = "none";
             $data->save();  
 
             $imagefile = $this->ads_logo->hashName();
             $path = $this->ads_logo->storeAs('ads/company',$imagefile);
+
+            // $s3_storage = $this->ads_logo->store('audio/', 's3');
 
             session()->flash('status', 'Added new Company');
             redirect()->to('admin/ads/');   

@@ -91,8 +91,10 @@
                         </div>
 
                       </div>
+
                       <p x-show="success" class="text-center text-custom-pink font-bold text-gray-800 text-sm">File Upload Complete</p> 
                        <p x-show="error" class="text-center font-bold text-red-800 text-sm">*Error to upload the file</p> 
+
                     </div>
 
                   <!--   <div class="mt">
@@ -104,15 +106,18 @@
 
                    </div>
 
+                   <!--  @error('ads_logo')  <p x-show="error" class="text-center font-bold text-red-800 text-sm">Maximum Upload Size is 1MB</p>  @enderror   -->             
 				    </div>
 
 
 		    </div>
   			<div class="mt-3 text-right sm:mt-5 mb-5">
-  				              			
+  				     
   		        <button wire:click="addAds()" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
   		         Save 
   		        </button>
+
+
   			</div>
 
         	<!-- table list-->

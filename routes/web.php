@@ -16,7 +16,8 @@ use App\Http\Livewire\Admin\AdminAdsCreate;
 use App\Http\Livewire\Admin\AdminAdsDetails;
 use App\Http\Livewire\Admin\AdminAdsSetup;
 use App\Http\Livewire\Admin\AdminCreateAds;
-
+use App\Http\Livewire\Admin\AdminPlans;
+use App\Http\Livewire\Admin\AdminPlanCreate;
 
 /*-- Editor ---*/
 use App\Http\Middleware\Editor;
@@ -81,6 +82,10 @@ Route::get('/podcaster', [MainController::class, 'viewPodcaster'])->name('podcas
 Route::get('/aboutus', [MainController::class, 'viewAboutus'])->name('aboutus');
 Route::get('/advertise', [MainController::class, 'viewAdvertise'])->name('advertise');
 
+Route::get('rss/feed/{username}', [MainController::class, 'viewGenerateRSS'])->name('generateRSS');
+// https://anchor.fm/s/6aa1b994/podcast/rss
+
+
 
 Route::group(['middleware' => Administrator::class,'prefix'=>'admin'], function(){
 
@@ -93,7 +98,8 @@ Route::group(['middleware' => Administrator::class,'prefix'=>'admin'], function(
 	Route::get('ads/details/{id}',AdminAdsDetails::class)->name('adminAdsDetails');
 	Route::get('ads/setup/{id}',AdminAdsSetup::class)->name('adminAdsSetup');
 	Route::get('ads/adsCreate',AdminCreateAds::class)->name('adminCreateAds');
-
+	Route::get('plans',AdminPlans::class)->name('adminPlans');
+    Route::get('plans/create',AdminPlanCreate::class)->name('adminPlansCreate');
 });
 
 

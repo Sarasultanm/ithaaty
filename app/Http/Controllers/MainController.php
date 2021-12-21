@@ -93,5 +93,14 @@ class MainController extends Controller
 	}
 
 
+	public function viewGenerateRSS($username){
+		$name = $username;
+
+		return view('rss.feed',compact('name'));
+	}
+
+
+
+
 
 }
