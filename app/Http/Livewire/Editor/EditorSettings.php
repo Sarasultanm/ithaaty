@@ -67,7 +67,7 @@ class EditorSettings extends Component
         // local
         $local_storage = $this->profilePhoto->storeAs('users/profile_img',$imagefile);
         // s3
-        $s3_storage = $this->profilePhoto->store('users/profile_img/', 's3');
+       // $s3_storage = $this->profilePhoto->store('users/profile_img/', 's3');
 
         
 
