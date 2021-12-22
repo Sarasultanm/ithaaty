@@ -16,6 +16,7 @@ use App\Models\UserViews;
 use Auth;
 use Share;
 use URL;
+use Request;
 
 use Livewire\WithFileUploads;
 
@@ -204,6 +205,7 @@ class EditorDashboard extends Component
              $data->view_type = "view";
              $data->view_status = "active";
              $data->view_ownerid = $audio_editor;
+             $data->user_ip = Request::ip();
              $data->save();
 
              $notif = new UserNotifications;
