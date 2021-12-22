@@ -29,21 +29,41 @@
                Podcast
               </p>
 
-            
-             <x-nav-link-custom :href="route('editorPodcast')" :active="request()->routeIs('editorPodcast','editorPodcastUpdate','editorPodcastDetails')">
-              <!-- Heroicon name: outline/fire -->
-              <svg xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-              </svg><span class="truncate">My Podcast</span>
-            </x-nav-link-custom>
+             @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+
+             @else
+
+              @if(Auth::user()->get_plan->check_features('p3')->count() != 0 || Auth::user()->get_plan->check_features('p2')->count() != 0 )
+                  <x-nav-link-custom :href="route('editorPodcast')" :active="request()->routeIs('editorPodcast','editorPodcastUpdate','editorPodcastDetails')">
+                  <!-- Heroicon name: outline/fire -->
+                  <svg xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                  </svg><span class="truncate">My Podcast</span>
+                </x-nav-link-custom>
+               @endif
+             @endif
+             
+             @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+
+             @else
+
+             @if(Auth::user()->get_plan->check_features('a1')->count() == 0 )
+
+               @if(Auth::user()->get_audio->count() != 0)
+               <x-nav-link-custom :href="route('editorOverview')" :active="request()->routeIs('editorOverview')">
+                <!-- Heroicon name: outline/fire -->
+                <svg xmlns="http://www.w3.org/2000/svg"   fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg><span class="truncate">Analytics</span>
+               </x-nav-link-custom>
+                @endif
+
+              @endif  
+
+             @endif
            
-             @if(Auth::user()->get_audio->count() != 0)
-            <x-nav-link-custom :href="route('editorOverview')" :active="request()->routeIs('editorOverview')">
-              <!-- Heroicon name: outline/fire -->
-              <svg xmlns="http://www.w3.org/2000/svg"   fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg><span class="truncate">Analytics</span>
-             </x-nav-link-custom>
-              @endif
+             
+
+
              <x-nav-link-custom :href="route('editorNotes')" :active="request()->routeIs('editorNotes')">
               <!-- Heroicon name: outline/fire -->
               <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -118,6 +138,14 @@
             <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
                Others
             </p>    
+
+
+            <x-nav-link-custom :href="route('editorPlans')" :active="request()->routeIs('editorPlans')">
+              <!-- Heroicon name: outline/fire -->
+                <svg xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg><span class="truncate">Plans</span>
+             </x-nav-link-custom>
 
              <x-nav-link-custom :href="route('editorSubscribers')" :active="request()->routeIs('editorSubscribers')">
               <!-- Heroicon name: outline/fire -->

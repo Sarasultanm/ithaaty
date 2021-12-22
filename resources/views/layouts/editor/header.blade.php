@@ -53,8 +53,10 @@
 
             <div x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false"  class="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
 	          <p class="text-sm font-medium text-gray-900 text-right">
-              @if(Auth::user()->plan == '1')
+              @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-gray-800 mr-3 border-red-500 border-2">Free</span>
+              @else
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-gray-800 mr-3 border-red-500 border-2">{{ Auth::user()->get_plan->plan_name }}</span>
 
               @endif
 	          

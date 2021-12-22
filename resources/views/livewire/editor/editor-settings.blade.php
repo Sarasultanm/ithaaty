@@ -77,8 +77,8 @@
 			                <div class="mt-6 grid grid-cols-4 gap-6">
 
 			                  <div class="col-span-4 sm:col-span-4">
-			                  	<h3 class="text-md leading-6 font-medium text-gray-900">Name</h3>
-			                    <input wire:model="userName" type="text" name="first_name" id="first_name" autocomplete="cc-given-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+			                  	<h3 class="text-md leading-6 font-medium text-gray-900">Username</h3>
+			                    <input wire:model="userAlias" type="text" name="first_name" id="first_name" autocomplete="cc-given-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
 			                  </div>
 
 			                  <div class="col-span-4 sm:col-span-4 text-right">

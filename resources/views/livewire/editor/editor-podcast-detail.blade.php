@@ -26,6 +26,12 @@
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
+      @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+
+      @else
+
+      @if(Auth::user()->get_plan->check_features('p3')->count() != 0 || Auth::user()->get_plan->check_features('p2')->count() != 0 )
+
       <main class="col-span-10">
         <div class="w-full ">
              <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
@@ -170,6 +176,54 @@
 			  	</div>
 
 			  	<div x-show="openTab === 2">
+
+            @if(Auth::user()->get_plan->check_features('a3')->count() != 0 )
+  
+            <div class="grid gap-4 grid-cols-12 mb-5">
+
+                <div class="sm:col-span-12 lg:col-span-4  p-2 ">
+                    <div class="relative bg-white py-6 px-4 sm:py-4 sm:px-4 shadow rounded-lg overflow-hidden">
+                     <p class="text-sm font-medium text-gray-500 truncate">Total User Views</p>
+                      <dd class="flex items-baseline">
+                        <p class="text-2xl font-semibold text-gray-900">
+                         0
+                        </p>
+                      </dd>
+                    </div>
+                </div>
+                
+
+                <div class="sm:col-span-12 lg:col-span-4  p-2 ">
+                    <div class="relative bg-white py-6 px-4 sm:py-4 sm:px-4  shadow rounded-lg overflow-hidden">
+                     <p class="text-sm font-medium text-gray-500 truncate">Unique Users</p>
+                      <dd class="flex items-baseline">
+                        <p class="text-2xl font-semibold text-gray-900">
+                           0
+                        </p>
+                      </dd>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-12 lg:col-span-4  p-2 ">
+                    <div class="relative bg-white py-6 px-4 sm:py-4 sm:px-4  shadow rounded-lg overflow-hidden">
+                       <p class="text-sm font-medium text-gray-500 truncate">Unique IP</p>
+                      <dd class="flex items-baseline">
+                        <p class="text-2xl font-semibold text-gray-900">
+                         0
+                        </p>
+                      </dd>
+                    </div>
+                </div>
+
+            </div>
+             @endif  
+
+
+
+
+
+
+
 			  	
           <div class="shadow-lg rounded-lg overflow-hidden">
 					  <div class="py-3 px-5 bg-gray-50">
@@ -222,6 +276,12 @@
 					  );
 					</script>
 
+
+          @if(Auth::user()->get_plan->check_features('o6')->count() != 0 )
+
+
+          
+
           <div class="shadow-lg rounded-lg overflow-hidden mt-10">
             <div class="py-3 px-5 bg-gray-50">
                 Word Counter
@@ -269,6 +329,7 @@
              </div>
           </div>
 
+          @endif
 
 			  	</div>	
 
@@ -707,76 +768,15 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       </main>
+      @endif
+      @endif
       <!-- aside -->
     
       <!-- aside -->
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

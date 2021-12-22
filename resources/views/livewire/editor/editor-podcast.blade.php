@@ -30,6 +30,13 @@
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
+      @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+
+      @else
+
+      @if(Auth::user()->get_plan->check_features('p3')->count() != 0 || Auth::user()->get_plan->check_features('p2')->count() != 0 )
+
+
       <main class="col-span-10">
         <div class="w-full ">
              <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
@@ -37,9 +44,15 @@
 
         <div class=" w-full flex">
             <div class="flex-1">
-               <h1 class="font-bold text-gray-800 text-xl">My Podcast</h1> 
+               <h1 class="font-bold text-gray-800 text-xl">My Podcast </h1> 
+               @if(empty(Auth::user()->alias))
+               <small class="">Click <a href="{{ route('editorSettings') }}" class="text-custom-pink pointer">settings</a> and update your name</small>
+               @else
+               <small class="text-custom-pink">@ {{Auth::user()->alias}} </small>
+               @endif
             </div>
             <div>
+
                 @if(Auth::user()->get_audio->count() != 0)
                 <a href="{{ route('editorSettings') }}" class=" inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white sm:col-start-2 sm:text-sm">Import RSS</a>
                 <a href="{{ route('editorPodcastCreate') }}" class=" inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white sm:col-start-2 sm:text-sm">Add Podcast</a>
@@ -179,9 +192,16 @@
         </div>  
         <!-- col-4 -->
         @else
+        @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
 
+         
+
+        @else
         <div class="col-span-12">
 
+              <!-- upload by rss -->
+
+              @if(Auth::user()->get_plan->check_features('p3')->count() != 0 )
 
                   <div class="shadow sm:rounded-md sm:overflow-hidden">
                     <div class="bg-white py-6 px-4 sm:p-6">
@@ -235,6 +255,11 @@
                       </div>
                        <?php } ?>
                 </section>
+                @endif
+            <!-- upload by rss -->
+              
+             <!-- upload by embed -->
+              @if(Auth::user()->get_plan->check_features('p2')->count() != 0 )
 
                   <div class="relative my-10">
                     <div class="absolute inset-0 flex items-center" aria-hidden="true">
@@ -252,7 +277,7 @@
                     <div class="bg-white py-6 px-4 sm:p-6">
                       <div class="grid grid-cols-4 gap-6">
                         <div class="col-span-4 sm:col-span-2">
-                         <h2 id="payment_details_heading" class="text-lg leading-6 font-medium text-gray-900">Upload Podcast</h2>
+                         <h2 id="payment_details_heading" class="text-lg leading-6 font-medium text-gray-900">Upload Podcast by Emded</h2>
                         <p class="mt-1 text-sm text-gray-500">Quisque sit amet ipsum maximus, vulputate elit non, mattis libero. Ut sed justo ligula.</p>
                         </div>
 
@@ -266,8 +291,48 @@
                     </div>
                    
                   </div>
+                  @endif
+              <!-- upload by embed -->     
 
+              <!-- upload by file -->
+
+              @if(Auth::user()->get_plan->check_features('u1')->count() == 0 )
+
+                  <div class="relative my-10">
+                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                      <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center">
+                      <span class="px-2 bg-white text-sm text-gray-500">
+                        OR
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="shadow sm:rounded-md sm:overflow-hidden">
+                    <div class="bg-white py-6 px-4 sm:p-6">
+                      <div class="grid grid-cols-4 gap-6">
+                        <div class="col-span-4 sm:col-span-2">
+                         <h2 id="payment_details_heading" class="text-lg leading-6 font-medium text-gray-900">Upload Podcast by File</h2>
+                        <p class="mt-1 text-sm text-gray-500">Quisque sit amet ipsum maximus, vulputate elit non, mattis libero. Ut sed justo ligula.</p>
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-2 text-right mt-5">
+                          <a  href="{{ route('editorPodcastCreate') }}" class="bg-custom-pink border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white ">
+                             Create Podcast
+                            </a>
+                        </div>
+
+                      </div>
+                    </div>
+                   
+                  </div>
+                  @endif
+                 <!-- upload by file -->
         </div>
+
+        @endif
+        
 
         @endif
 
@@ -280,50 +345,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       </main>
+         @endif
+      @endif
       <!-- aside -->
     
       <!-- aside -->

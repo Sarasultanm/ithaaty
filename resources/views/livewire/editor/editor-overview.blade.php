@@ -9,6 +9,9 @@
             
 
 
+
+
+
 <div class="min-h-screen bg-gray-100">
   <!--
     When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars
@@ -25,6 +28,13 @@
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
+
+      @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+
+			@else
+
+			@if(Auth::user()->get_plan->check_features('a1')->count() == 0 )
+
       <main class="col-span-10">
 
         <div class="mt-4">
@@ -32,7 +42,12 @@
           	 <h1 class="font-bold text-gray-800 text-xl">Overview</h1> 
           </div> -->
            <div class=" w-full ">
-                <h1 class="font-bold text-gray-800 text-xl">Analytics</h1> 
+           		@if(Auth::user()->get_plan->check_features('a2')->count() != 0 )
+                <h1 class="font-bold text-gray-800 text-xl">Default Analytics</h1> 
+              @endif 
+              @if(Auth::user()->get_plan->check_features('a3')->count() != 0 )
+                <h1 class="font-bold text-gray-800 text-xl">Advance Analytics</h1> 
+              @endif  
          </div> 
            <div class="w-full ">
           	 <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
@@ -305,13 +320,14 @@
           
         </div>
       </main>
+      	@endif
+ @endif
       <!-- aside -->
     
       <!-- aside -->
     </div>
   </div>
 </div>
-
 
 
 

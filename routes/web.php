@@ -36,8 +36,6 @@ use App\Http\Livewire\Editor\EditorAdsPodcast;
 use App\Http\Livewire\Editor\EditorActivity;
 use App\Http\Livewire\Editor\EditorFriends;
 
-
-
 use App\Http\Livewire\Editor\EditorContact;
 use App\Http\Livewire\Editor\EditorNotification;
 use App\Http\Livewire\Editor\EditorSubscribers;
@@ -48,6 +46,7 @@ use App\Http\Livewire\Editor\EditorUpdatePost;
 use App\Http\Livewire\Editor\EditorPlaylist;
 use App\Http\Livewire\Editor\EditorPlaylistDetails;
 use App\Http\Livewire\Editor\EditorFollowing;
+use App\Http\Livewire\Editor\EditorPlans;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -142,6 +141,8 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 	Route::get('playlist/{id}',EditorPlaylist::class)->name('editorPlaylist');
 	Route::get('playlist',EditorPlaylistDetails::class)->name('editorPlaylistDetails');
 	Route::get('following',EditorFollowing::class)->name('editorFollowing');
+
+	Route::get('plans',EditorPlans::class)->name('editorPlans');
 });
 
 

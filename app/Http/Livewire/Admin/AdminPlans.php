@@ -16,6 +16,8 @@ class AdminPlans extends Component
 
 	public function setDefault($id){
 
+        $checkPlan = UserPlan::where('plan_status','default')->count();
+
 		UserPlan::where('id',$id)
             ->update(['plan_status'=> 'default']);
     

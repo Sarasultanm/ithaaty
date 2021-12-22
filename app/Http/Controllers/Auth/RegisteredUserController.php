@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -42,6 +44,7 @@ class RegisteredUserController extends Controller
             'gender' => 'required',
             'location' => 'required',
         ]);
+        $randomStr = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 5);
 
         $user = User::create([
             'name' => $request->name,
@@ -52,7 +55,8 @@ class RegisteredUserController extends Controller
             'birthday' => $request->months." ".$request->days.", ".$request->years,
             'country' => $request->location,
             'age' => '0',
-            'plan' => '1',
+            'plan' => 'new',
+            'alias' => "User".$randomStr,
         ]);
 
         // event(new Registered($user));

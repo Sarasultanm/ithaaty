@@ -26,6 +26,7 @@ class User extends Authenticatable
         'country',
         'age',
         'plan',
+        'alias',
     ];
 
     /**
@@ -68,6 +69,10 @@ class User extends Authenticatable
 
     public function get_profilephoto(){
         return $this->hasMany('App\Models\UserGallery', 'gallery_userid','id')->where(['gallery_type'=>'profile','gallery_typestatus'=>'active']);
+    }
+
+    public function get_plan(){
+        return $this->belongsTo('App\Models\UserPlan','plan','id');
     }
     
 }

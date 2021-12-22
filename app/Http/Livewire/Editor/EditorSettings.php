@@ -19,7 +19,7 @@ class EditorSettings extends Component
 
      use WithFileUploads;
 
-	 public $categoryTitle,$userName,$oldPass,$newPass,$rss_title,$rss_link,$rss_data,$item_title,$displayArr,$profilePhoto,$checkProfilePhoto;
+	 public $categoryTitle,$userName,$oldPass,$newPass,$rss_title,$rss_link,$rss_data,$item_title,$displayArr,$profilePhoto,$checkProfilePhoto,$userAlias;
 
      public $listMedia;
      public $arr_category = array();
@@ -67,7 +67,7 @@ class EditorSettings extends Component
         // local
         $local_storage = $this->profilePhoto->storeAs('users/profile_img',$imagefile);
         // s3
-       // $s3_storage = $this->profilePhoto->store('users/profile_img/', 's3');
+        $s3_storage = $this->profilePhoto->store('users/profile_img/', 's3');
 
         
 
@@ -98,7 +98,7 @@ class EditorSettings extends Component
 
     public function updateName(){
 
-        Auth::user()->update(['name'=>$this->userName]);    
+        Auth::user()->update(['alias'=>$this->userAlias]);    
 
         session()->flash('status', 'Update Success');
         redirect()->to('/editor/settings');
@@ -214,7 +214,7 @@ class EditorSettings extends Component
 
     public function mount(){
 
-        $this->userName = Auth::user()->name;
+        $this->userAlias = Auth::user()->alias;
         // $this->checkProfilePhoto = Auth::user()->get_gallery('profile','active');
 
     }   

@@ -687,8 +687,14 @@
           </ul>
         </div>
       </main>
+       @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+
+       @else
+        
+         @include('layouts.editor.aside')
+       @endif
       <!-- aside -->
-      @include('layouts.editor.aside')
+    
       <!-- aside -->
     </div>
   </div>

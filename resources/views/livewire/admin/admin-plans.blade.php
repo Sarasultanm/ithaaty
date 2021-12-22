@@ -78,7 +78,7 @@
 			          </p>
 			          <a href="#" class="mt-8 block w-full bg-custom-pink border border-custom-pink rounded-md py-2 text-sm font-semibold text-white text-center hover-bg-custom-pink">Update Plan</a>
 			        </div>
-			        <div class="pt-6 pb-8 px-6">
+			        <div class="h-3/5 pt-6 pb-8 px-6">
 			          <h3 class="text-xs font-medium text-gray-900 tracking-wide uppercase">What's included</h3>
 			          <ul role="list" class="mt-6 space-y-4">
 			          	@foreach($plan->get_features()->orderBy('planoption_options')->get() as $features)
@@ -96,13 +96,13 @@
 			          </ul>
 			        
 			        </div>
-			        <div class="absolute bottom-0 p-2">
+			        <div class=" bottom-0 p-2">
 			        	<div class="relative flex items-start">
                         <div class="flex items-center h-5">
-                          <input id="default" name="default_method"  type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                          <input id="default" name="default_method"   type="radio"  class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded <?php echo ($plan->plan_status == 'default') ? "bg-blue-600 border-blue-600 ring-indigo-500" : "false"; ?>" wire:click="setDefault({{$plan->id}})">
                         </div>
                         <div class="ml-3 text-sm pb-3">
-                          <label for="comments" class="font-bold text-gray-900">Set as Default</label>
+                          <label for="comments" class="font-bold text-gray-900">Set as Default </label>
                           <p id="comments-description" class="text-xs text-gray-500">This is will set as a default<br> plan for new users</p>
                         </div>
                       </div>

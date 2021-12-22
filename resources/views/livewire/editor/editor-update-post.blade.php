@@ -26,6 +26,13 @@
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
+
+      @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+
+      @else
+
+      @if(Auth::user()->get_plan->check_features('p3')->count() != 0 || Auth::user()->get_plan->check_features('p2')->count() != 0 )
+
       <main class="lg:col-span-10 xl:col-span-10">
 
         <div class="mt-4">
@@ -55,19 +62,26 @@
 				      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
 				        <a>Embed</a>
 				      </li>
+				       @if(Auth::user()->get_plan->check_features('o4')->count() != 0 )
 		             <li @click="openTab = 3"  :class="openTab === 3 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
 		              <a>References</a>
 		            </li>
+		           @endif
+
+		           @if(Auth::user()->get_plan->check_features('o3')->count() != 0 )
 				      <li @click="openTab = 4"  :class="openTab === 4 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
 				        <a>Sponsor</a>
 				      </li>
+				      @endif
 				       <li @click="openTab = 5"  :class="openTab === 5 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
 				        <a>Affiliate</a>
 				      </li>
-
+				      @if(Auth::user()->get_plan->check_features('o5')->count() != 0 )
 				      <li @click="openTab = 6"  :class="openTab === 6 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
 				        <a>Q&A</a>
 				      </li>
+				      @endif
+
 				      <li @click="openTab = 7"  :class="openTab === 7 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
 				        <a>Segments</a>
 				      </li>
@@ -294,7 +308,7 @@
 
 
 					<div x-show="openTab === 3">
-						
+					@if(Auth::user()->get_plan->check_features('o4')->count() != 0 )
 					<div class="mt-5">
 		                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Reference</h2>
 		                  <p class="mt-1 text-sm text-gray-500">
@@ -343,13 +357,13 @@
 
 		            </div> 
 
-
+		          @endif
 					</div>
 
 
 
 					<div x-show="openTab === 4">
-						
+						 @if(Auth::user()->get_plan->check_features('o3')->count() != 0 )
 
 						<div class="mt-5">
 			                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Sponsorship</h2>
@@ -415,7 +429,7 @@
 							</ul>
 
 						</div>
-
+						@endif
 					</div>
 
 					<div x-show="openTab === 5">
@@ -471,7 +485,7 @@
 					</div>	
 
 					<div x-show="openTab === 6">
-
+						 @if(Auth::user()->get_plan->check_features('o5')->count() != 0 )
 						<div class="mt-5">
 		                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Question</h2>
 		                  <p class="mt-1 text-sm text-gray-500">
@@ -512,7 +526,7 @@
 
 
 		            </div> 
-
+		            @endif
 					</div>	
 
 
@@ -969,7 +983,9 @@
 
         </div>
       </main>
-      
+      @endif
+
+      @endif
     </div>
   </div>
 </div>
