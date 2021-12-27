@@ -66,7 +66,56 @@
 
            <div class="bg-white shadow p-1">        
       					@if($audio->audio_type == "Upload")
-      					
+      					       <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                       <script src="{{ asset('videojs/video.min.js') }}"></script>
+                        <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
+
+                       <video
+                        id="my-video"
+                          class="video-js vjs-default-skin vjs-fluid"
+                          controls
+                          width="100%"
+                          height="450px"
+                        poster="{{ asset('images/slider-img/'.$defaul_img) }}"
+                        data-setup="{}"
+                      >
+                       <?php $s3_link = "https://ithaaty-local-new-file.s3.ap-southeast-1.amazonaws.com/audio/"; ?>
+                        <source src="{{ $s3_link.$audio->audio_path }}" type="video/mp4" />
+                        <source src="{{ $s3_link.$audio->audio_path }}" type="audio/mpeg" />
+                        <source src="{{ $s3_link.$audio->audio_path }}" type="video/webm" />
+                        <p class="vjs-no-js">
+                          To view this video please enable JavaScript, and consider upgrading to a
+                          web browser that
+                          <a href="https://videojs.com/html5-video-support/" target="_blank"
+                            >supports HTML5 video</a
+                          >
+                        </p>
+                      </video>
+                      <script> 
+                            var player=videojs('my-video'); 
+                            player.nuevo({
+                              qualityMenu: true,
+                              buttonRewind: true,
+                              buttonForward: true
+                            });
+                        </script>
+
+                        @if($newNumAds != 0)
+                        @foreach($newAdsList as $adsl)
+                          
+                            <?php 
+                                  $videlink[] = $adsl->adslist_videolink;
+                                  $skip[] = $adsl->adslist_adstype;
+                                  $displaytime[] = $adsl->adslist_displaytime;
+                             ?>
+
+                          @endforeach
+
+                        @include('layouts.editor.ads-script')
+                        <script src="{{ asset('js/adsScript/'.$newNumAds.'-ads.js' ) }}" ></script> 
+
+                        @endif
+
 
       					@elseif($audio->audio_type == "RSS") 
 
