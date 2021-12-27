@@ -55,9 +55,18 @@
 			     <!--  <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses" class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
 			        <a>Categories</a>
 			      </li> -->
+
+        @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+
+         
+
+        @else
+        	 @if(Auth::user()->get_plan->check_features('p3')->count() != 0 )
 			      <li @click="openTab = 1" :class="openTab === 1 ? activeClasses : inactiveClasses" class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
 			        <a>RSS Feed</a>
 			      </li>
+			      @endif
+			  @endif
 			    </ul>
 			  </div>
 			
@@ -263,6 +272,13 @@
 			      </div>
 
 			     <div x-show="openTab === 1">
+			     	  @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+
+         
+
+        		@else
+        		@if(Auth::user()->get_plan->check_features('p3')->count() != 0 )
+			     
 			     	<section aria-labelledby="payment_details_heading">
 
 			
@@ -347,7 +363,8 @@
 			            </div>
 
 				    </section>
-				
+				    @endif
+						@endif
 			     </div>	
 			    </div>
 			  </div>
