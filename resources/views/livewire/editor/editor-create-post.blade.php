@@ -424,7 +424,8 @@
 				          </div>
 				          
 	    		   </div>
-					   <div wire:loading wire:target="saveMedia">
+
+					   <div class="mt-5 text-center text-custom-pink font-bold text-gray-800 text-sm"" wire:loading wire:target="saveMedia">
 				        Please wait while saving your file to server...
 				    </div>
               
@@ -432,7 +433,7 @@
               	    <div class="w-full">
               	    	<div class="w-1/2 float-left">&nbsp;</div>
               	  		<div class="w-1/2 float-left text-right">
-              	  			<button type="submit" class="w-1/2 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white sm:col-start-2 sm:text-md">Save</button>
+              	  			<button type="submit" wire:loading.attr="disabled" class="w-1/2 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white sm:col-start-2 sm:text-md">Save</button>
               	  		</div>
 				      			</div>    
 			   			</div>
