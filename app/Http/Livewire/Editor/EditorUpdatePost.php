@@ -207,6 +207,8 @@ class EditorUpdatePost extends Component
         // $data->ads_logo = $this->ads_logo->hashName();
         $imagefile = $this->thumbnail->hashName();
         $path = $this->thumbnail->storeAs('users/podcast_img',$imagefile);
+        // s3
+        $s3_storage = $this->thumbnail->store('users/podcast_img/', 's3');
 
         session()->flash('status', 'Thumbnail Updated');
         redirect()->to('editor/podcast/update/'.$audioid);   

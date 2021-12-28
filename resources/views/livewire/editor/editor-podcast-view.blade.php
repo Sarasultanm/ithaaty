@@ -66,7 +66,12 @@
 
            <div class="bg-white shadow p-1">        
       					@if($audio->audio_type == "Upload")
-      					       <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                        @if($audio->get_thumbnail->count() == 0)
+                           <?php $s3_thumbnail = "images/default_podcast.jpg"; ?>
+                        @else
+                          <?php $img_path = $audio->get_thumbnail->first()->gallery_path; ?>
+                          <?php $s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$img_path; ?>
+                        @endif
                        <script src="{{ asset('videojs/video.min.js') }}"></script>
                         <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
 
@@ -76,10 +81,10 @@
                           controls
                           width="100%"
                           height="450px"
-                        poster="{{ asset('images/slider-img/'.$defaul_img) }}"
+                        poster="{{ $s3_thumbnail }}"
                         data-setup="{}"
                       >
-                       <?php $s3_link = "https://s3-ithaaty-bucket.s3.me-south-1.amazonaws.com/audio/"; ?>
+                       <?php $s3_link = config('app.s3_public_link')."/audio/"; ?>
                         <source src="{{ $s3_link.$audio->audio_path }}" type="video/mp4" />
                         <source src="{{ $s3_link.$audio->audio_path }}" type="audio/mpeg" />
                         <source src="{{ $s3_link.$audio->audio_path }}" type="video/webm" />
@@ -119,7 +124,12 @@
 
       					@elseif($audio->audio_type == "RSS") 
 
-                        <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                         @if($audio->get_thumbnail->count() == 0)
+                           <?php $s3_thumbnail = "images/default_podcast.jpg"; ?>
+                        @else
+                          <?php $img_path = $audio->get_thumbnail->first()->gallery_path; ?>
+                          <?php $s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$img_path; ?>
+                        @endif
                         
                 				<script src="{{ asset('videojs/video.min.js') }}"></script>
                         <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
@@ -130,7 +140,7 @@
                           controls
                           width="100%"
                           height="450px"
-                          poster="{{ asset('images/slider-img/'.$defaul_img) }}"
+                          poster="{{ $s3_thumbnail }}"
                            data-setup="{}"
                         >
                           <source src="{{ $audio->audio_path }}" res="240" label="240p" type="video/mp4">

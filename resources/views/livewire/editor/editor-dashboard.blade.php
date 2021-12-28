@@ -286,11 +286,20 @@
                
                     @if($audio->audio_type == "Upload")
 
+
+                      
+
+
                      <div class="flex bg-custom-pink p-4 rounded-md">
-                      <div class="bg-custom-gray">
-                        <!-- <img src="{{ asset('images/logo.png') }}" style="width:150px;"> -->
-                        <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
-                        <img src="{{ asset('images/slider-img/'.$defaul_img) }}" style="width:150px;">
+                       <div >
+                        @if($audio->get_thumbnail->count() == 0)
+                           <img src="{{ asset('images/default_podcast.jpg') }}" style="width:150px;">
+                        @else
+                          <?php $img_path = $audio->get_thumbnail->first()->gallery_path; ?>
+                          <?php $s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$img_path; ?>
+                         
+                           <img src="{{ $s3_thumbnail }}" style="width:150px;">
+                        @endif
                       </div>
                       <div class="flex-1 pl-5">
                          <p class="text-2xl font-bold text-white">{{ $audio->audio_name }}</p>
@@ -329,7 +338,8 @@
                            <img src="{{ asset('images/default_podcast.jpg') }}" style="width:150px;">
                         @else
                           <?php $img_path = $audio->get_thumbnail->first()->gallery_path; ?>
-                           <img src="{{ asset('users/podcast_img/'.$img_path) }}" style="width:150px;">
+                          <?php $s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$img_path; ?>
+                           <img src="{{ $s3_thumbnail }}" style="width:150px;">
                         @endif
                       </div>
                       <div class="flex-1 pl-5">
@@ -365,10 +375,14 @@
                        <?php echo $audio->audio_path; ?>
                      </div> -->
                      <div class="flex bg-custom-pink p-4 rounded-md">
-                      <div class="bg-custom-gray">
-                       <!--  <img src="{{ asset('images/logo.png') }}" style="width:150px;"> -->
-                        <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
-                        <img src="{{ asset('images/slider-img/'.$defaul_img) }}" style="width:150px;">
+                      <div >
+                         @if($audio->get_thumbnail->count() == 0)
+                           <img src="{{ asset('images/default_podcast.jpg') }}" style="width:150px;">
+                        @else
+                          <?php $img_path = $audio->get_thumbnail->first()->gallery_path; ?>
+                          <?php $s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$img_path; ?>
+                           <img src="{{ $s3_thumbnail }}" style="width:150px;">
+                        @endif
                       </div>
                       <div class="flex-1 pl-5">
                          <p class="text-2xl font-bold text-white">{{ $audio->audio_name }}</p>

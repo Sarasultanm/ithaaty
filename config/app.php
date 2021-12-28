@@ -236,4 +236,8 @@ return [
         'Share' => Jorenvh\Share\ShareFacade::class,
     ],
 
+
+    // s3_public link
+    // http://s3.ap-southeast-1.amazonaws.com/ithaaty-local-laravel-images/
+    's3_public_link' => 'http://s3.'.env('AWS_DEFAULT_REGION').'.amazonaws.com/'.env('AWS_BUCKET'),
 ];

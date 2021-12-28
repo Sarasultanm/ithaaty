@@ -93,13 +93,13 @@
                           </div>
                           <div class="mt-2 text-sm text-gray-700 space-y-4">
                               @if($audioData->get_thumbnail->count() == 0)
-                                 <div class="text-white bg-cover h-36" style="background-image: url('{{ asset('images/default_podcast.jpg') }}');">    
-                                 </div>
+                                 <?php $s3_thumbnail = "images/default_podcast.jpg"; ?>
                               @else
                                 <?php $img_path = $audioData->get_thumbnail->first()->gallery_path; ?>
-                                <div class="text-white bg-cover h-36" style="background-image: url('{{ asset('users/podcast_img/'.$img_path) }}');">    
-                                 </div>
+                                <?php $s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$img_path; ?>
                               @endif
+                              <div class="text-white bg-cover h-36" style="background-image: url(<?php echo $s3_thumbnail; ?>);"></div>
+                              
                           </div>
 
                           <div>
