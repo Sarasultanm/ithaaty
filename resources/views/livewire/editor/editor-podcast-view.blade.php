@@ -79,7 +79,7 @@
                         poster="{{ asset('images/slider-img/'.$defaul_img) }}"
                         data-setup="{}"
                       >
-                       <?php $s3_link = "https://ithaaty-local-new-file.s3.ap-southeast-1.amazonaws.com/audio/"; ?>
+                       <?php $s3_link = "https://s3-ithaaty-bucket.s3.me-south-1.amazonaws.com/audio/"; ?>
                         <source src="{{ $s3_link.$audio->audio_path }}" type="video/mp4" />
                         <source src="{{ $s3_link.$audio->audio_path }}" type="audio/mpeg" />
                         <source src="{{ $s3_link.$audio->audio_path }}" type="video/webm" />

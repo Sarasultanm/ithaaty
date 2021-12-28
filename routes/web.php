@@ -4,49 +4,53 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MainController;
 
-
 /*-- Admin ---*/
 use App\Http\Middleware\Administrator;
-use App\Http\Livewire\Admin\AdminDashboard;
-use App\Http\Livewire\Admin\AdminSettings;
-use App\Http\Livewire\Admin\AdminPopular;
-use App\Http\Livewire\Admin\AdminTrending;
-use App\Http\Livewire\Admin\AdminAds;
-use App\Http\Livewire\Admin\AdminAdsCreate;
-use App\Http\Livewire\Admin\AdminAdsDetails;
-use App\Http\Livewire\Admin\AdminAdsSetup;
-use App\Http\Livewire\Admin\AdminCreateAds;
-use App\Http\Livewire\Admin\AdminPlans;
-use App\Http\Livewire\Admin\AdminPlanCreate;
+use App\Http\Livewire\Admin\{
+	AdminDashboard,
+	AdminSettings,
+	AdminPopular,
+	AdminTrending,
+	AdminAds,
+	AdminAdsCreate,
+	AdminAdsDetails,
+	AdminAdsSetup,
+	AdminCreateAds,
+	AdminPlans,
+	AdminPlanCreate,
+	AdminPlanUpdate
+};
 
 /*-- Editor ---*/
 use App\Http\Middleware\Editor;
-use App\Http\Livewire\Editor\EditorDashboard;
-use App\Http\Livewire\Editor\EditorPodcast;
-use App\Http\Livewire\Editor\EditorSettings;
-use App\Http\Livewire\Editor\EditorViewUsers;
-use App\Http\Livewire\Editor\EditorTrending;
-use App\Http\Livewire\Editor\EditorPopular;
-use App\Http\Livewire\Editor\EditorOverview;
-use App\Http\Livewire\Editor\EditorPodcastDetail;
-use App\Http\Livewire\Editor\EditorNotes;
-use App\Http\Livewire\Editor\EditorAds;
-use App\Http\Livewire\Editor\EditorAdsCompany;
-use App\Http\Livewire\Editor\EditorAdsPodcast;
-use App\Http\Livewire\Editor\EditorActivity;
-use App\Http\Livewire\Editor\EditorFriends;
+use App\Http\Livewire\Editor\{
+	EditorDashboard,
+	EditorPodcast,
+	EditorSettings,
+	EditorViewUsers,
+	EditorTrending,
+	EditorPopular,
+	EditorOverview,
+	EditorPodcastDetail,
+	EditorNotes,
+	EditorAds,
+	EditorAdsCompany,
+	EditorAdsPodcast,
+	EditorActivity,
+	EditorFriends,
+	EditorContact,
+	EditorNotification,
+	EditorSubscribers,
+	EditorSubscriberOverview,
+	EditorPodcastView,
+	EditorCreatePost,
+	EditorUpdatePost,
+	EditorPlaylist,
+	EditorPlaylistDetails,
+	EditorFollowing,
+	EditorPlans
+};
 
-use App\Http\Livewire\Editor\EditorContact;
-use App\Http\Livewire\Editor\EditorNotification;
-use App\Http\Livewire\Editor\EditorSubscribers;
-use App\Http\Livewire\Editor\EditorSubscriberOverview;
-use App\Http\Livewire\Editor\EditorPodcastView;
-use App\Http\Livewire\Editor\EditorCreatePost;
-use App\Http\Livewire\Editor\EditorUpdatePost;
-use App\Http\Livewire\Editor\EditorPlaylist;
-use App\Http\Livewire\Editor\EditorPlaylistDetails;
-use App\Http\Livewire\Editor\EditorFollowing;
-use App\Http\Livewire\Editor\EditorPlans;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -99,6 +103,7 @@ Route::group(['middleware' => Administrator::class,'prefix'=>'admin'], function(
 	Route::get('ads/adsCreate',AdminCreateAds::class)->name('adminCreateAds');
 	Route::get('plans',AdminPlans::class)->name('adminPlans');
     Route::get('plans/create',AdminPlanCreate::class)->name('adminPlansCreate');
+    Route::get('plans/update/{id}',AdminPlanUpdate::class)->name('adminPlansUpdate');
 });
 
 

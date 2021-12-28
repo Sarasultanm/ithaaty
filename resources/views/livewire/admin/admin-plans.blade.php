@@ -76,7 +76,7 @@
 			            <span class="text-4xl font-extrabold text-gray-900">${{$plan->plan_price}}</span>
 			            <span class="text-base font-medium text-gray-500">/mo</span>
 			          </p>
-			          <a href="#" class="mt-8 block w-full bg-custom-pink border border-custom-pink rounded-md py-2 text-sm font-semibold text-white text-center hover-bg-custom-pink">Update Plan</a>
+			          <a href="{{ route('adminPlansUpdate',['id' => $plan->id]) }}" class="mt-8 block w-full bg-custom-pink border border-custom-pink rounded-md py-2 text-sm font-semibold text-white text-center hover-bg-custom-pink">Update Plan</a>
 			        </div>
 			        <div class="h-3/5 pt-6 pb-8 px-6">
 			          <h3 class="text-xs font-medium text-gray-900 tracking-wide uppercase">What's included</h3>
