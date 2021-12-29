@@ -82,8 +82,9 @@
                    <img class="h-8 w-8 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">
                 @else
                   <?php $img_path = Auth::user()->get_profilephoto->first()->gallery_path; ?>
-                    <?php $s3_link = "https://s3-ithaaty-bucket.s3.me-south-1.amazonaws.com/users/profile_img/"; ?>
-                  <img class="h-8 w-8 rounded-full" src="{{ $s3_link.$img_path}}" alt=""> 
+                  <?php $s3_link = config('app.s3_public_link')."/users/profile_img/".$img_path; ?>
+                    
+                  <img class="h-8 w-8 rounded-full" src="{{ $s3_link }}" alt=""> 
                 @endif
               </button>
             </div>

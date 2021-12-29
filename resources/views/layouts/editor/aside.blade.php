@@ -2,8 +2,9 @@
  
  <aside class="hidden xl:block xl:col-span-4">
         <div class="sticky top-4 space-y-4">
-
-
+          @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+          @else
+          @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )
           <section aria-labelledby="who-to-follow-heading">
             <div class="bg-white rounded-lg shadow">
               <div class="p-6">
@@ -62,7 +63,8 @@
               </div>
             </div>
           </section>
-
+          @endif
+           @endif
           <section aria-labelledby="trending-heading">
             <div class="bg-white rounded-lg shadow">
               <div class="p-6">

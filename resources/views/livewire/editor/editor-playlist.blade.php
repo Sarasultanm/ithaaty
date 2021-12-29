@@ -24,7 +24,10 @@
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
+
       <main class="col-span-10">
+      	
+      	<!-- playlist -->
         <div class="mt-4 mt-4 p-5 bg-custom-pink rounded-md">
 	        <div class="grid gap-4 grid-cols-10">
 	            <div class="col-span-2 bg-white p-1">
@@ -144,7 +147,8 @@
 
 
           </div>
-
+          <!-- playlist -->
+          
       </main>
       <!-- aside -->
     

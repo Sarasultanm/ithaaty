@@ -25,6 +25,10 @@
         <!-- sidebar -->
       </div>
       <main class="col-span-10">
+        <!-- playlist -->
+        @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+        @else
+        @if(Auth::user()->get_plan->check_features('s4')->count() != 0 )
           <div class="w-full pt-4">
 
           	     <div class="w-full ">
@@ -179,25 +183,9 @@
           </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-       
-
-
-
-
-
+          <!-- playlist -->
+          @endif
+          @endif
       </main>
       <!-- aside -->
     

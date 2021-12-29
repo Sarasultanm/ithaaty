@@ -26,7 +26,10 @@
         <!-- sidebar -->
       </div>
       <main class="col-span-10">
-
+      	@if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+        @else
+        @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )
+        <!-- friend -->
         <div class="mt-4">
           <!-- <div class="mb-5 w-full ">
           	 <h1 class="font-bold text-gray-800 text-xl">Overview</h1> 
@@ -295,6 +298,9 @@
 
           
         </div>
+        <!-- friend -->
+        @endif
+        @endif
       </main>
       <!-- aside -->
     

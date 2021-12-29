@@ -73,12 +73,16 @@
           <!-- <button @click="open = true" class="w-full mb-5 text-center  px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500">
               New Post
             </button>  -->
-          @if(Auth::user()->get_audio->count() != 0 )
-         <a href="{{ route('editorPodcastCreate') }}" class="w-full mb-5 text-center  px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white font-bold" style="background-color: #f98b88;">
-              New Post 
-            </a>
-          @endif  
-                      <!-- This example requires Tailwind CSS v2.0+ -->
+         @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+         @else
+            @if(Auth::user()->get_plan->check_features('p3')->count() != 0 || Auth::user()->get_plan->check_features('p2')->count() != 0 )
+              @if(Auth::user()->get_audio->count() != 0 )
+             <a href="{{ route('editorPodcastCreate') }}" class="w-full mb-5 text-center  px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white font-bold" style="background-color: #f98b88;">
+                  New Post 
+                </a>
+              @endif
+            @endif    
+         @endif             <!-- This example requires Tailwind CSS v2.0+ -->
 
             <!--  modal add post -->          
 
@@ -171,12 +175,17 @@
                             <div class="py-1" role="none">
                               <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
                               @if( EditorDashboard::checkFav($audio->id) == 0 ) 
-                              <a wire:click="favorite({{ $audio->id }})" class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-0">
-                                <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <span>Add to favorites</span>
-                              </a>
+                                  @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+                                  @else
+                                     @if(Auth::user()->get_plan->check_features('s5')->count() != 0 )
+                                    <a wire:click="favorite({{ $audio->id }})" class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-0">
+                                      <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                      </svg>
+                                      <span>Add to favorites</span>
+                                    </a>
+                                    @endif
+                               @endif
                               @else
                                <a class="bg-gray-100 text-gray-900 flex px-4 py-2 text-sm cursor-pointer hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-0">
                                  <svg class="mr-3 h-5 w-5 text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -462,7 +471,10 @@
                   </div>
 
                   <div class="flex text-sm">
-
+                    @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+                    @else
+                    @if(Auth::user()->get_plan->check_features('s2')->count() != 0 )
+                    <!-- notes -->
                     <span class="inline-flex items-center text-sm mr-3" @click="openTab = 2"  :class="openTab === 2 ? activeClasses : inactiveClasses"   >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -471,7 +483,14 @@
                         <span class="font-medium text-gray-900">Notes</span>
                       </button>
                     </span>
+                     <!-- notes -->
+                     @endif
+                    @endif
 
+                     @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+                     @else
+                     @if(Auth::user()->get_plan->check_features('o4')->count() != 0 )
+                     <!-- referrence -->
                      <span class="inline-flex items-center text-sm" @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses" >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -480,17 +499,23 @@
                         <span class="font-medium text-gray-900">Referrence</span>
                       </button>
                     </span>
-
-
+                    <!-- referrence -->
+                    @endif
+                    @endif
                   </div>
                 </div>
                 <div x-show="openTab === 1">
-                  <div class="mt-5">
-                    <div class="mt-1">
-                      <input type="text" name="email" id="email" placeholder="Comments" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="comments" wire:keydown.enter="saveComment({{ $audio->id }},{{$audio->audio_editor}})"  >
+                  @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+                  @else
+                  @if(Auth::user()->get_plan->check_features('s2')->count() != 0 )
+                    <!-- comments -->
+                    <div class="mt-5">
+                      <div class="mt-1">
+                        <input type="text" name="email" id="email" placeholder="Comments" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="comments" wire:keydown.enter="saveComment({{ $audio->id }},{{$audio->audio_editor}})"  >
+                      </div>
                     </div>
-              </div>
-
+                     @endif
+                  @endif
 
                @if($audio->get_comments->count() != 0 )
                 <div x-data="{ open: false }">
@@ -543,10 +568,17 @@
 
                 @endif
 
+               
+                <!-- comments -->
+
           </div>
 
 
           <div x-show="openTab === 2">
+            @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+            @else
+            @if(Auth::user()->get_plan->check_features('s2')->count() != 0 )
+            <!-- notes-view -->
                     <div class="mt-5 flex">
                        <input type="text" name="email" id="email" placeholder="Time" class="flex-1 mr-3 w-20  shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md" wire:model="notes_time" >
                       <input type="text" name="email" id="email" placeholder="Notes" class="shadow-sm mr-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="notes_message"  >
@@ -596,9 +628,16 @@
                 </div>
                 </div>
                 @endif
+              <!-- notes-view -->
+              @endif
+              @endif
           </div>
 
           <div x-show="openTab === 3">
+            <!-- referrence-view -->
+             @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+             @else
+             @if(Auth::user()->get_plan->check_features('o4')->count() != 0 )
              <div class="mt-5">
                     <p class="text-md font-bold text-gray-900">Affiliate : </p>
                     <div class="mt-1">
@@ -615,7 +654,9 @@
 
                      
               </div>
-
+              @endif
+              @endif
+            <!-- referrence-view -->
           </div>
           <div x-show="openTab === 4">
              <div class="mt-5">

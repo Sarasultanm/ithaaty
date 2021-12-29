@@ -59,6 +59,10 @@
               </article>
             </div>
             <div class="col-span-8 relative">
+              @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+              @else
+              @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )
+                <!-- follow&fried button -->
                   @if(Auth::user()->id != $userInfo->id )
 
                     <div class="mt-3 text-right sm:mt-5 absolute bottom-0 right-0">
@@ -94,6 +98,9 @@
                           </button>
                    </div>
 
+                  @endif
+                   <!-- follow&fried button -->
+                  @endif
                   @endif
             </div>
               </div>

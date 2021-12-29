@@ -49,7 +49,7 @@ class EditorActivity extends Component
 
      //    return view('livewire.editor.editor-activity',compact('notif_list'));
 
-        return view('livewire.editor.editor-notification',[
+        return view('livewire.editor.editor-activity',[
             'notif_list'=> UserNotifications::orderBy('id', 'DESC')
             ->whereIn('notif_type', ['follow','like','comments'])
             ->paginate(10),

@@ -325,6 +325,8 @@
                         <span class="sr-only">likes</span>
                       </button>
                     </span> -->
+
+
                     <span class="inline-flex items-center text-sm" @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses" >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <!-- Heroicon name: solid/chat-alt -->
@@ -335,6 +337,8 @@
                         <span class="sr-only">replies</span>
                       </button>
                     </span>
+
+
                     <span class="inline-flex items-center text-sm">
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <!-- Heroicon name: solid/eye -->
@@ -349,6 +353,9 @@
                   </div>
 
                   <div class="flex text-sm">
+                    @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+                    @else
+                    @if(Auth::user()->get_plan->check_features('s4')->count() != 0 )
                      <span class="inline-flex items-center text-sm mr-3" @click="openTab = 6" :class="openTab === 6 ? activeClasses : inactiveClasses">
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                        <!-- <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -360,7 +367,14 @@
                         <span class="text-gray-900" :class="openTab === 6 ? activeClasses : inactiveClasses" >Add To Playlist</span>
                       </button>
                     </span>
+                    @endif
+                    @endif
 
+
+
+                    @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+                    @else
+                    @if(Auth::user()->get_plan->check_features('s2')->count() != 0 )
                     <span class="inline-flex items-center text-sm mr-3" @click="openTab = 2"   >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                        <svg class="h-5 w-5" :class="openTab === 2 ? activeClasses : inactiveClasses" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -369,7 +383,12 @@
                         <span class="text-gray-900"  :class="openTab === 2 ? activeClasses : inactiveClasses" >Notes</span>
                       </button>
                     </span>
+                    @endif
+                    @endif
 
+                    @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+                    @else
+                    @if(Auth::user()->get_plan->check_features('o4')->count() != 0 )
                     <span class="inline-flex items-center text-sm mr-3" @click="openTab = 3" >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                      <svg class="h-5 w-5" :class="openTab === 3 ? activeClasses : inactiveClasses"  xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -378,7 +397,13 @@
                         <span class="text-gray-900" :class="openTab === 3 ? activeClasses : inactiveClasses" >References</span>
                       </button>
                     </span> 
+                    @endif
+                    @endif
 
+
+                    @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+                    @else
+                    @if(Auth::user()->get_plan->check_features('o5')->count() != 0 )
                      <span class="inline-flex items-center text-sm" @click="openTab = 5" >
                       <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                      <svg class="h-5 w-5" :class="openTab === 5 ? activeClasses : inactiveClasses"  xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -387,16 +412,24 @@
                         <span class="text-gray-900" :class="openTab === 5 ? activeClasses : inactiveClasses" >Q&A</span>
                       </button>
                     </span> 
-                    
+                    @endif
+                    @endif
+
                   </div>
                 </div>
-                <div x-show="openTab === 1">
-                	<div class="mt-5">
-		                <div class="mt-1">
-		                  <input type="text" name="email" id="email" placeholder="Comments" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="comments" wire:keydown.enter="saveComment({{ $audio->id }},{{$audio->audio_editor}})"  >
-		                </div>
-			        </div>
 
+                <div x-show="openTab === 1">
+                    @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+                    @else
+                    @if(Auth::user()->get_plan->check_features('s2')->count() != 0 )
+                    <!-- comments -->
+                    	<div class="mt-5">
+    		                <div class="mt-1">
+    		                  <input type="text" name="email" id="email" placeholder="Comments" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="comments" wire:keydown.enter="saveComment({{ $audio->id }},{{$audio->audio_editor}})"  >
+    		                </div>
+    			           </div>
+                      @endif
+                    @endif
 
 				       @if($audio->get_comments->count() != 0 )
 				        <div x-data="{ open: false }">
@@ -408,45 +441,43 @@
 			                        <a class="cursor-pointer hover:underline" @click="open = true">View Comments</a>
 			                      </p>
 			                    </div>
-			                  
 		                	</div>
-		 
 				        </div>
-				        <div class="mt-5" x-show="open" @click.away="open = false">
-				        	@foreach($audio->get_comments as $comments)
-			                <div class="flex space-x-3">
-			                	
-			                    <div class="flex-shrink-0">
-			                      <img class="h-5 w-5 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-			                    </div>
-			                    <div class="min-w-0 flex-1">
-			                     <div class=" bg-gray-100 p-2 rounded-md mb-3">	
-			                      <p class="text-xs font-medium text-gray-900">
-			                        <a href="/editor/users//{{ $audio->audio_editor }}" class="font-bold hover:underline">{{ $comments->get_user->name }}</a>
-			                      </p>
-			                      <p class="text-sm text-gray-500">
-			                        <a href="#" class="hover:underline">
-			                          <time datetime="2020-12-09T11:43:00">{{ $comments->coms_message }}</time>
-			                        </a>
-			                      </p>
-			                      </div>
-
-			                      
-			                    </div>
-			                  
-		                	</div>
-		                	@endforeach
-				        </div>
-
-
+  				        <div class="mt-5" x-show="open" @click.away="open = false">
+  				        	 @foreach($audio->get_comments as $comments)
+  			                <div class="flex space-x-3">
+  			                	
+  			                    <div class="flex-shrink-0">
+  			                      <img class="h-5 w-5 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+  			                    </div>
+  			                    <div class="min-w-0 flex-1">
+  			                     <div class=" bg-gray-100 p-2 rounded-md mb-3">	
+  			                      <p class="text-xs font-medium text-gray-900">
+  			                        <a href="/editor/users//{{ $audio->audio_editor }}" class="font-bold hover:underline">{{ $comments->get_user->name }}</a>
+  			                      </p>
+  			                      <p class="text-sm text-gray-500">
+  			                        <a href="#" class="hover:underline">
+  			                          <time datetime="2020-12-09T11:43:00">{{ $comments->coms_message }}</time>
+  			                        </a>
+  			                      </p>
+  			                      </div>
+  			                    </div>
+  		                	</div>
+  		                	@endforeach
+  				        </div>
 				        </div>
 
 				        @endif
-
+                <!-- comments -->
+               
 			    </div>
 
 
 			    <div x-show="openTab === 2">
+            @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+            @else
+            @if(Auth::user()->get_plan->check_features('s2')->count() != 0 )
+            <!-- notes -->
 		                <div class="mt-5 flex">
 		                   <input type="text" name="email" id="email" placeholder="Time" class="flex-1 mr-3 w-20  shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md" wire:model="notes_time" >
 		                  <input type="text" name="email" id="email" placeholder="Notes" class="shadow-sm mr-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="notes_message"  >
@@ -500,9 +531,15 @@
 
 
 				        @endif
+                <!-- notes -->
+                @endif
+                @endif
 			    </div>
 
 			     <div x-show="openTab === 3">
+            @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+            @else
+            @if(Auth::user()->get_plan->check_features('o4')->count() != 0 )
 				     <div class="mt-5">
 		                <div class="mt-1">
 		                @foreach($audio->get_references as $reference)	
@@ -512,7 +549,8 @@
 		                @endforeach 
 		                </div>
 			        </div>
-
+              @endif
+              @endif
 			     </div>
                 
                        <div x-show="openTab === 4">
@@ -577,6 +615,9 @@
           </div>
 
           <div x-show="openTab === 5">
+            @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+            @else
+            @if(Auth::user()->get_plan->check_features('o5')->count() != 0 )
              <div class="mt-5">
                     <div class="mt-1">
                     @foreach($audio->get_question as $question)  
@@ -603,10 +644,14 @@
                     @endforeach 
                     </div>
               </div>
-
+              @endif
+              @endif
            </div>
 
            <div x-show="openTab === 6">
+            @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+            @else
+            @if(Auth::user()->get_plan->check_features('s4')->count() != 0 )
              <div class="mt-5">
                     <div class="grid gap-4 grid-cols-9">
 
@@ -638,7 +683,8 @@
                      </div>
                  
               </div>
-
+              @endif
+              @endif
            </div>
 
 
