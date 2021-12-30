@@ -73,18 +73,23 @@
 				        <a>Sponsor</a>
 				      </li>
 				      @endif
+
+				      @if(Auth::user()->get_plan->check_features('o7')->count() != 0 )
 				       <li @click="openTab = 5"  :class="openTab === 5 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
 				        <a>Affiliate</a>
 				      </li>
+				      @endif
+
 				      @if(Auth::user()->get_plan->check_features('o5')->count() != 0 )
 				      <li @click="openTab = 6"  :class="openTab === 6 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
 				        <a>Q&A</a>
 				      </li>
 				      @endif
-
+				      @if(Auth::user()->get_plan->check_features('o2')->count() != 0 )
 				      <li @click="openTab = 7"  :class="openTab === 7 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
-				        <a>Segments</a>
+				        <a>Monetize</a>
 				      </li>
+				      @endif
 				    </ul>
 				</div>
 
@@ -433,7 +438,7 @@
 					</div>
 
 					<div x-show="openTab === 5">
-
+						 @if(Auth::user()->get_plan->check_features('o7')->count() != 0 )
 						<div class="mt-5">
 		                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Affiliate</h2>
 		                  <p class="mt-1 text-sm text-gray-500">
@@ -481,7 +486,7 @@
 
 
 		            </div> 
-
+		            @endif
 					</div>	
 
 					<div x-show="openTab === 6">
@@ -531,7 +536,7 @@
 
 
 						<div x-show="openTab === 7">
-
+							@if(Auth::user()->get_plan->check_features('o2')->count() != 0 )
 							<div class="border-b-2 pb-10 pt-5 border-green-500 ">
                               
                                <h2 class="text-lg leading-6 font-medium text-gray-900"> Segments</h2>
@@ -915,7 +920,7 @@
 
 
                           </div> 
-
+              @endif
 					</div>
 
 

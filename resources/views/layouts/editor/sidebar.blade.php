@@ -24,6 +24,18 @@
                 Ads
               </span>
             </x-nav-link-custom>
+            @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+            @else
+            @if(Auth::user()->get_plan->check_features('s4')->count() != 0 )
+              <x-nav-link-custom :href="route('editorPlaylistDetails')" :active="request()->routeIs('editorPlaylistDetails','editorPlaylist')">
+              <!-- Heroicon name: outline/fire -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+              </svg><span class="truncate">Playlists</span>
+             </x-nav-link-custom>
+             @endif
+             @endif
+
 
               <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
                Podcast
@@ -38,7 +50,7 @@
                   <!-- Heroicon name: outline/fire -->
                   <svg xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                  </svg><span class="truncate">My Podcast</span>
+                  </svg><span class="truncate">Podcast</span>
                 </x-nav-link-custom>
                @endif
              @endif
@@ -105,17 +117,7 @@
             <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
                Social
             </p>    
-            @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
-            @else
-            @if(Auth::user()->get_plan->check_features('s4')->count() != 0 )
-              <x-nav-link-custom :href="route('editorPlaylistDetails')" :active="request()->routeIs('editorPlaylistDetails','editorPlaylist')">
-              <!-- Heroicon name: outline/fire -->
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-              </svg><span class="truncate">Playlists</span>
-             </x-nav-link-custom>
-             @endif
-             @endif
+            
 
             @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
             @else
@@ -135,6 +137,19 @@
               <span class="truncate">Friends</span>
              </x-nav-link-custom>
 
+             @endif
+             @endif
+
+
+            <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
+               Subscribers
+            </p> 
+
+            @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+            @else
+            @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )
+             
+
              <x-nav-link-custom :href="route('editorFollowing')" :active="request()->routeIs('editorFollowing')">
               <!-- Heroicon name: outline/fire -->
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -142,8 +157,18 @@
                 </svg>
               <span class="truncate">Following</span>
              </x-nav-link-custom>
+
+            <x-nav-link-custom :href="route('editorFollowers')" :active="request()->routeIs('editorFollowers')">
+              <!-- Heroicon name: outline/fire -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              <span class="truncate">Followers</span>
+             </x-nav-link-custom>
+
              @endif
              @endif
+
 
 
             <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
@@ -157,17 +182,17 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg><span class="truncate">Plans</span>
              </x-nav-link-custom>
-            @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+           <!--  @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
             @else
             @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )
              <x-nav-link-custom :href="route('editorSubscribers')" :active="request()->routeIs('editorSubscribers')">
-              <!-- Heroicon name: outline/fire -->
+           
                 <svg xmlns="http://www.w3.org/2000/svg"fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg><span class="truncate">Subcribers</span>
              </x-nav-link-custom>
              @endif
-             @endif
+             @endif -->
 
 
 
