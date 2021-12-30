@@ -36,16 +36,19 @@
              @endif
              @endif
 
-
-              <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
-               Podcast
-              </p>
-
              @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
 
              @else
 
               @if(Auth::user()->get_plan->check_features('p3')->count() != 0 || Auth::user()->get_plan->check_features('p2')->count() != 0 )
+
+              <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
+               Podcast
+              </p>
+
+           
+
+             
                   <x-nav-link-custom :href="route('editorPodcast')" :active="request()->routeIs('editorPodcast','editorPodcastUpdate','editorPodcastDetails')">
                   <!-- Heroicon name: outline/fire -->
                   <svg xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -114,14 +117,14 @@
               </span>
             </x-nav-link-custom>
 
-            <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
-               Social
-            </p>    
-            
-
             @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
             @else
+
             @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )
+
+            <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
+               Social
+            </p>  
              <x-nav-link-custom :href="route('editorActivity')" :active="request()->routeIs('editorActivity')">
               <!-- Heroicon name: outline/fire -->
             <svg xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -141,14 +144,13 @@
              @endif
 
 
-            <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
-               Subscribers
-            </p> 
-
             @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
             @else
             @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )
-             
+             <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
+               Subscribers
+            </p> 
+
 
              <x-nav-link-custom :href="route('editorFollowing')" :active="request()->routeIs('editorFollowing')">
               <!-- Heroicon name: outline/fire -->
