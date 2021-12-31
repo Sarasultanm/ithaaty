@@ -11,3 +11,9 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+/public/livewire-tmp
+/public/ads
+/public/ads/company
+/public/audio
+/public/users/podcast_img
+/public/users/profile_img

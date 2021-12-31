@@ -79,14 +79,14 @@
 			            <div class="shadow sm:rounded-md sm:overflow-hidden">
 			              <div class="bg-white py-6 px-4 sm:p-6">
 			                <div>
-			                  <h2 id="payment_details_heading" class="text-lg leading-6 font-medium text-gray-900">User Profile</h2>
+			                  <h2 id="payment_details_heading" class="text-lg leading-6 font-medium text-gray-900">Channel</h2>
 			                  <p class="mt-1 text-sm text-gray-500">Update your personal information.</p>
 			                </div>
 
 			                <div class="mt-6 grid grid-cols-4 gap-6">
 
 			                  <div class="col-span-4 sm:col-span-4">
-			                  	<h3 class="text-md leading-6 font-medium text-gray-900">Username</h3>
+			                  	<h3 class="text-md leading-6 font-medium text-gray-900">Channel Name</h3>
 			                    <input wire:model="userAlias" type="text" name="first_name" id="first_name" autocomplete="cc-given-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
 			                  </div>
 
