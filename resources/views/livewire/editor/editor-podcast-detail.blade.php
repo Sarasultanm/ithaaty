@@ -50,21 +50,28 @@
 
 
           	@if($audio->audio_type == "Upload")
-
+                        @if($audio->get_thumbnail->count() == 0)
+                           <?php $s3_thumbnail = "images/default_podcast.jpg"; ?>
+                        @else
+                          <?php $img_path = $audio->get_thumbnail->first()->gallery_path; ?>
+                          <?php $s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$img_path; ?>
+                        @endif
+                       <script src="{{ asset('videojs/video.min.js') }}"></script>
+                        <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
 
                        <video
-                        id="my-video{{ $audio->id }}"
-                        class="video-js vjs-theme-forest z-10"
-                        controls
-                        preload="auto"
-                        width="auto"
-                        height="264"
-                        poster="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg"
+                        id="my-video"
+                          class="video-js vjs-default-skin vjs-fluid"
+                          controls
+                          width="100%"
+                          height="450px"
+                        poster="{{ $s3_thumbnail }}"
                         data-setup="{}"
                       >
-                        <source src="{{ asset('audio/'.$audio->audio_path) }}" type="video/mp4" />
-                        <source src="{{ asset('audio/'.$audio->audio_path) }}" type="audio/mpeg" />
-                        <source src="{{ asset('audio/'.$audio->audio_path) }}" type="video/webm" />
+                       <?php $s3_link = config('app.s3_public_link')."/audio/"; ?>
+                        <source src="{{ $s3_link.$audio->audio_path }}" type="video/mp4" />
+                        <source src="{{ $s3_link.$audio->audio_path }}" type="audio/mpeg" />
+                        <source src="{{ $s3_link.$audio->audio_path }}" type="video/webm" />
                         <p class="vjs-no-js">
                           To view this video please enable JavaScript, and consider upgrading to a
                           web browser that
@@ -73,11 +80,25 @@
                           >
                         </p>
                       </video>
+                      <script> 
+                            var player=videojs('my-video'); 
+                            player.nuevo({
+                              qualityMenu: true,
+                              buttonRewind: true,
+                              buttonForward: true
+                            });
+                        </script>
+
+                       
 
              @elseif($audio->audio_type == "RSS")
-                  <!-- id="my-video{{ $audio->id }}" -->
-
-                      <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
+                 
+                        @if($audio->get_thumbnail->count() == 0)
+                           <?php $s3_thumbnail = "images/default_podcast.jpg"; ?>
+                        @else
+                          <?php $img_path = $audio->get_thumbnail->first()->gallery_path; ?>
+                          <?php $s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$img_path; ?>
+                        @endif
                         
                         <script src="{{ asset('videojs/video.min.js') }}"></script>
                         <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
@@ -88,7 +109,7 @@
                           controls
                           width="100%"
                           height="450px"
-                          poster="{{ asset('images/slider-img/'.$defaul_img) }}"
+                          poster="{{ $s3_thumbnail }}"
                            data-setup="{}"
                         >
                           <source src="{{ $audio->audio_path }}" res="240" label="240p" type="video/mp4">
@@ -115,6 +136,8 @@
                               buttonForward: true
                             });
                         </script>
+
+                        
 
           	@else
 

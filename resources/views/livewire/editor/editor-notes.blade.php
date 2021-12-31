@@ -80,12 +80,14 @@
 					                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
 					                  </div> -->
 					                  <div class="">
+					                  	<a href="{{ route('editorPodcastView',['id' => $notes->get_audio->id ]) }}">
 					                    <div class="text-sm font-bold text-gray-900">
 					                     {{ $notes->get_audio->audio_name }}
 					                    </div>
 					                    <div class="text-sm text-gray-500">
 					                    	 {{ $notes->get_user->name }}
 					                    </div>
+					                  	</a>
 					                  </div>
 					                </div>
 					              </td>

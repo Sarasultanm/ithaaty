@@ -124,7 +124,7 @@
 
       					@elseif($audio->audio_type == "RSS") 
 
-                         @if($audio->get_thumbnail->count() == 0)
+                        @if($audio->get_thumbnail->count() == 0)
                            <?php $s3_thumbnail = "images/default_podcast.jpg"; ?>
                         @else
                           <?php $img_path = $audio->get_thumbnail->first()->gallery_path; ?>
