@@ -27,6 +27,7 @@
       </div>
       <main class="col-span-10">
         @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+        @include('layouts.editor.page-404')
         @else
         @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )
         <!-- following -->
@@ -156,6 +157,8 @@
           
         </div>
         <!-- following -->
+        @else
+        @include('layouts.editor.page-404')
         @endif
         @endif
       </main>

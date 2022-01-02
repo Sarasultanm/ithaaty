@@ -26,7 +26,10 @@
         <!-- sidebar -->
       </div>
       <main class="col-span-10">
-
+      	@if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+      	@include('layouts.editor.page-404')
+        @else
+        @if(Auth::user()->get_plan->check_features('s2')->count() != 0 )
         <div class="mt-4">
           <!-- <div class="mb-5 w-full ">
           	 <h1 class="font-bold text-gray-800 text-xl">Overview</h1> 
@@ -129,6 +132,10 @@
             <!-- More questions... -->
           
         </div>
+        @else
+          @include('layouts.editor.page-404')
+        @endif
+        @endif
       </main>
       <!-- aside -->
     

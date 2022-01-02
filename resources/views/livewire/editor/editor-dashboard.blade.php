@@ -131,7 +131,17 @@
                     </div>
                     <div class="min-w-0 flex-1">
                       <p class="text-sm font-medium text-gray-900">
-                        <a href="/editor/users/{{ $audio->audio_editor }}" class="hover:underline">{{ $audio->get_user->name }}</a>
+                         @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+                         <a>{{ $audio->get_user->name }}</a>
+                         @else
+                           @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )
+                           <a href="/editor/users/{{ $audio->audio_editor }}" class="hover:underline">{{ $audio->get_user->name }}</a>
+                           @else
+                            <a>{{ $audio->get_user->name }}</a>
+                           @endif
+                         @endif
+
+                        
                       </p>
                       <p class="text-sm text-gray-500">
                         <a href="#" class="hover:underline flex">

@@ -41,8 +41,8 @@ class AdminPlanUpdate extends Component
         $this->upCreate($id,'Advance Analytics','a3',$this->a_typeThree);
         /* Upload Features */
         $this->upCreate($id,'No Upload','u1',$this->uf_typeOne);
-        $this->upCreate($id,'4 Podcast Per Month','u2',$this->uf_typeTwo);
-        $this->upCreate($id,'8 Podcast Per Month','u3',$this->uf_typeThree);
+        $this->upCreate($id,'4GB Podcast Per Month','u2',$this->uf_typeTwo);
+        $this->upCreate($id,'8GB Podcast Per Month','u3',$this->uf_typeThree);
         /* Other Features */
         $this->upCreate($id,'Advertisement','o1',$this->of_typeOne);
         $this->upCreate($id,'Monitize','o2',$this->of_typeTwo);

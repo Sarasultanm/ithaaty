@@ -36,7 +36,7 @@
           
         @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
 
-         
+         @include('layouts.editor.page-404')
 
         @else
 
@@ -321,7 +321,8 @@
 
 	
 
-
+		  			@else
+		  			@include('layouts.editor.page-404')
 
 			 <!-- 
           	</form>  -->

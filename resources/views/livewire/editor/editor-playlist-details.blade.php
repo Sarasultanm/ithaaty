@@ -27,6 +27,7 @@
       <main class="col-span-10">
         <!-- playlist -->
         @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+          @include('layouts.editor.page-404') 
         @else
         @if(Auth::user()->get_plan->check_features('s4')->count() != 0 )
           <div class="w-full pt-4">
@@ -181,7 +182,8 @@
           
           
           </div>
-
+          @else
+          @include('layouts.editor.page-404')
 
           <!-- playlist -->
           @endif

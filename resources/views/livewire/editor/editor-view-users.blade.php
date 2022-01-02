@@ -25,6 +25,11 @@
         <!-- sidebar -->
       </div>
       <main class="col-span-10">
+        @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+          @include('layouts.editor.page-404')
+        @else
+        @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )
+
         <div class="mt-4 mt-4 p-5  bg-cover"  style="background-image:url('{{ asset('images/audio-bg.jpg') }}')">
           <div class="grid gap-4 grid-cols-10">
             <div class="col-span-2 bg-white p-2 ">
@@ -575,10 +580,13 @@
 
           
         </div> -->
+         @else
+         
+         @include('layouts.editor.page-404')
 
 
-
-
+         @endif
+         @endif
       </main>
       <!-- aside -->
     

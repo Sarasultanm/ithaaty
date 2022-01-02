@@ -30,14 +30,16 @@
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
-      @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
-
-      @else
-
-      @if(Auth::user()->get_plan->check_features('p3')->count() != 0 || Auth::user()->get_plan->check_features('p2')->count() != 0 )
+     
 
 
       <main class="col-span-10">
+
+      @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+          @include('layouts.editor.page-404')
+      @else
+
+      @if(Auth::user()->get_plan->check_features('p3')->count() != 0 || Auth::user()->get_plan->check_features('p2')->count() != 0 )
         <div class="w-full ">
              <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
         </div>
@@ -340,14 +342,15 @@
 
 
         <!-- updated -->
+        @else
+          @include('layouts.editor.page-404')
 
-
-
-
-
-      </main>
          @endif
-      @endif
+        @endif
+      </main>
+
+        
+     
       <!-- aside -->
     
       <!-- aside -->

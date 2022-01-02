@@ -47,8 +47,8 @@ class AdminPlanCreate extends Component
         $this->onCreate($plan->id,'Advance Analytics','a3',$this->a_typeThree);
         /* Upload Features */
         $this->onCreate($plan->id,'No Upload','u1',$this->uf_typeOne);
-        $this->onCreate($plan->id,'4 Podcast Per Month','u2',$this->uf_typeTwo);
-        $this->onCreate($plan->id,'8 Podcast Per Month','u3',$this->uf_typeThree);
+        $this->onCreate($plan->id,'4GB Podcast Per Month','u2',$this->uf_typeTwo);
+        $this->onCreate($plan->id,'8GB Podcast Per Month','u3',$this->uf_typeThree);
         /* Other Features */
         $this->onCreate($plan->id,'Advertisement','o1',$this->of_typeOne);
         $this->onCreate($plan->id,'Monitize','o2',$this->of_typeTwo);

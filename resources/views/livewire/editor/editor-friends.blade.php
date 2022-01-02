@@ -27,6 +27,7 @@
       </div>
       <main class="col-span-10">
       	@if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
+      	@include('layouts.editor.page-404')
         @else
         @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )
         <!-- friend -->
@@ -57,13 +58,16 @@
 			  <div class="border-b border-gray-200">
 			  	<ul class="-mb-px flex" >
 			      <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
-			        <a>Friend</a>
+			        <a>Friends</a>
 			      </li>
 			      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
-			        <a>Confirm Request</a>
+			        <a>Confirm</a>
 			      </li>
 			       <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
-			        <a>Sending Request</a>
+			        <a>Request</a>
+			      </li>
+			       <li @click="openTab = 4" :class="openTab === 4 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
+			        <a>Block</a>
 			      </li>
 
 
@@ -299,6 +303,8 @@
           
         </div>
         <!-- friend -->
+        @else
+        @include('layouts.editor.page-404')
         @endif
         @endif
       </main>

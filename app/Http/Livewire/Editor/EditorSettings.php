@@ -2,17 +2,19 @@
 
 namespace App\Http\Livewire\Editor;
 
+use Auth;
+use FeedReader;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Audio;
 use App\Models\Category;
 use App\Models\UserFollow;
 use App\Models\UserGallery;
-use Auth;
 use Illuminate\Support\Facades\Hash;
-use FeedReader;
-use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+
+use Livewire\WithFileUploads;
+
 
 class EditorSettings extends Component
 {
@@ -96,7 +98,7 @@ class EditorSettings extends Component
 
 	}
 
-    public function updateName(){
+    public function updateAlias(){
 
         Auth::user()->update(['alias'=>$this->userAlias]);    
 
@@ -215,6 +217,7 @@ class EditorSettings extends Component
     public function mount(){
 
         $this->userAlias = Auth::user()->alias;
+        $this->userName = Auth::user()->name;
         // $this->checkProfilePhoto = Auth::user()->get_gallery('profile','active');
 
     }   
@@ -232,12 +235,11 @@ class EditorSettings extends Component
 
         // }
 
-
-
-
-
     }
 
+    public function updateName(){
+        Auth::user()->update(['name'=>$this->userName]);  
+    }
 
     public function render()
     {
