@@ -66,7 +66,7 @@ class AdminPlanUpdate extends Component
         if ($data != 0) {
             // return "Update Data";
             UserPlanFeatures::where(['planoption_planid'=>$id,'planoption_type'=>$type])
-            ->update(['planoption_options'=> ($result == true ) ? "check" : "uncheck" ]);
+            ->update(['planoption_description'=>$label,'planoption_options'=> ($result == true ) ? "check" : "uncheck" ]);
 
         } else {
             // return "Save new record";

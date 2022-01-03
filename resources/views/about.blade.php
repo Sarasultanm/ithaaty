@@ -31,18 +31,16 @@
     </head>
     <body  style="background: #5f7c84;">
         <div class="font-sans text-gray-900 antialiased">
-             <div class="grid grid-cols-2 gap-4" style="background: #5f7c84;height: 100vh">
-                <div class="col-span-1 text-white">
-                    <img src="{{ asset('images/logo.png')}}" style="width:300px;margin: 40px 30px 40px 30px;">
-                    <div class="px-24 pb-10">
-                        <h2 class="uppercase text-5xl mb-3">About Us</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra, magna eu aliquet tempor, libero nunc vehicula lectus, id sodales odio quam eget lectus. Vivamus luctus vestibulum nibh at cursus. Nulla facilisi. Pellentesque mollis nisi ante, nec varius urna auctor et.</p>
+             <div class="grid lg:grid-cols-2 md:grid-cols-2 gap-4" style="background: #5f7c84;height: 100vh">
 
-
-
+                <div class="text-white col-span-1">
+                    <a href="/"><img src="{{ asset('images/logo.png')}}" class="xl:w-72 lg:w-48 md:w-40 w-30 front-page-logo"></a>
+                    <div class="xl:px-24 xl:pb-10 lg:px-10 lg:pb-5 md:px-10 md:pb-5">
+                        <h2 class="uppercase mb-3 xl:text-5xl lg:text-5xl md:text-4xl  ">About Us</h2>
+                        <p class="xl:text-xl lg:text-lg md:text-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra, magna eu aliquet tempor, libero nunc vehicula lectus, id sodales odio quam eget lectus. Vivamus luctus vestibulum nibh at cursus. Nulla facilisi. Pellentesque mollis nisi ante, nec varius urna auctor et.</p>
                     </div>
-                   
                 </div>
+
                 <div class="col-span-1" style="background: #f98b88;">
                   <div class=" bg-no-repeat" style="background-image: url({{ asset('images/right-img.png')}});background-size: cover;height: 78%;background-position: center center;">
                         <div x-data="{ open: false }" class="w-full bg-transparent relatives float-left">
@@ -102,7 +100,7 @@
              </div>   
 
 
-             <div class="grid grid-cols-1 mt-20 absolute w-full" style="margin-top: -395px;">
+             <div class="grid grid-cols-1 mt-20 absolute w-full front-page-slider" >
                  <div class="col-span-1">
               <!--        <div  class="flex bg-transparent">
                           <div class="flex-1 mx-2 text-white text-center h-60" style="background: #2e5157;">
@@ -135,16 +133,16 @@
                                       
                                        @if($num == 1)
                                           <?php $slide_pic = "slide".$num; ?>
-                                         <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 active">
+                                         <div class="carousel-item col-12 col-sm-3 col-md-4 col-lg-3 active">
                                             <a href="/post/{{ $likec->like_audioid }}">
-                                                <img src="{{ asset('images/slider-img/'.$slide_pic.'.jpg') }}" class="img-fluid mx-auto d-block p-5" alt="img1">
+                                                <img src="{{ asset('images/slider-img/'.$slide_pic.'.jpg') }}" class="img-fluid mx-auto d-block xl:p-5 lg:p-0 md:p-0" alt="img1">
                                             </a>
                                          </div>
                                         @else
                                          <?php $slide_pic = "slide".$num; ?>
-                                             <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
+                                             <div class="carousel-item col-12 col-sm-3 col-md-4 col-lg-3">
                                             <a href="/post/{{ $likec->like_audioid }}">
-                                                <img src="{{ asset('images/slider-img/'.$slide_pic.'.jpg') }}" class="img-fluid mx-auto d-block p-5" alt="img1">
+                                                <img src="{{ asset('images/slider-img/'.$slide_pic.'.jpg') }}" class="img-fluid mx-auto d-block xl:p-5 lg:p-0 md:p-0" alt="img1">
                                             </a>
                                          </div>
 
@@ -172,17 +170,17 @@
                  </div>
              </div>
 
-              <div class="grid grid-cols-3 gap-4 px-10 pt-4 pb-6 bottom-0 absolute w-full bg-white">
-                 <div class="col-span-1">
+              <div class="grid xl:grid-cols-3  lg:grid-cols-7 md:grid-cols-7 gap-4 px-10 pt-4 pb-6 bottom-0 absolute w-full bg-white">
+                 <div class="xl:col-span-1 lg:col-span-3 md:col-span-3">
                      <ul class="uppercase">
-                        <li class="inline"><a href="#" class="text-gray-800 text-sm uppercase font-bold pr-3">Home</a></li>
-                         <li class="inline"><a href="/aboutus" class="text-gray-800 text-sm uppercase font-bold pr-3">About Us</a></li>
-                         <li class="inline"><a href="/podcaster" class="text-gray-800 text-sm uppercase font-bold pr-3">Podcaster</a></li>
-                         <li class="inline"><a href="/advertise" class="text-gray-800 text-sm uppercase font-bold pr-3">Advertise With Us</a></li>
+                        <li class="inline"><a href="#" class="text-gray-800 xl:text-sm lg:text-xs md:text-xs uppercase font-bold pr-3">Home</a></li>
+                         <li class="inline"><a href="/aboutus" class="text-gray-800 xl:text-sm lg:text-xs md:text-xs uppercase font-bold pr-3">About Us</a></li>
+                         <li class="inline"><a href="/podcaster" class="text-gray-800 xl:text-sm lg:text-xs md:text-xs uppercase font-bold pr-3">Podcaster</a></li>
+                         <li class="inline"><a href="/advertise" class="text-gray-800 xl:text-sm lg:text-xs md:text-xs uppercase font-bold pr-3">Advertise With Us</a></li>
                          
                      </ul>
                  </div>
-                 <div class="col-span-1">
+                 <div class="xl:col-span-1 lg:col-span-2 md:col-span-2">
                     <center>
                       <!--   <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-custom-pink hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                           <svg class="-ml-0.5 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -204,7 +202,7 @@
                             </div>
                      </center>
                  </div>
-                 <div class="col-span-1">
+                 <div class="xl:col-span-1 lg:col-span-2 md:col-span-2">
                     <ul class="uppercase float-right">
                          <li class="inline"><a href="#" class="text-gray-800 text-lg uppercase font-bold pr-3"><i class="fab fa-facebook"></i></a></li>
                          <li class="inline"><a href="#" class="text-gray-800 text-lg uppercase font-bold pr-3"><i class="fab fa-instagram"></i></a></li>
@@ -220,12 +218,14 @@
          @livewireScripts
 
 
-        <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-        <script src="{{ asset('js/jquery-migrate-3.0.0.min.js') }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" ></script>
-        <script src="{{ asset('js/jquery.backstretch.min.js') }}"></script>
-        <script src="{{ asset('js/wow.min.js') }}"></script>
+            <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+            <script src="{{ asset('js/jquery-migrate-3.0.0.min.js') }}"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" ></script>
+            <script src="{{ asset('js/jquery.backstretch.min.js') }}"></script>
+            <script src="{{ asset('js/wow.min.js') }}"></script>
+
+
         <!-- <script src="{{ asset('js/scripts.js') }}"></script> -->
     </body>
 
