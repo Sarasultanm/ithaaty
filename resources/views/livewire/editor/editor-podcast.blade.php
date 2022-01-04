@@ -82,7 +82,7 @@
                    
                     @foreach($getAudioData as $audioData)
 
-                      <div class="xl:col-span-4 lg:col-span-6 md:col-span-6 sm:col-span-6 bg-white p-2 ">
+                      <div class="xl:col-span-4 lg:col-span-6 md:col-span-6 sm:col-span-6 xs:col-span-6 bg-white p-2 ">
                         <article aria-labelledby="question-title-81614">
                          <div>
                             <div class="flex space-x-3">
