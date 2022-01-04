@@ -300,7 +300,7 @@
                     </div>
 
                    </div>
-                   @error('audio') <span class="text-xs text-red-600">Empty fields</span> @enderror
+                  
                             
 				    </div>
 
