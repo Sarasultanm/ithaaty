@@ -45,7 +45,7 @@
           <!-- This example requires Tailwind CSS v2.0+ -->
 			
 			<div class="grid grid-cols-12 mt-5 gap-5">
-				<div class="xl:col-span-8 sm:col-span-12">
+				<div class="col-span-12">
 
 			  <div 
 			    x-data="{
@@ -77,7 +77,7 @@
 			    <div class="w-full pt-4">
 			      <div x-show="openTab === 1">
 			      	
-			      	<div class="grid grid-cols-12 gap-5">
+			      	<div class="grid gap-5 xl:grid-cols-12 lg:grid-cols-12 md:grid-cols-12 sm:grid-cols-8 ">
 
 					@foreach($friendList as $friends)
 
@@ -169,7 +169,7 @@
 			      <div x-show="openTab === 2">
 			      	
 
-			      	<div class="grid grid-cols-12 gap-5">
+			      	<div class="grid gap-5 xl:grid-cols-12 lg:grid-cols-12 md:grid-cols-12 sm:grid-cols-8 ">
 
 			      		@foreach($confirmrequest as $friend)
 
@@ -215,7 +215,7 @@
 			         <div x-show="openTab === 3">
 			      	
 
-			      	<div class="grid grid-cols-12 gap-5">
+			      	<div class="grid gap-5 xl:grid-cols-12 lg:grid-cols-12 md:grid-cols-12 sm:grid-cols-8 ">
 
 				      	@foreach($friendrequest as $requestfriend)
 
