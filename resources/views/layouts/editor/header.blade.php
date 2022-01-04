@@ -52,7 +52,7 @@
           </button>
         </div>
 
-          <div x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false"  class="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
+          <div x-cloak x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false"  class="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
 	          <p class="text-sm font-medium text-gray-900 text-right">
               @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-gray-800 mr-3 border-red-500 border-2">Free</span>
@@ -88,6 +88,7 @@
               </div>
               <div x-description="Dropdown menu, show/hide based on menu state." x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                 <!-- Active: "bg-gray-100", Not Active: "" -->
+
                 <a href="{{ route('editorViewUser',['id' => Auth::user()->id]) }}" class="block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
 
                 <a href="{{ route('editorSettings') }}" class="block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
@@ -119,13 +120,13 @@
     <nav class="lg:hidden" aria-label="Global" x-cloak  x-show="header">
       <div class="max-w-3xl mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-4">
         <!-- Current: "bg-gray-100 text-gray-900", Default: "hover:bg-gray-50" -->
-        <a href="#" aria-current="page" class="bg-gray-100 text-gray-900 block rounded-md py-2 px-3 text-base font-medium text-gray-900">Home</a>
 
+        @include('layouts.editor.mobile-menu')
+
+        <!-- <a href="#" class="bg-gray-100 text-gray-900 block rounded-md py-2 px-3 text-base font-medium text-gray-900">Home</a>
         <a href="#" class="hover:bg-gray-50 block rounded-md py-2 px-3 text-base font-medium text-gray-900">Popular</a>
-
         <a href="#" class="hover:bg-gray-50 block rounded-md py-2 px-3 text-base font-medium text-gray-900">Communities</a>
-
-        <a href="#" class="hover:bg-gray-50 block rounded-md py-2 px-3 text-base font-medium text-gray-900">Trending</a>
+        <a href="#" class="hover:bg-gray-50 block rounded-md py-2 px-3 text-base font-medium text-gray-900">Trending</a> -->
       </div>
       <div class="border-t border-gray-200 pt-4 pb-3">
         <div class="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
@@ -160,11 +161,20 @@
           </div>
         </div>
         <div class="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
-          <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">Your Profile</a>
 
-          <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">Settings</a>
+          <a href="{{ route('editorViewUser',['id' => Auth::user()->id]) }}" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
 
-          <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">Sign out</a>
+          <a href="{{ route('editorSettings') }}" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+
+
+          <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <x-dropdown-link :href="route('logout')"
+                      onclick="event.preventDefault();
+                                  this.closest('form').submit();" class="block rounded-md text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">
+                  {{ __('Sign out') }}
+              </x-dropdown-link>
+          </form>
         </div>
       </div>
     </nav>
