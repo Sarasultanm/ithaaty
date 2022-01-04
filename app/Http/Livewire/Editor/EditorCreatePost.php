@@ -53,7 +53,7 @@ class EditorCreatePost extends Component
             'episode' => 'required',
             'status' => 'required',
             'category' => 'required',
-            'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,mp4,wav',
+            // 'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,mp4,wav',
             
         ]);
 

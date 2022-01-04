@@ -66,7 +66,11 @@
                 background-color: #ccc;
             }
         </style>
-
+        <style>
+            [x-cloak] { 
+              display: none !important;
+            }
+        </style>
          @livewireStyles
       
      <!--  <script src="https://vjs.zencdn.net/7.14.3/video.min.js"></script> 
