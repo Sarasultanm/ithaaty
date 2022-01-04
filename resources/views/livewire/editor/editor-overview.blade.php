@@ -31,7 +31,7 @@
 
      
 
-      <main class="col-span-10">
+      <main class="xl:col-span-10 lg:col-span-9">
 
       @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
       	@include('layouts.editor.page-404')
@@ -103,7 +103,7 @@
 			</div>
 
 			<div class="grid grid-cols-12 mt-5 gap-5">
-				<div class="col-span-8">
+				<div class="xl:col-span-8 lg:col-span-12 md:col-span-12 sm:col-span-12">
 				
 
 				<!-- This example requires Tailwind CSS v2.0+ -->
@@ -232,7 +232,7 @@
 
 
 				</div>
-				<div class="col-span-4">
+				<div class="xl:col-span-4 lg:col-span-12 md:col-span-12 sm:col-span-12">
 
 
 				<aside class=" bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">

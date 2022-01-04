@@ -25,7 +25,7 @@
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
-      <main class="col-span-10">
+      <main class="xl:col-span-10 lg:col-span-9">
       	@if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
         @else
         @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )

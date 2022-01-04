@@ -25,7 +25,7 @@
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
-      <main class="col-span-10">
+      <main class="xl:col-span-10 lg:col-span-9">
       	@if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
       	@include('layouts.editor.page-404')
         @else

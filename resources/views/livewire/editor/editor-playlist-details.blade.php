@@ -24,7 +24,7 @@
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
-      <main class="col-span-10">
+      <main class="xl:col-span-10 lg:col-span-9">
         <!-- playlist -->
         @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
           @include('layouts.editor.page-404') 
@@ -37,9 +37,9 @@
 	          </div>
 
 
-               <div class="grid gap-4 grid-cols-10">
+               <div class="grid gap-4 xl:grid-cols-10 lg:grid-cols-10 md:grid-cols-10">
 
-                  <div class="col-span-7">
+                  <div class="xl:col-span-7 sm:col-span-12">
                     <div class=" w-full ">
                          <h1 class="font-bold text-gray-800 text-xl">My Playlist</h1> 
                     </div> 
@@ -63,11 +63,11 @@
                   </div>
 
                    <div x-show="openTab === 10">
-                     <div class="grid gap-4 grid-cols-9">
+                     <div class="grid gap-4 xl:grid-cols-9 md:grid-cols-6 sm:grid-cols-6">
                         @foreach($playlist->get() as $plist)
                           @if($plist->playlist_status == "Public")
                           
-                              <div class="col-span-3 bg-white p-2 ">
+                              <div class="xl:col-span-3 md:col-span-2 sm:col-span-2 bg-white p-2 ">
                                  <a href="{{ route('editorPlaylist',['id' => $plist->id ]) }}" class="pointer">
                                   <div class="mt-2 text-sm text-gray-700 space-y-4">
                                      <div class="text-white bg-cover h-36">
@@ -148,7 +148,7 @@
                   </div>
 
 
-                  <div class="col-span-3">
+                  <div class="xl:col-span-3 sm:col-span-12">
                    
                         <div class=" bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
                           <div class="pb-5">

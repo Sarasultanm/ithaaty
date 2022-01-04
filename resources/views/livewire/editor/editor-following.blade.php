@@ -25,7 +25,7 @@
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
-      <main class="col-span-10">
+      <main class="xl:col-span-10 lg:col-span-9">
       	@if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
       	@include('layouts.editor.page-404')
         @else
@@ -80,7 +80,7 @@
 			
 			    <div class="w-full pt-4">
 			    
-			      	<div class="grid grid-cols-8 gap-5">
+			      	<div class="grid xl:grid-cols-8 lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-4 gap-5">
 
 					@foreach($following->get() as $follow)
 			            <div class="col-span-2 bg-white p-2 rounded-lg">

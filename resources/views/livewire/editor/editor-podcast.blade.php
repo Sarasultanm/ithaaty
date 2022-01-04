@@ -33,7 +33,7 @@
      
 
 
-      <main class="col-span-10">
+      <main class="xl:col-span-10 lg:col-span-9">
 
       @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
           @include('layouts.editor.page-404')
@@ -44,7 +44,7 @@
              <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
         </div>
 
-        <div class=" w-full flex">
+        <div class=" w-full flex xl:p-0 lg:p-0 md:p-0 sm:p-0 xs:p-0">
             <div class="flex-1">
                <h1 class="font-bold text-gray-800 text-xl">My Podcast </h1> 
                @if(empty(Auth::user()->alias))
@@ -67,7 +67,7 @@
         <div class="grid grid-cols-12 mt-5 gap-5">
          @if(Auth::user()->get_audio->count() != 0)
         <!-- col-8 -->
-        <div class="col-span-8">
+        <div class="xl:col-span-8 sm:col-span-12">
 
            <div class="grid gap-4 grid-cols-12">
 
@@ -82,7 +82,7 @@
                    
                     @foreach($getAudioData as $audioData)
 
-                      <div class="col-span-4 bg-white p-2 ">
+                      <div class="xl:col-span-4 lg:col-span-6 md:col-span-6 sm:col-span-6 bg-white p-2 ">
                         <article aria-labelledby="question-title-81614">
                          <div>
                             <div class="flex space-x-3">
@@ -145,7 +145,7 @@
       <!-- col-8 -->
 
       <!-- col-4 -->
-      <div class="col-span-4">
+      <div class="col-span-4 xl:block lg:block md:block sm:hidden">
           <aside >
                 <div class=" bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
                   <div class="pb-5 space-y-6">

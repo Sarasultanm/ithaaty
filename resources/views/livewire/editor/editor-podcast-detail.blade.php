@@ -32,7 +32,7 @@
 
       @if(Auth::user()->get_plan->check_features('p3')->count() != 0 || Auth::user()->get_plan->check_features('p2')->count() != 0 )
 
-      <main class="col-span-10">
+      <main class="xl:col-span-10 lg:col-span-9">
         <div class="w-full ">
              <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
         </div>

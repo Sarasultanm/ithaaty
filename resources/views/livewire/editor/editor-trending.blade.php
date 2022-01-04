@@ -26,7 +26,7 @@
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
-      <main class="col-span-10">
+      <main class="xl:col-span-10 lg:col-span-9">
 
         <div class="mt-4">
          

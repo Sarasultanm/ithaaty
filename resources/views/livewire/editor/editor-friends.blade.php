@@ -25,7 +25,7 @@
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
-      <main class="col-span-10">
+      <main class="xl:col-span-10 lg:col-span-9">
       	@if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
       	@include('layouts.editor.page-404')
         @else
@@ -45,7 +45,7 @@
           <!-- This example requires Tailwind CSS v2.0+ -->
 			
 			<div class="grid grid-cols-12 mt-5 gap-5">
-				<div class="col-span-8">
+				<div class="xl:col-span-8 sm:col-span-12">
 
 			  <div 
 			    x-data="{

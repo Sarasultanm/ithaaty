@@ -25,7 +25,7 @@
         <!-- sidebar -->
       </div>
 
-      <main class="col-span-10">
+      <main class="xl:col-span-10 lg:col-span-9">
       	
       	<!-- playlist -->
         <div class="mt-4 mt-4 p-5 bg-custom-pink rounded-md">

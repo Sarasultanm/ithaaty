@@ -25,7 +25,7 @@
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
-      <main class="col-span-10">
+      <main class="xl:col-span-10 lg:col-span-9">
 
         <div class="mt-4">
           <div class="mb-5 w-full ">
@@ -42,7 +42,7 @@
 			      activeClasses: 'border-custom-pink text-custom-pink',
 			      inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
 			    }" 
-			    class="p-6"
+			    class=""
 			  >
 			  <div class="border-b border-gray-200">
 			  	<ul class="-mb-px flex" >
@@ -85,13 +85,13 @@
 
 			                <div class="mt-6 grid grid-cols-4 gap-6">
 
-			                  <div class="col-span-4 sm:col-span-4">
+			                  <div class="col-span-4 xl:col-span-2 lg:col-span-2 sm:col-span-3">
 			                  	<h3 class="text-md leading-6 font-medium text-gray-900">Channel Name</h3>
 			                    <input wire:model="userAlias" type="text" name="first_name" id="first_name" autocomplete="cc-given-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
 			                  </div>
 
-			                  <div class="col-span-4 sm:col-span-4 text-right">
-			                    <button type="submit" class="bg-custom-pink border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">Update</button>
+			                  <div class="col-span-4 xl:col-span-2 lg:col-span-2 sm:col-span-1 text-right">
+			                    <button type="submit" class="mt-5 bg-custom-pink border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">Update</button>
 			                  </div>
 
 			                </div>
