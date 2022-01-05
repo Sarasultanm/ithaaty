@@ -18,10 +18,18 @@ class Authenticate extends Middleware
 
     protected function redirectTo($request)
     {
-        if (\Auth::user()->roles == 'editor') {
-          return $next($request);
+        if(\Auth::check()){
+            if (\Auth::user()->roles == 'editor') {
+                return $next($request);
+            }
+        }else{
+            return redirect('/');
         }
 
-        return redirect('/');
+        // if (\Auth::user()->roles == 'editor') {
+        //   return $next($request);
+        // }
+        // return redirect('/');
+        
     }
 }

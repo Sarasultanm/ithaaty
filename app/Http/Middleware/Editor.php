@@ -16,6 +16,22 @@ class Editor
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+
+        if(\Auth::check()){
+            if (\Auth::user()->roles == 'editor') {
+                return $next($request);
+            }
+        }else{
+            return redirect('/');
+        }
+
+
+        // if (\Auth::user()->roles == 'editor') {
+        //   return $next($request);
+        // }
+
+        // return redirect('/');
+
+        // return $next($request);
     }
 }

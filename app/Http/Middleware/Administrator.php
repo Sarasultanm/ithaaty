@@ -16,10 +16,19 @@ class Administrator
      */
     public function handle(Request $request, Closure $next)
     {
-        if (\Auth::user()->roles == 'admin') {
-          return $next($request);
-        }
+        // if (\Auth::user()->roles == 'admin') {
+        //   return $next($request);
+        // }
 
-        return redirect('/');
+        // return redirect('/');
+
+
+        if(\Auth::check()){
+            if (\Auth::user()->roles == 'admin') {
+                return $next($request);
+            }
+        }else{
+            return redirect('/');
+        }
     }
 }
