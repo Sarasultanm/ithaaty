@@ -100,7 +100,17 @@ class MainController extends Controller
 	}
 
 
-
+	public function checkLogin(){
+		if(Auth::check()){
+			if(Auth::user()->roles ="admin"){
+				return "admin";
+			}else{
+				return "editor";
+			}
+		}else{
+			return "NotLogin";
+		}
+	}
 
 
 }
