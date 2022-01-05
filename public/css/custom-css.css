@@ -39,3 +39,22 @@
      margin-top: -298px;
   }
 }
+
+@media (max-width: 640px){
+  .front-page-slider {
+     margin-top: 0px;
+     margin-bottom: 10px;
+  }
+  .front-page-container{
+  	height: 53vh !important;
+  }
+}
+@media (max-width: 416px){
+  .front-page-slider {
+     margin-top: 0px;
+     margin-bottom: 10px;
+  }
+  .front-page-container{
+  	height: 48vh !important;
+  }
+}
