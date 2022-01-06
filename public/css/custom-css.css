@@ -55,6 +55,7 @@
      margin-bottom: 10px;
   }
   .front-page-container{
-  	height: 48vh !important;
+  	/*height: 48vh !important;*/
+  	height: auto !important;
   }
 }
