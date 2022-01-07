@@ -97,6 +97,7 @@ class EditorViewUsers extends Component
              $data->friend_requestid = $id;
              $data->friend_type = "Send Request";
              $data->friend_status = "active";
+             $data->friend_block_type = "empty";
              $data->save();
 
              $notif = new UserNotifications;

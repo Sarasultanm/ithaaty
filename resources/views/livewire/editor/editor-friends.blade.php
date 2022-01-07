@@ -87,12 +87,13 @@
 						@if($friends->friend_type == "Friends")
 
 
-			            <div class="col-span-4 p-2 rounded-lg">
-			            	 @if(Auth::user()->id == $friends->friend_userid )  
-				              <a href="{{ route('editorViewUser',['id' => $friends->get_request_user->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
+			            <div class="xl:col-span-3 lg:col-span-4  md:col-span-4 sm:col-span-4 p-2 rounded-lg">
+			            	  <!-- @if(Auth::user()->id == $friends->friend_userid )  
+				              <a href="" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
 				              @else
 				               <a href="{{ route('editorViewUser',['id' => $friends->get_add_friend->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
-				              @endif
+				              @endif -->
+				              <div class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
 				                <div class="mt-2 text-sm text-gray-700 space-y-4">
 				                   <div class="text-white bg-cover h-36">
 				                      <!--  <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">    --> 
@@ -121,40 +122,46 @@
 				                <div>
 				                  <div class="flex space-x-3">
 				                    <div class="min-w-0 flex-1">
-			                    	@if(Auth::user()->id == $friends->friend_userid )
-				                      <p class="text-md font-bold text-gray-900 mt-2 text-center">  
-				                      	{{ $friends->get_request_user->name }} 
-					                  </p>
-					                  <p class="text-xs font-regular text-gray-500  text-center">  
-				                      	{{ $friends->get_request_user->email }}
-					                  </p>
-					                @else
-					                 <p class="text-md font-bold text-gray-900 mt-2 text-center">  
-				                      	{{ $friends->get_add_friend->name }}
-					                  </p>
-					                  <p class="text-xs font-regular text-gray-500  text-center">  
-				                      	{{ $friends->get_add_friend->email }}
-					                  </p>
-					                @endif  
+				                    	@if(Auth::user()->id == $friends->friend_userid )
+					                      <p class="text-md font-bold text-gray-900 mt-2 text-center">  
+					                      	<a href="#">
+					                      		{{ $friends->get_request_user->name }} 
+					                      	</a>
+						                 	  </p>
+						                  	<p class="text-xs font-regular text-gray-500  text-center">  
+					                      	{{ $friends->get_request_user->email }}
+						                    </p>
+							                @else
+							                  <p class="text-md font-bold text-gray-900 mt-2 text-center">  
+						                      	{{ $friends->get_add_friend->name }}
+							                  </p>
+							                  <p class="text-xs font-regular text-gray-500  text-center">  
+						                      	{{ $friends->get_add_friend->email }}
+							                  </p>
+							                @endif  
 
-					                  @if(Auth::user()->id == $friends->friend_userid )
-				                      <p class="my-2 text-center">
-				                       <!--  <button wire:click="removeFriend({{ $friends->get_request_user->id }})" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
-				                         Remove as Friend
-				                        </button> -->
-				                      </p>
-				                      @else
-				                      <p class="my-2 text-center">
-				                      <!--   <button wire:click="removeFriend({{ $friends->get_add_friend->id }})" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
-				                         Remove as Friend
-				                        </button> -->
-				                      </p>
-				                      @endif 
+						                  @if(Auth::user()->id == $friends->friend_userid )
+					                      <p class="my-2 text-center">
+					                       <!-- <button wire:click="removeFriend({{ $friends->get_request_user->id }})" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
+					                         Remove as Friend
+					                        </button> -->
+					                        <button wire:click="blockFriend({{$friends->id}},{{ $friends->get_request_user->id }},'user')" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
+					                         Block Friend
+					                        </button>
+					                      </p>
+					                      @else
+					                      <p class="my-2 text-center">
+					                      <button wire:click="blockFriend({{$friends->id}},{{ $friends->get_add_friend->id }},'request')" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
+					                         Block Friend
+					                        </button>
+					                      </p>
+					                      @endif 
 				                    </div>
 				                   
 				                  </div>
 				                </div>
-				              </a>
+				              </div>
+				              <!-- </a> -->
 				            </div>
 
 				           @endif
@@ -175,7 +182,7 @@
 
 							@if($friend->friend_type == "Send Request")
 
-				            <div class="col-span-4 p-2 rounded-lg">
+				            <div class="xl:col-span-3 lg:col-span-4  md:col-span-4 sm:col-span-4 p-2 rounded-lg">
 				              <a href="{{ route('editorViewUser',['id' => $friend->get_add_friend->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
 				                <div class="mt-2 text-sm text-gray-700 space-y-4">
 				                   <div class="text-white bg-cover h-36">
@@ -220,7 +227,7 @@
 				      	@foreach($friendrequest as $requestfriend)
 
 							@if($requestfriend->friend_type == "Send Request")
-				             <div class="col-span-4 p-2 rounded-lg">
+				             <div class="xl:col-span-3 lg:col-span-4  md:col-span-4 sm:col-span-4 p-2 rounded-lg">
 				              <a href="{{ route('editorViewUser',['id' => $requestfriend->get_request_user->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
 				                <div class="mt-2 text-sm text-gray-700 space-y-4">
 				                   <div class="text-white bg-cover h-36">
@@ -236,11 +243,11 @@
 					                  <p class="text-xs font-regular text-gray-500  text-center">  
 				                      	{{ $requestfriend->get_request_user->email }}
 					                  </p>
-				                      <p class="my-2 text-center">
-				                       <!--  <button wire:click="cancelRequest({{ $requestfriend->get_request_user->id }})" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
+				                     <!--  <p class="my-2 text-center">
+				                       <button wire:click="cancelRequest({{ $requestfriend->get_request_user->id }})" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
 				                        Cancel Request
-				                        </button> -->
-				                      </p>
+				                        </button>
+				                      </p> -->
 				                    </div>
 				                   
 				                  </div>
@@ -258,6 +265,102 @@
 			      </div>
 			     
 
+			      <div x-show="openTab === 4">
+			      	
+
+			      	<div class="grid gap-5 xl:grid-cols-12 lg:grid-cols-12 md:grid-cols-12 sm:grid-cols-8 ">
+
+				    @foreach($friendList as $friends)
+
+						@if($friends->friend_status == "active" && $friends->friend_type == "Block")
+
+
+								@if(Auth::user()->id == $friends->get_block->block_userid)
+
+			            <div class="xl:col-span-3 lg:col-span-4  md:col-span-4 sm:col-span-4 p-2 rounded-lg">
+			            	  <!-- @if(Auth::user()->id == $friends->friend_userid )  
+				              <a href="" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
+				              @else
+				               <a href="{{ route('editorViewUser',['id' => $friends->get_add_friend->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
+				              @endif -->
+				              <div class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
+				                <div class="mt-2 text-sm text-gray-700 space-y-4">
+				                   <div class="text-white bg-cover h-36">
+				                      <!--  <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">    --> 
+				                      @if(Auth::user()->id == $friends->friend_userid )
+				                      		
+				                      		@if($friends->get_request_user->get_profilephoto->count() == 0)
+					                         <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">
+					                        @else
+					                          <?php $friendprofile_path = $friends->get_request_user->get_profilephoto->first()->gallery_path; ?>
+					                          <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('users/profile_img/'.$friendprofile_path) }}" alt="">
+					                        @endif 
+
+				                      @else
+				                      		@if($friends->get_add_friend->get_profilephoto->count() == 0)
+					                         <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">
+					                        @else
+					                          <?php $friendprofile_path = $friends->get_add_friend->get_profilephoto->first()->gallery_path; ?>
+					                          <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('users/profile_img/'.$friendprofile_path) }}" alt="">
+					                        @endif 
+
+				                      @endif  
+
+				                        
+				                   </div>
+				                </div>
+				                <div>
+				                  <div class="flex space-x-3">
+				                    <div class="min-w-0 flex-1">
+				                    	@if(Auth::user()->id == $friends->friend_userid )
+					                      <p class="text-md font-bold text-gray-900 mt-2 text-center">  
+					                      	<a href="#">
+					                      		{{ $friends->get_request_user->name }} 
+					                      	</a>
+						                 	  </p>
+						                  	<p class="text-xs font-regular text-gray-500  text-center">  
+					                      	{{ $friends->get_request_user->email }}
+						                    </p>
+							                @else
+							                  <p class="text-md font-bold text-gray-900 mt-2 text-center">  
+						                      	{{ $friends->get_add_friend->name }}
+							                  </p>
+							                  <p class="text-xs font-regular text-gray-500  text-center">  
+						                      	{{ $friends->get_add_friend->email }}
+							                  </p>
+							                @endif  
+
+						                  @if(Auth::user()->id == $friends->friend_userid )
+					                      <!-- <p class="my-2 text-center">
+					                        <button wire:click="unblockFriend({{$friends->id}},{{ $friends->get_request_user->id }},'user')" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
+					                        Unblock
+					                        </button>
+					                      </p> -->
+					                      @else
+					                     <!--  <p class="my-2 text-center">
+					                      <button wire:click="unblockFriend({{$friends->id}},{{ $friends->get_add_friend->id }},'request')" class="bg-custom-pink text-white text-sm font-bold rounded-md px-2 py-1.5 pointer">
+					                         Unblock
+					                        </button>
+					                      </p> -->
+					                      @endif 
+				                    </div>
+				                   
+				                  </div>
+				                </div>
+				              </div>
+				              <!-- </a> -->
+				            </div>
+
+				           
+				            @endif
+			            @endif
+
+             		@endforeach 
+			      
+             		</div>
+
+			      </div>
+			     
 
 			    </div>
 			  </div>

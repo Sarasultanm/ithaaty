@@ -74,5 +74,9 @@ class User extends Authenticatable
     public function get_plan(){
         return $this->belongsTo('App\Models\UserPlan','plan','id');
     }
+
+    public function block_list(){
+        return $this->belongsTo('App\Models\UserBlockList','block_user','id');
+    }
     
 }

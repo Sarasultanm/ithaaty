@@ -59,7 +59,7 @@ class EditorPodcastDetail extends Component
             for ($i=0; $i < str_word_count($mergeComs) ; $i++){
 
                 if(!in_array($arryComs[$i],$marks)){
-                    $wordArray[] = $arryComs[$i]."(".substr_count($mergeComs, $arryComs[$i]).")";
+                    $wordArray[] = $arryComs[$i]."(".substr_count(strtolower($mergeComs), strtolower($arryComs[$i])).")";
                }
 
 

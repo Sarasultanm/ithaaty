@@ -49,6 +49,7 @@
   	height: 53vh !important;
   }
 }
+
 @media (max-width: 416px){
   .front-page-slider {
      margin-top: 0px;
@@ -59,3 +60,7 @@
   	height: auto !important;
   }
 }
+
+
+
+
