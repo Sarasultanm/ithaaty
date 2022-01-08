@@ -658,7 +658,7 @@
                     <p class="text-md font-bold text-gray-900">References : </p>
                     <div class="mt-3">
                       @foreach($audio->get_references as $refs)
-                     <p  class="text-sm"><a href="{{ $refs->audioref_link }}">{{ $refs->audioref_title }}</a></p>
+                     <p  class="text-sm"><a target="_blank" href="{{ $refs->audioref_link }}">{{ $refs->audioref_title }}</a></p>
                      @endforeach
                     </div>
 

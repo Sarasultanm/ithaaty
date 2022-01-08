@@ -544,7 +544,7 @@
 		                <div class="mt-1">
 		                @foreach($audio->get_references as $reference)	
 		                
-		                 <a href="{{ $reference->audioref_link }}">{{ $reference->audioref_title }}</a><br>
+		                 <a target="_blank" href="{{ $reference->audioref_link }}">{{ $reference->audioref_title }}</a><br>
 
 		                @endforeach 
 		                </div>

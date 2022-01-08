@@ -12,6 +12,7 @@ use App\Models\AudioAffiliate;
 use App\Models\UserQa;
 use App\Models\UserGallery;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 
 use Livewire\WithFileUploads;
 
@@ -22,7 +23,7 @@ class EditorUpdatePost extends Component
 
 	public $audio,$a_id,$title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link,$checkAudio,$status;
     public $spon_name,$spon_website,$spon_location,$spon_linkloc,$spon_image,$afi_link,$afi_title,$qa_question;
-    public $profilePhoto,$thumbnail;
+    public $profilePhoto,$thumbnail,$vttfile;
     
 	protected $listeners = [
         'refreshParent' =>'$refresh'
@@ -126,6 +127,10 @@ class EditorUpdatePost extends Component
 
     public function addSponsor(){
 
+        $this->validate([
+            'spon_image' => 'required|image|max:1024',
+        ]);
+
         $data = Audio::findOrFail($this->a_id);
 
         if(Auth::user()->id == $data->audio_editor){
@@ -215,8 +220,23 @@ class EditorUpdatePost extends Component
 
     }
 
+    public function uploadChapters($audioid){
 
-   public function clearRefFields(){
+
+        Storage::prepend('vtt/updated.vtt', $this->vttfile);
+
+
+        session()->flash('status', 'Working grate');
+        redirect()->to('editor/podcast/update/'.$audioid); 
+
+
+    }
+
+
+
+
+
+  public function clearRefFields(){
        $this->ref_title = null;
        $this->ref_link = null;
    }

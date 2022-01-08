@@ -33,7 +33,7 @@
 
       @if(Auth::user()->get_plan->check_features('p3')->count() != 0 || Auth::user()->get_plan->check_features('p2')->count() != 0 )
 
-      <main class="lg:col-span-10 xl:col-span-10">
+      <main class="xl:col-span-10 lg:col-span-9">
 
         <div class="mt-4">
           <!-- <div class="mb-5 w-full ">
@@ -90,6 +90,12 @@
 				        <a>Monetize</a>
 				      </li>
 				      @endif
+
+				       @if(Auth::user()->get_plan->check_features('o8')->count() != 0 )
+				        <li @click="openTab = 8"  :class="openTab === 8 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
+				        <a>Chapters</a>
+				      </li>
+				       @endif
 				    </ul>
 				</div>
 
@@ -412,6 +418,7 @@
 			                    <div class="mt-1">
 			                      <input type="file"  class=""  wire:model="spon_image">
 			                    </div>
+			                    @error('spon_image') <span class="text-xs text-red-600">Required Fields</span> @enderror
 					        </div>
 					       
 					      <div class="mt-3 text-right sm:mt-5 mb-5">
@@ -922,6 +929,42 @@
                           </div> 
               @endif
 					</div>
+
+
+					<div x-show="openTab === 8">
+						 @if(Auth::user()->get_plan->check_features('o8')->count() != 0 )
+						<div class="mt-5">
+		                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Chapters</h2>
+		                  <p class="mt-1 text-sm text-gray-500">
+		                    Add a chapters for your podcast
+		                  </p>
+		                  <div class="border-t-2 border-custom-pink "></div>   
+
+		                 
+	
+					        <div class="mt-5">
+			                    <label for="email" class="block text-sm font-medium text-gray-700">VTT Files</label>
+			                    <div class="mt-1">
+			                    	<textarea rows="20" class="w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="vttfile"></textarea>
+			                      
+			                    </div>
+					        </div>
+					        <div class="w-15 mt-5">
+			                    <label for="email" class="block text-sm font-medium text-gray-700">&nbsp;</label>
+			                    <div class="mt-1">
+			                       <button  class="w-auto inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md float-right">
+						          Update Chapters
+						        </button>
+			                    </div>
+					        </div>
+		                 
+		                   
+		                 
+
+
+		            </div> 
+		            @endif
+					</div>	
 
 
 				</div>
