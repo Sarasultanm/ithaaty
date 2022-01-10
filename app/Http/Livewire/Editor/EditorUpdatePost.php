@@ -306,7 +306,26 @@ class EditorUpdatePost extends Component
 
     }
 
+    public function publishAudio($id){
 
+        $data = Audio::findOrFail($id);
+
+        if(Auth::user()->id == $data->audio_editor){
+
+         Audio::where('id',$id)
+            ->update([
+                'audio_publish'=> "Publish",
+            ]);
+    
+         session()->flash('status', 'Podcast Publish Complete.');
+
+         // redirect()->to('editor/podcast/update/'.$this->a_id);   
+         redirect()->to('editor/dashboard');       
+
+        }else{
+          redirect()->to('editor/dashboard');       
+        } 
+    }
 
 
     public function render()

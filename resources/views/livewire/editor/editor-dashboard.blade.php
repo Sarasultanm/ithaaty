@@ -101,15 +101,7 @@
           <ul class="space-y-4">
 
             @foreach($audioList->get() as $audio)
-
-
-
-
-
-
-
-
-
+            @if($audio->audio_publish == "Publish")
 
           <?php // if( EditorDashboard::checkFollow($audio->audio_editor) != 0 || $audio->audio_editor == Auth::user()->id ) ?>
 
@@ -744,7 +736,7 @@
          
 
             @endif 
-
+            @endif 
             @endforeach
 
 

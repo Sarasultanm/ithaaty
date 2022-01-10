@@ -69,6 +69,7 @@ class EditorCreatePost extends Component
         $data->audio_path = $this->audio->hashName();
         $data->audio_type = "Upload";
         $data->audio_hashtags = (empty($this->hashtags)) ? "" : $this->hashtags;
+        $data->audio_publish = "Draft";
         $data->save();
 
 
@@ -77,9 +78,9 @@ class EditorCreatePost extends Component
 
         $s3_storage = $this->audio->store('audio', 's3');
 
-        session()->flash('status', 'Post Success');
+        session()->flash('status', "You updated your podcast but its not publish. If you want to publish your podcast now hit the publish button.");
 
-        redirect()->to('/editor/dashboard');
+        redirect()->to('/editor/podcast/update/'.$data->id);
 
      }
 
@@ -113,6 +114,7 @@ class EditorCreatePost extends Component
         $data->audio_summary = (empty($this->summary)) ? "" : $this->summary;
         $data->audio_path = $this->embedlink;
         $data->audio_type = "Embed";
+        $data->audio_publish = "Draft";
         $data->audio_hashtags = (empty($this->hashtags)) ? "" : $this->hashtags;
         $data->save();
 
@@ -131,10 +133,10 @@ class EditorCreatePost extends Component
         // $audiofile = $this->audiofile->hashName();
         // $path = $this->audiofile->storeAs('audio',$audiofile);
 
-        session()->flash('status', 'Post Success');
+        session()->flash('status', "You updated your podcast but its not publish. If you want to publish your podcast now hit the publish button.");
 
-        redirect()->to('/editor/dashboard');
-
+        // redirect()->to('/editor/dashboard');
+        redirect()->to('/editor/podcast/update/'.$data->id);
 
 
 
