@@ -147,8 +147,11 @@
                           <source src="{{ $audio->audio_path }}" res="360" label="360p" type="video/mp4">
                           <source src="{{ $audio->audio_path }}" default res="480" label="480p" type="video/mp4">
                           <source src="{{ $audio->audio_path }}" res="720" label="720p" type="video/mp4">
-                          <track kind="chapters" src="https://ithaaty.com/vtt/sample.vtt" srclang="en">
+                          @if($audio->get_chapters != 0)
+                            <?php  $chapter_link = $audio->get_chapters()->chapter_filename;  ?>
+                            <track kind="chapters" src="{{ asset('vtt/'.$chapter_link) }}" srclang="en">
 
+                          @endif  
                           <!-- <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/mp4" />
                           <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/webm" /> -->
                           <p class="vjs-no-js">

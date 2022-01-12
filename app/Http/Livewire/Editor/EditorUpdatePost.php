@@ -11,6 +11,7 @@ use App\Models\AudioSponsor;
 use App\Models\AudioAffiliate;
 use App\Models\UserQa;
 use App\Models\UserGallery;
+use App\Models\AudioChapters;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,10 +21,9 @@ class EditorUpdatePost extends Component
 {
     use WithFileUploads;
 
-
 	public $audio,$a_id,$title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link,$checkAudio,$status;
     public $spon_name,$spon_website,$spon_location,$spon_linkloc,$spon_image,$afi_link,$afi_title,$qa_question;
-    public $profilePhoto,$thumbnail,$vttfile;
+    public $profilePhoto,$thumbnail,$vttfile,$defaultvvt;
     
 	protected $listeners = [
         'refreshParent' =>'$refresh'
@@ -63,6 +63,7 @@ class EditorUpdatePost extends Component
 	        $this->embedlink = $data->audio_path;
 	        $this->hashtags = $data->audio_hashtags;
             $this->status = $data->audio_status;
+            $this->vttfile = $this->checkChapter($id);
             // $this->thumbnail = UserGallery::where(['gallery_userid'=>$id,'gallery_type'=>'podcast','gallery_typestatus'=>'active'])
         }else{
         	$this->checkAudio = "false";
@@ -222,17 +223,87 @@ class EditorUpdatePost extends Component
 
     public function uploadChapters($audioid){
 
+        $this->validate([
+            'vttfile' => 'required',
+        ]);
 
-        Storage::prepend('vtt/updated.vtt', $this->vttfile);
+        $checkChapter = AudioChapters::where('chapter_audioid',$audioid);
+        if($checkChapter->count() == 0){
+            // create chapters
+            $randomStr = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 10);
+            $filename = $audioid."-audio-".$randomStr."-chapters-files.vtt";
+
+            $data = new AudioChapters;
+            $data->chapter_audioid = $audioid; 
+            $data->chapter_content = $this->vttfile; 
+            $data->chapter_type    = "main"; 
+            $data->chapter_filename  =  $filename;
+            $data->chapter_path  = "none"; 
+            $data->chapter_status  = "active"; 
+            $data->save();
+
+            Storage::disk('local')->put('vtt/'.$filename, $this->vttfile);
+
+            session()->flash('status', 'Chapters Save');
 
 
-        session()->flash('status', 'Working grate');
+        }else{
+
+            $checkChapter->update(['chapter_content'=> $this->vttfile]);
+            //delete old
+            Storage::disk('local')->delete('vtt/'.$checkChapter->first()->chapter_filename);
+            // create new
+            Storage::disk('local')->put('vtt/'.$checkChapter->first()->chapter_filename, $this->vttfile);
+
+            session()->flash('status', 'Updated');
+        }
+
+       
+        
+
+        // Storage::prepend('vtt/updated.vtt', $this->vttfile);
+
+
+        
         redirect()->to('editor/podcast/update/'.$audioid); 
 
 
     }
 
+    public function checkChapter($audioid){
+        $data = AudioChapters::where('chapter_audioid',$audioid);
+        if($data->count() == 0){
+            return $this->defaultChapter();
+        }else{
+            return $data->first()->chapter_content;
+        }
 
+    }
+
+    public function defaultChapter(){
+        return "WEBVTT
+
+00:00:00.000 --> 00:00:05.000
+Chapter I
+
+00:00:05.000 --> 00:00:10.000
+Chapter II
+
+00:00:10.000 --> 00:00:15.000
+Chapter III
+
+00:00:15.000 --> 00:00:20.000
+Credits";
+
+    }
+
+    // public function generateChapterName($audioid){
+
+    //     $data = Audio::find($audioid)->first();
+
+        
+
+    // }
 
 
 
