@@ -39,10 +39,14 @@
 	                </div>
 	            </div>
 	           <div class="col-span-8">
-	            	<p class="text-md font-regular text-white mt-2">{{ $playlist->playlist_status }} Playlist</p>
+	            	<p class="text-md font-regular text-white mt-2">{{ $playlist->playlist_status }} Playlist </p>
 	            	<p class="text-6xl font-bold text-white mt-2 mb-5">{{ $playlist->playlist_title }} </p>
 	            	<p class="text-white mt-2"><span class="text-xs font-bold ">{{ $playlist->get_user->name }}</span> , <span class="text-xs font-regular ">{{ $playlist->get_playlistItems->count() }} podcast</span> </p>
+	            	<div>
+	            		<button class="bg-white text-custom-pink font-regular text-sm py-1 px-3 rounded">Share</button>
+	            	</div>
 	            </div>
+	            
 	        </div>
 
 
