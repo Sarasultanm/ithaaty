@@ -147,11 +147,10 @@
                           <source src="{{ $audio->audio_path }}" res="360" label="360p" type="video/mp4">
                           <source src="{{ $audio->audio_path }}" default res="480" label="480p" type="video/mp4">
                           <source src="{{ $audio->audio_path }}" res="720" label="720p" type="video/mp4">
-                          @if($audio->get_chapters != 0)
-                            <?php  $chapter_link = $audio->get_chapters()->chapter_filename;  ?>
-                            <track kind="chapters" src="{{ asset('vtt/'.$chapter_link) }}" srclang="en">
-
-                          @endif  
+                         @if($audio->get_chapters()->count() != 0)
+                             <?php  $chapter_link = $audio->get_chapters()->first()->chapter_filename;  ?>
+                            <track kind="chapters" src="{{ asset('vtt/'.$chapter_link) }}" srclang="en"> 
+                          @endif 
                           <!-- <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/mp4" />
                           <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/webm" /> -->
                           <p class="vjs-no-js">
@@ -256,6 +255,7 @@
 
 	          <div class="text-black  px-2 pt-2 bg-white mt-5">
                <h2 class="font-bold text-xl m-0">{{ $audio->audio_name }}</h2>
+                
                <!-- <?php echo json_encode($notes); ?>; -->
           <!-- <br>Dispaly:     
           <p id="demo"></p> -->
