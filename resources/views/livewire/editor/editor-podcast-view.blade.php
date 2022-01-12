@@ -88,6 +88,10 @@
                         <source src="{{ $s3_link.$audio->audio_path }}" type="video/mp4" />
                         <source src="{{ $s3_link.$audio->audio_path }}" type="audio/mpeg" />
                         <source src="{{ $s3_link.$audio->audio_path }}" type="video/webm" />
+                        @if($audio->get_chapters()->count() != 0)
+                           <?php  $chapter_link = $audio->get_chapters()->first()->chapter_filename;  ?>
+                          <track kind="chapters" src="{{ asset('vtt/'.$chapter_link) }}" srclang="en"> 
+                        @endif 
                         <p class="vjs-no-js">
                           To view this video please enable JavaScript, and consider upgrading to a
                           web browser that
@@ -147,12 +151,10 @@
                           <source src="{{ $audio->audio_path }}" res="360" label="360p" type="video/mp4">
                           <source src="{{ $audio->audio_path }}" default res="480" label="480p" type="video/mp4">
                           <source src="{{ $audio->audio_path }}" res="720" label="720p" type="video/mp4">
-                         @if($audio->get_chapters()->count() != 0)
+                          @if($audio->get_chapters()->count() != 0)
                              <?php  $chapter_link = $audio->get_chapters()->first()->chapter_filename;  ?>
                             <track kind="chapters" src="{{ asset('vtt/'.$chapter_link) }}" srclang="en"> 
                           @endif 
-                          <!-- <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/mp4" />
-                          <source src="{{ asset('ads/big_buck_bunny.mp4') }}" type="video/webm" /> -->
                           <p class="vjs-no-js">
                             To view this video please enable JavaScript, and consider upgrading to a
                             web browser that
@@ -206,16 +208,19 @@
                       <img class="h-12 w-12" src="{{ asset('sponsor/'.$sponsor->audiospon_imgpath) }}" alt="">
                     </div>
                     <div class="flex-1 min-w-0">
-                      <a href="#" class="focus:outline-none">
-                        <span class="absolute inset-0" aria-hidden="true"></span>
+                   
+                        <!-- <span class="absolute inset-0" aria-hidden="true"></span> -->
                         <p class="text-md font-bold text-gray-900">
                           {{ $sponsor->audiospon_name }}
                         </p>
-                        <p class="text-sm text-gray-500 truncate">
+                        <p class="text-sm text-gray-500 truncate font-bold">
+                         
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 float-left mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                           </svg>
+                           <a target="_blank" href="<?php echo $sponsor->audiospon_website; ?>" class="hover:underline pointer">
                           {{ $sponsor->audiospon_website }}
+                          </a>
                         </p>
                          <p class="text-sm text-gray-500 truncate">
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5  float-left  mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -224,7 +229,7 @@
                           </svg>
                           {{ $sponsor->audiospon_location }}
                         </p>
-                      </a>
+                     
                     </div>
                   </div>
                  </div>
