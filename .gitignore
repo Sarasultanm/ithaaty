@@ -17,3 +17,5 @@ yarn-error.log
 /public/audio
 /public/users/podcast_img
 /public/users/profile_img
+/public/vtt
+/public/sponsor

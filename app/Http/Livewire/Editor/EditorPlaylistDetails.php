@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Editor;
 
 use Livewire\Component;
 use App\Models\UserPlaylist;
+use App\Models\UserPlaylistShared;
 use Auth;
 
 class EditorPlaylistDetails extends Component
@@ -43,8 +44,8 @@ class EditorPlaylistDetails extends Component
     {
 
     	$playlist = UserPlaylist::where('playlist_userid',Auth::user()->id);
+      $sharedplaylist = UserPlaylistShared::where('plshared_userid',Auth::user()->id);
 
-
-        return view('livewire.editor.editor-playlist-details',compact('playlist'));
+        return view('livewire.editor.editor-playlist-details',compact('playlist','sharedplaylist'));
     }
 }

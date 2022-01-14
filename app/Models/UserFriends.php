@@ -21,6 +21,10 @@ class UserFriends extends Model
     public function get_block(){
         return $this->belongsTo('App\Models\UserBlockList','id','block_friendtblid');
     }
+
+   
+
+
 }
 
 

@@ -79,4 +79,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\UserBlockList','block_user','id');
     }
     
+    public function check_shared_playlist($playlistid){
+        return $this->belongsTo('App\Models\UserPlaylistShared','id','plshared_userid')->where(['plshared_playlistid'=>$playlistid]);
+    }
+
+
+
+
 }
