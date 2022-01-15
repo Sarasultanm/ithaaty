@@ -631,12 +631,17 @@
                     @foreach($audio->get_question as $question)  
                      <div  x-data="{ open: false }">
 
-                     <div class="bg-gray-100 p-2 rounded-md mb-3 text-sm pointer" @click="open = true">{{ $question->qa_question   }}</div>
+                     <div class="bg-gray-100 p-2 rounded-md mb-3 text-sm pointer" @click="open = true">
+                       {{ $question->qa_question   }}<br><br>
+                       <span class="text-right text-xs text-gray-500"><i>Posted at: {{ $question->created_at }}</i></span>
+                     </div>
                         <div  x-show="open" @click.away="open = false">
                             @foreach($question->get_answer as $answerlist)
                               <div class="bg-gray-100 p-2 rounded-md mb-3 text-xs ml-5">
                                 <p class="font-bold">{{ $answerlist->get_user->name }}</p>
-                                <p>{{ $answerlist->qn_answer }}</p>
+                                <p>{{ $answerlist->qn_answer }}
+                                  <br><br><span class="text-right text-xs text-gray-500 font-italic"><i>Posted at: {{ $answerlist->created_at }}</i></span>
+                                </p>
                               </div>
                              
                             @endforeach

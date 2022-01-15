@@ -65,96 +65,86 @@
 
 
                              <!-- This example requires Tailwind CSS v2.0+ -->
-															<div x-cloak x-show="modal"  class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-															  <div 
-															   x-transition:enter="transition ease-out duration-100" 
+									<div x-cloak x-show="modal"  class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+									  <div 
+									   x-transition:enter="transition ease-out duration-100" 
 			                           x-transition:enter-start="transform opacity-0 scale-95" 
 			                           x-transition:enter-end="transform opacity-100 scale-100" 
 			                           x-transition:leave="transition ease-in duration-75" 
 			                           x-transition:leave-start="transform opacity-100 scale-100" 
 			                           x-transition:leave-end="transform opacity-0 scale-95"
-															  class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0" >
-															  
-															    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"  @click="modal = false, share = false"></div>
+									  class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0" >
+									  
+									    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"  @click="modal = false, share = false"></div>
 
-															    <!-- This element is to trick the browser into centering the modal contents. -->
-															    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+									    <!-- This element is to trick the browser into centering the modal contents. -->
+									    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-															    <div 
-															     x-transition:enter="transition ease-out duration-300" 
+									    <div 
+									       x-transition:enter="transition ease-out duration-300" 
 				                           x-transition:enter-start="transform opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
 				                           x-transition:enter-end="transform opacity-100 translate-y-0 sm:scale-100" 
 				                           x-transition:leave="transition ease-in duration-200" 
 				                           x-transition:leave-start="transform opacity-100 translate-y-0 sm:scale-100" 
 				                           x-transition:leave-end="transform opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-															    class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
-															      <div>
-															       <!--  <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-															          <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-															            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-															          </svg>
-															        </div> -->
-															        <div class="mt-3  sm:mt-5">
-															        	<!-- friends -->
+									    class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+									      <div>
+									       <!--  <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+									          <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+									            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+									          </svg>
+									        </div> -->
+									        <div class="mt-3  sm:mt-5">
+									        	<!-- friends -->
 
-															        	<div>
-																				  <label for="location" class="block text-sm font-medium text-gray-700">Friend List</label>
-																				  <select wire:model="friends" id="location" name="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-																				  			 <option>Select</option>
-																				  	@foreach($friendList as $friends)
-																					  	@if($friends->friend_status == "active" && $friends->friend_type == "Friends")
-																							  	@if(Auth::user()->id == $friends->friend_userid )
-																							  	@if($friends->get_request_user->check_shared_playlist($playlist->id)->count() == 0)
-																							  	 <option value="{{$friends->get_request_user->id}}">{{ $friends->get_request_user->name }}
-																							  	 
-																							  	 </option>
-																							  	 @endif
-																	                @else
-																	                @if($friends->get_add_friend->check_shared_playlist($playlist->id)->count() == 0)
-																	                 <option value="{{$friends->get_add_friend->id}}">{{ $friends->get_add_friend->name }}
+									        	<div>
+														  <label for="location" class="block text-sm font-medium text-gray-700">Friend List</label>
+														  <select wire:model="friends" id="location" name="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+														  			 <option>Select</option>
+														  	@foreach($friendList as $friends)
+															  	@if($friends->friend_status == "active" && $friends->friend_type == "Friends")
+																	  	@if(Auth::user()->id == $friends->friend_userid )
+																	  	@if($friends->get_request_user->check_shared_playlist($playlist->id)->count() == 0)
+																	  	 <option value="{{$friends->get_request_user->id}}">{{ $friends->get_request_user->name }}
+																	  	 
+																	  	 </option>
+																	  	 @endif
+											                @else
+											                @if($friends->get_add_friend->check_shared_playlist($playlist->id)->count() == 0)
+											                 <option value="{{$friends->get_add_friend->id}}">{{ $friends->get_add_friend->name }}
 
-																	                 
-																	                 </option>
-																	                 @endif
-																	                @endif  
-																					    @endif
-																						@endforeach
+											                 
+											                 </option>
+											                 @endif
+											                @endif  
+															    @endif
+																@endforeach
 
-																				    
-																				  </select>
+														    
+														  </select>
 
-																				   @error('friends') <span class="text-xs text-red-600">Empty fields</span> @enderror
-																				</div>
+														   @error('friends') <span class="text-xs text-red-600">Empty fields</span> @enderror
+														</div>
 
-															        	<!-- friends-->
+									        	<!-- friends-->
 
-															        </div>
-															      </div>
-															      <div class="mt-5 sm:mt-6">
-															        <button  wire:click="sharedPlaylist({{$playlist->id}})" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white ">
-															          Share Playlist 
-															        </button>
-															      </div>
-															    </div>
-															  </div>
-															</div>
+									        </div>
+									      </div>
+									      <div class="mt-5 sm:mt-6">
+									        <button  wire:click="sharedPlaylist({{$playlist->id}})" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white ">
+									          Share Playlist 
+									        </button>
+									      </div>
+									    </div>
+									  </div>
+									</div>
 
-
-
-
-
-
-
-
-
-
-                             <!-- modal -->
-
-                             <a  class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
+                            
+                             <a wire:click="shareButton('facebook',{{ $playlist->id }})"  class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
                                   <i class="fab fa-facebook-square mr-3 h-5 w-5 text-gray-400" style="font-size: 20px;"></i>
                                   <span>Facebook</span>
                              </a>
-                             <a class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
+                             <a wire:click="shareButton('twitter',{{ $playlist->id }})" class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
                                   <i class="fab fa-twitter-square mr-3 h-5 w-5 text-gray-400" style="font-size: 20px;"></i>
                                   <span>Twitter</span>
                              </a>

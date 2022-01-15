@@ -13,6 +13,7 @@ use App\Models\UserNotifications;
 use App\Models\UserComments;
 use App\Models\UserNotes;
 use App\Models\UserViews;
+use App\Models\AudioReport;
 use Auth;
 use Share;
 use URL;
@@ -28,7 +29,7 @@ class EditorDashboard extends Component
 
 
 	    public $title,$season,$episode,$category,$summary,$audiofile,$uploadType,$embedlink,$comments,$hashtags,$notes_message,$notes_time;
- 
+        public $report_type,$report_message;
 
         protected $listeners = [
         'refreshParent' =>'$refresh'
@@ -45,6 +46,24 @@ class EditorDashboard extends Component
         'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav',
 	    ];
 
+
+        public function reportAudio($audio_id){
+            $this->validate([
+                "report_type" => "required",
+                "report_message" => "required",
+            ]);
+
+            $data = new AudioReport;
+            $data->report_audioid = $audio_id;
+            $data->report_userid = Auth::user()->id;
+            $data->report_type = $this->report_type;
+            $data->report_message = $this->report_message;
+            $data->save();
+
+            session()->flash('status', 'Report Submitted');
+            redirect()->to('/editor/dashboard');
+
+        }
 
 	    public function save(){
 

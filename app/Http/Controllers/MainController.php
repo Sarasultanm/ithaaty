@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\UserFollow;
 use App\Models\UserFav;
 use App\Models\UserLikes;
+use App\Models\UserPlaylist;
 use Auth;
 
 
@@ -33,8 +34,10 @@ class MainController extends Controller
 		$audio = Audio::where('id',$id)->first();
 		$randomList = User::inRandomOrder()->take(3)->get();
 		$mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1);
-		return view('post',compact('audio','randomList','mostlike'));
+		$getHashtags = Audio::where('audio_hashtags', 'like', '%music%')->count();
+		return view('post',compact('audio','randomList','mostlike','getHashtags'));
 	}
+
 
 	public function viewEmbed($id){
 
@@ -42,6 +45,17 @@ class MainController extends Controller
 		$randomList = User::inRandomOrder()->take(3)->get();
 		$mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1);
 		return view('embed',compact('audio','randomList','mostlike'));
+	}
+
+
+	public function viewPlaylist($id){
+
+		$audio = Audio::where('id',$id)->first();
+		$randomList = User::inRandomOrder()->take(3)->get();
+		$mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1);
+		$playlist = UserPlaylist::where('id',$id)->first();
+		$getHashtags = Audio::where('audio_hashtags', 'like', '%music%')->count();
+		return view('playlist',compact('audio','randomList','mostlike','playlist','getHashtags'));
 	}
 
 

@@ -35,7 +35,14 @@ class EditorPlaylist extends Component
 
 	}
 
-
+	 public function shareButton($socialMedia,$id){
+        if($socialMedia == "facebook"){
+             $link ="https://www.facebook.com/sharer/sharer.php?u=https://ithaaty.com/playlist/".$id;
+        }else{
+            $link = "https://twitter.com/intent/tweet?url=https://ithaaty.com/playlist/".$id;
+        }
+        redirect()->to($link);
+    }
 
 
 

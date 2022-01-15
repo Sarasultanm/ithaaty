@@ -1,5 +1,87 @@
  <?php use App\Http\Livewire\Editor\EditorDashboard; ?>
  
+
+
+<aside class="hidden xl:block xl:col-span-4">
+          <div class=" bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
+            <div class="pb-5">
+                  <h3 class="font-medium text-gray-900">Hashtag Feeds</h3>
+                  <p class="text-rose-600 text-sm mx-0 font-bold">{{$audio->audio_hashtags}} {{ $getHashtags }}</p>
+                  <?php 
+                   $str = $audio->audio_hashtags;
+                    $items_hastags = preg_match_all('/#\w+/iu', $str, $itens);
+                      for ($i=0; $i < $items_hastags ; $i++) { 
+                              echo $itens[0][$i];
+                      }
+                    ?>
+                  <ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
+  
+                   <li class="py-3 flex justify-between items-center">
+                        <div class="flex items-center">
+                          <img src="{{ asset('images/slider-img/slide5.jpg') }}" alt="" class="w-8 h-8">
+                           <div class="ml-4 ">
+                             <p class="text-sm font-medium text-gray-900">Facebook </p>
+                             <?php $fb_string = $audio->audio_hashtags;    
+                              $fb_text=preg_replace('/#(\\w+)/','<a target="_blank" class="text-rose-500 font-bold" href=https://www.facebook.com/hashtag/$1>$0</a>',$fb_string); ?>
+                             <p class="text-sm text-gray-500"><?php echo $fb_text; ?></p>
+                          </div>
+                        </div>
+                       <!-- <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500">View</p> -->
+                    </li>
+
+                    <li class="py-3 flex justify-between items-center">
+                        <div class="flex items-center">
+                          <img src="{{ asset('images/slider-img/slide5.jpg') }}" alt="" class="w-8 h-8">
+                           <div class="ml-4 ">
+                             <p class="text-sm font-medium text-gray-900">Instagram </p>
+                             <p class="text-sm text-gray-500">{{$audio->audio_hashtags}}</p>
+                          </div>
+                        </div>
+                       <!-- <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500">View</p> -->
+                    </li>
+
+                    <li class="py-3 flex justify-between items-center">
+                        <div class="flex items-center">
+                          <img src="{{ asset('images/slider-img/slide5.jpg') }}" alt="" class="w-8 h-8">
+                           <div class="ml-4 ">
+                             <p class="text-sm font-medium text-gray-900">Twitter </p>
+                              <?php $twit_string = $audio->audio_hashtags;    
+                              $twit_text=preg_replace('/#(\\w+)/','<a target="_blank" class="text-rose-500 font-bold" href=https://twitter.com/search?q=$1&src=typed_query>$0</a>',$twit_string); ?>
+                             <p class="text-sm text-gray-500"><?php echo $twit_text; ?></p>
+                          </div>
+                        </div>
+                       <!-- <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500">View</p> -->
+                    </li>
+  
+                  </ul>
+              </div>
+            </div>
+
+
+            <div class="mt-5 bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
+            
+            <div class="pb-5">
+                  <h3 class="font-medium text-gray-900">Categories</h3>
+                  <ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
+                 
+                    <li class="py-3 flex justify-between items-center">
+                        <div class="flex items-center">
+                          <img src="{{ asset('images/slider-img/slide5.jpg') }}" alt="" class="w-8 h-8">
+                           <div class="ml-4 ">
+                             <p class="text-sm font-medium text-gray-900">Category Title</p>
+                          </div>
+                        </div>
+                       <p class="ml-6 bg-white rounded-md text-xs font-medium ext-gray-500">2</p>
+                      </li> 
+  
+                  </ul>
+              </div>
+           </div>
+
+
+          </aside>
+
+<!-- 
  <aside class="hidden xl:block xl:col-span-4">
         <div class="sticky top-4 space-y-4">
           
@@ -29,7 +111,7 @@
                       </div>
                       <div class="flex-shrink-0">
                         <button  type="button" class="inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100">
-                          <!-- Heroicon name: solid/plus -->
+                 
                           <svg class="-ml-1 mr-0.5 h-5 w-5 text-rose-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                           </svg>
@@ -43,7 +125,7 @@
                     @endforeach
 
 
-                    <!-- More people... -->
+                   
                   </ul>
                 </div>
                 <div class="mt-6">
@@ -74,7 +156,7 @@
                         <div class="mt-2 flex space-x-6">
                           <span class="inline-flex items-center text-sm">
                             <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500"> 
-                              <!-- Heroicon name: solid/thumb-up -->
+                           
                               <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
                               </svg>
@@ -84,7 +166,7 @@
                           </span>
                           <span class="inline-flex items-center text-sm">
                             <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                              <!-- Heroicon name: solid/chat-alt -->
+                      
                               <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
                               </svg>
@@ -95,7 +177,7 @@
                       </div>
                     </li>
 
-                    <!-- More posts... -->
+                  
                   </ul>
                 </div>
                 <div class="mt-6">
@@ -107,4 +189,4 @@
             </div>
           </section>
         </div>
-      </aside>
+      </aside> -->

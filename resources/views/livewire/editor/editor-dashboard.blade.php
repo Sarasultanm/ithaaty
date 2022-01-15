@@ -197,16 +197,83 @@
                               </a>
                               @endif  
                                 <!-- Heroicon name: solid/star -->
+                              <div x-data="{modal: false}" >
+                                 <a   @click="modal = !modal" class=" text-gray-900 flex px-4 py-2 text-sm cursor-pointer hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-0">
+                                      <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span>Report</span>
+                                  </a>
 
-                            <a class=" text-gray-900 flex px-4 py-2 text-sm cursor-pointer hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-0">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                  <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                                </svg>
-                                <span>Report</span>
-                              </a>
+                                    <!-- modal -->
+                                    <!-- This example requires Tailwind CSS v2.0+ -->
+                                    <div x-cloak x-show="modal"  class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                                      <div 
+                                       x-transition:enter="transition ease-out duration-100" 
+                                       x-transition:enter-start="transform opacity-0 scale-95" 
+                                       x-transition:enter-end="transform opacity-100 scale-100" 
+                                       x-transition:leave="transition ease-in duration-75" 
+                                       x-transition:leave-start="transform opacity-100 scale-100" 
+                                       x-transition:leave-end="transform opacity-0 scale-95"
+                                       class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0" >
+                                      
+                                        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"  @click="modal = false, share = false"></div>
+
+                                        <!-- This element is to trick the browser into centering the modal contents. -->
+                                        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+                                        <div 
+                                         x-transition:enter="transition ease-out duration-300" 
+                                         x-transition:enter-start="transform opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+                                         x-transition:enter-end="transform opacity-100 translate-y-0 sm:scale-100" 
+                                         x-transition:leave="transition ease-in duration-200" 
+                                         x-transition:leave-start="transform opacity-100 translate-y-0 sm:scale-100" 
+                                         x-transition:leave-end="transform opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                        class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                            
+                                            <div >
+                                              <!-- friends -->
+
+                                              <div class="mt-5">
+                                                <label for="location" class="block text-sm font-medium text-gray-700">Report Type</label>
+                                                <select wire:model="report_type"  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                  <option>Select</option>
+                                                  <option value="r1">Report One</option>
+                                                  <option value="r2">Report Two</option>
+                                                  <option value="r3">Report Three</option>
+                                                </select>
+                                                @error('report_type') <span class="text-xs text-red-600">Empty fields</span> @enderror
+                                                
+                                              </div>
+
+                                              <div class="mt-5">
+                                                <label for="about" class="block text-sm font-medium text-gray-700">
+                                                  Comments
+                                                </label>
+                                                <div class="mt-1">
+                                                  <textarea  wire:model="report_message" rows="5" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
+                                                </div>
+                                                @error('report_message') <span class="text-xs text-red-600">Empty fields</span> @enderror
+                                              </div>
+
+
+                                              <!-- friends-->
+
+                                            </div>
+                                          
+                                          <div class="mt-5 sm:mt-6">
+                                            <button  wire:click="reportAudio({{ $audio->id }})" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white ">
+                                              Submit Report
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                   <!-- modal -->
+                            </div>
 
                              <div  x-data="{ open: false }" @click.away="open = false">
-                              <a class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
+                              <a  @click="open = !open" class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
                             <!--     <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                   <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                                 </svg> -->
@@ -558,9 +625,9 @@
                               <a href="/editor/users//{{ $audio->audio_editor }}" class="font-bold hover:underline">{{ $comments->get_user->name }}</a>
                             </p>
                             <p class="text-sm text-gray-500">
-                              <a href="#" class="hover:underline">
-                                <time datetime="2020-12-09T11:43:00">{{ $comments->coms_message }}</time>
-                              </a>
+                             {{ $comments->coms_message }}<br><br>
+                              <span class="text-right text-xs text-gray-500"><i>Posted at: {{ $comments->created_at }}</i></span>
+                              
                             </p>
                             </div>
 
