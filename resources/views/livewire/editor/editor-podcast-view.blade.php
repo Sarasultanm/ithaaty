@@ -633,24 +633,35 @@
 
                      <div class="bg-gray-100 p-2 rounded-md mb-3 text-sm pointer" @click="open = true">
                        {{ $question->qa_question   }}<br><br>
-                       <span class="text-right text-xs text-gray-500"><i>Posted at: {{ $question->created_at }}</i></span>
+                       <span class="text-right text-xs text-gray-500"><i>Time: {{ $question->qa_time }}</i></span>
                      </div>
                         <div  x-show="open" @click.away="open = false">
                             @foreach($question->get_answer as $answerlist)
                               <div class="bg-gray-100 p-2 rounded-md mb-3 text-xs ml-5">
                                 <p class="font-bold">{{ $answerlist->get_user->name }}</p>
                                 <p>{{ $answerlist->qn_answer }}
-                                  <br><br><span class="text-right text-xs text-gray-500 font-italic"><i>Posted at: {{ $answerlist->created_at }}</i></span>
+                                  <br><br><span class="text-right text-xs text-gray-500 font-italic"><i>Time: {{ $answerlist->qn_time }}</i></span>
                                 </p>
                               </div>
                              
                             @endforeach
+                   
+
                            <div class="my-2 flex">
-                            <input type="text" name="email" id="email" placeholder="Write your answer here" class="shadow-sm mr-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="qa_answer"  >
-                            <button wire:click="saveAnswer({{$question->id}},{{ $question->qa_audioid }})" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-white bg-custom-pink focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" >
-                             Save
-                             </button>
-                        </div>
+                              <div class="w-full">
+                                  <input type="text" name="email" id="email" placeholder="Write your answer here" class="shadow-sm mr-3 focus:ring-indigo-500 focus:border-indigo-500 block  sm:text-sm border-gray-300 rounded-md w-full" wire:model="qa_answer">
+                                  @error('qa_answer') <span class="text-xs text-red-600">Required Fields</span> @enderror
+                              </div>
+                              <div class="mx-3">
+                                  <input type="text" name="email" id="email" placeholder="Time" class="shadow-sm mr-3 focus:ring-indigo-500 focus:border-indigo-500 block  sm:text-sm border-gray-300 rounded-md w-full" wire:model="qa_time">
+                                  @error('qa_time') <span class="text-xs text-red-600">Required Fields</span> @enderror
+                              </div>
+                              <div class="w-auto">
+                                 <button wire:click="saveAnswer(3,39)" type="button" class="px-2.5 py-2.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-white bg-custom-pink focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-20">Save</button>
+                              </div>
+                            </div>
+
+
                       </div>
 
                      </div>

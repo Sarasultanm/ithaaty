@@ -22,7 +22,7 @@ class EditorUpdatePost extends Component
     use WithFileUploads;
 
 	public $audio,$a_id,$title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link,$checkAudio,$status;
-    public $spon_name,$spon_website,$spon_location,$spon_linkloc,$spon_image,$afi_link,$afi_title,$qa_question;
+    public $spon_name,$spon_website,$spon_location,$spon_linkloc,$spon_image,$afi_link,$afi_title,$qa_question,$qa_time;
     public $profilePhoto,$thumbnail,$vttfile,$defaultvvt;
     
 	protected $listeners = [
@@ -361,9 +361,15 @@ Credits";
 
     public function addQuestion($audioid){
         
+        $this->validate([
+            "qa_question" => "required",
+            "qa_time" => "required"
+        ]);
+
         $data = new UserQa;
         $data->qa_audioid = $audioid;
         $data->qa_question = $this->qa_question;
+        $data->qa_time = $this->qa_time;
         $data->qa_status = "active";
         $data->save();
 
