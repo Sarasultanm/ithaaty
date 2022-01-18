@@ -79,6 +79,7 @@ use App\Http\Livewire\Editor\{
 
 Route::get('/', [MainController::class, 'about']);
 
+Route::get('/notes/{id}', [MainController::class, 'viewNotes']);
 Route::get('/post/{id}', [MainController::class, 'viewPost']);
 Route::get('/embed/{id}', [MainController::class, 'viewEmbed']);
 Route::get('/playlist/{id}', [MainController::class, 'viewPlaylist']);

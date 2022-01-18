@@ -10,6 +10,7 @@ use App\Models\UserFollow;
 use App\Models\UserFav;
 use App\Models\UserLikes;
 use App\Models\UserPlaylist;
+use App\Models\UserNotes;
 use Auth;
 
 
@@ -27,8 +28,6 @@ class MainController extends Controller
 		return view('livewire.editor.editor-view-users',compact('userData'));
 	}
 
-
-
 	public function viewPost($id){
 
 		$audio = Audio::where('id',$id)->first();
@@ -38,6 +37,15 @@ class MainController extends Controller
 		return view('post',compact('audio','randomList','mostlike','getHashtags'));
 	}
 
+
+	public function viewNotes($id){
+		$notes = UserNotes::where('id',$id)->first();
+		$audio = Audio::where('id',$notes->notes_audioid)->first();
+		$randomList = User::inRandomOrder()->take(3)->get();
+		$mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1);
+		$getHashtags = Audio::where('audio_hashtags', 'like', '%music%')->count();
+		return view('notes',compact('audio','randomList','mostlike','getHashtags','notes'));
+	}
 
 	public function viewEmbed($id){
 

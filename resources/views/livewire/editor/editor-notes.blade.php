@@ -68,6 +68,9 @@
 					              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 					                Time
 					              </th>
+					              <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+					                Share
+					              </th>
 					            <!--   <th scope="col" class="relative px-6 py-3">
 					                <span class="sr-only">Edit</span>
 					              </th> -->
@@ -103,6 +106,24 @@
 					              </td>
 					              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 					            {{ $notes->notes_time }}
+					               
+					              </td>
+					              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+					            		
+					            	<!-- This example requires Tailwind CSS v2.0+ -->
+													<span class="relative z-0 inline-flex shadow-sm rounded-md float-right">
+													  <button wire:click="shareButton('facebook',{{ $notes->id }})"  type="button" class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+													    Facebook
+													  </button>
+													 <!--  <button type="button" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+													    Instagram
+													  </button> -->
+													  <button wire:click="shareButton('facebook',{{ $notes->id }})"  type="button" class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+													    Twitter
+													  </button>
+													</span>
+													
+													 
 					               
 					              </td>
 					             <!--  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
