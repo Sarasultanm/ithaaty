@@ -37,7 +37,7 @@ use Auth;
 class EditorPodcastView extends Component
 {
 
-	public $audio,$notes,$comments,$notes_message,$notes_time,$adsList,$numAds,$newAdsList,$newNumAds,$qa_answer,$qa_time;
+	public $audio,$notes,$comments,$notes_message,$notes_time,$adsList,$numAds,$newAdsList,$newNumAds,$qa_answer;
 
 
      protected $listeners = [
@@ -193,7 +193,6 @@ class EditorPodcastView extends Component
 
             $this->validate([
                 "qa_answer" => "required",
-                "qa_time" => "required",
             ]);
 
              $data = new UserQanswer;
@@ -201,7 +200,7 @@ class EditorPodcastView extends Component
              $data->qn_audioid = $audio_id;
              $data->qn_useranswerid = Auth::User()->id;
              $data->qn_answer = $this->qa_answer;
-             $data->qn_time = $this->qa_time;
+             $data->qn_time = "00:00";
              $data->qn_status = "active";
              $data->save();
 

@@ -640,7 +640,7 @@
                               <div class="bg-gray-100 p-2 rounded-md mb-3 text-xs ml-5">
                                 <p class="font-bold">{{ $answerlist->get_user->name }}</p>
                                 <p>{{ $answerlist->qn_answer }}
-                                  <br><br><span class="text-right text-xs text-gray-500 font-italic"><i>Time: {{ $answerlist->qn_time }}</i></span>
+                                  
                                 </p>
                               </div>
                              
@@ -648,14 +648,11 @@
                    
 
                            <div class="my-2 flex">
-                              <div class="w-full">
+                              <div class="w-full mr-3">
                                   <input type="text" name="email" id="email" placeholder="Write your answer here" class="shadow-sm mr-3 focus:ring-indigo-500 focus:border-indigo-500 block  sm:text-sm border-gray-300 rounded-md w-full" wire:model="qa_answer">
                                   @error('qa_answer') <span class="text-xs text-red-600">Required Fields</span> @enderror
                               </div>
-                              <div class="mx-3">
-                                  <input type="text" name="email" id="email" placeholder="Time" class="shadow-sm mr-3 focus:ring-indigo-500 focus:border-indigo-500 block  sm:text-sm border-gray-300 rounded-md w-full" wire:model="qa_time">
-                                  @error('qa_time') <span class="text-xs text-red-600">Required Fields</span> @enderror
-                              </div>
+                             
                               <div class="w-auto">
                                  <button wire:click="saveAnswer(3,39)" type="button" class="px-2.5 py-2.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-white bg-custom-pink focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-20">Save</button>
                               </div>
