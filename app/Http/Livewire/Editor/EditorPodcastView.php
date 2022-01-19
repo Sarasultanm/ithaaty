@@ -37,7 +37,7 @@ use Auth;
 class EditorPodcastView extends Component
 {
 
-	public $audio,$notes,$comments,$notes_message,$notes_time,$adsList,$numAds,$newAdsList,$newNumAds,$qa_answer;
+	public $audio,$notes,$comments,$notes_message,$notes_time,$adsList,$numAds,$newAdsList,$newNumAds,$qa_answer,$report_type,$report_message;
 
 
      protected $listeners = [
@@ -64,15 +64,7 @@ class EditorPodcastView extends Component
         return $data;
     }  
 
-	public function mount($id)
-    {
-        $this->audio = Audio::where('id',$id)->first();
-        $this->notes = UserNotes::where('notes_audioid',$id)->get();
-        $this->adsList = AdsListSetup::where('adssetup_audioid',$id)->get();
-        $this->numAds = AdsListSetup::where('adssetup_audioid',$id)->count();
-        $this->newAdsList = AdsList::where('adslist_country',Auth::User()->country)->get();
-        $this->newNumAds = AdsList::where('adslist_country',Auth::User()->country)->count();
-    }
+	
 
      public function like($id,$audio_editor,$like_type){
 
@@ -242,7 +234,91 @@ class EditorPodcastView extends Component
         }
 
 
+        public function favorite($id){
 
+             $data = new UserFav;
+             $data->favs_userid = Auth::User()->id;
+             $data->favs_audioid = $id;
+             $data->favs_type = "favorite";
+             $data->favs_status = "active";
+             $data->save();
+            
+            redirect()->to('editor/podcast/view/'.$id); 
+
+        }
+
+        public function reportAudio($audio_id){
+            $this->validate([
+                "report_type" => "required",
+                "report_message" => "required",
+            ]);
+
+            $data = new AudioReport;
+            $data->report_audioid = $audio_id;
+            $data->report_userid = Auth::user()->id;
+            $data->report_type = $this->report_type;
+            $data->report_message = $this->report_message;
+            $data->save();
+
+            session()->flash('status', 'Report Submitted');
+            redirect()->to('editor/podcast/view/'.$audio_id); 
+      
+
+        }
+
+
+        public function shareButton($socialMedia,$id){
+            if($socialMedia == "facebook"){
+                 $link ="https://www.facebook.com/sharer/sharer.php?u=https://ithaaty.com/post/".$id;
+            }else{
+                $link = "https://twitter.com/intent/tweet?url=https://ithaaty.com/post/".$id;
+            }
+            redirect()->to($link);
+        }
+
+        public function publicAudio($id){
+
+             Audio::where('id',$id)
+            ->update([
+                'audio_status'=> 'public',
+            ]);
+            
+            session()->flash('status', 'Audio Status change to Public');
+
+            $this->emit('refreshParent');
+
+            redirect()->to('editor/podcast/view/'.$id); 
+      
+
+        }
+        public function privateAudio($id){
+
+             Audio::where('id',$id)
+            ->update([
+                'audio_status'=> 'private',
+            ]);
+            session()->flash('status', 'Audio Status change to Private');
+
+            $this->emit('refreshParent');
+
+            redirect()->to('editor/podcast/view/'.$id); 
+
+        }
+
+
+
+
+
+
+    public function mount($id)
+    {
+        $this->audio = Audio::where('id',$id)->first();
+        $this->notes = UserNotes::where('notes_audioid',$id)->get();
+        $this->adsList = AdsListSetup::where('adssetup_audioid',$id)->get();
+        $this->numAds = AdsListSetup::where('adssetup_audioid',$id)->count();
+        $this->newAdsList = AdsList::where('adslist_country',Auth::User()->country)->get();
+        $this->newNumAds = AdsList::where('adslist_country',Auth::User()->country)->count();
+    }    
 
 
 

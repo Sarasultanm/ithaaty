@@ -429,19 +429,13 @@
 			                    </div>
 					        </div>
 
-					        <div class="mt-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">Link to Location</label>
-			                    <div class="mt-1">
-			                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="spon_linkloc">
-			                    </div>
-					        </div>
 
 					        <div class="mt-5">
 			                    <label for="email" class="block text-sm font-medium text-gray-700">Upload Image</label>
 			                    <div class="mt-1">
 			                      <input type="file"  class=""  wire:model="spon_image">
 			                    </div>
-			                    @error('spon_image') <span class="text-xs text-red-600">Required Fields</span> @enderror
+			                   
 					        </div>
 					       
 					      <div class="mt-3 text-right sm:mt-5 mb-5">

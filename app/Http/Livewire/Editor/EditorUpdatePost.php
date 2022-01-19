@@ -22,7 +22,7 @@ class EditorUpdatePost extends Component
     use WithFileUploads;
 
 	public $audio,$a_id,$title,$season,$episode,$category,$summary,$embedlink,$hashtags,$ref_title,$ref_link,$checkAudio,$status;
-    public $spon_name,$spon_website,$spon_location,$spon_linkloc,$spon_image,$afi_link,$afi_title,$qa_question,$qa_time;
+    public $spon_name,$spon_website,$spon_location,$spon_image,$afi_link,$afi_title,$qa_question,$qa_time;
     public $profilePhoto,$thumbnail,$vttfile,$defaultvvt;
     
 	protected $listeners = [
@@ -128,9 +128,9 @@ class EditorUpdatePost extends Component
 
     public function addSponsor(){
 
-        $this->validate([
-            'spon_image' => 'required|image|max:1024',
-        ]);
+        // $this->validate([
+        //     'spon_image' => 'image|max:1024',
+        // ]);
 
         $data = Audio::findOrFail($this->a_id);
 
@@ -144,7 +144,7 @@ class EditorUpdatePost extends Component
                 $spon->audiospon_name = $this->spon_name;
                 $spon->audiospon_website = $this->spon_website;
                 $spon->audiospon_location = $this->spon_location;
-                $spon->audiospon_linktolocation = $this->spon_linkloc;
+                $spon->audiospon_linktolocation = "empty";
                 $spon->audiospon_imgpath = $this->spon_image->hashName();
                 $spon->audiospon_appearancetype = "empty";
                 $spon->audiospon_min1 = "empty";
@@ -161,7 +161,21 @@ class EditorUpdatePost extends Component
 
             }else{
 
-                session()->flash('status', 'Sponsor Image not loaded');
+                $spon = new AudioSponsor;
+                $spon->audiospon_userid = Auth::user()->id;
+                $spon->audiospon_audioid = $this->a_id;
+                $spon->audiospon_name = $this->spon_name;
+                $spon->audiospon_website = $this->spon_website;
+                $spon->audiospon_location = $this->spon_location;
+                $spon->audiospon_linktolocation = "empty";
+                $spon->audiospon_imgpath = "empty";
+                $spon->audiospon_appearancetype = "empty";
+                $spon->audiospon_min1 = "empty";
+                $spon->audiospon_min2 = "empty";
+                $spon->audiospon_status = "empty";
+                $spon->save();  
+
+                session()->flash('status', 'Added new Sponsor');
 
                 redirect()->to('editor/podcast/update/'.$this->a_id); 
 

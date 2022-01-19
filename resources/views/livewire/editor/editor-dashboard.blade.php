@@ -323,14 +323,7 @@
                               </div>
 
                             </div>
-                                <!--    <a href="#" class="text-gray-700 flex px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0-item-2">
-                              
-                                <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd" />
-                                </svg>
-                                <span>Report content</span>
-                              </a> -->
-
+                               
                             @if($audio->audio_editor == Auth::user()->id)  
                               @if( $audio->audio_status == 'private')
                                <a wire:click="publicAudio({{ $audio->id }})" class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-2">
@@ -579,6 +572,7 @@
                     @endif
                   </div>
                 </div>
+
                 <div x-show="openTab === 1">
                   @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
                   @else
