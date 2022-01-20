@@ -286,13 +286,12 @@
 			                  <div class="col-span-4 sm:col-span-2">
 			                    <input wire:model="rss_link" type="text" name="first_name" id="first_name" autocomplete="cc-given-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
 			                  </div>
-
+			                
 			                  <div class="col-span-4 sm:col-span-2 text-right">
-			                    <button wire:click="loadRss()" class="bg-custom-pink border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white">
-			                  Load RSS
-			                </button>
+			                    <button wire:click="loadRss()" class="bg-custom-pink border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white">Load RSS
+			                		</button>
 			                  </div>
-
+			                  
 			                </div>
 			              </div>
 			             
@@ -332,7 +331,7 @@
 					   
 				    </section>
 
-
+				    @if(Auth::user()->get_audio_type('Upload')->count() != 0 )
 				    <section class="mt-5">
 
 			
@@ -356,6 +355,7 @@
 			            </div>
 
 				    </section>
+				    @endif
 				    @endif
 						@endif
 			     </div>	
