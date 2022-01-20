@@ -786,7 +786,7 @@
                                     <span class="text-xs text-red-600">Required Fields</span> @enderror
                                 </div>
                                 <div class="w-auto">
-                                   <button wire:click="saveAnswer(3,39)" type="button" class="px-2.5 py-2.5 border border-gray-300 
+                                   <button wire:click="saveAnswer({{$question->id}},{{$audio->id}})" type="button" class="px-2.5 py-2.5 border border-gray-300 
                                    shadow-sm text-xs font-medium rounded text-white bg-custom-pink w-20">Save</button>
                                 </div>
                              </div>
