@@ -352,9 +352,16 @@
                                                 <label for="location" class="block text-sm font-medium text-gray-700">Report Type</label>
                                                 <select wire:model="report_type"  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                                   <option>Select</option>
-                                                  <option value="r1">Report One</option>
-                                                  <option value="r2">Report Two</option>
-                                                  <option value="r3">Report Three</option>
+                                                  <option value="r1">Nudity</option>
+                                                  <option value="r2">Violence</option>
+                                                  <option value="r3">Harrastment</option>
+                                                  <option value="r4">Suicide / Self-Injury</option>
+                                                  <option value="r5">False Information</option>
+                                                  <option value="r6">Spam</option>
+                                                  <option value="r7">Unauthorized Sales</option>
+                                                  <option value="r8">Hate Speech</option>
+                                                  <option value="r9">Terrorism</option>
+                                                  <option value="r10">Something Else</option>
                                                 </select>
                                                 @error('report_type') <span class="text-xs text-red-600">Empty fields</span> @enderror
                                                 
