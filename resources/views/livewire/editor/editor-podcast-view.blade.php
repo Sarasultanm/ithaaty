@@ -696,7 +696,16 @@
     				      <div class="mt-5">
     		                <div class="mt-1">
     		                @foreach($audio->get_references as $reference)	
-    		                 <a target="_blank" href="{{ $reference->audioref_link }}">{{ $reference->audioref_title }}</a><br>
+                          @if(strpos($reference->audioref_link, "https://")!==false)
+    		                    <a target="_blank" href="{{ $reference->audioref_link }}">
+                              {{ $reference->audioref_title }}
+                            </a>
+                          @else
+                           <a target="_blank" href="{{ 'https://'.$reference->audioref_link }}">
+                              {{ $reference->audioref_title }}
+                            </a>
+                          @endif
+                         <br>
     		                @endforeach 
     		                </div>
     			        </div>
