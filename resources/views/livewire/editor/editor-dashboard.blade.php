@@ -712,9 +712,9 @@
                     <div class="mt-1">
                       @foreach($audio->get_affiliate as $afi)
                         @if(strpos($afi->audioafi_link, "https://")!==false)
-                          <p class="text-sm"><a href="{{ $afi->audioafi_link }}">{{ $afi->audioafi_title }}</a></p>
+                          <p class="text-sm"><a target="_blank" href="{{ $afi->audioafi_link }}">{{ $afi->audioafi_title }}</a></p>
                         @else
-                          <p class="text-sm"><a href="{{ 'https://'.$afi->audioafi_link }}">{{ $afi->audioafi_title }}</a></p>
+                          <p class="text-sm"><a target="_blank" href="{{ 'https://'.$afi->audioafi_link }}">{{ $afi->audioafi_title }}</a></p>
                         @endif
                      @endforeach
                     </div>
