@@ -39,8 +39,11 @@
            <div class="w-full ">
           	 <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
           </div>
-          	<div class=" w-full ">
-                <h1 class="font-bold text-gray-800 text-xl">Friends</h1> 
+          <div class=" w-full flex">
+                <h1 class="font-bold text-gray-800 text-xl flex-auto">Friends</h1>
+                <div>
+	                <input wire:model.debounce.300ms="searchbar" wire:keydown.enter="get_search()" type="email" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Search Friends">
+	              </div>
          	</div> 
           <!-- This example requires Tailwind CSS v2.0+ -->
 			

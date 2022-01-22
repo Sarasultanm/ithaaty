@@ -23,6 +23,8 @@ class EditorNotes extends Component
         redirect()->to($link);
     }
 
+    
+    
     public function render()
     {
     	// $notesList = UserNotes::where('notes_userid',Auth::user()->id)->get();

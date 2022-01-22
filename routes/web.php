@@ -49,7 +49,8 @@ use App\Http\Livewire\Editor\{
 	EditorPlaylistDetails,
 	EditorFollowing,
 	EditorFollowers,
-	EditorPlans
+	EditorPlans,
+	EditorSearch
 };
 
 /*
@@ -153,6 +154,8 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 	Route::get('followers',EditorFollowers::class)->name('editorFollowers');
 
 	Route::get('plans',EditorPlans::class)->name('editorPlans');
+	Route::get('search/{data}',EditorSearch::class)->name('editorSearch');
+
 });
 
 
