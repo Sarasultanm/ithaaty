@@ -141,7 +141,7 @@ class EditorSettings extends Component
             'title' => $data->get_title(),
             'description' => $data->get_description(),
             'link' => $data->get_link(),
-            'author' => $data->get_author()->get_name(),
+            // 'author' => $data->get_author()->get_name(),
             'image_url' => $data->get_image_url(),
             'item_quantity' =>$data->get_item_quantity(),
             // 'native_xml'=> var_dump($xml)
@@ -196,6 +196,7 @@ class EditorSettings extends Component
                 $data->audio_path = $i['enclosure_link'];
                 $data->audio_type = "RSS";
                 $data->audio_hashtags = "";
+                $data->audio_publish = "";
                 $data->save();
 
 

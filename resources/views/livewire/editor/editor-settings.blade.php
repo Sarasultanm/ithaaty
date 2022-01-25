@@ -344,7 +344,7 @@
 			                  </div>
 
 			                  <div class="col-span-4 sm:col-span-2 text-right mt-4">
-			                    <a href="" class="bg-custom-pink border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white">
+			                    <a href="{{ route('generateFeed',['id' => Auth::user()->id]) }}" class="bg-custom-pink border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white">
 			                  Generate RSS
 			                </a>
 			                  </div>

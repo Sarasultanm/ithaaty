@@ -103,7 +103,12 @@ class MainController extends Controller
 		$randomList = User::inRandomOrder()->take(3)->get();
 		$mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->get();
 		$podcaster = User::where('roles','editor');
+	}
+
+	public function viewRss(){
+
 		return view('ads-page',compact('randomList','mostlike','podcaster'));
+		return view('rss');
 	}
 
 
@@ -114,6 +119,14 @@ class MainController extends Controller
 		return view('about',compact('likes'))->with('num');
 	}
 
+	public function feedRSS($id)
+    {
+    	$feeds  = Audio::where(['audio_editor'=>$id,'audio_type'=>'Upload'])->get();
+    	$users = User::where('id',$id)->first();
+    	$amazon_link = config('app.s3_public_link');
+        return response()->view('rss.feed',compact('feeds','users','amazon_link'))->header('Content-Type', 'application/xml');
+
+    }
 
 	public function viewGenerateRSS($username){
 		$name = $username;
