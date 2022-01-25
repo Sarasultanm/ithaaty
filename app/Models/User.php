@@ -87,6 +87,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\UserPlaylistShared','id','plshared_userid')->where(['plshared_playlistid'=>$playlistid]);
     }
 
+    public function get_rsslink(){
+        return $this->hasMany('App\Models\UserRssLink', 'rss_ownerid','id')->where('rss_status','active');
+    }
+
 
     public static function search($search){
 

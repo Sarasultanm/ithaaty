@@ -66,5 +66,9 @@ class Audio extends Model
         // return $this->hasMany('App\Models\AudioChapters', 'chapter_audioid','id');
     }
 
+    
+
+
+
 
 }

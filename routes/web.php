@@ -92,7 +92,7 @@ Route::get('/advertise', [MainController::class, 'viewAdvertise'])->name('advert
 
 Route::get('rss/feed/{username}', [MainController::class, 'viewGenerateRSS'])->name('generateRSS');
 // https://anchor.fm/s/6aa1b994/podcast/rss
-Route::get('feed/{id}', [MainController::class, 'feedRSS'])->name('generateFeed');
+Route::get('feed/{rsslink}', [MainController::class, 'feedRSS'])->name('generateFeed');
 
 
 Route::group(['middleware' => Administrator::class,'prefix'=>'admin'], function(){

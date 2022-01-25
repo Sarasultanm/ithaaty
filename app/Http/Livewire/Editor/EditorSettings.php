@@ -10,6 +10,7 @@ use App\Models\Audio;
 use App\Models\Category;
 use App\Models\UserFollow;
 use App\Models\UserGallery;
+use App\Models\UserRssLink;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,7 +22,7 @@ class EditorSettings extends Component
 
      use WithFileUploads;
 
-	 public $categoryTitle,$userName,$oldPass,$newPass,$rss_title,$rss_link,$rss_data,$item_title,$displayArr,$profilePhoto,$checkProfilePhoto,$userAlias;
+	 public $categoryTitle,$userName,$oldPass,$newPass,$rss_title,$rss_link,$rss_data,$item_title,$displayArr,$profilePhoto,$checkProfilePhoto,$userAlias,$rss_name;
 
      public $listMedia;
      public $arr_category = array();
@@ -219,6 +220,7 @@ class EditorSettings extends Component
 
         $this->userAlias = Auth::user()->alias;
         $this->userName = Auth::user()->name;
+    
         // $this->checkProfilePhoto = Auth::user()->get_gallery('profile','active');
 
     }   
@@ -241,6 +243,28 @@ class EditorSettings extends Component
     public function updateName(){
         Auth::user()->update(['name'=>$this->userName]);  
     }
+
+    public function createRssLink(){
+        $this->validate([
+            'rss_name'=>'required'
+        ]);
+
+        $data = UserRssLink::where('rss_links',$this->rss_name);
+
+        if($data->count() == 0){
+            $rss = new UserRssLink;
+            $rss->rss_ownerid = Auth::user()->id;
+            $rss->rss_links = $this->rss_name;
+            $rss->rss_type = "links";
+            $rss->save();
+            session()->flash('status', 'RSS Link created');
+            redirect()->to('/editor/settings');     
+        }else{
+            session()->flash('status', 'RSS link already exists');
+            redirect()->to('/editor/settings');   
+        }
+    }
+
 
     public function render()
     {

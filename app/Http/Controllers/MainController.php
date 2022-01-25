@@ -11,6 +11,7 @@ use App\Models\UserFav;
 use App\Models\UserLikes;
 use App\Models\UserPlaylist;
 use App\Models\UserNotes;
+use App\Models\UserRssLink;
 use Auth;
 
 
@@ -119,10 +120,11 @@ class MainController extends Controller
 		return view('about',compact('likes'))->with('num');
 	}
 
-	public function feedRSS($id)
+	public function feedRSS($rsslink)
     {
-    	$feeds  = Audio::where(['audio_editor'=>$id,'audio_type'=>'Upload'])->get();
-    	$users = User::where('id',$id)->first();
+    	$get_rsslink = UserRssLink::where('rss_links',$rsslink)->first();
+    	$feeds  = Audio::where(['audio_editor'=>$get_rsslink->rss_ownerid,'audio_type'=>'Upload'])->get();
+    	$users = User::where('id',$get_rsslink->rss_ownerid)->first();
     	$amazon_link = config('app.s3_public_link');
         return response()->view('rss.feed',compact('feeds','users','amazon_link'))->header('Content-Type', 'application/xml');
 
