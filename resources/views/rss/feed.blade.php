@@ -27,7 +27,7 @@
                 <author><![CDATA[{{ $feed_item->get_user->name  }}]]></author>
                 <guid>{{ $feed_item->audio_editor  }}</guid>
                 <pubDate>{{ $feed_item->created_at  }}</pubDate>
-                <enclosure url="{{$amazon_link}}./audio/.{{$feed_item->audio_path}}" type="audio/x-m4a"/>
+                <enclosure url="{{$amazon_link}}/audio/{{$feed_item->audio_path}}" type="audio/x-m4a"/>
                 <image href="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded400/17789837/17789837-1631013740160-890d84d6a811d.jpg"/>
                 <season>{{ $feed_item->audio_season  }}</season>
                 <episode>{{ $feed_item->audio_episode  }}</episode>
