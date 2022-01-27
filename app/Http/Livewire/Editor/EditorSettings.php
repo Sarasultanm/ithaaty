@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\UserFollow;
 use App\Models\UserGallery;
 use App\Models\UserRssLink;
+use App\Models\UserCustomization;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,12 +23,12 @@ class EditorSettings extends Component
 
      use WithFileUploads;
 
-	 public $categoryTitle,$userName,$oldPass,$newPass,$rss_title,$rss_link,$rss_data,$item_title,$displayArr,$profilePhoto,$checkProfilePhoto,$userAlias,$rss_name;
+	 public $categoryTitle,$userName,$oldPass,$newPass,$rss_title,$rss_link,$rss_data,$item_title,$displayArr,$profilePhoto,$checkProfilePhoto,$userAlias,$rss_name,$header_bg,$page_bg;
 
      public $listMedia;
      public $arr_category = array();
      public $arr_checkbox = array();
-
+     public $colors = array();
 
     public function savePhoto()
     {
@@ -216,14 +217,7 @@ class EditorSettings extends Component
 
 
 
-    public function mount(){
-
-        $this->userAlias = Auth::user()->alias;
-        $this->userName = Auth::user()->name;
-    
-        // $this->checkProfilePhoto = Auth::user()->get_gallery('profile','active');
-
-    }   
+   
 
     public function saveArray(){
 
@@ -265,6 +259,67 @@ class EditorSettings extends Component
         }
     }
 
+    public function updateBackground($parts){
+
+        $type  = ($parts == 'header') ? "csm_headerbg" : "csm_pagebg";
+        $value = ($parts == 'header') ? $this->header_bg : $this->page_bg;
+        $checkColors = UserCustomization::where(['csm_ownerid'=>Auth::user()->id,'csm_type'=>$type,'csm_typestatus'=>'active']);
+
+
+        if($checkColors->count() == 0){
+                $data = new UserCustomization;
+                $data->csm_ownerid = Auth::user()->id;
+                $data->csm_type = $type;
+                $data->csm_typestatus = "active";
+                $data->csm_value = $value;
+                $data->save();
+        }else{
+
+            UserCustomization::where('id',$checkColors->first()->id)
+            ->update([
+                'csm_typestatus'=> 'draft',
+            ]);
+
+            $data = new UserCustomization;
+            $data->csm_ownerid = Auth::user()->id;
+            $data->csm_type = $type;
+            $data->csm_typestatus = "active";
+            $data->csm_value = $value;
+            $data->save();
+        }
+
+        session()->flash('status', 'Background Updated');
+        redirect()->to('/editor/settings');  
+    }
+
+    public function putColor($type,$color){
+       if($type == 'header'){
+        $this->header_bg = $color;
+       }else{
+        $this->page_bg = $color;
+       } 
+       
+    }
+
+    public function checkColor($type){
+        if(Auth::user()->get_csm($type,'active')->count() != 0){
+            $data = Auth::user()->get_csm($type,'active')->first()->csm_value;
+        }else{
+            $data = "#f98b88";
+        }
+        return $data;
+    }
+
+    public function mount(){
+
+        $this->userAlias = Auth::user()->alias;
+        $this->userName = Auth::user()->name;
+        $this->header_bg = $this->checkColor('csm_headerbg');
+        $this->page_bg = $this->checkColor('csm_pagebg');
+        $this->colors = ['#f98b88','#2196F3', '#009688','#f7fafc','#9C27B0', '#FFEB3B', '#afbbc9', '#4CAF50', '#2d3748', '#f56565', '#ed64a6','#009688','#5f7c84','#d3e579'];
+        // $this->checkProfilePhoto = Auth::user()->get_gallery('profile','active');
+
+    }   
 
     public function render()
     {

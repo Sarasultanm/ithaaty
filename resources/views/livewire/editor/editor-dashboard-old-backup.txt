@@ -12,7 +12,11 @@
             
 
 
-<div class="min-h-screen bg-gray-100">
+@if(Auth::user()->get_csm('csm_pagebg','active')->count() != 0 )
+   <div class="min-h-screen" style="background:{{Auth::user()->get_csm('csm_pagebg','active')->first()->csm_value }};">
+@else
+   <div class="min-h-screen bg-gray-100">
+@endif
   <!--
     When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars
 

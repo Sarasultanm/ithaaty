@@ -1,4 +1,11 @@
-  <header x-data="{ header: false }"  @keydown.escape.stop="header = false" @click.away="header = false" class="bg-white shadow-sm lg:static lg:overflow-y-visible">
+  <header x-data="{ header: false }"  @keydown.escape.stop="header = false" @click.away="header = false" class="shadow-sm lg:static lg:overflow-y-visible" 
+  @if(Auth::user()->get_csm('csm_headerbg','active')->count() != 0 )
+    style="background:{{Auth::user()->get_csm('csm_headerbg','active')->first()->csm_value }};"
+  @else
+    style="background:#fff;"
+  @endif
+  
+  >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
         <div class="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">

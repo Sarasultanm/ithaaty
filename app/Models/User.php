@@ -92,6 +92,11 @@ class User extends Authenticatable
     }
 
 
+    public function get_csm($type,$status){
+        return $this->hasMany('App\Models\UserCustomization', 'csm_ownerid','id')->where(['csm_type'=>$type,'csm_typestatus'=>$status]);
+    }
+
+
     public static function search($search){
 
         return empty($search) ? static::query()
