@@ -110,6 +110,8 @@
                    <!-- follow&fried button -->
                   @endif
                   @endif
+
+                  @if(Auth::user()->id == $userInfo->id )
                   <!-- This example requires Tailwind CSS v2.0+ -->
                     <div x-cloak x-cloak  x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false" class="relative inline-block text-left float-right">
                       <div>
@@ -294,7 +296,7 @@
                         </div>
                       </div>
                     </div>
-
+                    @endif
               </div>
               </div>
 
@@ -594,23 +596,45 @@
               <div class=" bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
                   <div class="pb-5">
                         <h3 class="font-bold text-gray-900">Profile Information</h3>
-                        <p class="text-gray-500 font-regular text-sm mt-4">{{ $userInfo->about }}<!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus mattis risus eget felis cursus suscipit. Ut vulputate orci id risus facilisis, lacinia dignissim lorem interdum. Ut a pellentesque odio. --></p>
+                        <p class="text-gray-500 font-regular text-sm mt-4">{{ $userInfo->about }}</p>
                         <ul class="mt-5 space-y-1 text-center">
+
                           <li class="text-gray-500 inline-block">
-                            <a href="">
+                            @if(strpos($userFacebook, "https://")!==false)
+                            <a target="_black" href="{{$userFacebook}}">
                               <i class="fab fa-facebook-square mr-2 h-5 w-5 text-xl"></i> 
                             </a>
+                            @else
+                            <a target="_black" href="{{ 'https://'.$userFacebook }}">
+                              <i class="fab fa-facebook-square mr-2 h-5 w-5 text-xl"></i> 
+                            </a>
+                            @endif
                           </li>
+
                           <li class="text-gray-500 inline-block">
-                            <a href="">
+                             @if(strpos($userTwitter, "https://")!==false)
+                            <a target="_black" href="{{$userTwitter}}">
                               <i class="fab fa-twitter-square mr-2 h-5 w-5 text-xl"></i>
                             </a>
+                            @else
+                            <a target="_black" href="{{ 'https://'.$userTwitter }}">
+                              <i class="fab fa-twitter-square mr-2 h-5 w-5 text-xl"></i>
+                            </a>
+                            @endif
                          </li>
+
                          <li class="text-gray-500 inline-block">
-                            <a href="">
+                           @if(strpos($userInstagram, "https://")!==false)
+                            <a target="_black" href="{{$userInstagram}}">
                               <i class="fab fa-instagram-square mr-2 h-5 w-5 text-xl"></i>
                             </a>
+                           @else
+                            <a target="_black" href="{{ 'https://'.$userInstagram }}">
+                              <i class="fab fa-instagram-square mr-2 h-5 w-5 text-xl"></i>
+                            </a>
+                           @endif
                          </li>
+
                         </ul>
                         <!-- separator -->
                           <div class="relative mt-5">

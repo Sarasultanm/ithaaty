@@ -15,6 +15,7 @@ use App\Models\UserNotifications;
 use App\Models\UserPlaylist;
 use App\Models\UserPlaylistItems;
 use App\Models\UserGallery;
+use App\Models\UserSocialLinks;
 use Auth;
 
 use Livewire\WithFileUploads;
@@ -28,6 +29,17 @@ class EditorViewUsers extends Component
 
     public $userInfo,$userPodcast,$userFav,$userCat,$userFollow,$recentLikes,$checkFollowing,$checkFriend,$getTopView,$playlist_title,$playlist_status,$playlist_public,$playlist_private;
     public $user_coverphoto,$user_profilephoto;
+    public $userFacebook,$userTwitter,$userInstagram;
+
+
+    public function checkSocialLink($id,$type){
+        if(UserSocialLinks::where(['social_ownerid'=>$id,'social_type'=>$type,'social_typestatus'=>'active'])->count() != 0){
+            $data = UserSocialLinks::where(['social_ownerid'=>$id,'social_type'=>$type,'social_typestatus'=>'active'])->first()->social_link;
+        }else{
+            $data = "";
+        }
+        return $data;
+    }
 
     public function mount($id){
 
@@ -42,6 +54,9 @@ class EditorViewUsers extends Component
         $this->checkFriend = $this->get_if_friends($id);
         $this->playlist_public = UserPlaylist::orderBy('id','DESC')->where(['playlist_userid'=>$id,'playlist_status'=>'Public'])->get();
         $this->playlist_private = UserPlaylist::orderBy('id','DESC')->where(['playlist_userid'=>$id,'playlist_status'=>'Private'])->get();
+        $this->userFacebook = $this->checkSocialLink($id,"Facebook");
+        $this->userTwitter = $this->checkSocialLink($id,"Twitter");
+        $this->userInstagram = $this->checkSocialLink($id,"Instagram");
         // $this->getTopView = UserViews::where('view_ownerid',$id)->orderBy('total','DESC')->groupBy('view_audioid')->selectRaw('count(*) as total, view_audioid')->take(1)->first();
 
     }
