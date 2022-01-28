@@ -431,7 +431,23 @@
                         <div class="col-span-3 bg-white p-2 ">
                             <div class="mt-2 text-sm text-gray-700 space-y-4">
                                <div class="text-white bg-cover h-36">
-                                   <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">      
+                                   @if($friends->friend_userid == $userInfo->id )
+                                      @if($friends->get_request_user->get_profilephoto->count() == 0)
+                                       <img class="h-full mx-auto my-0 " src="{{ asset('images/default_user.jpg') }}" alt="">
+                                      @else
+                                        <?php $img_path = $friends->get_request_user->get_profilephoto->first()->gallery_path; ?>
+                                        <?php $s3_profilelink = config('app.s3_public_link')."/users/profile_img/".$img_path; ?>
+                                        <img class="h-full mx-auto my-0" src="{{$s3_profilelink}}" alt="">
+                                      @endif
+                                   @else   
+                                      @if($friends->get_add_friend->get_profilephoto->count() == 0)
+                                       <img class="h-full mx-auto my-0 " src="{{ asset('images/default_user.jpg') }}" alt="">
+                                      @else
+                                        <?php $img_path = $friends->get_add_friend->get_profilephoto->first()->gallery_path; ?>
+                                        <?php $s3_profilelink = config('app.s3_public_link')."/users/profile_img/".$img_path; ?>
+                                        <img class="h-full mx-auto my-0 " src="{{$s3_profilelink}}" alt="">
+                                      @endif
+                                   @endif
                                </div> 
                             </div>
                             <div>
@@ -468,7 +484,14 @@
                           <div class="col-span-3 bg-white p-2 ">
                               <div class="mt-2 text-sm text-gray-700 space-y-4">
                                  <div class="text-white bg-cover h-36">
-                                     <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">   
+                                     <!-- <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">  -->
+                                      @if($follow->get_user->get_profilephoto->count() == 0)
+                                         <img class="h-full mx-auto my-0 " src="{{ asset('images/default_user.jpg') }}" alt="">
+                                      @else
+                                          <?php $img_path = $follow->get_user->get_profilephoto->first()->gallery_path; ?>
+                                          <?php $s3_profilelink = config('app.s3_public_link')."/users/profile_img/".$img_path; ?>
+                                          <img class="h-full mx-auto my-0 " src="{{$s3_profilelink}}" alt="">
+                                      @endif 
                                  </div>
                               </div>
                               <div>
@@ -522,7 +545,8 @@
                                              <a href="{{ route('editorPlaylist',['id' => $playlist->id ]) }}" class="pointer">
                                               <div class="mt-2 text-sm text-gray-700 space-y-4">
                                                  <div class="text-white bg-cover h-36">
-                                                     <img class="h-full mx-auto my-0" src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg" alt="">        
+
+                                                  <img class="h-full mx-auto my-0" src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/17789837/17789837-1631013743470-36b9d215bea63.jpg" alt="">
                                                  </div>  
                                               </div>
                                               <div>
@@ -674,11 +698,41 @@
 
                 <div class="mt-5 bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
                   <div class="pb-5">
-                        <h3 class="font-bold text-gray-900">Friends</h3>
-                        <div class="flex">
-                           <a class="">
-                             
+                        <h3 class="font-bold text-gray-900 mb-5">Friends</h3>
+                        <div class="grid grid-cols-3 gap-2">
+                           @foreach($friendList as $friends)
+                           <a class="col-span-1">
+                             <span class="inline-block relative">
+                              @if($friends->friend_userid == $userInfo->id )
+                                @if($friends->get_request_user->get_profilephoto->count() == 0)
+                                 <img class="h-16 w-16 rounded-md " src="{{ asset('images/default_user.jpg') }}" alt="">
+                                @else
+                                  <?php $img_path = $friends->get_request_user->get_profilephoto->first()->gallery_path; ?>
+                                  <?php $s3_profilelink = config('app.s3_public_link')."/users/profile_img/".$img_path; ?>
+                                  <img class="h-16 w-16 rounded-md" src="{{$s3_profilelink}}" alt="">
+                                @endif
+                             @else   
+                                @if($friends->get_add_friend->get_profilephoto->count() == 0)
+                                 <img class="h-16 w-16 rounded-md " src="{{ asset('images/default_user.jpg') }}" alt="">
+                                @else
+                                  <?php $img_path = $friends->get_add_friend->get_profilephoto->first()->gallery_path; ?>
+                                  <?php $s3_profilelink = config('app.s3_public_link')."/users/profile_img/".$img_path; ?>
+                                  <img class="h-16 w-16 rounded-md" src="{{$s3_profilelink}}" alt="">
+                                @endif
+                             @endif
+                              <!-- <img class="h-16 w-16 rounded-md" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""> -->
+                              @if($friends->friend_userid == $userInfo->id )
+                                   <p class="font-bold text-gray-900 mt-2 text-sm">
+                                    {{ $friends->get_request_user->name}}
+                                   </p>
+                              @else   
+                                   <p class="font-bold text-gray-900 mt-2 text-sm">
+                                    {{ $friends->get_add_friend->name}}
+                                   </p>
+                              @endif
+                            </span>
                            </a>
+                           @endforeach
                         </div>
                         
 
