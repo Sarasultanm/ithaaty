@@ -23,7 +23,7 @@ class EditorSettings extends Component
 
      use WithFileUploads;
 
-	 public $categoryTitle,$userName,$oldPass,$newPass,$rss_title,$rss_link,$rss_data,$item_title,$displayArr,$profilePhoto,$checkProfilePhoto,$userAlias,$rss_name,$header_bg,$page_bg;
+	 public $categoryTitle,$userName,$userAbout,$oldPass,$newPass,$rss_title,$rss_link,$rss_data,$item_title,$displayArr,$profilePhoto,$checkProfilePhoto,$userAlias,$rss_name,$header_bg,$page_bg;
 
      public $listMedia;
      public $arr_category = array();
@@ -238,6 +238,13 @@ class EditorSettings extends Component
         Auth::user()->update(['name'=>$this->userName]);  
     }
 
+    public function updateAbout(){
+        Auth::user()->update(['about'=>$this->userAbout]);
+
+        session()->flash('status', 'About Us Updated');
+        redirect()->to('/editor/settings');   
+    }
+
     public function createRssLink(){
         $this->validate([
             'rss_name'=>'required'
@@ -314,6 +321,7 @@ class EditorSettings extends Component
 
         $this->userAlias = Auth::user()->alias;
         $this->userName = Auth::user()->name;
+        $this->userAbout = Auth::user()->about;
         $this->header_bg = $this->checkColor('csm_headerbg');
         $this->page_bg = $this->checkColor('csm_pagebg');
         $this->colors = ['#f98b88','#2196F3', '#009688','#f7fafc','#9C27B0', '#FFEB3B', '#afbbc9', '#4CAF50', '#2d3748', '#f56565', '#ed64a6','#009688','#5f7c84','#d3e579'];

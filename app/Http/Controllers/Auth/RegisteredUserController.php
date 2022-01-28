@@ -57,6 +57,7 @@ class RegisteredUserController extends Controller
             'age' => '0',
             'plan' => 'new',
             'alias' => "User".$randomStr,
+            'about' => ' ',
         ]);
 
         // event(new Registered($user));

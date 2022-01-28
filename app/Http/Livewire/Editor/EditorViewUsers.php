@@ -14,13 +14,20 @@ use App\Models\UserFriends;
 use App\Models\UserNotifications;
 use App\Models\UserPlaylist;
 use App\Models\UserPlaylistItems;
+use App\Models\UserGallery;
 use Auth;
 
+use Livewire\WithFileUploads;
 
 class EditorViewUsers extends Component
 {
 
+
+    use WithFileUploads;
+
+
     public $userInfo,$userPodcast,$userFav,$userCat,$userFollow,$recentLikes,$checkFollowing,$checkFriend,$getTopView,$playlist_title,$playlist_status,$playlist_public,$playlist_private;
+    public $user_coverphoto,$user_profilephoto;
 
     public function mount($id){
 
@@ -175,7 +182,103 @@ class EditorViewUsers extends Component
 
 
 
+    public function saveProfilePhoto()
+    {
+        $this->validate([
+            'user_profilephoto' => 'image|max:1024',
+        ]);
 
+        $checkProfile = UserGallery::where(['gallery_userid'=>Auth::user()->id,'gallery_type'=>'profile','gallery_typestatus'=>'active']);
+
+        if($checkProfile->count() == 0){
+
+            $data = New UserGallery;
+            $data->gallery_userid = Auth::user()->id;
+            $data->gallery_type = "profile";
+            $data->gallery_typestatus = "active";
+            $data->gallery_path = $this->user_profilephoto->hashName();
+            $data->gallery_status = "active";
+            $data->save();
+
+        }else{  
+
+            UserGallery::where('id',$checkProfile->first()->id)
+            ->update([
+                'gallery_typestatus'=> 'draft',
+            ]);
+
+            $data = New UserGallery;
+            $data->gallery_userid = Auth::user()->id;
+            $data->gallery_type = "profile";
+            $data->gallery_typestatus = "active";
+            $data->gallery_path = $this->user_profilephoto->hashName();
+            $data->gallery_status = "active";
+            $data->save();
+
+        }
+
+       
+        
+        $imagefile = $this->user_profilephoto->hashName();
+        // local
+        $local_storage = $this->user_profilephoto->storeAs('users/profile_img',$imagefile);
+        // s3
+        $s3_storage = $this->user_profilephoto->store('users/profile_img/', 's3');
+
+        
+        session()->flash('status', 'Profile Picture Updated');
+        redirect()->to('/editor/users/'.Auth::user()->id);
+
+    }
+
+    public function saveCoverPhoto()
+    {
+        $this->validate([
+            'user_coverphoto' => 'image|max:1024',
+        ]);
+
+        $checkProfile = UserGallery::where(['gallery_userid'=>Auth::user()->id,'gallery_type'=>'cover','gallery_typestatus'=>'active']);
+
+        if($checkProfile->count() == 0){
+
+            $data = New UserGallery;
+            $data->gallery_userid = Auth::user()->id;
+            $data->gallery_type = "cover";
+            $data->gallery_typestatus = "active";
+            $data->gallery_path = $this->user_coverphoto->hashName();
+            $data->gallery_status = "active";
+            $data->save();
+
+        }else{  
+
+            UserGallery::where('id',$checkProfile->first()->id)
+            ->update([
+                'gallery_typestatus'=> 'draft',
+            ]);
+
+            $data = New UserGallery;
+            $data->gallery_userid = Auth::user()->id;
+            $data->gallery_type = "cover";
+            $data->gallery_typestatus = "active";
+            $data->gallery_path = $this->user_coverphoto->hashName();
+            $data->gallery_status = "active";
+            $data->save();
+
+        }
+
+       
+        
+        $imagefile = $this->user_coverphoto->hashName();
+        // local
+        $local_storage = $this->user_coverphoto->storeAs('users/cover_img',$imagefile);
+        // s3
+        $s3_storage = $this->user_coverphoto->store('users/cover_img/', 's3');
+
+        
+        session()->flash('status', 'Profile Picture Updated');
+        redirect()->to('/editor/users/'.Auth::user()->id);
+
+    }
 
 
 

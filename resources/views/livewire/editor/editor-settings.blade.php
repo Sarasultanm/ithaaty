@@ -345,11 +345,40 @@
 			                        About
 			                      </label>
 			                      <div class="mt-1">
-			                        <textarea id="about" name="about" rows="3" class="shadow-sm focus:ring-sky-500 focus:border-sky-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+			                        <!-- <textarea rows="3" class="shadow-sm focus:ring-sky-500 focus:border-sky-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea> -->
+
+															<div class="flex items-start space-x-4">
+															  <div class="min-w-0 flex-1">
+															    <div class="relative">
+															      <div class="border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
+															        <label for="comment" class="sr-only">Add your comment</label>
+															        <textarea  wire:model="userAbout"  rows="3" name="comment" id="comment" class="block w-full py-3 border-0 resize-none focus:ring-0 sm:text-sm" placeholder="About"></textarea>
+
+															        <!-- Spacer element to match the height of the toolbar -->
+															        <div class="py-2" aria-hidden="true">
+															          <!-- Matches height of button in toolbar (1px border + 36px content height) -->
+															          <div class="py-px">
+															            <div class="h-9"></div>
+															          </div>
+															        </div>
+															      </div>
+
+															      <div class="absolute bottom-0 inset-x-0 pl-3 pr-2 py-2 flex justify-between">
+															        <div class="flex items-center space-x-5">
+															       
+															          
+															        </div>
+															        <div class="flex-shrink-0">
+															          <button wire:click="updateAbout()"  type="submit" class=" bg-custom-pink inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white ">
+															            Save
+															          </button>
+															        </div>
+															      </div>
+															    </div>
+															  </div>
+															</div>
 			                      </div>
-			                      <p class="mt-2 text-sm text-gray-500">
-			                        Brief description for your profile. URLs are hyperlinked.
-			                      </p>
+			                      
 			                    </div>
 			                  </div>
 
@@ -357,22 +386,7 @@
 			                    <p class="text-sm font-medium text-gray-700" aria-hidden="true">
 			                      Photo
 			                    </p>
-			                    <!-- <div class="mt-1 lg:hidden">
-			                      <div class="flex items-center">
-			                        <div class="flex-shrink-0 inline-block rounded-full overflow-hidden h-12 w-12" aria-hidden="true">
-			                          <img class="rounded-full h-full w-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=320&amp;h=320&amp;q=80" alt="">
-			                        </div>
-			                        <div class="ml-5 rounded-md shadow-sm">
-			                          <div class="group relative border border-gray-300 rounded-md py-2 px-3 flex items-center justify-center hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-sky-500">
-			                            <label for="mobile-user-photo" class="relative text-sm leading-4 font-medium text-gray-700 pointer-events-none">
-			                              <span>Change</span>
-			                              <span class="sr-only"> user photo</span>
-			                            </label>
-			                            <input id="mobile-user-photo" name="user-photo" type="file" class="absolute w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md">
-			                          </div>
-			                        </div>
-			                      </div>
-			                    </div> -->
+			                    
 			                    <div x-data="{ isUploading: false, progress: 0, success: false, error:false }" 
                                                x-on:livewire-upload-start="isUploading = true"
                                                x-on:livewire-upload-finish="isUploading = false,success = true" 
@@ -382,29 +396,25 @@
 			                                <div class="hidden relative rounded-full overflow-hidden lg:block">
 			                                 @if(Auth::user()->get_profilephoto->count() == 0)
 
-				                                  @if($profilePhoto)
+				                                @if($profilePhoto)
 							                    		  <img class="relative rounded-full w-40 h-40" src="{{ $profilePhoto->temporaryUrl() }}" alt="">
-							                      @else
-							                    		  <img class="relative rounded-full w-40 h-40" src="{{ asset('images/default_user.jpg') }}" alt=""> 
-							                      @endif
+									                      @else
+									                    		  <img class="relative rounded-full w-40 h-40" src="{{ asset('images/default_user.jpg') }}" alt=""> 
+									                      @endif
 
 			                                 @else
 
-			                                 	  @if($profilePhoto) 
+			                                 @if($profilePhoto) 
 							                    		  <img class="relative rounded-full w-40 h-40" src="{{ $profilePhoto->temporaryUrl() }}" alt="">
-							                      @else
+									                      @else
 							                      		  <?php 
 							                      		  	$img_path = Auth::user()->get_profilephoto->first()->gallery_path; 
 							                      		  ?>
 							                    		  <img class="relative rounded-full w-40 h-40" src="{{ asset('users/profile_img/'.$img_path) }}" alt=""> 
-							                      @endif
+									                      @endif
 
 			                                 @endif
-						                    <!--   @if($profilePhoto)
-						                    		  <img class="relative rounded-full w-40 h-40" src="{{ $profilePhoto->temporaryUrl() }}" alt="">
-						                      @else
-						                    		  <img class="relative rounded-full w-40 h-40" src="{{ asset('images/default_user.jpg') }}" alt=""> 
-						                      @endif -->
+						                   
 						                      
 						                      <label for="desktop-user-photo" class="absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100">
 						                        <button>Change</button>
@@ -412,25 +422,21 @@
 						                        <input type="file" id="desktop-user-photo" name="user-photo" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md" wire:model="profilePhoto">
 						                      </label>
 						                    </div>
+                                 <div class="mt-5">
+                                  <div x-show="isUploading"  class="relative pt-1">
+                                    <div  class="overflow-hidden h-2 text-xs flex rounded bg-purple-200 progress">
+                                      <div x-bind:style="`width:${progress}%`"
+                                        class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom-pink"
+                                      ></div>
+                                    </div>
+                                  </div>
+                                  <center>
+                                  	<button wire:click="savePhoto()" x-show="success" class="py-2 px-4 text-center  text-white bg-custom-pink font-bold text-sm">Save Changes</button>
+                                  </center>
+                                 
 
-                                               <div class="mt-5">
-                                                <div x-show="isUploading"  class="relative pt-1">
-                                                 <!--  <div class="text-center text-gray-700">
-                                                    Please wait while uploading the file .. <input x-bind:value="`${progress}%`" disabled style="width: 60px;">
-                                                  </div> -->
-                                                  <div  class="overflow-hidden h-2 text-xs flex rounded bg-purple-200 progress">
-                                                    <div x-bind:style="`width:${progress}%`"
-                                                      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom-pink"
-                                                    ></div>
-                                                  </div>
-                                                </div>
-                                                <center>
-                                                	<button wire:click="savePhoto()" x-show="success" class="py-2 px-4 text-center  text-white bg-custom-pink font-bold text-sm">Save Changes</button>
-                                                </center>
-                                                <!-- <button type="submit" class="bg-custom-pink border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">Update</button> -->
-
-                                                 <p x-show="error" class="text-center font-bold text-red-800 text-sm">*Error to upload the file</p> 
-                                              </div>
+                                   <p x-show="error" class="text-center font-bold text-red-800 text-sm">*Error to upload the file</p> 
+                                </div>
 
                                 </div>
 			            
@@ -440,7 +446,52 @@
 			        
 
 				    </section>
+				    <h2 class="mt-5 font-bold text-gray-900 text-lg">Social Media Links</h2>
+				    <section class="mt-5 bg-white p-5 shadow sm:rounded-md sm:overflow-hidden">
+				    	<div class="grid grid-cols-10 gap-4">
+				    		
+				    	
+			        	<div class="col-span-5 flex flex-col lg:flex-row  ">
+	                  <div class="flex-grow space-y-6 ">
+	                    <div>
+	                      <label for="username" class="block text-sm font-medium text-gray-700">
+	                        Facebook Link
+	                      </label>
+	                      <div class="mt-1 rounded-md shadow-sm flex">
+	                        <input type="text" class="focus:ring-sky-500 focus:border-sky-500 flex-grow block w-full min-w-0 rounded-none rounded-md sm:text-sm border-gray-300" wire:model="userFacebook" wire:keydown.enter="updateSocialLink()">
+	                      </div>
+	                    </div>
+	                  </div>	
+			          </div>
+			        	
+			        	<div class="col-span-5 flex flex-col lg:flex-row ">
+	                  <div class="flex-grow space-y-6 ">
+	                    <div>
+	                      <label for="username" class="block text-sm font-medium text-gray-700">
+	                        Twitter Link
+	                      </label>
+	                      <div class="mt-1 rounded-md shadow-sm flex">
+	                        <input type="text" class="focus:ring-sky-500 focus:border-sky-500 flex-grow block w-full min-w-0 rounded-none rounded-md sm:text-sm border-gray-300" wire:model="userTwitter" wire:keydown.enter="updateSocialLink()">
+	                      </div>
+	                    </div>
+	                  </div>	
+			          </div>
 
+			          <div class="col-span-5 flex flex-col lg:flex-row ">
+	                  <div class="flex-grow space-y-6 ">
+	                    <div>
+	                      <label for="username" class="block text-sm font-medium text-gray-700">
+	                        Instagram Link
+	                      </label>
+	                      <div class="mt-1 rounded-md shadow-sm flex">
+	                        <input type="text" class="focus:ring-sky-500 focus:border-sky-500 flex-grow block w-full min-w-0 rounded-none rounded-md sm:text-sm border-gray-300" wire:model="userInstagram" wire:keydown.enter="updateSocialLink()">
+	                      </div>
+	                    </div>
+	                  </div>	
+			          </div>
+
+			          </div>
+				    </section>
 
 
 			      </div>
