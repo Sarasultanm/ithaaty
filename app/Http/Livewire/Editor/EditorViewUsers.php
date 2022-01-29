@@ -29,7 +29,7 @@ class EditorViewUsers extends Component
 
     public $userInfo,$userPodcast,$userFav,$userCat,$userFollow,$recentLikes,$checkFollowing,$checkFriend,$getTopView,$playlist_title,$playlist_status,$playlist_public,$playlist_private;
     public $user_coverphoto,$user_profilephoto;
-    public $userFacebook,$userTwitter,$userInstagram;
+    public $userFacebook,$userTwitter,$userInstagram,$userFriendList;
 
 
     public function checkSocialLink($id,$type){
@@ -57,6 +57,7 @@ class EditorViewUsers extends Component
         $this->userFacebook = $this->checkSocialLink($id,"Facebook");
         $this->userTwitter = $this->checkSocialLink($id,"Twitter");
         $this->userInstagram = $this->checkSocialLink($id,"Instagram");
+        $this->userFriendList = UserFriends::where('friend_userid',$id)->orWhere('friend_requestid',$id)->get();
         // $this->getTopView = UserViews::where('view_ownerid',$id)->orderBy('total','DESC')->groupBy('view_audioid')->selectRaw('count(*) as total, view_audioid')->take(1)->first();
 
     }

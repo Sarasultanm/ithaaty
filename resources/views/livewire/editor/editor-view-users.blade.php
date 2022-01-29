@@ -427,7 +427,8 @@
                         <h1 class="font-bold text-gray-800 text-xl">Friends</h1> 
                     </div>
                     <div class="grid gap-4 grid-cols-9">
-                       @foreach($friendList as $friends)
+                       @foreach($userFriendList as $friends)
+                        @if($friends->friend_type == "Friends")
                         <div class="col-span-3 bg-white p-2 ">
                             <div class="mt-2 text-sm text-gray-700 space-y-4">
                                <div class="text-white bg-cover h-36">
@@ -454,11 +455,14 @@
                               <div class="flex space-x-3">
                                 <div class="min-w-0 flex-1">
                                   <p class="text-md font-bold text-gray-900 mt-2">
-                                    <a href="#" class="hover:underline">
                                       @if($friends->friend_userid == $userInfo->id )
+                                      <a href="{{ route('editorViewUser',['id' => $friends->get_request_user->id ]) }}" target="_blank" class="hover:underline">
                                          {{ $friends->get_request_user->name}}
+                                      </a>
                                       @else   
+                                       <a href="{{ route('editorViewUser',['id' => $friends->get_add_friend->id ]) }}" target="_blank" class="hover:underline">
                                          {{ $friends->get_add_friend->name}}
+                                      </a>
                                       @endif
                                   </p>
                                   <p class="text-xs text-gray-500">
@@ -470,6 +474,7 @@
                               </div>
                             </div>
                         </div>
+                        @endif
                        @endforeach
                     </div>
                   </div>
@@ -498,7 +503,7 @@
                                 <div class="flex space-x-3">
                                   <div class="min-w-0 flex-1">
                                     <p class="text-md font-bold text-gray-900 mt-2">
-                                      <a href="#" class="hover:underline">{{ $follow->get_user->name }}</a>
+                                      <a href="{{ route('editorViewUser',['id' => $follow->get_user->id ]) }}" class="hover:underline">{{ $follow->get_user->name }}</a>
                                     </p>
                                     <p class="text-xs text-gray-500">
                                       <a class="hover:underline">
@@ -700,8 +705,9 @@
                   <div class="pb-5">
                         <h3 class="font-bold text-gray-900 mb-5">Friends</h3>
                         <div class="grid grid-cols-3 gap-2">
-                           @foreach($friendList as $friends)
-                           <a class="col-span-1">
+                           @foreach($userFriendList as $friends)
+                           @if($friends->friend_type == "Friends")
+                           <div class="col-span-1">
                              <span class="inline-block relative">
                               @if($friends->friend_userid == $userInfo->id )
                                 @if($friends->get_request_user->get_profilephoto->count() == 0)
@@ -720,18 +726,24 @@
                                   <img class="h-16 w-16 rounded-md" src="{{$s3_profilelink}}" alt="">
                                 @endif
                              @endif
-                              <!-- <img class="h-16 w-16 rounded-md" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""> -->
+                              
+
                               @if($friends->friend_userid == $userInfo->id )
                                    <p class="font-bold text-gray-900 mt-2 text-sm">
-                                    {{ $friends->get_request_user->name}}
+                                    <a href="{{ route('editorViewUser',['id' => $friends->get_request_user->id ]) }}" target="_blank" > 
+                                     {{ $friends->get_request_user->name}}
+                                    </a>
                                    </p>
                               @else   
                                    <p class="font-bold text-gray-900 mt-2 text-sm">
+                                    <a href="{{ route('editorViewUser',['id' => $friends->get_add_friend->id ]) }}" target="_blank">
                                     {{ $friends->get_add_friend->name}}
+                                  </a>
                                    </p>
                               @endif
                             </span>
-                           </a>
+                           </div>
+                           @endif
                            @endforeach
                         </div>
                         
