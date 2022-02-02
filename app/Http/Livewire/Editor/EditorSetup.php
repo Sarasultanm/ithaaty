@@ -106,7 +106,7 @@ class EditorSetup extends Component
         $data = new UserSetup;
         $data->setup_ownerid = Auth::user()->id;
         $data->setup_type = "Interest Setup";
-        $data->setup_typestatus = "Complete";
+        $data->setup_typestatus = "Incomplete";
         $data->save();
 
         $this->currentSteps = 3;
@@ -118,7 +118,7 @@ class EditorSetup extends Component
         $data = new UserSetup;
         $data->setup_ownerid = Auth::user()->id;
         $data->setup_type = "Channel Setup";
-        $data->setup_typestatus = "Complete";
+        $data->setup_typestatus = "Incomplete";
         $data->save();
 
         User::where("id",Auth::user()->id)->update([
@@ -167,8 +167,8 @@ class EditorSetup extends Component
 
     public function mount(){
         $this->checkSteps('Friend Setup','Complete');
-        $this->checkSteps('Interest Setup','Complete');
-        $this->checkSteps('Channel Setup','Complete');
+        $this->checkSteps('Interest Setup','Incomplete');
+        $this->checkSteps('Channel Setup','Incomplete');
 
     }
 
