@@ -105,8 +105,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UserSocialLinks', 'social_ownerid','id')->where(['social_type'=>$type,'social_typestatus'=>$status]);
     }
 
-     public function get_setuptype($type,$status){
+    public function get_setuptype($type,$status){
         return $this->hasMany('App\Models\UserSetup', 'setup_ownerid','id')->where(['setup_type'=>$type,'setup_typestatus'=>$status]);
+    }
+    public function get_setup($type){
+        return $this->hasMany('App\Models\UserSetup', 'setup_ownerid','id')->where(['setup_type'=>$type]);
     }
 
 

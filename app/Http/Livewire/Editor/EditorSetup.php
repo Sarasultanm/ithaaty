@@ -91,6 +91,104 @@ class EditorSetup extends Component
              $this->addFriend++;
     }
 
+
+    public function skipSetup($type){
+
+        $data = new UserSetup;
+        $data->setup_ownerid = Auth::user()->id;
+
+        if($type == "Friend"){
+            $data->setup_type = "Friend Setup";
+            $data->setup_typestatus = "Incomplete"; 
+            $this->currentSteps = 2;
+            $this->stepOne = 1;
+
+        }elseif($type == "Interest"){
+            $data->setup_type = "Interest Setup";
+            $data->setup_typestatus = "Incomplete";
+            $this->currentSteps = 3;
+            $this->stepTwo = 1;
+
+        }elseif($type == "Channel"){
+            $data->setup_type = "Channel Setup";
+            $data->setup_typestatus = "Incomplete";
+            $this->stepThree = 1;
+            
+            User::where("id",Auth::user()->id)->update([
+            "firstlogin"=>"1"
+            ]);
+
+            session()->flash('status', 'Setup Complete');
+             redirect()->to('editor/dashboard');  
+
+        }else{
+
+        }
+
+        $data->save();
+    }
+
+
+     public function checkSteps($type){
+        //$data = Auth::user()->get_setup($type)->count();
+        // if($type == "Friend Setup"){
+        //     if($data != 0){
+        //         $this->currentSteps = 1;
+        //         $this->stepOne = 1;
+        //     }else{
+        //         $this->currentSteps = 1;
+        //         $this->stepOne = 0;
+        //     }
+
+        // }elseif($type == "Interest Setup"){
+        //     if($data != 0){
+        //         $this->currentSteps = 3;
+        //         $this->stepTwo = 1;
+        //     }else{
+        //         $this->currentSteps = 1;
+        //         $this->stepTwo = 0;
+        //     }
+        // }elseif($type == "Channel Setup"){
+        //     if($data != 0){
+        //         $this->stepThree = 1;
+        //     }else{
+        //         $this->currentSteps = 1;
+        //         $this->stepThree = 0;
+        //     }
+        // }
+
+        $firstStep = Auth::user()->get_setup('Friend Setup')->count();
+
+        // check if already exist
+        if($firstStep != 0 ){
+
+            $this->currentSteps = 2;
+            $this->stepOne = 1;
+            $this->stepTwo = 0;
+            $this->stepThree = 0;
+            
+            $secondStep = Auth::user()->get_setup('Interest Setup')->count();
+            if($secondStep != 0){
+                $this->currentSteps = 3;
+                $this->stepOne = 1;
+                $this->stepTwo = 1;
+                $this->stepThree = 0;
+            }
+
+        }else{
+            $this->currentSteps = 1;
+            $this->stepOne = 0;
+            $this->stepTwo = 0;
+            $this->stepThree = 0;
+        }
+
+
+
+        
+
+    }
+
+
     public function friendSetup(){
         $data = new UserSetup;
         $data->setup_ownerid = Auth::user()->id;
@@ -132,43 +230,14 @@ class EditorSetup extends Component
 
     }
 
-    public function checkSteps($type,$status){
-        $data = Auth::user()->get_setuptype($type,$status)->count();
-        if($type == "Friend Setup"){
-            if($data != 0){
-                $this->currentSteps = 2;
-                $this->stepOne = 1;
-            }else{
-                $this->currentSteps = 1;
-                $this->stepOne = 0;
-            }
-
-        }elseif($type == "Interest Setup"){
-            if($data != 0){
-                $this->currentSteps = 3;
-                $this->stepTwo = 1;
-            }else{
-                $this->currentSteps = 1;
-                $this->stepTwo = 0;
-            }
-        }else{
-            if($data != 0){
-                $this->stepThree = 1;
-            }else{
-                $this->currentSteps = 1;
-                $this->stepThree = 0;
-            }
-        }
-        
-
-    }
+   
 
 
 
     public function mount(){
-        $this->checkSteps('Friend Setup','Complete');
-        $this->checkSteps('Interest Setup','Incomplete');
-        $this->checkSteps('Channel Setup','Incomplete');
+        $this->checkSteps('Friend Setup');
+        // $this->checkSteps('Interest Setup');
+        // $this->checkSteps('Channel Setup');
 
     }
 

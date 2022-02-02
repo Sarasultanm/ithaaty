@@ -46,7 +46,6 @@
                         <span class="px-6 py-4 flex items-center text-sm font-medium">
                          @if($stepOne == 1)
                          <span class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-custom-pink rounded-full">
-                            <!-- Heroicon name: solid/check -->
                             <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                             </svg>
@@ -74,15 +73,22 @@
                         
                          @if($stepTwo == 1)
                          <span class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-custom-pink rounded-full">
-                            <!-- Heroicon name: solid/check -->
                             <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                             </svg>
                           </span>
                           @else
-                          <span class="flex-shrink-0 w-10 h-10 flex items-center justify-center border-2 border-custom-pink rounded-full">
-                            <span class="text-custom-pink">02</span>
-                          </span>
+                            @if($stepOne == 0)
+                              <span class="flex-shrink-0 w-10 h-10 flex items-center justify-center border-2 border-gray-300 rounded-full">
+                                <span class="text-custom-pink">02</span>
+                              </span>
+                             @else
+                             <span class="flex-shrink-0 w-10 h-10 flex items-center justify-center border-2 border-custom-pink rounded-full">
+                                <span class="text-custom-pink">02</span>
+                              </span>
+                              
+
+                             @endif 
                           @endif
 
 
@@ -102,10 +108,25 @@
                       <!-- Upcoming Step -->
                       <a class="group flex items-center">
                         <span class="px-6 py-4 flex items-center text-sm font-medium">
+                          @if($stepThree == 1)
                           <span class="flex-shrink-0 w-10 h-10 flex items-center justify-center border-2 border-gray-300 rounded-full group-hover:border-gray-400">
                             <span class="text-gray-500 group-hover:text-gray-900">03</span>
                           </span>
                           <span class="ml-4 text-sm font-medium text-gray-500 group-hover:text-gray-900">Channels</span>
+                          @else
+                             @if($stepTwo == 0)
+                              <span class="flex-shrink-0 w-10 h-10 flex items-center justify-center border-2 border-gray-300 rounded-full">
+                                <span class="text-custom-pink">03</span>
+                              </span>
+                             @else
+                             <span class="flex-shrink-0 w-10 h-10 flex items-center justify-center border-2 border-custom-pink rounded-full">
+                                <span class="text-custom-pink">03</span>
+                              </span>
+                              
+
+                             @endif 
+
+                          @endif
                         </span>
                       </a>
                     </li>              
@@ -175,13 +196,16 @@
 
 
                          <!-- This example requires Tailwind CSS v2.0+ -->
-                        <div class="w-full mt-5 flex justify-end">
+                        <div class="w-full mt-5 flex justify-end space-x-3">
                           
-                           <!--  <?php // if($addFriend > 1){ ?> -->
+                            <?php if($addFriend > 1){ ?>
                                <button wire:click="friendSetup()" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
                                Next
                               </button>   
-                           <!--  <?php // } ?> -->
+                            <?php } ?>
+                             <button wire:click="skipSetup('Friend')" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
+                               Skip
+                              </button> 
                            
 
                            
@@ -250,7 +274,7 @@
                                 </div>
                        </div>
                          <!-- This example requires Tailwind CSS v2.0+ -->
-                        <div class="w-full mt-5 flex justify-between space-x-3">
+                        <div class="w-full mt-5 flex justify-end space-x-3">
                             <!-- <button wire:click="friendSetup()" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
                               Back
                             </button>   -->
@@ -259,7 +283,11 @@
                             </div>
                             <button wire:click="interestSetup()" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
                               Next
-                            </button>   
+                            </button> 
+                            <button wire:click="skipSetup('Interest')" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
+                               Skip
+                              </button> 
+                             
                         </div>
                         <!-- step 2 content -->
                     </div>
@@ -305,7 +333,7 @@
                             </ul>
 
                             <!-- This example requires Tailwind CSS v2.0+ -->
-                            <div class="w-full mt-5 flex justify-between space-x-3">
+                            <div class="w-full mt-5 flex justify-end space-x-3">
                                 <!-- <button wire:click="friendSetup()" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
                                   Back
                                 </button> -->
@@ -313,6 +341,9 @@
                                 <button wire:click="channelSetup()" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
                                   Next
                                 </button>   
+                                <button wire:click="skipSetup('Channel')" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
+                               Skip
+                              </button> 
                             </div>  
                       
 
