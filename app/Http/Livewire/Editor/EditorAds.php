@@ -13,12 +13,6 @@ use Livewire\WithFileUploads;
 class EditorAds extends Component
 {
 
-
-	use WithFileUploads;
-
-	public $ads_name,$ads_website,$ads_location,$ads_logo,$ads_file;
-    public $ads_list,$adslist_name,$adslist_videolink,$adslist_videoupload,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc,$country_slc,$agebracket_list,$adslist_days,$adslist_videotype,$adslist_end;
-
     public $compSkip = 50,$compDisplay = 100,$compDays = 3,$compTotal = 450;
 
 
@@ -131,14 +125,6 @@ class EditorAds extends Component
 
 
         }
-
-
-       
-
-        
-
-
-
 
     }
 

@@ -117,6 +117,20 @@
             </div>
           </section>
 
+          <section aria-labelledby="trending-heading">
+            <div class="bg-white rounded-lg shadow">
+              <div class="p-6">
+                <h2 id="trending-heading" class="text-base font-medium text-gray-900">
+                  Ads Here
+                </h2>
+                <div class="mt-6 flow-root">
+                 
+                </div>
+               
+              </div>
+            </div>
+          </section>
+
                     <section aria-labelledby="who-to-follow-heading">
             <div class="">
               <div class="">

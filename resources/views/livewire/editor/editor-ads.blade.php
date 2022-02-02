@@ -200,9 +200,9 @@
                         <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
                           <a>Videos List</a>
                         </li>
-                           <li @click="openTab = 3"  :class="openTab === 3 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
+                        <li @click="openTab = 3"  :class="openTab === 3 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
                             <a>Add Videos Ads</a>
-                          </li>
+                        </li>
                       </ul>
                   </div>
 
@@ -347,8 +347,8 @@
                                              <div class="text-sm font-bold text-gray-500">{{ $ads->adslist_status }}</div>
                                           </td>
                                           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Update</a> / 
-                                             <a href="#" class="text-indigo-600 hover:text-indigo-900">Stats</a>
+                                            <a href="{{ route('editorAdsUpdate',['id' => $ads->id ]) }}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Update</a> / 
+                                             <a href="{{ route('editorAdsStats',['id' => $ads->id ]) }}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Stats</a>
                                             @if($ads->adslist_status == "Confirm")
                                           <!--  <a href="{{ route('adminAdsSetup',['id' => $ads->id]) }}" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-2 py-2 border-gray-200 text-base font-medium text-black hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Setup
                                              </a>  -->

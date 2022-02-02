@@ -48,7 +48,12 @@ class AuthenticatedSessionController extends Controller
             $request->session()->regenerate();
 
             if (Auth::user()->roles == 'editor') {
-                return redirect('editor/dashboard');
+                if(Auth::user()->firstlogin == 0){
+                    return redirect('editor/setup');
+                }else{
+                    return redirect('editor/dashboard');
+                }
+
             }else{
                  // return redirect(RouteServiceProvider::HOME);
                 return redirect('admin/dashboard');

@@ -28,6 +28,7 @@ class User extends Authenticatable
         'plan',
         'alias',
         'about',
+        'firstlogin'
     ];
 
     /**
@@ -103,6 +104,16 @@ class User extends Authenticatable
     public function get_socialLink($type,$status){
         return $this->hasMany('App\Models\UserSocialLinks', 'social_ownerid','id')->where(['social_type'=>$type,'social_typestatus'=>$status]);
     }
+
+     public function get_setuptype($type,$status){
+        return $this->hasMany('App\Models\UserSetup', 'setup_ownerid','id')->where(['setup_type'=>$type,'setup_typestatus'=>$status]);
+    }
+
+
+
+
+
+
 
     public static function search($search){
 

@@ -50,7 +50,10 @@ use App\Http\Livewire\Editor\{
 	EditorFollowing,
 	EditorFollowers,
 	EditorPlans,
-	EditorSearch
+	EditorSearch,
+	EditorAdsStats,
+	EditorAdsUpdate,
+	EditorSetup
 };
 
 /*
@@ -109,6 +112,7 @@ Route::group(['middleware' => Administrator::class,'prefix'=>'admin'], function(
 	Route::get('plans',AdminPlans::class)->name('adminPlans');
     Route::get('plans/create',AdminPlanCreate::class)->name('adminPlansCreate');
     Route::get('plans/update/{id}',AdminPlanUpdate::class)->name('adminPlansUpdate');
+
 });
 
 
@@ -144,6 +148,8 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 	Route::get('ads',EditorAds::class)->name('editorAds');
 	Route::get('ads/company',EditorAdsCompany::class)->name('editorAdsCompany');
 	Route::get('ads/podcast',EditorAdsPodcast::class)->name('editorAdsPodcast');
+	Route::get('ads/stats/{id}',EditorAdsStats::class)->name('editorAdsStats');
+	Route::get('ads/update/{id}',EditorAdsUpdate::class)->name('editorAdsUpdate');
 
 	Route::get('activity',EditorActivity::class)->name('editorActivity');
 	Route::get('friends',EditorFriends::class)->name('editorFriends');
@@ -156,6 +162,7 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 	Route::get('plans',EditorPlans::class)->name('editorPlans');
 	Route::get('search/{data}',EditorSearch::class)->name('editorSearch');
 
+	Route::get('setup',EditorSetup::class)->name('editorSetup');
 });
 
 

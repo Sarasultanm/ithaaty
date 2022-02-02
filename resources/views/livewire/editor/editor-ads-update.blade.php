@@ -1,7 +1,6 @@
-
  <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Podcast Update') }}
+            {{ __('Ads Update') }}
         </h2>
   </x-slot>
 
@@ -26,565 +25,155 @@
 
     <div class="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
       <div class="hidden lg:block lg:col-span-3 xl:col-span-2">
-      	<!-- sidebar -->
+        <!-- sidebar -->
         @include('layouts.editor.sidebar')
         <!-- sidebar -->
       </div>
-
-      @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
-
-      @else
-
-      @if(Auth::user()->get_plan->check_features('p3')->count() != 0 || Auth::user()->get_plan->check_features('p2')->count() != 0 )
-
       <main class="xl:col-span-10 lg:col-span-9">
 
         <div class="mt-4">
-          <!-- <div class="mb-5 w-full ">
-          	 <h1 class="font-bold text-gray-800 text-xl">Overview</h1> 
+         <!--  <div class="mb-5 w-full ">
+             <h1 class="font-bold text-gray-800 text-xl">Create you Ads</h1> 
           </div> -->
 
           <div class="w-full ">
-          	 <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
+             <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
           </div>
+          
+           <!-- update -->
 
-          @if($checkAudio == 'true')
+           <div class="border-b-2 pb-10 border-green-500 ">  
+                             <h1 class="flex-1 font-bold text-gray-800 text-xl ">Details</h1> 
+                               <p class="mt-1 text-sm text-gray-500">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales quis tortor at cursus.
+                               </p>
+                                <div class="mt-5">
+                                        <label for="email" class="block text-sm font-medium text-gray-700">Title</label>
+                                        <div class="mt-1">
+                                          <input type="text" name="name" id="name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " wire:model="adslist_name">
+                                          @error('adslist_name') <span class="text-xs text-red-600">Empty fields</span> @enderror
+                                        </div>
+                                </div>
 
-          <!-- This example requires Tailwind CSS v2.0+ -->
-          @if($audio->audio_publish != "Publish")
-				<div class="rounded-md bg-custom-pink p-4">
-				  <div class="flex">
-				    <div class="flex-shrink-0">
-				      <!-- Heroicon name: solid/information-circle -->
-				      <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-				        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-				      </svg>
-				    </div>
-				    <div class="ml-3 flex-1 md:flex md:justify-between">
-				      <p class="text-sm text-white">
-				        Your podcast is currently in a draft, please update the information in the tab below. If you want to publish your podcast now hit the publish button.
-				      </p>
-				      <p class="mt-4 text-sm md:mt-0 md:ml-6">
-				        <button wire:click="publishAudio({{$a_id}})" class="whitespace-nowrap font-medium text-white hover-bg-custom-pink hover:text-white  p-2 border-2 border-white rounded-md">Publish </button>
-				      </p>
-				    </div>
-				  </div>
-				</div>
-				@endif
+                                <div class="mt-5">
+                                        <label for="email" class="block text-sm font-medium text-gray-700">Description</label>
+                                        <div class="mt-1">
+                                          <textarea class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " wire:model="adslist_desc"></textarea>
+                                          @error('adslist_desc') <span class="text-xs text-red-600">Empty fields</span> @enderror
+                                        </div>
+                                </div>
 
-          <!-- <form wire:submit.prevent="updatepost">  -->
+                                <div class="mt-5">
+                                        <label for="email" class="block text-sm font-medium text-gray-700">Website Url</label>
+                                        <div class="mt-1">
+                                          <input type="text" name="name" id="name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " wire:model="adslist_weblink">
+                                          @error('adslist_weblink') <span class="text-xs text-red-600">Empty fields</span> @enderror
+                                        </div>
+                                </div>
+                      </div>
 
-          	<div x-data="{
-			      openTab: 1,
-			      activeClasses: 'border-custom-pink text-custom-pink',
-			      inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-			    }" 
-			    class="">
+                      <div class="border-b-2 pb-10 border-green-500 mt-4">            
+                            <h1 class="flex-1 font-bold text-gray-800 text-xl ">Media</h1> 
+                            <p class="mt-1 text-sm text-gray-500">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales quis tortor at cursus.
+                            </p>
 
-				<div class="border-b border-gray-200">
-				  	<ul class="-mb-px flex" >
-				      <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
-				        <a>Info</a>
-				      </li>
-				      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
-				        <a>Embed</a>
-				      </li>
-				       @if(Auth::user()->get_plan->check_features('o4')->count() != 0 )
-		             <li @click="openTab = 3"  :class="openTab === 3 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
-		              <a>References</a>
-		            </li>
-		           @endif
-
-		           @if(Auth::user()->get_plan->check_features('o3')->count() != 0 )
-				      <li @click="openTab = 4"  :class="openTab === 4 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
-				        <a>Sponsor</a>
-				      </li>
-				      @endif
-
-				      @if(Auth::user()->get_plan->check_features('o7')->count() != 0 )
-				       <li @click="openTab = 5"  :class="openTab === 5 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
-				        <a>Affiliate</a>
-				      </li>
-				      @endif
-
-				      @if(Auth::user()->get_plan->check_features('o5')->count() != 0 )
-				      <li @click="openTab = 6"  :class="openTab === 6 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
-				        <a>Q&A</a>
-				      </li>
-				      @endif
-				      @if(Auth::user()->get_plan->check_features('o2')->count() != 0 )
-				      <li @click="openTab = 7"  :class="openTab === 7 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
-				        <a>Monetize</a>
-				      </li>
-				      @endif
-
-				       @if(Auth::user()->get_plan->check_features('o8')->count() != 0 )
-				        <li @click="openTab = 8"  :class="openTab === 8 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
-				        <a>Chapters</a>
-				      </li>
-				       @endif
-				    </ul>
-				</div>
-
-				<div class="w-full pt-4">
-					<input type="text" class="hidden"  wire:model="a_id">
-					<div x-show="openTab === 1">
-
-						<div class="mt-5">
-			                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Creat Post</h2>
-			                  <p class="mt-1 text-sm text-gray-500">
-			                    This information will be displayed publicly so be careful what you share.
-			                  </p>
-			            </div>
-
-				        <div class="border-t-2 border-custom-pink ">	
-				    		<div class="mt-5">
-						                    <label for="email" class="block text-sm font-medium text-gray-700">Title</label>
-						                    <div class="mt-1">
-						                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="title">
-						                    </div>
-								        </div>
-
-						              	 <div class="mt-5">
-
-											<label for="email" class="block text-sm font-medium text-gray-700">Category</label>
-											@if($categoryList->count() == 0 )
-						      	 			 <span class="text-sm font-medium text-red-600">Add category in the settings</span>
-						      	 			@else
-						      	 			<select id="country" name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="category">
-						                        <option>Select</option>
-						                        @foreach($categoryList->get() as $cat)
-						                        <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
-						                        @endforeach
-						             		 </select> 
-
-						      	 			@endif
-							    					
-							    		</div>
-
-			             	
-			                <div class="mt-5">
-				                <div class="flex">
-								  <div class="flex-1 mr-2">
-								  	<label for="email" class="block text-sm font-medium text-gray-700">Season</label>
-								 
-				                    <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="season">
-				                        <option>Select</option>
-				                        @for ($s = 1; $s < 50; $s++)
-				                           <option value="{{ $s }}">{{ $s }}</option>
-										@endfor
-				             		 </select> 
-
-								  </div>
-								  <div class="flex-1 ml-2">
-								  	<label for="email" class="block text-sm font-medium text-gray-700">Episode</label>
-								 
-				                      <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="episode">
-				                        <option>Select</option>
-				                        @for ($e = 1; $e < 50; $e++)
-				                           <option value="{{ $e }}">{{ $e }}</option>
-										@endfor
-				             		 </select> 
+                        <div x-data="{
+                                  openTab: 'link',
+                                  activeClasses: 'border-custom-pink text-custom-pink font-bold',
+                                  inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                }" 
+                                class="">
 
 
-								  </div>
-								   <div class="flex-1 ml-2">
-								  	<label for="email" class="block text-sm font-medium text-gray-700">Status</label>
-								 
-				                      <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="status">
-				                        @if($status == 'private')
-				                        <option value="private">Private</option>
-				                        <option value="public">Public</option>
-				                        @else
-				                         <option value="public">Public</option>
-				                          <option value="private">Private</option>
-				                        @endif
-				                      
-				                        
-								
-				             		 </select> 
+                                <div class="border-b border-gray-200">
+                                    <ul class="-mb-px flex" >
+                                      <li @click="openTab = 'link'"  :class="openTab === 'link' ? activeClasses : inactiveClasses"   class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                                        <a>Link</a>
+                                      </li>
+                                      <li @click="openTab = 'upload'" :class="openTab === 'upload' ? activeClasses : inactiveClasses"  class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                                        <a>Upload</a>
+                                      </li>
+                                    </ul>
+                                </div>
 
 
-								  </div>
-								 
-								</div>
-							</div>
+                                <div  x-show="openTab === 'link'" >
 
-							<div class="mt-5">
-							          <label for="about" class="block text-sm font-medium text-gray-700">
-							            Transcript
-							          </label>
-							          <div class="mt-1">
-							            <textarea id="about" name="about" rows="15" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="summary" ></textarea>
-							          </div>
-				    		</div>
+                                    <div class="mt-5">
+                                          <label for="email" class="block text-sm font-medium text-gray-700">Video Link</label>
+                                          <div class="mt-1">
+                                            <input type="text" name="website" id="website" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="adslist_videolink">
 
+                                          </div>
+                                          <div class="items-center mt-5">
+                                            <input id="push" name="notification-method" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 float-left" value="link"  wire:model="adslist_videotype">
+                                            <label for="push" class="ml-5 block text-sm font-medium text-gray-700">
+                                              Agree for video link
+                                            </label>
+                                            @error('adslist_videotype') <span class="text-xs text-red-600">Please check this button</span> @enderror
+                                          </div>
+                                      </div>
 
-				    		<div class="mt-5">
-				    				<div class="block text-sm font-medium text-gray-700"> Thumbnail </div>
-				    				<div class="mt-2 w-1/4">
-				    					 <div x-data="{ isUploading: false, progress: 0, success: false, error:false }" 
-                           x-on:livewire-upload-start="isUploading = true"
-                           x-on:livewire-upload-finish="isUploading = false,success = true" 
-                           x-on:livewire-upload-error="isUploading = false,error= true"
-                           x-on:livewire-upload-progress="progress = $event.detail.progress">
+                                </div>
 
-			                                <div class="hidden relative rounded-md overflow-hidden lg:block">
-			                                 @if($this->audio->get_thumbnail->count() == 0)
+                                 <div  x-show="openTab === 'upload'">
 
-				                                  @if($thumbnail)
-							                    		  <img class="relative rounded-md w-auto" src="{{ $thumbnail->temporaryUrl() }}" alt="">
-							                      @else
-							                    		  <img class="relative rounded-md w-auto " src="{{ asset('images/default_podcast.jpg') }}" alt=""> 
-							                      @endif
+                                    <div class="mt-5">
+                                             <div x-data="{ isUploading: false, progress: 0, success: false, error:false }" 
+                                               x-on:livewire-upload-start="isUploading = true"
+                                               x-on:livewire-upload-finish="isUploading = false,success = true" 
+                                               x-on:livewire-upload-error="isUploading = false,error= true"
+                                               x-on:livewire-upload-progress="progress = $event.detail.progress">
 
-			                                 @else
-
-			                                 	  @if($thumbnail) 
-							                    		  <img class="relative rounded-md w-auto" src="{{ $thumbnail->temporaryUrl() }}" alt="">
-							                      @else
-							                      		  <?php 
-							                      		  	$img_path = $this->audio->get_thumbnail->first()->gallery_path; 
-							                      		  ?>
-							                    		  <img class="relative rounded-md w-auto" src="{{ asset('users/podcast_img/'.$img_path) }}" alt=""> 
-							                      @endif
-
-			                                 @endif
-						                   
-						                      
-						                      <label for="desktop-user-photo" class="absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100">
-						                        <button>Change</button>
-						                        <span class="sr-only"> user photo</span>
-						                        <input type="file" id="desktop-user-photo" name="user-photo" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md" wire:model="thumbnail">
-						                      </label>
-						                    </div>
-
-                                               <div class="mt-5">
-                                                <div x-show="isUploading"  class="relative pt-1">
-                                                 
-                                                  <div  class="overflow-hidden h-2 text-xs flex rounded bg-purple-200 progress">
-                                                    <div x-bind:style="`width:${progress}%`"
-                                                      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom-pink"
-                                                    ></div>
+                                                  <label for="email" class="block text-sm font-medium text-gray-700">Upload Logo</label>
+                                                  <div class="mt-1">
+                                                    <input type="file"  class="" wire:model="adslist_videoupload">
                                                   </div>
-                                                </div>
-                                                <center>
-                                                	<button wire:click="saveThumbnail({{$this->a_id}})" x-show="success" class="py-2 px-4 text-center  text-white bg-custom-pink font-bold text-sm">Save Changes</button>
-                                                </center>
-                                              
 
-                                                 <p x-show="error" class="text-center font-bold text-red-800 text-sm">*Error to upload the file</p> 
-                                              </div>
+                                                  <div class="mt-5">
+                                                    <div x-show="isUploading"  class="relative pt-1">
+                                                      <div class="text-center text-gray-700">
+                                                        Please wait while uploading the file .. <input x-bind:value="`${progress}%`" disabled style="width: 60px;">
+                                                      </div>
+                                                      <div  class="overflow-hidden h-2 text-xs flex rounded bg-purple-200 progress">
+                                                        <div x-bind:style="`width:${progress}%`"
+                                                          class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom-pink"
+                                                        ></div>
+                                                      </div>
+                                                    </div>
+                                                    <p x-show="success" class="text-center text-custom-pink font-bold text-gray-800 text-sm">File Upload Complete</p> 
+                                                     <p x-show="error" class="text-center font-bold text-red-800 text-sm">*Error to upload the file</p> 
+                                                  </div>
 
-                                		</div>
+                                                 </div>
 
+                                                  <div class="items-center mt-5">
+                                                    <input id="push" name="notification-method" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 float-left"  value="upload"  wire:model="adslist_videotype">
+                                                    <label for="push" class="ml-5 block text-sm font-medium text-gray-700">
+                                                      Agree for file upload
+                                                    </label>
+                                                     @error('adslist_videotype') <span class="text-xs text-red-600">Please check this button</span> @enderror
+                                                  </div>
 
-				    				</div>
-				    		</div>
-
-
-
-
-
-
-						</div>
-
-
-						<div class="border-t-2 border-custom-pink mt-16"></div>        
-			        
-			              <div class="mt-3 text-right sm:mt-5 mb-20">
-			              			
-							        <button wire:click="updateInfo()" class="w-1/4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
-							          Update Info
-							        </button>
-				    			
-						   </div>
+                                          </div>
 
 
 
+                                </div>
 
+                             
 
+                            </div>
 
-					</div>
+                            
+                      </div>
 
-					<div x-show="openTab === 2">
-						
-					<!-- <div class="border-t-2 border-custom-pink mt-16"></div>   --> 
-		            <div class="mt-5">
-		                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Embed Code</h2>
-		                  <p class="mt-1 text-sm text-gray-500">
-		                    This information will be displayed publicly so be careful what you share.
-		                  </p>
-		            </div>
-		            <div class="border-t-2 border-custom-pink "></div>   
-	            	<div class="mt-5">
-	                       <div class="mt-1">
-				            <textarea id="about" name="about" rows="4" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="embedlink" ></textarea>
-				          </div>
-	                </div>
-	                <div class="mt-5">
-			          <label for="about" class="block text-sm font-medium text-gray-700">
-			            Hashtags 
-			          </label>
-			          <div class="mt-1">
-			            <textarea rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="hashtags" ></textarea>
-			          </div>
-    				</div>
-
-    				<div class="border-t-2 border-custom-pink mt-16"></div>        
-			        
-		              <div class="mt-3 text-right sm:mt-5 mb-20">
-		              			
-						        <button wire:click="updateEmbed()" class="w-1/4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
-						          Update Info
-						        </button>
-			    			
-					   </div>
-
-
-					</div>
-
-
-					<div x-show="openTab === 3">
-					@if(Auth::user()->get_plan->check_features('o4')->count() != 0 )
-					<div class="mt-5">
-		                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Reference</h2>
-		                  <p class="mt-1 text-sm text-gray-500">
-		                    Add a reference for you podcast
-		                  </p>
-		                  <div class="border-t-2 border-custom-pink "></div>   
-
-		                  <div class="flex">
-		                  	<div class="mt-5 w-40 mr-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">Title</label>
-			                    <div class="mt-1">
-			                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="ref_title">
-			                    </div>
-					        </div>
-
-					        <div class="flex-auto mt-5  mr-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">Link</label>
-			                    <div class="mt-1">
-			                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="ref_link">
-			                    </div>
-					        </div>
-					        <div class=" w-15 mt-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">&nbsp;</label>
-			                    <div class="mt-1">
-			                       <button wire:click="addReference({{ $a_id }})"  class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
-						           Add Reference
-						        </button>
-			                    </div>
-					        </div>
-		                  </div>
-		                   <div class="border-t-2 border-custom-pink mt-16"></div>        
-		                  <div class="mt-5">
-		                  	<h2 class="text-lg leading-6 font-medium text-gray-900"> Reference List</h2>
-		                  	<ul role="list" class="divide-y divide-gray-200">
-		                  	 @foreach($audio->get_references as $ref )	
-							  <li class="py-4 flex">
-							    <div class="ml-3">
-							      <p class="text-sm font-medium text-gray-900">{{ $ref->audioref_title }}</p>
-							      <p class="text-sm text-gray-500">{{ $ref->audioref_link }}</p>
-							    </div>
-							  </li>
-							  @endforeach
-							</ul>
-		                  </div>
-
-
-		            </div> 
-
-		          @endif
-					</div>
-
-
-
-					<div x-show="openTab === 4">
-						 @if(Auth::user()->get_plan->check_features('o3')->count() != 0 )
-
-						<div class="mt-5">
-			                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Sponsorship</h2>
-			                  <p class="mt-1 text-sm text-gray-500">
-			                    Enter your sponsorship details in the fields.
-			                  </p>
-			            </div>
-
-				        <div class="border-t-2 border-custom-pink ">	
-				        	<div class="mt-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">Company Name</label>
-			                    <div class="mt-1">
-			                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="spon_name">
-			                    </div>
-					        </div>
-
-					        <div class="mt-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">Company Website</label>
-			                    <div class="mt-1">
-			                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="spon_website">
-			                    </div>
-					        </div>
-
-
-					        <div class="mt-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">Location</label>
-			                    <div class="mt-1">
-			                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="spon_location">
-			                    </div>
-					        </div>
-
-
-					        <div class="mt-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">Upload Image</label>
-			                    <div class="mt-1">
-			                      <input type="file"  class=""  wire:model="spon_image">
-			                    </div>
-			                   
-					        </div>
-					       
-					      <div class="mt-3 text-right sm:mt-5 mb-5">
-				              			
-								        <button wire:click="addSponsor()" class="w-1/4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
-								          Add Sponsor
-								        </button>
-							</div>
-
-							 <div class="border-t-2 border-custom-pink mt-5"></div>        
-							 <ul role="list" class="divide-y divide-gray-200">
-		                  	 @foreach($audio->get_sponsor as $sponsor )	
-							  <li class="py-4 flex">
-							    <div class="ml-3">
-							      <p class="text-sm font-medium text-gray-900">{{ $sponsor->audiospon_name }}</p>
-							      <p class="text-sm text-gray-500">{{ $sponsor->audiospon_website }}</p>
-							    </div>
-							  </li>
-							  @endforeach
-							</ul>
-
-						</div>
-						@endif
-					</div>
-
-					<div x-show="openTab === 5">
-						 @if(Auth::user()->get_plan->check_features('o7')->count() != 0 )
-						<div class="mt-5">
-		                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Affiliate</h2>
-		                  <p class="mt-1 text-sm text-gray-500">
-		                    Add a affiliate for you podcast
-		                  </p>
-		                  <div class="border-t-2 border-custom-pink "></div>   
-
-		                  <div class="flex">
-		                  	<div class="mt-5 w-40 mr-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">Title</label>
-			                    <div class="mt-1">
-			                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="afi_title">
-			                    </div>
-					        </div>
-
-					        <div class="flex-auto mt-5  mr-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">Link</label>
-			                    <div class="mt-1">
-			                      <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="afi_link">
-			                    </div>
-					        </div>
-					        <div class=" w-15 mt-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">&nbsp;</label>
-			                    <div class="mt-1">
-			                       <button wire:click="addAffiliate({{ $a_id }})"  class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
-						           Add Affiliate
-						        </button>
-			                    </div>
-					        </div>
-		                  </div>
-		                   <div class="border-t-2 border-custom-pink mt-16"></div>        
-		                  <div class="mt-5">
-		                  	<h2 class="text-lg leading-6 font-medium text-gray-900"> Affiliate List</h2>
-		                  	<ul role="list" class="divide-y divide-gray-200">
-		                  	 @foreach($audio->get_affiliate as $afi )	
-							  <li class="py-4 flex">
-							    <div class="ml-3">
-							      <p class="text-sm font-medium text-gray-900">{{ $afi->audioafi_title }}</p>
-							      <p class="text-sm text-gray-500">{{ $afi->audioafi_link }}</p>
-							    </div>
-							  </li>
-							  @endforeach
-							</ul>
-		                  </div>
-
-
-		            </div> 
-		            @endif
-					</div>	
-
-					<div x-show="openTab === 6">
-						 @if(Auth::user()->get_plan->check_features('o5')->count() != 0 )
-						<div class="mt-5">
-		                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Question</h2>
-		                  <p class="mt-1 text-sm text-gray-500">
-		                    Add a question for your podcast
-		                  </p>
-		                  <div class="border-t-2 border-custom-pink "></div>   
-
-		                  <div class="flex">
-	
-					        <div class="flex-auto mt-5  mr-5">
-					        			<div class="mt-1 flex">
-					        					 <div class="flex-auto">
-					        					 		<label for="email" class="block text-sm font-medium text-gray-700">Question</label>
-					        					 		<input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md "  wire:model="qa_question">
-					        					 		 @error('qa_question') <span class="text-xs text-red-600">Required Fields</span> @enderror
-					        					 </div>
-					        					 <div class="ml-2">
-					        					 	  <label for="email" class="block text-sm font-medium text-gray-700">Time</label>
-					        					 		<input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md 
-			                      "  wire:model="qa_time">
-			                       @error('qa_time') <span class="text-xs text-red-600">Required Fields</span> @enderror
-					        					 </div>
-					        			</div>
-					        </div>
-					        <div class=" w-15 mt-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">&nbsp;</label>
-			                    <div class="mt-1">
-			                       <button wire:click="addQuestion({{ $a_id }})"  class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
-						           Add Question
-						        </button>
-			                    </div>
-					        </div>
-		                  </div>
-		                   <div class="border-t-2 border-custom-pink mt-16"></div>        
-		                  <div class="mt-5">
-		                  	<h2 class="text-lg leading-6 font-medium text-gray-900"> Question List</h2>
-		                  	<ul role="list" class="">
-		                  	 @foreach($audio->get_question as $qa )	
-							  <li class="p-2 flex  w-full border-custom-pink border-2 mt-2">
-							    <div class="ml-3">
-							      <p class="text-sm font-medium text-gray-900">Question: {{ $qa->qa_question }}</p>
-							      <p class="text-sm font-medium text-gray-900">Time: {{ $qa->qa_time }}</p>
-							    </div>
-							  </li>
-							  @endforeach
-							</ul>
-		                  </div>
-
-
-		            </div> 
-		            @endif
-					</div>	
-
-
-						<div x-show="openTab === 7">
-							@if(Auth::user()->get_plan->check_features('o2')->count() != 0 )
-							<div class="border-b-2 pb-10 pt-5 border-green-500 ">
-                              
-                               <h2 class="text-lg leading-6 font-medium text-gray-900"> Segments</h2>
-			                  <p class="mt-1 text-sm text-gray-500">
-			                     Please click the link below to see the documents
-			                  </p>
-			                  <div class="border-t-2 border-custom-pink "></div>
-
-
-
+                      <div class="border-b-2 pb-10 pt-5 border-green-500 ">
+                               <h1 class="flex-1 font-bold text-gray-800 text-xl ">Segments</h1> 
+                               <p class="mt-1 text-sm text-gray-500">
+                                    Please click the link below to see the documents
+                               </p>
                                 <div class="mt-5">
                                    <label for="email" class="block text-sm font-medium text-gray-700">Country</label>
                                    <div class="flex">
@@ -849,6 +438,7 @@
                                         <!-- <label  class="block text-sm font-medium text-gray-700">Description</label> -->
                                         <div class="mt-1">
                                           <textarea id="countryList" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " wire:model="adslist_country"></textarea>
+                                          @error('adslist_country') <span class="text-xs text-red-600">Empty fields</span> @enderror
                                         </div>
                                 </div>
                                 
@@ -877,6 +467,7 @@
                                         <!-- <label  class="block text-sm font-medium text-gray-700">Description</label> -->
                                         <div class="mt-1">
                                           <textarea id="countryList" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " wire:model="adslist_agebracket"></textarea>
+                                           @error('adslist_agebracket') <span class="text-xs text-red-600">Empty fields</span> @enderror
                                         </div>
                                 </div>
                                 
@@ -954,119 +545,127 @@
                                   </div>
                                 </div>
 
+
+
+
+                               
+
                               </div>
 
 
                           </div> 
-              @endif
-					</div>
+
+                          <div class="border-0 pb-10 border-green-500 mt-4">            
+                        <h1 class="flex-1 font-bold text-gray-800 text-xl ">Duration</h1> 
+                               <p class="mt-1 text-sm text-gray-500">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales quis tortor at cursus.
+                               </p>             
+
+                                <div class="mt-5">
+                                  <div class="flex">
+                                        <div class="flex-1 mr-2">
+                                                  <label for="email" class="block text-sm font-medium text-gray-700">Skip Duration</label>
+                                                  <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:click="adsComputation($event.target.value,'skip')"  wire:model="adslist_adstype">
+                                                     <!--  <option>Select</option> -->
+                                                      <option value="0">No Skip</option>
+                                                      <!-- <option value="1">1</option>
+                                                      <option value="2">2</option>
+                                                      <option value="3">3</option>
+                                                      <option value="4">4</option> -->
+                                                      <option value="5">5 sec</option>
+                                                  </select> 
+                                        </div>
+                                        <div class="flex-1 ml-2">
+                                                  <label for="email" class="block text-sm font-medium text-gray-700">Display Time</label>
+                                                  <div class="mt-1">
+                                                    <!-- <input type="text" name="website" id="website" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="adslist_displaytime"> -->
+                                                     <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:click="adsComputation($event.target.value,'display')"  wire:model="adslist_displaytime">
+                                                          <!-- <option>Select</option> -->
+                                                          <option value="1%">1%(Preroll)</option>
+                                                          <option value="10%">10%</option>
+                                                          <option value="20%">20%</option>
+                                                          <option value="30%">30%</option>
+                                                          <option value="40%">40%</option>
+                                                          <option value="50%">50%(Midroll)</option>
+                                                          <option value="60%">60%</option>
+                                                          <option value="70%">70%</option>
+                                                          <option value="80%">80%</option>
+                                                          <option value="90%">90%</option>
+                                                          <option value="100%">100%(Postroll)</option>
+                                                      </select> 
+                                                  </div>
+                                        </div>
+                                        <div class="flex-1 ml-2">
+                                                  <label for="email" class="block text-sm font-medium text-gray-700">Days</label>
+                                                  <div class="mt-1">
+                                                    <!-- <input type="text" name="website" id="website" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="adslist_displaytime"> -->
+                                                     <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="adslist_days" wire:click="adsComputation($event.target.value,'days')"  >
+                                                         <!--  <option>Select</option> -->
+                                                          <option value="3">3 days</option>
+                                                          <option value="7">7 days</option>
+                                                          <option value="9">9 days</option>
+                                                          <option value="12">12 days</option>
+                                                      </select> 
+                                                  </div>
+                                        </div>
+                                  </div>
+                            </div>
+                          </div>
+
+                          <div class="border-b-2 pb-10 pt-5 border-green-500 lg:px-0 sm:px-3">
+                               <h1 class="flex-1 font-bold text-gray-800 text-xl ">Payment Summary</h1> 
+                               <p class="mt-1 mb-3 text-sm text-gray-500">
+                                 Your ad will run for {{ $compDays }} days.
+                               </p>
+                               <div class="bg-white py-2 px-3 rounded-md  lg:w-1/4 sm:w-1/2">
+                                 <p class="mt-1 text-sm text-gray-800">
+                                   Skip Duration :${{ $compSkip }}
+                                 </p>
+                                  <p class="mt-1 text-sm text-gray-800">
+                                   Display Time :${{ $compDisplay }}
+                                 </p>
+                                 <p class="mt-1 text-sm text-gray-800">
+                                   Days : {{ $compDays }} days 
+                                 </p>
+                                 <?php 
+                                 $date = date_create(now());
+                                 date_add($date, date_interval_create_from_date_string($compDays." days"));
+                                 //echo date_format($date, "M d, Y");
+                                 ?>
+                                 <p class="mt-1 text-sm text-gray-800">
+                                   End Date : {{ date_format($date, "M d, Y") }}
+                                 </p>
+                                </div>
+                                <p class="mt-3 text-md text-white bg-custom-pink py-2 px-3  rounded-md  lg:w-1/4 sm:w-1/2">
+                                 Total Budget : <b class="font-bold float-right">${{ $compTotal }}</b><br>
+                                  <small> ${{ $compSkip + $compDisplay }} a day x {{ $compDays }} days</small>
+                                  
+                              
+                               </p>
+
+                          </div>
 
 
-					<div x-show="openTab === 8">
-						 @if(Auth::user()->get_plan->check_features('o8')->count() != 0 )
-						<div class="mt-5">
-		                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Chapters</h2>
-		                  <p class="mt-1 text-sm text-gray-500">
-		                    Add a chapters for your podcast
-		                  </p>
-		                  <div class="border-t-2 border-custom-pink "></div>   
-
-		            
-	
-					        <div class="mt-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">VTT Files</label>
-			                    <div class="mt-1">
-			                    	<textarea rows="20" class="w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="vttfile"></textarea>
-			                    </div>
-			                      @error('vttfile') <span class="text-xs text-red-600">Required Fields</span> @enderror
-
-			                 
-					        </div>
-					        <div class="w-15 mt-5">
-			                    <label for="email" class="block text-sm font-medium text-gray-700">&nbsp;</label>
-			                    <div class="mt-1">
-			                       <button wire:click="uploadChapters({{$a_id}})" class="w-auto inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md float-right">
-						          Update Chapters
-						        </button>
-			                    </div>
-					        </div>
-		                 
-		                   
-		              
 
 
-		            </div> 
-		            @endif
-					</div>	
+                          <div class="mt-3 text-right sm:mt-5 mb-5">
+                                                
+                               <button class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+                                Update Ads
+                                </button>
+                          </div>
 
 
-				</div>
+           <!-- update -->
 
-
-
-
-
-
-
-
-
-
-
-			</div>  
           
-          		
+            <!-- More questions... -->
           
-
-
-
-
-		  
-
-
-
-	   
-
-
-
-
-<!-- 		  <div class="border-t-2 border-custom-pink mt-16"></div>        
-			        
-              <div class="mt-3 text-right sm:mt-5 mb-20">
-              			<input type="text" class="hidden"  wire:model="a_id">
-				        <button wire:click="updatepost()" class="w-1/4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
-				          Update Podcast
-				        </button>
-	    			
-			   </div> -->
-
-
-
-
-			 
-       <!--    	</form>  -->
-          	@else
-
-          		  @include('layouts.editor.page-404')    
-
-          	@endif
-
-
-
-
-
-
-
-
-
-
-
-         
-
         </div>
       </main>
-      @endif
-
-      @endif
+      <!-- aside -->
+    
+      <!-- aside -->
     </div>
   </div>
 </div>
@@ -1092,6 +691,4 @@
 
 
         </div>
-</div><div>
-    {{-- The best athlete wants his opponent at his best. --}}
 </div>
