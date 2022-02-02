@@ -198,11 +198,11 @@
                          <!-- This example requires Tailwind CSS v2.0+ -->
                         <div class="w-full mt-5 flex justify-end space-x-3">
                           
-                           <!--  <?php if($addFriend > 1){ ?> -->
+                          
                                <button wire:click="friendSetup()" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
                                Next
                               </button>   
-                           <!--  <?php } ?> -->
+                     
                              <button wire:click="skipSetup('Friend')" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
                                Skip
                               </button> 
