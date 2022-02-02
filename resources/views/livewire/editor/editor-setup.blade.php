@@ -137,7 +137,7 @@
                 <div class="w-full">
                     <div  class=" {{ $currentSteps != 1 ? 'hidden' : '' }}">
                         <!-- step 1 content -->
-                        <div class="w-full mb-5 flex justify-end">
+                        <div class="w-full mb-5 flex justify-start">
                             <div>
                             <label for="search" class="block text-sm font-medium text-gray-700">Quick search</label>
                               <div class="mt-1 relative flex items-center">
@@ -198,20 +198,15 @@
 
                          <!-- This example requires Tailwind CSS v2.0+ -->
                         <div class="w-full mt-5 flex justify-end space-x-3">
-                          
-                          
                                <button wire:click="friendSetup()" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
                                Next
                               </button>   
-                     
-                             <button wire:click="skipSetup('Friend')" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
-                               Skip
-                              </button> 
-                           
-
-                           
-
                         </div>
+                        <div class="w-full mt-5 flex justify-end space-x-3">   
+                                <a wire:click="skipSetup('Friend')" class="inline-flex items-center border border-transparent text-sm font-medium rounded-md shadow-sm text-white text-custom-pink cursor-pointer hover:underline">
+                               Skip
+                              </a> 
+                        </div>  
                        
                         <!-- step 1 content -->
                     </div>
@@ -275,20 +270,17 @@
                                 </div>
                        </div>
                          <!-- This example requires Tailwind CSS v2.0+ -->
-                        <div class="w-full mt-5 flex justify-end space-x-3">
-                            <!-- <button wire:click="friendSetup()" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
-                              Back
-                            </button>   -->
-                            <div>
-                                &nbsp;
-                            </div>
+                        <div class="w-full mt-5 flex justify-end space-x-3"> 
                             <button wire:click="interestSetup()" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
                               Next
                             </button> 
-                            <button wire:click="skipSetup('Interest')" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
-                               Skip
-                              </button> 
+
                              
+                        </div>
+                         <div class="w-full mt-5 flex justify-end space-x-3">   
+                                <a wire:click="skipSetup('Interest')"  class="inline-flex items-center border border-transparent text-sm font-medium rounded-md shadow-sm text-white text-custom-pink cursor-pointer hover:underline">
+                               Skip
+                              </a> 
                         </div>
                         <!-- step 2 content -->
                     </div>
@@ -335,16 +327,14 @@
 
                             <!-- This example requires Tailwind CSS v2.0+ -->
                             <div class="w-full mt-5 flex justify-end space-x-3">
-                                <!-- <button wire:click="friendSetup()" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
-                                  Back
-                                </button> -->
-                                <div>&nbsp;</div>  
                                 <button wire:click="channelSetup()" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
-                                  Next
+                                  Finish
                                 </button>   
-                                <button wire:click="skipSetup('Channel')" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-pink ">
+                            </div>  
+                            <div class="w-full mt-5 flex justify-end space-x-3">   
+                                <a wire:click="skipSetup('Channel')" class="inline-flex items-center border border-transparent text-sm font-medium rounded-md shadow-sm text-white text-custom-pink cursor-pointer">
                                Skip
-                              </button> 
+                              </a> 
                             </div>  
                       
 
