@@ -18,5 +18,6 @@ yarn-error.log
 /public/users/podcast_img
 /public/users/profile_img
 /public/users/channe_img
+/public/users/channel_cover
 /public/vtt
 /public/sponsor

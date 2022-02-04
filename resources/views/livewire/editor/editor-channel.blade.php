@@ -222,7 +222,7 @@
 
             <div 
                 x-data="{
-                  openTab: 3,
+                  openTab: 1,
                   activeClasses: 'border-custom-pink text-custom-pink',
                   inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }" 

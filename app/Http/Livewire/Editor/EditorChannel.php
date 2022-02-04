@@ -61,6 +61,7 @@ class EditorChannel extends Component
         $channel->channel_type = "channel_photo";
         $channel->channel_typestatus = "active";
         $channel->channel_gallery_id = $data->id;
+        $channel->channel_gallery_cover_id = $data->id;
         $channel->save();
 
 
@@ -230,9 +231,20 @@ class EditorChannel extends Component
 
 
     public function mount(){
-        $this->channel_list = Auth::user()->get_channels()->first();
-        $this->channel_about = $this->channel_list->channel_description;
+        $this->checkChannel = Auth::user()->get_channels()->count();
 
+        if($this->checkChannel != 0){
+             $this->channel_list = Auth::user()->get_channels()->first();
+             $this->channel_about = $this->channel_list->channel_description;
+        }else{
+            $this->channel_about = ""; 
+        }
+       
+        // if($this->channel_list->channel_description){
+        //     $this->channel_about = $this->channel_list->channel_description;
+        // }else{
+        //    $this->channel_about = ""; 
+        // }
         $this->allchannels = UserChannel::orderBy('id')->get();
 
     }
