@@ -7,6 +7,8 @@ use App\Models\{
     User,
     UserFriends,
     UserSetup,
+    UserChannel,
+    UserChannelSub,
 };
 use Auth;
 
@@ -21,6 +23,17 @@ class EditorSetup extends Component
 
 
     public $search = "",$result,$addFriend = 0;
+
+
+    public function subChannel($id){
+        $data = new UserChannelSub;
+        $data->sub_channelid = $id;
+        $data->sub_userid = Auth::user()->id;
+        $data->sub_type  = "channel";
+        $data->save();
+
+        $this->emit('refreshParent');
+    }
 
 
     public function get_search(){
@@ -244,6 +257,8 @@ class EditorSetup extends Component
 
     public function render()
     {
-        return view('livewire.editor.editor-setup');
+
+        $channel_list = UserChannel::orderBy('id')->get();
+        return view('livewire.editor.editor-setup',compact('channel_list'));
     }
 }

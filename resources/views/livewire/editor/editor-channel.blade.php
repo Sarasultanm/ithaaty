@@ -168,14 +168,19 @@
             </div>
             @else
 
-            @if(Auth::user()->get_gallery('channel_photo','active')->count() != 0)
-            <?php $img_path_cover = $channel_list->get_channel_photo->gallery_path ?>
-            <?php $s3_cover_link = config('app.s3_public_link')."/users/channe_img/".$img_path_cover; ?>
+            @if(Auth::user()->get_gallery('channel_cover','active')->count() != 0)
+              <?php $img_path_cover = $channel_list->get_channel_cover->gallery_path ?>
+              <?php $s3_cover_link = config('app.s3_public_link')."/users/channel_cover/".$img_path_cover; ?>
+                <div class="w-full h-48 bg-cover bg-center" style="background-image: url({{ $s3_cover_link }});">
+                    &nbsp;
+                </div>
+            @else
+               <div class="w-full bg-custom-pink h-48 bg-cover bg-center">
+                    &nbsp;
+                </div>
 
-            <div class="w-full bg-custom-pink h-48" style="background-image: url({{ $s3_cover_link }});">
-                &nbsp;
-            </div>
             @endif
+
             <div class="w-full">
                
 
@@ -200,7 +205,7 @@
                           {{$channel_list->channel_name}}
                         </p>
                         <p class="text-md text-gray-500 truncate">
-                          0 subcribers
+                          {{ $channel_list->get_subs()->count() }}  subcribers
                         </p>
                       </a>
                     </div>
@@ -217,7 +222,7 @@
 
             <div 
                 x-data="{
-                  openTab: 1,
+                  openTab: 4,
                   activeClasses: 'border-custom-pink text-custom-pink',
                   inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }" 
@@ -262,7 +267,94 @@
                 </div>
 
                 <div x-show="openTab === 4">
-                    d
+                    <div class="grid grid-cols-10 gap-4">
+                        <div class="col-span-10">
+                            <div class="mt-4 p-5 flex bg-white rounded-md shadow-sm">
+                              <div class="p-2">
+                                  <h3 class="text-gray-900 font-bold text-md">Cover Photo</h3>
+                                  <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><br>
+                                  
+                                  <div class="">
+                                 <div x-data="{ isUploading: false, progress: 0, success: false, error:false }" 
+                                   x-on:livewire-upload-start="isUploading = true"
+                                   x-on:livewire-upload-finish="isUploading = false,success = true" 
+                                   x-on:livewire-upload-error="isUploading = false,error= true"
+                                   x-on:livewire-upload-progress="progress = $event.detail.progress">
+
+                                     <label for="desktop-user-photo" class="mt-5 inset-0 relative items-center justify-center text-sm font-bold text-custom-pink cursor-pointer hover:underline">
+                                          <span>UPLOAD</span>
+                                          <span class="sr-only"> user photo</span>
+                                          <input type="file"class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md" wire:model="channel_cover">
+                                      </label>
+
+                                        <center>
+                                         @error('channel_cover') <span class="text-center text-xs text-red-600">Required Image</span> @enderror
+                                        </center>
+
+
+                                      <div class="">
+                                        <div x-show="isUploading"  class="relative pt-1">
+                                          <!-- <div class="text-center text-gray-700">
+                                            Please wait while uploading the file .. <input x-bind:value="`${progress}%`" disabled style="width: 60px;">
+                                          </div> -->
+                                          <div  class="overflow-hidden h-2 text-xs flex rounded bg-purple-200 progress">
+                                            <div x-bind:style="`width:${progress}%`"
+                                              class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom-pink"
+                                            ></div>
+                                          </div>
+                                        </div>
+                                       <!--  <p  class="text-center text-custom-pink font-bold text-gray-800 text-sm">File Upload Complete</p> 
+                                         <p x-show="error" class="text-center font-bold text-red-800 text-sm">*Error to upload the file</p>  -->
+                              
+                                          <button x-show="success" wire:click="saveCover({{$channel_list->id}})" class="hover:underline mt-5 text-custom-pink text-sm font-bold">SAVE CHANGES</button>
+                                     
+                                      </div>
+
+
+                                     
+                                     </div>
+                              </div>
+
+
+
+                                  <div class="">
+                                    
+                                  </div>
+                                  
+                              </div>
+                              
+                           
+                             @if(Auth::user()->get_gallery('channel_cover','active')->count() != 0)
+                                <?php $img_path_cover = $channel_list->get_channel_cover->gallery_path ?>
+                                <?php $s3_cover_link = config('app.s3_public_link')."/users/channel_cover/".$img_path_cover; ?>
+                                
+                                   @if ($channel_cover)
+                                       <div class="w-full bg-custom-pink h-48" style="background-image: url({{ $channel_cover->temporaryUrl() }});">
+                                       &nbsp;
+                                      </div>
+                                   @else
+                                      <div class="w-full bg-custom-pink h-48" style="background-image: url({{ $s3_cover_link }});">
+                                      &nbsp;
+                                      </div>
+                                  @endif
+                              @else
+
+                                  @if ($channel_cover)
+                                       <div class="w-full bg-custom-pink h-48 bg-cover bg-center" style="background-image: url({{ $channel_cover->temporaryUrl() }});">
+                                        &nbsp;
+                                      </div>
+                                   @else
+                                       <div class="w-full bg-custom-pink h-48" >
+                                         &nbsp;
+                                      </div>
+
+                                  @endif
+                               
+                              @endif
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 

@@ -291,37 +291,61 @@
                         <!-- step 3 content -->
                         <!-- This example requires Tailwind CSS v2.0+ -->
                             <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                              @foreach($channel_list as $channel)
                               <li class="col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200">
                                 <div class="flex-1 flex flex-col p-8">
-                                  <img class="w-32 h-32 flex-shrink-0 mx-auto rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
-                                  <h3 class="mt-6 text-gray-900 text-sm font-medium">Jane Cooper</h3>
+
+                                 <!--  <img class="w-32 h-32 flex-shrink-0 mx-auto rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt=""> -->
+
+                                  <?php $img_path = $channel->get_channel_photo->gallery_path ?>
+                                  <?php $s3_link = config('app.s3_public_link')."/users/channe_img/".$img_path; ?>
+                                  <img class="w-32 h-32 flex-shrink-0 mx-auto rounded-full" src="{{ $s3_link }}" alt=""> 
+
+
+
+
+                                  <h3 class="mt-6 text-gray-900 text-sm font-medium">{{$channel->channel_name}}</h3>
                                   <dl class="mt-1 flex-grow flex flex-col justify-between">
                                     <dt class="sr-only">Title</dt>
-                                    <dd class="text-gray-500 text-sm">Paradigm Representative</dd>
+                                    <dd class="text-gray-500 text-sm">{{ $channel->get_subs()->count() }} subcribers</dd>
                                     <dt class="sr-only">Role</dt>
-                                    <dd class="mt-3">
+                                    <!-- <dd class="mt-3">
                                       <span class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full">Admin</span>
-                                    </dd>
+                                    </dd> -->
                                   </dl>
                                 </div>
                                 <div>
                                   <div class="-mt-px flex divide-x divide-gray-200">
                                     <div class="w-0 flex-1 flex">
-                                      <a href="mailto:janecooper@example.com" class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
-                                        <!-- Heroicon name: solid/mail -->
-                                      
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400"  viewBox="0 0 20 20" fill="currentColor">
+                                      @if($channel->check_user_subs(Auth::user()->id)->count() == 0)
+                                      <a wire:click="subChannel({{$channel->id}})" class="cursor-pointer relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                                     
+                                       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400"  viewBox="0 0 20 20" fill="currentColor">
                                           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
                                         </svg>
-                                        <span class="ml-3">Subcribe</span>
+                                         <span class="ml-3 text-gray-400 font-regular">Subcribe</span>
                                       </a>
+
+                                      @else
+
+                                       <a class="cursor-pointer relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                                     
+                                       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-custom-pink"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                                      </svg>
+                                        <span class="ml-3 text-custom-pink font-bold">Subcribed</span>
+                                      
+                                      </a>
+
+
+                                      @endif
                                     </div>
                                   
 
                                   </div>
                                 </div>
                               </li>
-
+                              @endforeach
                               <!-- More people... -->
                             </ul>
 

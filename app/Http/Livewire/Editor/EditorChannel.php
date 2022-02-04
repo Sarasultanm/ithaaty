@@ -15,7 +15,7 @@ class EditorChannel extends Component
     use WithFileUploads;
 
 
-    public $channel_photo,$channel_name;
+    public $channel_photo,$channel_cover,$channel_name;
 
 
     public function createChannel(){
@@ -25,7 +25,7 @@ class EditorChannel extends Component
             'channel_name' => 'required',
         ]);
 
-        $checkChannelPhoto = UserGallery::where(['gallery_userid'=>Auth::user()->id,'gallery_type'=>'channel','gallery_typestatus'=>'active']);
+        $checkChannelPhoto = UserGallery::where(['gallery_userid'=>Auth::user()->id,'gallery_type'=>'channel_photo','gallery_typestatus'=>'active']);
 
         if($checkChannelPhoto->count() == 0){
 
@@ -72,6 +72,77 @@ class EditorChannel extends Component
         
 
         session()->flash('status', 'Channel Created');
+        redirect()->to('/editor/channel');
+
+
+    }
+
+    public function saveCover($channel_id){
+
+        $this->validate([
+            'channel_cover' => 'required|image|max:5024',
+        ]);
+
+
+        $channel = UserChannel::where("id",$channel_id);
+
+
+        if(Auth::user()->id == $channel->first()->channel_ownerid){
+
+
+            $checkPhoto = UserGallery::where(['gallery_userid'=>Auth::user()->id,'gallery_type'=>'channel_cover','gallery_typestatus'=>'active']);
+
+            if($checkPhoto->count() == 0){
+
+                $data = New UserGallery;
+                $data->gallery_userid = Auth::user()->id;
+                $data->gallery_type = "channel_cover";
+                $data->gallery_typestatus = "active";
+                $data->gallery_path = $this->channel_cover->hashName();
+                $data->gallery_status = "active";
+                $data->save();
+
+            }else{
+
+                UserGallery::where('id',$checkPhoto->first()->id)
+                ->update([
+                    'gallery_typestatus'=> 'draft',
+                ]);
+
+                $data = New UserGallery;
+                $data->gallery_userid = Auth::user()->id;
+                $data->gallery_type = "channel_cover";
+                $data->gallery_typestatus = "active";
+                $data->gallery_path = $this->channel_cover->hashName();
+                $data->gallery_status = "active";
+                $data->save();
+
+            }
+
+            $channel->update([
+                'channel_gallery_cover_id'=> $data->id
+            ]);
+
+
+            $imagefile = $this->channel_cover->hashName();
+            // local
+            $local_storage = $this->channel_cover->storeAs('users/channel_cover',$imagefile);
+            // s3
+            $s3_storage = $this->channel_cover->store('users/channel_cover/', 's3');
+
+
+        }
+
+
+
+        
+
+      
+
+
+        
+
+        session()->flash('status', 'Update Cover Photo');
         redirect()->to('/editor/channel');
 
 
