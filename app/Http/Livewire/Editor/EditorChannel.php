@@ -62,6 +62,7 @@ class EditorChannel extends Component
         $channel->channel_typestatus = "active";
         $channel->channel_gallery_id = $data->id;
         $channel->channel_gallery_cover_id = $data->id;
+        $channel->channel_description = "";
         $channel->save();
 
 
