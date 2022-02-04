@@ -18,6 +18,7 @@ class EditorChannel extends Component
     public $channel_photo,$channel_cover,$channel_name;
 
 
+
     public function createChannel(){
 
         $this->validate([
@@ -77,6 +78,28 @@ class EditorChannel extends Component
 
     }
 
+
+    public function updateAbout($channel_id){
+        
+         $channel = UserChannel::where("id",$channel_id);
+
+          if(Auth::user()->id == $channel->first()->channel_ownerid){
+
+             $channel->update([
+                'channel_description'=> $this->channel_about
+             ]);
+
+
+            session()->flash('status', 'Update Success');
+            redirect()->to('/editor/channel');
+
+          }
+
+
+
+    }
+
+
     public function saveCover($channel_id){
 
         $this->validate([
@@ -135,14 +158,71 @@ class EditorChannel extends Component
 
 
 
-        
-
-      
-
-
-        
-
         session()->flash('status', 'Update Cover Photo');
+        redirect()->to('/editor/channel');
+        
+
+
+    }
+
+    public function saveLogo($channel_id){
+
+        $this->validate([
+            'channel_photo' => 'required|image|max:5024',
+        ]);
+
+
+        $channel = UserChannel::where("id",$channel_id);
+
+
+        if(Auth::user()->id == $channel->first()->channel_ownerid){
+
+
+            $checkPhoto = UserGallery::where(['gallery_userid'=>Auth::user()->id,'gallery_type'=>'channel_photo','gallery_typestatus'=>'active']);
+
+            if($checkPhoto->count() == 0){
+
+                $data = New UserGallery;
+                $data->gallery_userid = Auth::user()->id;
+                $data->gallery_type = "channel_photo";
+                $data->gallery_typestatus = "active";
+                $data->gallery_path = $this->channel_photo->hashName();
+                $data->gallery_status = "active";
+                $data->save();
+
+            }else{
+
+                UserGallery::where('id',$checkPhoto->first()->id)
+                ->update([
+                    'gallery_typestatus'=> 'draft',
+                ]);
+
+                $data = New UserGallery;
+                $data->gallery_userid = Auth::user()->id;
+                $data->gallery_type = "channel_photo";
+                $data->gallery_typestatus = "active";
+                $data->gallery_path = $this->channel_photo->hashName();
+                $data->gallery_status = "active";
+                $data->save();
+
+            }
+
+            $channel->update([
+                'channel_gallery_id'=> $data->id
+            ]);
+
+
+            $imagefile = $this->channel_photo->hashName();
+            // local
+            $local_storage = $this->channel_photo->storeAs('users/channe_img',$imagefile);
+            // s3
+            $s3_storage = $this->channel_photo->store('users/channe_img/', 's3');
+
+
+        }
+
+
+        session()->flash('status', 'Update Logo');
         redirect()->to('/editor/channel');
 
 
@@ -151,6 +231,10 @@ class EditorChannel extends Component
 
     public function mount(){
         $this->channel_list = Auth::user()->get_channels()->first();
+        $this->channel_about = $this->channel_list->channel_description;
+
+        $this->allchannels = UserChannel::orderBy('id')->get();
+
     }
 
 

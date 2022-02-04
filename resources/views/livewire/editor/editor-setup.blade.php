@@ -295,14 +295,9 @@
                               <li class="col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200">
                                 <div class="flex-1 flex flex-col p-8">
 
-                                 <!--  <img class="w-32 h-32 flex-shrink-0 mx-auto rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt=""> -->
-
                                   <?php $img_path = $channel->get_channel_photo->gallery_path ?>
                                   <?php $s3_link = config('app.s3_public_link')."/users/channe_img/".$img_path; ?>
                                   <img class="w-32 h-32 flex-shrink-0 mx-auto rounded-full" src="{{ $s3_link }}" alt=""> 
-
-
-
 
                                   <h3 class="mt-6 text-gray-900 text-sm font-medium">{{$channel->channel_name}}</h3>
                                   <dl class="mt-1 flex-grow flex flex-col justify-between">
