@@ -149,16 +149,7 @@ class EditorSettings extends Component
 
 	}
 
-    public function updateAlias(){
-
-        Auth::user()->update(['alias'=>$this->userAlias]);    
-
-        session()->flash('status', 'Update Success');
-        redirect()->to('/editor/settings');
-
-
-
-    }
+   
 
     public function updatePass(){
 
@@ -283,25 +274,43 @@ class EditorSettings extends Component
 
     }
 
-    public function updateName(){
-        Auth::user()->update(['name'=>$this->userName]);  
-    }
+    // public function updateAlias(){
 
-    public function updateAbout(){
-        Auth::user()->update(['about'=>$this->userAbout]);
+    //     Auth::user()->update(['alias'=>$this->userAlias]);    
+
+    //     session()->flash('status', 'Update Success');
+    //     redirect()->to('/editor/settings');
+    // }
+
+    // public function updateName(){
+    //     Auth::user()->update(['name'=>$this->userName]);  
+    // }
+
+    // public function updateAbout(){
+    //     Auth::user()->update(['about'=>$this->userAbout]);
+
+    //     session()->flash('status', 'About Us Updated');
+    //     redirect()->to('/editor/settings');   
+    // }
+
+    //  public function updateCountry(){
+    //     Auth::user()->update(['country'=>$this->userCountry]);
+
+    //     session()->flash('status', 'Country Updated');
+    //     redirect()->to('/editor/settings');   
+    // }
+
+    public function updateProfile(){
+        Auth::user()->update([
+            'name'=>$this->userName,
+            'about'=>$this->userAbout,
+            'country'=>$this->userCountry,
+            'alias'=>$this->userAlias
+        ]);
 
         session()->flash('status', 'About Us Updated');
-        redirect()->to('/editor/settings');   
+        redirect()->to('/editor/settings');
     }
-
-     public function updateCountry(){
-        Auth::user()->update(['country'=>$this->userCountry]);
-
-        session()->flash('status', 'Country Updated');
-        redirect()->to('/editor/settings');   
-    }
-
-
 
 
     public function createRssLink(){

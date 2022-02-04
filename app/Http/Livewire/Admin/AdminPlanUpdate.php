@@ -10,7 +10,7 @@ class AdminPlanUpdate extends Component
 {
 
     public $plan_id,$plan_name,$plan_description;
-    public $pf_typeOne,$pf_typeTwo,$pf_typeThree,$a_typeOne,$a_typeTwo,$a_typeThree,$uf_typeOne,$uf_typeTwo,$uf_typeThree,$of_typeOne,$of_typeTwo,$of_typeThree,$of_typeFour,$of_typeFive,$of_typeSix,$of_typeSeven,$of_typeEight,$of_typeNine,$result;
+    public $pf_typeOne,$pf_typeTwo,$pf_typeThree,$a_typeOne,$a_typeTwo,$a_typeThree,$uf_typeOne,$uf_typeTwo,$uf_typeThree,$of_typeOne,$of_typeTwo,$of_typeThree,$of_typeFour,$of_typeFive,$of_typeSix,$of_typeSeven,$of_typeEight,$of_typeNine,$of_typeTen,$result;
 
     public $sf_typeOne,$sf_typeTwo,$sf_typeThree,$sf_typeFour,$sf_typeFive;
 
@@ -53,6 +53,7 @@ class AdminPlanUpdate extends Component
         $this->upCreate($id,'Default Affiliation','o7',$this->of_typeSeven);
         $this->upCreate($id,'Chapter Breakdown','o8',$this->of_typeEight);    
         $this->upCreate($id,'Affiliate Marketing Features','o9',$this->of_typeNine);    
+        $this->upCreate($id,'Create Channels','o10',$this->of_typeTen);
 
         session()->flash('status',"Plan Updated");
         redirect()->to('admin/plans/update/'.$id);  
@@ -83,6 +84,25 @@ class AdminPlanUpdate extends Component
          
     }
 
+    public function get_Datatypes($id,$type){
+
+        $data = UserPlan::findOrFail($id);
+        // $check_types = $data->get_type($type)->first()->planoption_options;
+        $check_types = $data->get_type($type)->count();
+        if($check_types != 0){
+            $type = $data->get_type($type)->first()->planoption_options;
+            if($type == "check"){
+                return true;
+            }else{
+                return false;
+            }
+            
+        }else{
+            return false;
+        }
+
+
+    }
 
 
     public function mount($id){
@@ -118,27 +138,10 @@ class AdminPlanUpdate extends Component
          $this->of_typeSeven = $this->get_Datatypes($id,'o7');
          $this->of_typeEight = $this->get_Datatypes($id,'o8');
          $this->of_typeNine = $this->get_Datatypes($id,'o9');
+         $this->of_typeTen = $this->get_Datatypes($id,'o10');
     }
 
-    public function get_Datatypes($id,$type){
 
-        $data = UserPlan::findOrFail($id);
-        // $check_types = $data->get_type($type)->first()->planoption_options;
-        $check_types = $data->get_type($type)->count();
-        if($check_types != 0){
-            $type = $data->get_type($type)->first()->planoption_options;
-            if($type == "check"){
-                return true;
-            }else{
-                return false;
-            }
-            
-        }else{
-            return false;
-        }
-
-
-    }
 
     public function render()
     {

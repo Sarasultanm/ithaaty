@@ -12,7 +12,7 @@ class AdminPlanCreate extends Component
 
 
 	public $plan_name,$plan_description;
-	public $pf_typeOne,$pf_typeTwo,$pf_typeThree,$a_typeOne,$a_typeTwo,$a_typeThree,$uf_typeOne,$uf_typeTwo,$uf_typeThree,$of_typeOne,$of_typeTwo,$of_typeThree,$of_typeFour,$of_typeFive,$of_typeSix,$of_typeSeven,$of_typeEight,$of_typeNine,$result;
+	public $pf_typeOne,$pf_typeTwo,$pf_typeThree,$a_typeOne,$a_typeTwo,$a_typeThree,$uf_typeOne,$uf_typeTwo,$uf_typeThree,$of_typeOne,$of_typeTwo,$of_typeThree,$of_typeFour,$of_typeFive,$of_typeSix,$of_typeSeven,$of_typeEight,$of_typeNine,$of_typeTen,$result;
 
     public $sf_typeOne,$sf_typeTwo,$sf_typeThree,$sf_typeFour,$sf_typeFive;
 
@@ -59,7 +59,7 @@ class AdminPlanCreate extends Component
         $this->onCreate($plan->id,'Default Affiliation','o7',$this->of_typeSeven);
         $this->onCreate($plan->id,'Chapter Breakdown','o8',$this->of_typeEight);    
         $this->onCreate($plan->id,'Affiliate Marketing Features','o9',$this->of_typeNine);  
-
+        $this->onCreate($plan->id,'Create Channels','o10',$this->of_typeTen);  
 		
 		
 
