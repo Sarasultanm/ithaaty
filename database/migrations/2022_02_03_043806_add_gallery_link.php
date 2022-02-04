@@ -14,7 +14,7 @@ class AddGalleryLink extends Migration
     public function up()
     {
         Schema::table('user_channels', function (Blueprint $table) {
-            $table->text('channel_description')->default("empty");
+            $table->text('channel_description')->default('empty');
             $table->string('channel_gallery_id');
         });
     }
