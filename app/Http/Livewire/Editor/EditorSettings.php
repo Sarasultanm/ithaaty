@@ -238,7 +238,7 @@ class EditorSettings extends Component
                 $data->audio_path = $i['enclosure_link'];
                 $data->audio_type = "RSS";
                 $data->audio_hashtags = "";
-                $data->audio_publish = "";
+                $data->audio_publish = "Draft";
                 $data->save();
 
 

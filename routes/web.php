@@ -56,7 +56,8 @@ use App\Http\Livewire\Editor\{
 	EditorSetup,
 	EditorChannel,
 	EditorChannelCreate,
-	EditorChannelUpdate
+	EditorChannelUpdate,
+	EditorChannelView
 };
 
 /*
@@ -170,6 +171,7 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 	Route::get('channel',EditorChannel::class)->name('editorChannel');
 	Route::get('channel/create',EditorChannelCreate::class)->name('editorChannelCreate');
 	Route::get('channel/update/{id}',EditorChannelUpdate::class)->name('editorChannelUpdate');
+	Route::get('channel/{link}',EditorChannelView::class)->name('editorChannelView');
 });
 
 

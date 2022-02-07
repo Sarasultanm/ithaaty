@@ -16,4 +16,10 @@ class Category extends Model
    		return $this->hasMany('App\Models\Audio','audio_category','id')->count();
      }
 
+     public function getAudioById($userid){
+        return $this->hasMany('App\Models\Audio','audio_category','id')->where(['audio_editor'=>$userid]);
+     }
+
+
+
 }

@@ -3,8 +3,13 @@
 namespace App\Http\Livewire\Editor;
 
 use Livewire\Component;
-use App\Models\UserChannel;
-use App\Models\UserGallery;
+use App\Models\{
+    UserChannel,
+    UserGallery,
+    UserChannelSub,
+    Category,
+
+};
 use Auth;
 use Livewire\WithFileUploads;
 
@@ -55,14 +60,61 @@ class EditorChannel extends Component
 
         }
 
+        $randomStr = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"), 0, 24);
+
         $channel = new UserChannel;
         $channel->channel_ownerid = Auth::user()->id;
         $channel->channel_name = $this->channel_name;
-        $channel->channel_type = "channel_photo";
+        $channel->channel_type = "channel";
         $channel->channel_typestatus = "active";
         $channel->channel_gallery_id = $data->id;
         $channel->channel_gallery_cover_id = $data->id;
         $channel->channel_description = "empty";
+        $channel->channel_uniquelink = $randomStr;
+        $channel->save();
+
+
+        $imagefile = $this->channel_photo->hashName();
+        // local
+        $local_storage = $this->channel_photo->storeAs('users/channe_img',$imagefile);
+        // s3
+        $s3_storage = $this->channel_photo->store('users/channe_img/', 's3');
+
+        
+
+        session()->flash('status', 'Channel Created');
+        redirect()->to('/editor/channel');
+
+
+    }
+
+    public function createSubChannel(){
+
+        $this->validate([
+            'channel_photo' => 'required|image|max:1024',
+            'channel_name' => 'required',
+        ]);
+
+
+        $data = New UserGallery;
+        $data->gallery_userid = Auth::user()->id;
+        $data->gallery_type = "sub_channel_photo";
+        $data->gallery_typestatus = "active";
+        $data->gallery_path = $this->channel_photo->hashName();
+        $data->gallery_status = "active";
+        $data->save();
+
+        $randomStr = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"), 0, 24);
+
+        $channel = new UserChannel;
+        $channel->channel_ownerid = Auth::user()->id;
+        $channel->channel_name = $this->channel_name;
+        $channel->channel_type = "sub_channel";
+        $channel->channel_typestatus = "active";
+        $channel->channel_gallery_id = $data->id;
+        $channel->channel_gallery_cover_id = $data->id;
+        $channel->channel_description = "empty";
+        $channel->channel_uniquelink = $randomStr;
         $channel->save();
 
 
@@ -91,16 +143,29 @@ class EditorChannel extends Component
                 'channel_description'=> $this->channel_about
              ]);
 
-
             session()->flash('status', 'Update Success');
             redirect()->to('/editor/channel');
 
           }
 
-
-
     }
 
+
+    public function createChannelLink($channel_id){
+
+         $channel = UserChannel::where("id",$channel_id);
+
+          if(Auth::user()->id == $channel->first()->channel_ownerid){
+
+             $channel->update([
+                'channel_uniquelink'=> $this->channel_uniquelink
+             ]);
+
+            session()->flash('status', 'Update Link Success');
+            redirect()->to('/editor/channel');
+
+          }
+    }
 
     public function saveCover($channel_id){
 
@@ -231,12 +296,27 @@ class EditorChannel extends Component
     }
 
 
+     public function subChannel($id){
+
+        $data = new UserChannelSub;
+        $data->sub_channelid = $id;
+        $data->sub_userid = Auth::user()->id;
+        $data->sub_type  = "channel";
+        $data->save();
+
+        session()->flash('status', 'Subscribe Complete');
+        redirect()->to('/editor/channel');
+
+    }
+
     public function mount(){
         $this->checkChannel = Auth::user()->get_channels()->count();
 
         if($this->checkChannel != 0){
              $this->channel_list = Auth::user()->get_channels()->first();
              $this->channel_about = $this->channel_list->channel_description;
+             $this->channel_uniquelink = $this->channel_list->channel_uniquelink;
+             $this->sub_channel_list = Auth::user()->get_subchannels()->get();
         }else{
             $this->channel_about = ""; 
         }
@@ -253,6 +333,8 @@ class EditorChannel extends Component
 
     public function render()
     {
-        return view('livewire.editor.editor-channel');
+
+        $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
+        return view('livewire.editor.editor-channel',compact('categoryList'));
     }
 }

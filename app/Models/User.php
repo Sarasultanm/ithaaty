@@ -113,7 +113,10 @@ class User extends Authenticatable
     }
 
     public function get_channels(){
-        return $this->hasMany('App\Models\UserChannel', 'channel_ownerid','id');
+        return $this->hasMany('App\Models\UserChannel', 'channel_ownerid','id')->where(['channel_type'=>'channel']);
+    }
+    public function get_subchannels(){
+        return $this->hasMany('App\Models\UserChannel', 'channel_ownerid','id')->where(['channel_type'=>'sub_channel']);
     }
 
 
