@@ -409,15 +409,19 @@
                             <div class="w-0 flex-1 flex">
                               @if(!empty($sub_channel->channel_uniquelink))
                               <a target="_blank" href="{{ route('editorChannelView',['link' => $sub_channel->channel_uniquelink ]) }}" class="cursor-pointer relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
-                              @else
-                              <a target="_blank"   class="cursor-pointer relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
-                              @endif
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                                 </svg>
                                  <span class="ml-3 text-gray-400 font-regular">Manage</span>
                               </a>
+                              @else
+                                 <a target="_blank" class="cursor-pointer relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                                
+                                 <span class="ml-3 text-red-600  font-regular">Update links in the settings</span>
+                              </a>
+                              @endif
 
+                             
                              
                             </div>
                           </div>
