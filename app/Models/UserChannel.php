@@ -22,7 +22,19 @@ class UserChannel extends Model
         return $this->belongsTo('App\Models\UserChannelSub','id','sub_channelid')->where(['sub_userid'=>$userid]);
     }
 
+    public function check_episode($audio){
+        return $this->belongsTo('App\Models\UserChannelEpisode','id','channelep_channelid')->where(['channelep_audioid'=>$audio,'channelep_typestatus'=>'active']);
+    }
+
+    public function get_episode(){
+        return $this->hasMany('App\Models\UserChannelEpisode','channelep_channelid','id')->where(['channelep_typestatus'=>'active']);
+    }
+
+
     public function get_subs(){
         return $this->hasMany('App\Models\UserChannelSub', 'sub_channelid','id');
     }
+
+   
+
 }

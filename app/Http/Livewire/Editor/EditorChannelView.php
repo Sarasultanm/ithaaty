@@ -129,15 +129,16 @@ class EditorChannelView extends Component
         $this->channel_about = $this->channel->channel_description;
         $this->channel_uniquelink = $this->channel->channel_uniquelink;
 
-        $this->sub_channel_list = Auth::user()->get_subchannels()->get();
+        $this->sub_channel_list = Auth::user()->channels()->get();
 
-         $this->allchannels = UserChannel::orderBy('id')->get();
+        $this->allchannels = UserChannel::orderBy('id')->get();
 
+        $this->channel_episodes = $this->channel->get_episode()->get();
     }
 
     public function render()
     {
-         $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
+        $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
         return view('livewire.editor.editor-channel-view',compact('categoryList'));
     }
 }

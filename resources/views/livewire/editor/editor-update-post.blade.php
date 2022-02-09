@@ -123,20 +123,30 @@
 				        <a>Chapters</a>
 				      </li>
 				       @endif
+
+				    <!--    @if(Auth::user()->get_plan->check_features('o10')->count() != 0 )
+				        <li @click="openTab = 9"  :class="openTab === 9 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
+				        <a>Channels</a>
+				      </li>
+				       @endif -->
 				    </ul>
 				</div>
 
 				<div class="w-full pt-4">
 					<input type="text" class="hidden"  wire:model="a_id">
+
+
+					
+
+
 					<div x-show="openTab === 1">
 
-						<div class="mt-5">
-			                  <h2 class="text-lg leading-6 font-medium text-gray-900"> Creat Post</h2>
-			                  <p class="mt-1 text-sm text-gray-500">
-			                    This information will be displayed publicly so be careful what you share.
-			                  </p>
-			            </div>
-
+								 <div class="mt-5">
+			              <h2 class="text-lg leading-6 font-medium text-gray-900"> Creat Post</h2>
+			              <p class="mt-1 text-sm text-gray-500">
+			                This information will be displayed publicly so be careful what you share.
+			              </p>
+			           </div>
 				        <div class="border-t-2 border-custom-pink ">	
 				    		<div class="mt-5">
 						                    <label for="email" class="block text-sm font-medium text-gray-700">Title</label>
@@ -290,14 +300,94 @@
 						</div>
 
 
-						<div class="border-t-2 border-custom-pink mt-16"></div>        
+						@if(Auth::user()->get_plan->check_features('o10')->count() != 0 )
+							<div class="mt-5">
+				        <h2 class="text-lg leading-6 font-medium text-gray-900"> Channel Options</h2>
+				        <p class="mt-1 text-sm text-gray-500">
+				          Display this episode to your channels
+				        </p>
+				      </div>
+				      <div class="border-t-2 border-custom-pink"></div>    	
+
+				      <div class="mt-5">
+				      		 @if($channel_list->count() != 0)
+                   
+				      		 <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                              @foreach($channel_list->get() as $channel)
+                              <li class="col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200">
+                                <div class="flex-1 flex flex-col p-2">
+
+                                  <?php $img_path = $channel->get_channel_photo->gallery_path ?>
+                                  <?php $s3_link = config('app.s3_public_link')."/users/channe_img/".$img_path; ?>
+                                  <img class="w-32 h-32 flex-shrink-0 mx-auto rounded-full" src="{{ $s3_link }}" alt=""> 
+
+                                  <h3 class="mt-6 text-gray-900 text-sm font-medium">{{$channel->channel_name}}</h3>
+                                  <dl class="mt-1 flex-grow flex flex-col justify-between">
+                                    <dt class="sr-only">Title</dt>
+                                    <dd class="text-gray-500 text-sm">{{ $channel->get_subs()->count() }} subcribers</dd>
+                                    <dt class="sr-only">Role</dt>
+                                    <!-- <dd class="mt-3">
+                                      <span class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full">Admin</span>
+                                    </dd> -->
+                                  </dl>
+                                </div>
+                                <div>
+                                  <div class="-mt-px flex divide-x divide-gray-200">
+                                    <div class="w-0 flex-1 flex">
+                                      @if($channel->check_episode($this->a_id)->count() == 0)
+                                      <a wire:click="insertToChannel({{$channel->id}},{{$this->a_id}})" class="cursor-pointer relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                                     
+                                       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-custom-pink"  viewBox="0 0 20 20" fill="currentColor">
+                                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                                        </svg>
+                                         <span class="ml-3 text-custom-pink font-bold">Add</span>
+                                      </a>
+
+                                      @else
+
+                                       <a  wire:click="removeToChannel({{$channel->id}},{{$this->a_id}})" class="cursor-pointer relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+	                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-custom-pink" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+																				</svg>
+                                       
+                                        <span class="ml-3 text-custom-pink font-bold">Remove</span>
+                                      
+                                      </a>
+
+
+                                      @endif
+                                    </div>
+                                  
+
+                                  </div>
+                                </div>
+                              </li>
+                              @endforeach
+                              <!-- More people... -->
+                            </ul>
+
+
+                   @else
+                   <center>
+                   	<h2 class="text-lg leading-6 font-medium text-gray-900"> No channel found </h2>
+                   </center>
+                   @endif
+                                
+              </div> 
+
+
+
+
+			      @endif
+
+
+
+				<div class="border-t-2 border-custom-pink mt-16"></div> 
 			        
-			              <div class="mt-3 text-right sm:mt-5 mb-20">
-			              			
+			         <div class="mt-3 text-right sm:mt-5 mb-20">
 							        <button wire:click="updateInfo()" class="w-1/4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
 							          Update Info
-							        </button>
-				    			
+							        </button>				    			
 						   </div>
 
 

@@ -222,7 +222,7 @@
 
             <div 
                 x-data="{
-                  openTab: 1,
+                  openTab: 4,
                   activeClasses: 'border-custom-pink text-custom-pink',
                   inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }" 
@@ -247,7 +247,7 @@
                     <a>About</a>
                   </li>
                    <li @click="openTab = 4" :class="openTab === 4 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
-                    <a>Customize</a>
+                    <a>Settings</a>
                   </li>
 
 
@@ -260,7 +260,11 @@
                   
 
                 <div x-show="openTab === 1">
-                    
+                    <h3 class="text-gray-900 text-xl font-bold">Popular</h3>
+
+                    <h3 class="text-gray-900 text-xl font-bold">Uploaded</h3>
+
+                    <h3 class="text-gray-900 text-xl font-bold">Channels</h3>
                 </div>
 
                 <div x-show="openTab === 2">
@@ -701,13 +705,204 @@
 
                         <!--end cover-->
 
+                      <section class="mt-5 col-span-10">
+                          <div class="shadow-sm sm:rounded-md sm:overflow-hidden">
+                            <div class="bg-white py-6 px-4 sm:p-6">
+                              <h3 class="text-gray-900 font-bold text-md">Add Users</h3>
+                              <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><br> 
+                              <input wire:model.debounce.300ms="search" wire:keydown.enter="get_search()" type="text" placeholder="Search" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md">
+                              
+                               @if($result)
+                                @if($result->count() != 0 )
+                                <div class="grid grid-cols-6 gap-4 sm:grid-cols-2 w-full mt-5">
+                                     
+                                          @foreach($result as $items)
+                                            @if(Auth::user()->id != $items->id)
+                                              <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                                    <div class="flex-shrink-0">
+                                                        @if($items->get_profilephoto->count() == 0)
+                                                        <img class="h-10 w-10 rounded-full " src="{{ asset('images/default_user.jpg') }}" alt="">
+                                                        @else
+                                                            <?php $img_path = $items->get_profilephoto->first()->gallery_path; ?>
+                                                            <?php $s3_profilelink = config('app.s3_public_link')."/users/profile_img/".$img_path; ?>
+                                                            <?php $userviewprofile = $items->get_profilephoto->first()->gallery_path; ?>
+                                                            <img class="h-10 w-10 rounded-full " src="{{$s3_profilelink}}" alt="">
+                                                        @endif 
+                                                    </div>
+                                                    <div class="flex-1 min-w-0">
+                                                      <a class="focus:outline-none">
+                                                        <p class="text-sm font-medium text-gray-900">
+                                                          {{ $items->name }}  
+                                                        </p>
+                                                        <p class="text-sm text-gray-500 truncate">
+                                                           {{ $items->email }}
+                                                        </p>
+                                                      </a>
+                                                    </div>
+                                                    <div class="flex-auto min-w-0">
+                                                        <button  type="button" class="float-right inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-custom-pink">
+                                                            Send Invitation
+                                                       </button>
+                                                    </div>
+                                              </div>
+                                              @endif
+                                          @endforeach
+                                 </div>
 
+                                  @else
+                                      <div class=" text-center">
+                                          <h3 class="text-gray-900 font-bold text-md">User not found</h3>
+                                          <p class="text-gray-500 text-sm mt-2">Try sending a invitation using the email address.</p>
+
+                                          <div>
+                                              <div class="mt-1">
+                                                <input type="email" class="item-center w-1/4  pr-10  sm:text-sm rounded-md" placeholder="Enter your email" aria-invalid="true" aria-describedby="email-error">
+                                                
+                                         
+                                              </div>
+                                              <button  type="button" class="mt-2 items-center px-2.5 py-1.5 border border-transparent text-sm font-medium rounded shadow-sm text-white bg-custom-pink">
+                                                      Send Invitation
+                                                </button>
+                                          </div> 
+                                           
+                                     </div>
+                                     
+                                 @endif
+                                @endif
+
+
+
+                               
+   
+                              
+                            </div>
+                          </div>
+                      </section>
 
                     </div>
                 </div>
 
                  <div x-show="openTab === 5">
+
+                    <h3 class="text-gray-900 text-xl font-bold">Episodes</h3>
+                    <!-- channel episodes -->
+                    <div class="grid grid-cols-12 mt-5 gap-5">
+                      @foreach($channel_episodes as $episode_items)
+                        <div class="xl:col-span-4 lg:col-span-6 md:col-span-6 sm:col-span-6 xs:col-span-6 bg-white p-2 ">
+                                  <article aria-labelledby="question-title-81614">
+                                   <div>
+                                      <div class="flex space-x-3">
+                                        <div class="min-w-0 flex-1">
+                                          <p class="text-md font-bold text-gray-900">
+                                            <a href="#" class="hover:underline">{{ $episode_items->get_audio->audio_name }}
+                                              @if($episode_items->get_audio->audio_publish != "Publish")
+                                              <svg class="h-5 w-5 text-custom-pink float-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg></a>
+                                              @endif
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="mt-2 text-sm text-gray-700 space-y-4">
+                                        @if($episode_items->get_audio->get_thumbnail->count() == 0)
+                                           <?php $s3_ep_thumbnail = "images/default_podcast.jpg"; ?>
+                                        @else
+                                          <?php $ep_img_path = $episode_items->get_audio->get_thumbnail->first()->gallery_path; ?>
+                                          <?php $s3_ep_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$ep_img_path; ?>
+                                        @endif
+                                        <div class="text-white bg-cover h-36" style="background-image: url(<?php echo $s3_ep_thumbnail; ?>);"></div>
+                                        
+                                    </div>
+
+                                    <div>
+                                      <div class="flex space-x-3">
+                                        <div class="min-w-0 flex-1">                      
+                                          <p class="text-xs text-gray-500 mt-2">
+                                            <a class="hover:underline">
+                                             
+                                              <?php $date = date_create($episode_items->get_audio->created_at); ?>
+                                              <time datetime="2020-12-09T11:43:00">{{ date_format($date,"M, Y") }}</time>  <span class="float-left">SE:{{ $episode_items->get_audio->audio_season }} | EP:{{ $episode_items->get_audio->audio_episode }}</span>
+                                            </a>
+                                          </p>
+                                        <!--   <div class="text-xs font-bold text-gray-900 mt-5" x-data="{ open: false }"> -->
+                                          <div class="text-xs font-bold text-gray-900 mt-5">
+                                            
+                                            <a href="{{ route('editorPodcastUpdate',['id' => $episode_items->get_audio->id]) }}"  class="hover:underline">Update</a>
+                                            <a href="{{ route('editorPodcastDetails',['id' => $episode_items->get_audio->id]) }}" class="hover:underline float-right" >Details</a>
+
+                                          </div>
+                                        </div>
+                                       
+                                      </div>
+                                    </div>
+
+                                  </article>
+                                </div>
+                      @endforeach
+                    </div>
+                    <!-- channel episodes -->
+
+
+                    @if($episodes->count() != 0)
+                     <div class="grid grid-cols-12 mt-5 gap-5">
+                      <!-- @foreach($episodes->get() as $episode)
+
+                      <div class="xl:col-span-4 lg:col-span-6 md:col-span-6 sm:col-span-6 xs:col-span-6 bg-white p-2 ">
+                                 
+                                   <div>
+                                      <div class="flex space-x-3">
+                                        <div class="min-w-0 flex-1">
+                                          <p class="text-md font-bold text-gray-900">
+                                            <a href="#" class="hover:underline">{{ $episode->audio_name }}
+                                              @if($episode->audio_publish != "Publish")
+                                              <svg class="h-5 w-5 text-custom-pink float-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg></a>
+                                              @endif
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="mt-2 text-sm text-gray-700 space-y-4">
+                                        @if($episode->get_thumbnail->count() == 0)
+                                           <?php $s3_ep_thumbnail = "images/default_podcast.jpg"; ?>
+                                        @else
+                                          <?php $ep_img_path = $episode->get_thumbnail->first()->gallery_path; ?>
+                                          <?php $s3_ep_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$ep_img_path; ?>
+                                        @endif
+                                        <div class="text-white bg-cover h-36" style="background-image: url(<?php echo $s3_ep_thumbnail; ?>);"></div>
+                                        
+                                    </div>
+
+                                    <div>
+                                      <div class="flex space-x-3">
+                                        <div class="min-w-0 flex-1">                      
+                                          <p class="text-xs text-gray-500 mt-2">
+                                            <a class="hover:underline">
+                                             
+                                              <?php $date = date_create($episode->created_at); ?>
+                                              <time datetime="2020-12-09T11:43:00">{{ date_format($date,"M, Y") }}</time>  <span class="float-left">SE:{{ $episode->audio_season }} | EP:{{ $episode->audio_episode }}</span>
+                                            </a>
+                                          </p>
+                                       
+                                          <div class="text-xs font-bold text-gray-900 mt-5">
+                                            
+                                            <a href="{{ route('editorPodcastUpdate',['id' => $episode->id]) }}"  class="hover:underline">Update</a>
+                                            <a href="{{ route('editorPodcastDetails',['id' => $episode->id]) }}" class="hover:underline float-right" >Details</a>
+
+                                          </div>
+                                        </div>
+                                       
+                                      </div>
+                                    </div>
+                        </div>
+
+                      @endforeach -->
+                    </div>
+                    @else
+                    <center>
+                      <h3 class="text-gray-900 text-xl font-bold">No Episodes Found</h3>
+                    </center>
                     
+                    @endif
+
                 </div>
 
 

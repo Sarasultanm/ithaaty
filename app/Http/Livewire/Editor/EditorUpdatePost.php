@@ -12,6 +12,8 @@ use App\Models\AudioAffiliate;
 use App\Models\UserQa;
 use App\Models\UserGallery;
 use App\Models\AudioChapters;
+use App\Models\UserChannelEpisode;
+use App\Models\UserChannel;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -418,12 +420,63 @@ Credits";
         } 
     }
 
+    public function insertToChannel($channel_id,$audio_id){
+
+        $channel = UserChannel::where('id',$channel_id);
+
+        if($channel->first()->channel_ownerid == Auth::user()->id){
+
+            $episode = UserChannelEpisode::where(['channelep_channelid'=>$channel_id,'channelep_audioid'=>$audio_id]);
+
+            if($episode->count() == 0){
+
+                $data = new UserChannelEpisode;
+                $data->channelep_channelid = $channel_id;
+                $data->channelep_audioid = $audio_id;
+                $data->channelep_userid = Auth::user()->id;
+                $data->channelep_type   = "Podcast";
+                $data->channelep_typestatus = "active";
+                $data->save();
+            
+            }else{
+
+                $episode->update(
+                    ['channelep_typestatus'=>'active']
+                );
+            }
+
+        }
+
+        session()->flash('status', 'Episode Add to Channel');
+        redirect()->to('editor/podcast/update/'.$audio_id); 
+
+    }
+
+    public function removeToChannel($channel_id,$audio_id){
+
+        $channel = UserChannel::where('id',$channel_id);
+
+        if($channel->first()->channel_ownerid == Auth::user()->id){
+
+            UserChannelEpisode::where(['channelep_channelid'=>$channel_id,'channelep_audioid'=>$audio_id])->update(
+                    ['channelep_typestatus'=>'remove']
+            );
+           
+        }
+
+        session()->flash('status', 'Episode Remove to Channel');
+        redirect()->to('editor/podcast/update/'.$audio_id); 
+
+    }
+
+
+
 
     public function render()
     {
-
-
+       
+        $channel_list = UserChannel::where("channel_ownerid",Auth::user()->id);
     	$categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
-        return view('livewire.editor.editor-update-post',compact('categoryList'));
+        return view('livewire.editor.editor-update-post',compact('categoryList','channel_list'));
     }
 }

@@ -8,7 +8,8 @@ use App\Models\{
     UserGallery,
     UserChannelSub,
     Category,
-
+    Audio,
+    User,
 };
 use Auth;
 use Livewire\WithFileUploads;
@@ -21,7 +22,7 @@ class EditorChannel extends Component
 
 
     public $channel_photo,$channel_cover,$channel_name;
-
+    public $search = "",$result;
 
 
     public function createChannel(){
@@ -309,6 +310,15 @@ class EditorChannel extends Component
 
     }
 
+
+    public function get_search(){
+
+        return $this->result = User::search($this->search)->get();
+
+    }
+
+
+
     public function mount(){
         $this->checkChannel = Auth::user()->get_channels()->count();
 
@@ -316,7 +326,10 @@ class EditorChannel extends Component
              $this->channel_list = Auth::user()->get_channels()->first();
              $this->channel_about = $this->channel_list->channel_description;
              $this->channel_uniquelink = $this->channel_list->channel_uniquelink;
-             $this->sub_channel_list = Auth::user()->get_subchannels()->get();
+             $this->channel_episodes = $this->channel_list->get_episode()->get();
+             $this->sub_channel_list = Auth::user()->channels()->get();
+
+
         }else{
             $this->channel_about = ""; 
         }
@@ -327,14 +340,15 @@ class EditorChannel extends Component
         //    $this->channel_about = ""; 
         // }
         $this->allchannels = UserChannel::orderBy('id')->get();
+       
 
     }
 
 
     public function render()
     {
-
+        $episodes = Audio::orderBy('id','DESC')->where('audio_editor',Auth::user()->id);
         $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
-        return view('livewire.editor.editor-channel',compact('categoryList'));
+        return view('livewire.editor.editor-channel',compact('categoryList','episodes'));
     }
 }
