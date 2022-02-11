@@ -762,11 +762,11 @@
 
                                           <div>
                                               <div class="mt-1">
-                                                <input type="email" class="item-center w-1/4  pr-10  sm:text-sm rounded-md" placeholder="Enter your email" aria-invalid="true" aria-describedby="email-error">
+                                                <input type="email" class="item-center w-1/4  pr-10  sm:text-sm rounded-md" placeholder="Enter your email" wire:model="emailInvitation">
                                                 
                                          
                                               </div>
-                                              <button  type="button" class="mt-2 items-center px-2.5 py-1.5 border border-transparent text-sm font-medium rounded shadow-sm text-white bg-custom-pink">
+                                              <button wire:click="sendInvitation({{$channel_list->id}})" type="button" class="mt-2 items-center px-2.5 py-1.5 border border-transparent text-sm font-medium rounded shadow-sm text-white bg-custom-pink">
                                                       Send Invitation
                                                 </button>
                                           </div> 

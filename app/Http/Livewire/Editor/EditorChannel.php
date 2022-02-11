@@ -12,6 +12,8 @@ use App\Models\{
     User,
 };
 use Auth;
+use Mail;
+use App\Mail\ChannelInvitation; 
 use Livewire\WithFileUploads;
 
 
@@ -22,7 +24,7 @@ class EditorChannel extends Component
 
 
     public $channel_photo,$channel_cover,$channel_name;
-    public $search = "",$result;
+    public $search = "",$result,$emailInvitation;
 
 
     public function createChannel(){
@@ -316,6 +318,28 @@ class EditorChannel extends Component
         return $this->result = User::search($this->search)->get();
 
     }
+
+
+    public function sendInvitation($channel_id){
+
+        $channel = UserChannel::where('id',$channel_id)->first();
+
+        $user = User::findOrFail($channel->channel_ownerid);
+        $photo_link = $channel->get_channel_photo->gallery_path;
+        $channel_photo = config('app.s3_public_link')."/users/channe_img/".$photo_link;
+        $subcribers =  $channel->get_subs()->count();
+
+        $this->sendEmail($user,$this->emailInvitation,$channel->channel_name,$channel_photo,$subcribers);
+
+        session()->flash('status', 'Email Invitation Send');
+        redirect()->to('/editor/channel');
+
+    }
+
+     public function sendEmail($user,$email,$channel_name,$channel_photo,$subcribers){
+        Mail::to($email)->send(new ChannelInvitation($user,$channel_name,$channel_photo,$subcribers));
+    }
+
 
 
 
