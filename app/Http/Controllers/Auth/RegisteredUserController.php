@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserPlan;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -46,6 +47,9 @@ class RegisteredUserController extends Controller
         ]);
         $randomStr = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 5);
 
+
+        $plan_default = UserPlan::where('plan_status','default')->first()->id;
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -55,7 +59,7 @@ class RegisteredUserController extends Controller
             'birthday' => $request->months." ".$request->days.", ".$request->years,
             'country' => $request->location,
             'age' => '0',
-            'plan' => 'new',
+            'plan' => $plan_default,
             'alias' => "User".$randomStr,
             'about' => ' ',
         ]);
