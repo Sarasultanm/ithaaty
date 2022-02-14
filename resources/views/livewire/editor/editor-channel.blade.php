@@ -770,6 +770,9 @@
                                                       Send Invitation
                                                 </button>
                                           </div> 
+                                          <div>
+                                            @error('emailInvitation') <span class="text-center text-xs text-red-600">{{$message}}</span> @enderror
+                                          </div>
                                            
                                      </div>
                                      

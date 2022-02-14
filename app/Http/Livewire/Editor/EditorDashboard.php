@@ -14,6 +14,7 @@ use App\Models\UserComments;
 use App\Models\UserNotes;
 use App\Models\UserViews;
 use App\Models\AudioReport;
+use App\Models\UserFriends;
 use Auth;
 use Share;
 use URL;
@@ -415,10 +416,42 @@ class EditorDashboard extends Component
         redirect()->to($link);
     }
 
+    public function get_if_friends($id){
+
+        $request = UserFriends::where(['friend_userid'=>Auth::user()->id,'friend_requestid'=>$id]);
+        $friend = UserFriends::where(['friend_userid'=>$id,'friend_requestid'=>Auth::user()->id]);
+
+        // check if you are requesting to the users
+        if($request->count() != 0){
+            return $request->first()->friend_type;
+        }else{
+
+            if($friend->count() != 0){
+
+                if($friend->first()->friend_type == "Send Request"){
+                    return "Confirm Request";
+                }else{
+                    return $friend->first()->friend_type;
+                }
+
+            }else{
+                if(Auth::user()->id == $id){
+                      return "Owner";
+                }else{
+                     return "Not Friend";
+                }
+               
+            }
+            
+        }
+
+    }
+
     public function render()
     {   
 
-    	$audioList = Audio::orderBy('id','DESC')->whereIn('audio_status', ['active','public','private']);
+    	$audioList = Audio::orderBy('id','DESC')->where('audio_publish','Publish')->whereIn('audio_status', ['active','public','private']);
+        //$audioList = Audio::orderBy('id','DESC')->where(['audio_status'=>'active','audio_status'=>'public','audio_status'=>'private']);
         $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
         $randomList = User::inRandomOrder()->where('id','!=',Auth::user()->id)->take(3)->get();
         $mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1);

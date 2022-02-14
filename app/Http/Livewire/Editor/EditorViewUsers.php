@@ -95,7 +95,6 @@ class EditorViewUsers extends Component
 
             if($friend->count() != 0){
 
-                
                 if($friend->first()->friend_type == "Send Request"){
                     return "Confirm Request";
                 }else{

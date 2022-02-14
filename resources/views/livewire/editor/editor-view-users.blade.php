@@ -326,6 +326,9 @@
                 <li @click="openTab = 4"  :class="openTab === 4 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
                   <a >Playlist</a>
                 </li>
+                <li @click="openTab = 5"  :class="openTab === 5 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
+                  <a >Channel</a>
+                </li>
     			    </ul>
   			   </div>
           <div class="grid gap-4 grid-cols-10">

@@ -105,13 +105,10 @@
           <ul class="space-y-4">
 
             @foreach($audioList->get() as $audio)
-            @if($audio->audio_publish == "Publish")
-
-          <?php // if( EditorDashboard::checkFollow($audio->audio_editor) != 0 || $audio->audio_editor == Auth::user()->id ) ?>
-
-            @if( $audio->audio_status != 'private' || $audio->audio_editor == Auth::user()->id )
+            
           
-
+           @if( $audio->audio_status == 'public' || $audio->audio_editor == Auth::user()->id || $this->get_if_friends($audio->audio_editor) == "Friends") 
+           
             <li class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
               <article aria-labelledby="question-title-81614">
                 <div>
@@ -136,7 +133,7 @@
                             <a>{{ $audio->get_user->name }}</a>
                            @endif
                          @endif
-
+                        
                         
                       </p>
                       <p class="text-sm text-gray-500">
@@ -201,7 +198,7 @@
                               </a>
                               @endif  
                                 <!-- Heroicon name: solid/star -->
-                              <div x-data="{modal: false}" >
+                             <div x-data="{modal: false}" >
                                  <a   @click="modal = !modal" class=" text-gray-900 flex px-4 py-2 text-sm cursor-pointer hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-0">
                                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                                       <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -274,13 +271,11 @@
                                       </div>
                                     </div>
                                    <!-- modal -->
-                            </div>
+                             </div>
 
                              <div  x-data="{ open: false }" @click.away="open = false">
                               <a  @click="open = !open" class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
-                            <!--     <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg> -->
+                           
                                 <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                   <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"></path>
                                 </svg>
@@ -366,10 +361,6 @@
                    <h2 class="font-bold text-xl m-0">{{ $audio->audio_name }}</h2>
                
                     @if($audio->audio_type == "Upload")
-
-
-                      
-
 
                      <div class="flex bg-custom-pink p-4 rounded-md">
                        <div >
@@ -575,6 +566,7 @@
                     @endif
                     @endif
                   </div>
+
                 </div>
 
                 <div x-show="openTab === 1">
@@ -815,7 +807,7 @@
          
 
             @endif 
-            @endif 
+            
             @endforeach
 
 

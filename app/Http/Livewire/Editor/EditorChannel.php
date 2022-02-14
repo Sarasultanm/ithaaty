@@ -10,10 +10,20 @@ use App\Models\{
     Category,
     Audio,
     User,
+    UserMail,
+    UserCollaborator,
 };
 use Auth;
 use Mail;
-use App\Mail\ChannelInvitation; 
+use App\Mail\ChannelInvitation;
+
+use Illuminate\Support\Str; 
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\URL;
+
+
+
+
 use Livewire\WithFileUploads;
 
 
@@ -322,6 +332,10 @@ class EditorChannel extends Component
 
     public function sendInvitation($channel_id){
 
+        $this->validate([
+            'emailInvitation' => 'required|string|email|max:50',
+        ]);
+
         $channel = UserChannel::where('id',$channel_id)->first();
 
         $user = User::findOrFail($channel->channel_ownerid);
@@ -329,10 +343,31 @@ class EditorChannel extends Component
         $channel_photo = config('app.s3_public_link')."/users/channe_img/".$photo_link;
         $subcribers =  $channel->get_subs()->count();
 
+        //asia time zone
+        $expiredDate = Carbon::now()->addHour()->timezone('Asia/Hong_Kong');
+
+        // UserMail::create([
+        //     'mail_sender_id'=>$user->first()->id,
+        //     'mail_link_id'=> Str::random(30),
+        //     'mail_type'=>'channel_invitation',
+        //     'mail_typestatus'=>'active',
+        //     'mail_expired'=> $expiredDate
+        // ]);
+
+        // UserCollaborator::create([
+        //     'usercol_userid'=>$user->first()->id,
+        //     'usercol_channel_id'=> $channel->first()->id,
+        //     'usercol_email'=> $this->emailInvitation,
+        //     'usercol_type'=> 'channel_invitation',
+        //     'usercol_typestatus'=> 'active'
+        // ]);
+
+
         $this->sendEmail($user,$this->emailInvitation,$channel->channel_name,$channel_photo,$subcribers);
 
-        session()->flash('status', 'Email Invitation Send');
-        redirect()->to('/editor/channel');
+
+       session()->flash('status', 'Email Invitation Send'.$expiredDate);
+       redirect()->to('/editor/channel');
 
     }
 

@@ -10,7 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Str; 
 
 
 class RegisteredUserController extends Controller
@@ -45,9 +45,9 @@ class RegisteredUserController extends Controller
             'gender' => 'required',
             'location' => 'required',
         ]);
-        $randomStr = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 5);
+        // $randomStr = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 5);
 
-
+        $randomStr = Str::random(5);
         $plan_default = UserPlan::where('plan_status','default')->first()->id;
 
         $user = User::create([
