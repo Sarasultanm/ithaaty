@@ -53,69 +53,57 @@
        @include('layouts.guest.sidebar')
         <!-- sidebar -->
       </div>
-      <main class="lg:col-span-9 xl:col-span-6">
+      <main class="lg:col-span-9 xl:col-span-10">
         <div class="mt-4">
            <div class="mb-5 w-full ">
-             <h1 class="font-bold text-gray-800 text-xl">Podcaster</h1> 
+             <h1 class="font-bold text-gray-800 text-xl">Podcast</h1> 
           </div>
 
-          <div class="grid gap-4 grid-cols-6">
-              
-            @foreach($podcaster->get() as $pod)
+          <div class="grid grid-cols-12 mt-5 gap-5">
+              @foreach($podcast_lists->get() as $podcast_items)
+                  <div class="xl:col-span-4 lg:col-span-6 md:col-span-6 sm:col-span-6 xs:col-span-6 bg-white p-2 ">
 
-     
-
-
-            <div class="col-span-2 bg-white p-2 ">
-              <article aria-labelledby="question-title-81614">
-
-                <div class="mt-2 text-sm text-gray-700 space-y-4">
-                  
-                   <div class="text-white bg-cover h-36">
-                   
-                       <img class="h-full mx-auto my-0 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                             
-                   </div>
-                    
-                </div>
-
-                <div>
-                  <div class="flex space-x-3">
-                    <div class="min-w-0 flex-1">
-                      <p class="text-md font-bold text-gray-900 mt-2">
-                        <a href="#" class="hover:underline">{{ $pod->name }}</a>
-                      </p>
-                      <p class="text-xs text-gray-500">
-                        <a class="hover:underline">
-                          Followers <span class="float-right">{{ $pod->get_followers->count() }}</span>
-                        </a>
-                      </p>
+                    <div>
+                      <div class="flex space-x-3">
+                        <div class="min-w-0 flex-1">
+                          <p class="text-md font-bold text-gray-900">
+                            <a class="hover:underline">{{ $podcast_items->audio_name }}
+                          </p>
+                        </div>
+                      </div>
                     </div>
 
-                   
+                    <div class="mt-2 text-sm text-gray-700 space-y-4">
+                      <a target="_blank" href="/post/{{$podcast_items->id}}"> 
+                        @if($podcast_items->get_thumbnail->count() == 0)
+                           <?php $s3_ep_thumbnail = "images/default_podcast.jpg"; ?>
+                        @else
+                          <?php $ep_img_path = $podcast_items->get_thumbnail->first()->gallery_path; ?>
+                          <?php $s3_ep_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$ep_img_path; ?>
+                        @endif
+                        <div class="text-white bg-cover h-36" style="background-image: url(<?php echo $s3_ep_thumbnail; ?>);"></div>
+                      </a>
+                    </div>
+                    
+                     <div>
+                      <div class="flex space-x-3">
+                        <div class="min-w-0 flex-1">                      
+                          <p class="text-xs text-gray-500 mt-2">
+                            <a class="hover:underline">
+                              Owner: <strong>{{ $podcast_items->get_user->name }}</strong>
+                              
+                            </a>
+                          </p>
+                      
+                        </div>
+                       
+                      </div>
+                    </div>
+
+
                   </div>
 
-                    <div class="mt-3">
-                      <center>
-                        <button type="button" class="inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100">
-                          <!-- Heroicon name: solid/plus -->
-                          <span>
-                            Follow
-                          </span>
-                        </button>
-                        </center>
-                      </div>
-
-
-                </div>
-
-              </article>
-            </div>
-
-
-
-
-             @endforeach
+              @endforeach           
           </div>
 
 
@@ -125,7 +113,7 @@
         </div>
       </main>
       <!-- aside -->
-      @include('layouts.guest.aside')
+    
       <!-- aside -->
     </div>
   </div>

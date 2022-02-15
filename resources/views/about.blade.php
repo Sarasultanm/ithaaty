@@ -96,11 +96,13 @@
 
 
                 <div class="text-white col-span-1">
+                    <center>
                     <a href="/"><img src="{{ asset('images/logo.png')}}" class="xl:w-72 lg:w-48 md:w-40 sm:w-36 w-30 front-page-logo xl:block lg:block md:block sm:hidden"></a>
-                    <div class="xl:px-24 xl:pb-10 lg:px-10 lg:pb-5 md:px-10 md:pb-5 sm:px-5 sm:pb-2">
+                    </center>
+                    <!-- <div class="xl:px-24 xl:pb-10 lg:px-10 lg:pb-5 md:px-10 md:pb-5 sm:px-5 sm:pb-2">
                         <h2 class="uppercase mb-3 xl:text-5xl lg:text-5xl md:text-4xl  ">About Us</h2>
                         <p class="xl:text-xl lg:text-lg md:text-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra, magna eu aliquet tempor, libero nunc vehicula lectus, id sodales odio quam eget lectus. Vivamus luctus vestibulum nibh at cursus. Nulla facilisi. Pellentesque mollis nisi ante, nec varius urna auctor et.</p>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="col-span-1 xl:block lg:block md:block sm:hidden" style="background: #f98b88;">

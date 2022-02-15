@@ -88,7 +88,8 @@ class MainController extends Controller
 		$randomList = User::inRandomOrder()->take(3)->get();
 		$mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->get();
 		$podcaster = User::where('roles','editor');
-		return view('podcaster',compact('randomList','mostlike','podcaster'));
+		$podcast_lists = Audio::where('audio_publish','Publish')->whereIn('audio_status', ['active','public']);
+		return view('podcaster',compact('randomList','mostlike','podcaster','podcast_lists'));
 	}
 
 	public function viewAboutus(){

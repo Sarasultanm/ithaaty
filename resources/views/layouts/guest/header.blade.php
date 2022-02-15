@@ -3,7 +3,7 @@
       <div class="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
         <div class="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
           <div class="flex-shrink-0 flex items-center">
-            <a href="">
+            <a href="/">
               <img class="block h-16 w-auto" src="{{ asset('images/logo.png') }}" alt="Workflow">
             </a>
           </div>
