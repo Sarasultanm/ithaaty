@@ -14,6 +14,7 @@ use App\Models\UserGallery;
 use App\Models\AudioChapters;
 use App\Models\UserChannelEpisode;
 use App\Models\UserChannel;
+use App\Models\UserPodcasts;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 

@@ -5,14 +5,19 @@ namespace App\Http\Livewire\Editor;
 use Auth;
 use FeedReader;
 use Livewire\Component;
-use App\Models\User;
-use App\Models\Audio;
-use App\Models\Category;
-use App\Models\UserFollow;
-use App\Models\UserGallery;
-use App\Models\UserRssLink;
-use App\Models\UserCustomization;
-use App\Models\UserSocialLinks;
+use App\Models\{
+    User,
+    Audio,
+    Category,
+    UserFollow,
+    UserGallery,
+    UserRssLink,
+    UserCustomization,
+    UserSocialLinks,
+    UserInterest,
+    Interest,
+};
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -411,12 +416,23 @@ class EditorSettings extends Component
 
     }   
 
+    public function updateInterest($id){
+            UserInterest::updateOrCreate(
+                ['interest_ownerid'=>Auth::user()->id,'interest_id'=>$value],
+                ['interest_type'=>"interest",'interest_typestatus' => "active"]
+             );
+    }
+
+
+
+
+
     public function render()
     {
 
     	// $categoryList = Category::where('category_owner',Auth::user()->id);
         $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
-
-        return view('livewire.editor.editor-settings',compact('categoryList'));
+         $interest_list = Interest::where('status','active')->get();
+        return view('livewire.editor.editor-settings',compact('categoryList','interest_list'));
     }
 }

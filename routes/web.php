@@ -57,7 +57,9 @@ use App\Http\Livewire\Editor\{
 	EditorChannel,
 	EditorChannelCreate,
 	EditorChannelUpdate,
-	EditorChannelView
+	EditorChannelView,
+	EditorNewPodcastView,
+	EditorEpisodeCreate,
 };
 
 /*
@@ -127,9 +129,6 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 
 	Route::get('dashboard',EditorDashboard::class)->name('editorDashboard');
 	
-	Route::get('podcast',EditorPodcast::class)->name('editorPodcast');
-	Route::get('podcast/details/{id}',EditorPodcastDetail::class)->name('editorPodcastDetails');
-	Route::get('podcast/view/{id}',EditorPodcastView::class)->name('editorPodcastView');
 
 	Route::get('settings',EditorSettings::class)->name('editorSettings');
 	Route::get('popular',EditorPopular::class)->name('editorPopular');
@@ -146,6 +145,9 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 	//Route::get('users/{id}', [MainController::class, 'viewUsers']);
 	Route::get('users/{id}',EditorViewUsers::class)->name('editorViewUser');
 
+	Route::get('podcast',EditorPodcast::class)->name('editorPodcast');
+	Route::get('podcast/details/{id}',EditorPodcastDetail::class)->name('editorPodcastDetails');
+	Route::get('podcast/view/{id}',EditorPodcastView::class)->name('editorPodcastView');
 	Route::get('podcast/create',EditorCreatePost::class)->name('editorPodcastCreate');
 	Route::get('podcast/update/{id}',EditorUpdatePost::class)->name('editorPodcastUpdate');
 
@@ -172,6 +174,10 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 	Route::get('channel/create',EditorChannelCreate::class)->name('editorChannelCreate');
 	Route::get('channel/update/{id}',EditorChannelUpdate::class)->name('editorChannelUpdate');
 	Route::get('channel/{link}',EditorChannelView::class)->name('editorChannelView');
+
+	Route::get('channel/podcast/{link}',EditorNewPodcastView::class)->name('editorNewPodcastView');
+	Route::get('channel/podcast/{link}/create',EditorEpisodeCreate::class)->name('editorEpisodeCreate');
+
 });
 
 

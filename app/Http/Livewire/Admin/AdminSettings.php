@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Interest;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,6 +15,44 @@ class AdminSettings extends Component
 {
 
 	public $categoryTitle,$userName,$oldPass,$newPass;
+   public $title,$in_desc;
+
+
+
+
+   public function addInterest(){
+
+         $this->validate([
+               'title' => 'required|string|unique:interests|max:50',
+               'in_desc'=>'required'
+         ]);
+
+         Interest::create([
+            'title'=> $this->title,
+            'description' => $this->in_desc,
+            'type'=>'interest',
+         ]);
+
+
+         session()->flash('status', 'Add new Interest');
+
+         redirect()->to('/admin/settings');
+
+   }
+
+   public function updatedTitle(){
+        $this->validate([
+               'title' => 'unique:interests|max:50'
+         ]);
+
+   }
+
+       
+ 
+
+
+
+
 
 	public function updateName(){
 
@@ -22,8 +61,6 @@ class AdminSettings extends Component
         session()->flash('status', 'Update Success');
 
         redirect()->to('/admin/settings');
-
-
 
     }
 
@@ -75,7 +112,8 @@ class AdminSettings extends Component
     {
 
         $category_list = Category::where('category_status','active')->get();
+        $interest_list = Interest::where('status','active')->get();
 
-        return view('livewire.admin.admin-settings',compact('category_list'));
+        return view('livewire.admin.admin-settings',compact('category_list','interest_list'));
     }
 }

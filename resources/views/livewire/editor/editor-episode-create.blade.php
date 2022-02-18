@@ -1,7 +1,7 @@
 
  <x-slot name="header">
 	<h2 class="font-semibold text-xl text-gray-800 leading-tight">
-		{{ __('Podcast Create') }}
+		{{ __('Episode Create') }}
 	</h2>
 </x-slot>
 
@@ -54,7 +54,7 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 				<!-- 	<form wire:submit.prevent="save">  -->
 
 				<div>
-			  <h2 class="text-lg leading-6 font-medium text-gray-900"> Creat Post</h2>
+			  <h2 class="text-lg leading-6 font-medium text-gray-900"> Create Episodes</h2>
 			  <p class="mt-1 text-sm text-gray-500">
 				This information will be displayed publicly so be careful what you share.
 			  </p>

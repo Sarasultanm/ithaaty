@@ -220,53 +220,22 @@
                                </p>
                                 <div class="grid grid-cols-4 gap-4 mt-3">
 
-                                  <div class="col-span-2">
-                                      <div class="relative flex items-start">
-                                        <div class="flex items-center h-5">
-                                          <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                  @foreach($interest_list as $value)
+                                    <div class="col-span-2">
+                                        <div class="relative flex items-start">
+                                          <div class="flex items-center h-5">
+                                            <input wire:model="interest_option.{{$value->id}}" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" value="{{ $value->id }}">
+                                          </div>
+                                          <div class="ml-3 text-sm">
+                                            <label for="comments" class="font-bold text-gray-900">{{ $value->title }}   </label>
+                                            <p id="comments-description" class="text-gray-500">{{ $value->description }} </p>
+                                          </div>
                                         </div>
-                                        <div class="ml-3 text-sm">
-                                          <label for="comments" class="font-bold text-gray-900">Social Issues, Election or Politics</label>
-                                          <p id="comments-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-                                        </div>
-                                      </div>
-                                  </div>
-                                   <div class="col-span-2">
-                                      <div class="relative flex items-start">
-                                        <div class="flex items-center h-5">
-                                          <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                                        </div>
-                                        <div class="ml-3 text-sm">
-                                          <label for="comments" class="font-bold text-gray-900">Housing</label>
-                                          <p id="comments-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-                                        </div>
-                                      </div>
+                                    </div>
+                                  @endforeach
 
-                                  </div>
-
-                                   <div class="col-span-2">
-                                      <div class="relative flex items-start">
-                                        <div class="flex items-center h-5">
-                                          <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                                        </div>
-                                        <div class="ml-3 text-sm">
-                                          <label for="comments" class="font-bold text-gray-900">Employment</label>
-                                          <p id="comments-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-                                        </div>
-                                      </div>
-                                  </div>
-                                   <div class="col-span-2">
-                                      <div class="relative flex items-start">
-                                        <div class="flex items-center h-5">
-                                          <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                                        </div>
-                                        <div class="ml-3 text-sm">
-                                          <label for="comments" class="font-bold text-gray-900">Credits</label>
-                                          <p id="comments-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-                                        </div>
-                                      </div>
-
-                                  </div>
+                                  
+                                  {{ $result_items }}
                                 </div>
                        </div>
                          <!-- This example requires Tailwind CSS v2.0+ -->

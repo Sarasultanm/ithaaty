@@ -9,6 +9,8 @@ use App\Models\{
     UserSetup,
     UserChannel,
     UserChannelSub,
+    Interest,
+    UserInterest,
 };
 use Auth;
 
@@ -22,8 +24,7 @@ class EditorSetup extends Component
 
 
 
-    public $search = "",$result,$addFriend = 0;
-
+    public $search = "",$result,$addFriend = 0,$interest_option,$result_items = "";
 
     public function subChannel($id){
         $data = new UserChannelSub;
@@ -220,8 +221,22 @@ class EditorSetup extends Component
         $data->setup_typestatus = "Incomplete";
         $data->save();
 
+
+        foreach($this->interest_option as $value){
+            if($value != 0){
+                 UserInterest::updateOrCreate(
+                        ['interest_ownerid'=>Auth::user()->id,'interest_id'=>$value],
+                        ['interest_type'=>"interest",'interest_typestatus' => "check"]
+                 );
+            }
+        }
+
+
         $this->currentSteps = 3;
         $this->stepTwo = 1;
+
+
+
     }
 
     public function channelSetup(){
@@ -258,7 +273,8 @@ class EditorSetup extends Component
     public function render()
     {
 
-        $channel_list = UserChannel::orderBy('id')->get();
-        return view('livewire.editor.editor-setup',compact('channel_list'));
+        $channel_list = UserChannel::orderBy('id')->where('channel_status','active')->get();
+        $interest_list = Interest::where('status','active')->get();
+        return view('livewire.editor.editor-setup',compact('channel_list','interest_list'));
     }
 }

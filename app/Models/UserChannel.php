@@ -30,11 +30,17 @@ class UserChannel extends Model
         return $this->hasMany('App\Models\UserChannelEpisode','channelep_channelid','id')->where(['channelep_typestatus'=>'active']);
     }
 
+     public function get_podcast(){
+        return $this->hasMany('App\Models\UserPodcasts','podcast_channelid','id')->where(['podcast_status'=>'active']);
+    }
+
+
 
     public function get_subs(){
         return $this->hasMany('App\Models\UserChannelSub', 'sub_channelid','id');
     }
 
    
+
 
 }
