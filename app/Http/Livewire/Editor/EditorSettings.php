@@ -18,6 +18,7 @@ use App\Models\{
     Interest,
 };
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -90,17 +91,13 @@ class EditorSettings extends Component
             'profilePhoto' => 'image|max:1024',
         ]);
 
-        $checkProfile = UserGallery::where(['gallery_userid'=>Auth::user()->id,'gallery_type'=>'profile','gallery_typestatus'=>'active']);
-
+        $checkProfile =  Auth::user()->get_gallery('profile','active');
+  
         if($checkProfile->count() == 0){
 
-            $data = New UserGallery;
-            $data->gallery_userid = Auth::user()->id;
-            $data->gallery_type = "profile";
-            $data->gallery_typestatus = "active";
-            $data->gallery_path = $this->profilePhoto->hashName();
-            $data->gallery_status = "active";
-            $data->save();
+    
+            $data = Controller::createImage('profile',$this->profilePhoto);
+
 
         }else{  
 
@@ -109,27 +106,13 @@ class EditorSettings extends Component
                 'gallery_typestatus'=> 'draft',
             ]);
 
-            $data = New UserGallery;
-            $data->gallery_userid = Auth::user()->id;
-            $data->gallery_type = "profile";
-            $data->gallery_typestatus = "active";
-            $data->gallery_path = $this->profilePhoto->hashName();
-            $data->gallery_status = "active";
-            $data->save();
+            $data = Controller::createImage('profile',$this->profilePhoto);
+
 
         }
 
-       
-        
-        $imagefile = $this->profilePhoto->hashName();
-        // local
-        $local_storage = $this->profilePhoto->storeAs('users/profile_img',$imagefile);
-        // s3
-        $s3_storage = $this->profilePhoto->store('users/profile_img/', 's3');
+       Controller::storeImage($this->profilePhoto,'users/profile_img/');
 
-        
-
-        session()->flash('status', 'Profile Picture Updated');
         redirect()->to('/editor/settings');
 
     }

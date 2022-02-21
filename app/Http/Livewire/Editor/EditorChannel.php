@@ -34,6 +34,7 @@ class EditorChannel extends Component
         $data = UserChannel::find($channel_id);
 
         if (Auth::user()->id == $data->channel_ownerid) {
+            
             $image = Controller::makeImage('podcast_img', $this->podcast_photo, 'users/podcast_img');
 
             UserPodcasts::create([
@@ -59,25 +60,16 @@ class EditorChannel extends Component
         $checkChannelPhoto = UserGallery::where(['gallery_userid' => Auth::user()->id, 'gallery_type' => 'channel_photo', 'gallery_typestatus' => 'active']);
 
         if ($checkChannelPhoto->count() == 0) {
-            $data = new UserGallery();
-            $data->gallery_userid = Auth::user()->id;
-            $data->gallery_type = "channel_photo";
-            $data->gallery_typestatus = "active";
-            $data->gallery_path = $this->channel_photo->hashName();
-            $data->gallery_status = "active";
-            $data->save();
+
+            $data = Controller::createImage('channel_photo',$this->channel_photo);
+
         } else {
             UserGallery::where('id', $checkChannelPhoto->first()->id)->update([
                 'gallery_typestatus' => 'draft',
             ]);
 
-            $data = new UserGallery();
-            $data->gallery_userid = Auth::user()->id;
-            $data->gallery_type = "channel_photo";
-            $data->gallery_typestatus = "active";
-            $data->gallery_path = $this->channel_photo->hashName();
-            $data->gallery_status = "active";
-            $data->save();
+            $data = Controller::createImage('channel_photo',$this->channel_photo);
+            
         }
 
         $channel = new UserChannel();
@@ -91,11 +83,8 @@ class EditorChannel extends Component
         $channel->channel_uniquelink = Str::random(24);
         $channel->save();
 
-        $imagefile = $this->channel_photo->hashName();
-        // local
-        $local_storage = $this->channel_photo->storeAs('users/channe_img', $imagefile);
-        // s3
-        $s3_storage = $this->channel_photo->store('users/channe_img/', 's3');
+
+        Controller::storeImage($this->channel_photo,'users/channe_img/');
 
         session()->flash('status', 'Channel Created');
         redirect()->to('/editor/channel');
@@ -108,13 +97,15 @@ class EditorChannel extends Component
             'channel_name' => 'required',
         ]);
 
-        $data = new UserGallery();
-        $data->gallery_userid = Auth::user()->id;
-        $data->gallery_type = "sub_channel_photo";
-        $data->gallery_typestatus = "active";
-        $data->gallery_path = $this->channel_photo->hashName();
-        $data->gallery_status = "active";
-        $data->save();
+        // $data = new UserGallery();
+        // $data->gallery_userid = Auth::user()->id;
+        // $data->gallery_type = "sub_channel_photo";
+        // $data->gallery_typestatus = "active";
+        // $data->gallery_path = $this->channel_photo->hashName();
+        // $data->gallery_status = "active";
+        // $data->save();
+
+        $data = Controller::createImage('sub_channel_photo',$this->channel_photo);
 
         $channel = new UserChannel();
         $channel->channel_ownerid = Auth::user()->id;
@@ -127,11 +118,13 @@ class EditorChannel extends Component
         $channel->channel_uniquelink = Str::random(24);
         $channel->save();
 
-        $imagefile = $this->channel_photo->hashName();
-        // local
-        $local_storage = $this->channel_photo->storeAs('users/channe_img', $imagefile);
-        // s3
-        $s3_storage = $this->channel_photo->store('users/channe_img/', 's3');
+        // $imagefile = $this->channel_photo->hashName();
+        // // local
+        // $local_storage = $this->channel_photo->storeAs('users/channe_img', $imagefile);
+        // // s3
+        // $s3_storage = $this->channel_photo->store('users/channe_img/', 's3');
+
+        Controller::storeImage($this->channel_photo,'users/channe_img/');
 
         session()->flash('status', 'Channel Created');
         redirect()->to('/editor/channel');

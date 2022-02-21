@@ -14,9 +14,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
 
-
-
-    public function makeImage($type,$image,$path){
+    public static function makeImage($type,$image,$path){
 
         $data = UserGallery::create([
             'gallery_userid' => Auth::user()->id,
@@ -35,4 +33,32 @@ class Controller extends BaseController
         return $data;
 
     }
+
+    public static function createImage($type,$image){
+
+        $data = UserGallery::create([
+            'gallery_userid' => Auth::user()->id,
+            'gallery_type' => $type,
+            'gallery_typestatus' => 'active',
+            'gallery_path' => $image->hashName(),
+            'gallery_status' => 'active',
+         ]);
+
+        return $data;
+
+    }
+
+    public static function storeImage($image,$path){
+
+        $imagefile = $image->hashName();
+        // local
+        $local_storage = $image->storeAs($path,$imagefile);
+        // s3
+        $s3_storage = $image->store($path, 's3');
+
+
+
+    }
+    
+
 }

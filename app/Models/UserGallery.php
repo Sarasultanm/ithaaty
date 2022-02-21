@@ -19,6 +19,7 @@ class UserGallery extends Model
     ];
 
 
+    
 
 
 }

@@ -8,7 +8,6 @@
         <div class="">
             
 
-
 @if(Auth::user()->get_csm('csm_pagebg','active')->count() != 0 )
    <div class="min-h-screen" style="background:{{Auth::user()->get_csm('csm_pagebg','active')->first()->csm_value }};">
 @else
