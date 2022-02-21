@@ -170,36 +170,24 @@ class EditorChannel extends Component
             $checkPhoto = UserGallery::where(['gallery_userid' => Auth::user()->id, 'gallery_type' => 'channel_cover', 'gallery_typestatus' => 'active']);
 
             if ($checkPhoto->count() == 0) {
-                $data = new UserGallery();
-                $data->gallery_userid = Auth::user()->id;
-                $data->gallery_type = "channel_cover";
-                $data->gallery_typestatus = "active";
-                $data->gallery_path = $this->channel_cover->hashName();
-                $data->gallery_status = "active";
-                $data->save();
+              
+                $data = Controller::createImage('channel_cover',$this->channel_cover);
+
             } else {
                 UserGallery::where('id', $checkPhoto->first()->id)->update([
                     'gallery_typestatus' => 'draft',
                 ]);
 
-                $data = new UserGallery();
-                $data->gallery_userid = Auth::user()->id;
-                $data->gallery_type = "channel_cover";
-                $data->gallery_typestatus = "active";
-                $data->gallery_path = $this->channel_cover->hashName();
-                $data->gallery_status = "active";
-                $data->save();
+                $data = Controller::createImage('channel_cover',$this->channel_cover);
+
             }
 
             $channel->update([
                 'channel_gallery_cover_id' => $data->id,
             ]);
 
-            $imagefile = $this->channel_cover->hashName();
-            // local
-            $local_storage = $this->channel_cover->storeAs('users/channel_cover', $imagefile);
-            // s3
-            $s3_storage = $this->channel_cover->store('users/channel_cover/', 's3');
+            Controller::storeImage($this->channel_cover,'users/channel_cover/');
+
         }
 
         session()->flash('status', 'Update Cover Photo');

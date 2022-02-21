@@ -120,6 +120,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UserChannel', 'channel_ownerid','id')->where(['channel_type'=>'channel']);
     }
 
+    public function get_podcasts(){
+        return $this->hasMany('App\Models\UserPodcasts', 'podcast_ownerid','id')->where(['podcast_status'=>'active']);
+    }
+
     public function get_subchannels(){
         return $this->hasMany('App\Models\UserChannel', 'channel_ownerid','id')->where(['channel_type'=>'sub_channel']);
     }

@@ -89,7 +89,7 @@
         </div>
         @endforeach
     </div>
-    <h3 class="text-gray-900 text-xl font-bold">Uploaded</h3>
+    <h3 class="text-gray-900 text-xl font-bold">Latest Upload</h3>
 
-    <h3 class="text-gray-900 text-xl font-bold">Channels</h3>
+   
 </div>

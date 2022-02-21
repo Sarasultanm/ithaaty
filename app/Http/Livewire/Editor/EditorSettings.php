@@ -95,9 +95,7 @@ class EditorSettings extends Component
   
         if($checkProfile->count() == 0){
 
-    
             $data = Controller::createImage('profile',$this->profilePhoto);
-
 
         }else{  
 
@@ -107,7 +105,6 @@ class EditorSettings extends Component
             ]);
 
             $data = Controller::createImage('profile',$this->profilePhoto);
-
 
         }
 

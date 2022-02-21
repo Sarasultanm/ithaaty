@@ -26,7 +26,7 @@
                     <p class="text-sm text-gray-500 truncate">Velit placeat sit ducimus non sed</p>
 
                     <div class="mt-1">
-                        <p class="line-clamp-2 text-sm text-gray-600">
+                        <p class="line-clamp-2 text-sm text-gray-600 truncate">
                             {{ $episode->get_audio->audio_summary }}
                         </p>
                     </div>

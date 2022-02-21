@@ -3,18 +3,34 @@
 namespace App\Http\Livewire\Editor;
 
 use Livewire\Component;
-use App\Models\Audio;
-use App\Models\User;
-use App\Models\Category;
-use App\Models\AudioReferences;
-use App\Models\AudioSponsor;
-use App\Models\AudioAffiliate;
-use App\Models\UserQa;
-use App\Models\UserGallery;
-use App\Models\AudioChapters;
-use App\Models\UserChannelEpisode;
-use App\Models\UserChannel;
-use App\Models\UserPodcasts;
+use App\Models\{
+    Audio,
+    User,
+    Category,
+    AudioReferences,
+    AudioSponsor,
+    AudioAffiliate,
+    UserQa,
+    UserGallery,
+    AudioChapters,
+    UserChannelEpisode,
+    UserChannel,
+    UserPodcasts,
+    UserPodcastEpisodes
+};
+// use App\Models\Audio;
+// use App\Models\User;
+// use App\Models\Category;
+// use App\Models\AudioReferences;
+// use App\Models\AudioSponsor;
+// use App\Models\AudioAffiliate;
+// use App\Models\UserQa;
+// use App\Models\UserGallery;
+// use App\Models\AudioChapters;
+// use App\Models\UserChannelEpisode;
+// use App\Models\UserChannel;
+// use App\Models\UserPodcasts;
+// use App\Models\UserPodcastEpisodes;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -470,7 +486,20 @@ Credits";
 
     }
 
+    public function addEpisode($podcast_id){
 
+    
+        UserPodcastEpisodes::create([
+            'poditem_podcastid'=>$podcast_id,
+            'poditem_audioid'=>$this->a_id,
+            'poditem_type'=>$this->audio->audio_type,
+        ]);
+
+        session()->flash('status', 'Episode Added');
+
+        redirect()->to('editor/podcast/update/'.$this->a_id); 
+
+    }
 
 
     public function render()

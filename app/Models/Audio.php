@@ -62,10 +62,13 @@ class Audio extends Model
     } 
 
     public function get_chapters(){
-         return $this->belongsTo('App\Models\AudioChapters', 'id', 'chapter_audioid',);
+         return $this->belongsTo('App\Models\AudioChapters', 'id', 'chapter_audioid');
         // return $this->hasMany('App\Models\AudioChapters', 'chapter_audioid','id');
     }
 
+    public function check_in_podcasts(){
+        return $this->belongsTo('App\Models\UserPodcastEpisodes', 'id', 'poditem_audioid');
+    } 
     
 
 
