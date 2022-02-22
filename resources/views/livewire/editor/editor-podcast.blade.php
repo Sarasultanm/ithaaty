@@ -188,7 +188,7 @@
                       @else
                           @php
                               $audio_ep_img_path = $audio_episodes->get_thumbnail->first()->gallery_path;
-                              $audio_s3_ep_thumbnail = config('app.s3_public_link') . "/users/podcast_img/" . $ep_img_path;
+                              $audio_s3_ep_thumbnail = config('app.s3_public_link') . "/users/podcast_img/" . $audio_ep_img_path;
                           @endphp
                       @endif
                       <div class="text-white bg-cover h-36" style="background-image: url({{ $audio_s3_ep_thumbnail  }}?>);"></div>

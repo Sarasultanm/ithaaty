@@ -118,7 +118,7 @@
                                           </center>
                                         </div>
                                         <center>
-                                         @error('channel_photo') <span class="text-center text-xs text-red-600">Required Image</span> @enderror
+                                         @error('channel_photo') <span class="text-center text-xs text-red-600">{{ $message }}</span> @enderror
                                         </center>
                                       <div class="mt-5">
                                         <div x-show="isUploading"  class="relative pt-1">

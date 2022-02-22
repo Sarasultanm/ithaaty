@@ -5,13 +5,13 @@
 
     <li class="col-span-1 flex flex-col text-center bg-white rounded-lg shadow">
         <a target="_blank" href="{{ route('editorNewPodcastView',['link' => $podcast_items->podcast_uniquelink ]) }}">
-            <div class="flex-auto w-32 h-52 p-2 w-auto relative">
+            <div class="flex-auto  h-52 p-2 w-auto relative">
                 <?php $img_path = $podcast_items->get_channel_photo->gallery_path ?>
                 <?php $s3_link = config('app.s3_public_link')."/users/podcast_img/".$img_path; ?>
                 <img class="h-full w-full rounded-lg" src="{{ $s3_link }}" alt="" />
             </div>
             <div class="flex-1 flex flex-col text-left p-2">
-                <h3 class="font-bold text-gray-900 text-lg text-sm truncate">{{$podcast_items->podcast_title}}</h3>
+                <h3 class="font-bold text-gray-900 text-lg  truncate">{{$podcast_items->podcast_title}}</h3>
                 <p class="text-gray-500 text-sm">{{$podcast_items->get_channel->channel_name}}</p>
                 <p class="flex mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-500 h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
