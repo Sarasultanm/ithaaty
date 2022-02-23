@@ -132,7 +132,6 @@ class User extends Authenticatable
 
 
 
-
     public static function search($search){
 
         return empty($search) ? static::query()

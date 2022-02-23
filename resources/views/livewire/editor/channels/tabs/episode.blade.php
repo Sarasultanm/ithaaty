@@ -1,13 +1,13 @@
 <h3 class="text-xl font-bold text-gray-900">Episodes</h3>
 <!-- channel episodes -->
 <div class="grid grid-cols-12 gap-5 mt-5">
-    @foreach (Auth::user()->channels()->get() as $channel)
-            
+    @foreach (Auth::user()->get_podcasts()->get() as $podcasts)
+{{--             
     <div class="col-span-12 p-2 bg-white ">
         <h2>{{ $channel->channel_name }}</h2>
-    </div>
+    </div> --}}
 
-    @forelse($channel->get_episode()->get() as $episode_items)
+    @forelse($podcasts->get_episodes()->get() as $episode_items)
     <div class="p-2 bg-white rounded-lg shadow-md xl:col-span-3 lg:col-span-6 md:col-span-6 sm:col-span-6 xs:col-span-6">     
             <div>
                 <div class="flex space-x-3">
@@ -53,6 +53,7 @@
                                 <?php $date = date_create($episode_items->get_audio->created_at); ?> <time datetime="2020-12-09T11:43:00">{{ date_format($date,"M, Y") }}</time>
                                 <span class="float-left">SE:{{ $episode_items->get_audio->audio_season }} | EP:{{ $episode_items->get_audio->audio_episode }}</span>
                             </a>
+                            <p class="text-sm font-bold text-gray-800">{{ $podcasts->podcast_title }}</p>
                         </p>
                         <!--   <div class="mt-5 text-xs font-bold text-gray-900" x-data="{ open: false }"> -->
                         <div class="mt-5 text-xs font-bold text-gray-900">
@@ -65,11 +66,11 @@
     
     </div>
     @empty
-    <div class="col-span-12">
+    {{-- <div class="col-span-12">
         <center>
             <h3 class="text-xl font-bold text-gray-900">No Episodes Found</h3>
         </center>
-    </div>
+    </div> --}}
     @endforelse
 
 
