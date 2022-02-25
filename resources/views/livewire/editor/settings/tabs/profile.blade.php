@@ -1,3 +1,5 @@
+
+@if(Auth::user()->get_plan->check_features('o10')->count() == 0 )
 <section>
     <form wire:submit.prevent="updateAlias">
         <div class="shadow sm:rounded-md sm:overflow-hidden">
@@ -26,7 +28,7 @@
         </div>
     </form>
 </section>
-
+@endif
 <section class="mt-5">
     <div class="mt-6 flex flex-col lg:flex-row shadow sm:rounded-md sm:overflow-hidden bg-white py-6 px-4">
         <div class="flex-grow space-y-6">
