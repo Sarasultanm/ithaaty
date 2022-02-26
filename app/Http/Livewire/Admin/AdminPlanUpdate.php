@@ -54,6 +54,9 @@ class AdminPlanUpdate extends Component
         $this->upCreate($id,'Chapter Breakdown','o8',$this->of_typeEight);    
         $this->upCreate($id,'Affiliate Marketing Features','o9',$this->of_typeNine);    
         $this->upCreate($id,'Create Channels','o10',$this->of_typeTen);
+        $this->upCreate($id,'Create Multiple Channels','o11',$this->of_typeEleven);    
+
+
 
         session()->flash('status',"Plan Updated");
         redirect()->to('admin/plans/update/'.$id);  
@@ -139,6 +142,7 @@ class AdminPlanUpdate extends Component
          $this->of_typeEight = $this->get_Datatypes($id,'o8');
          $this->of_typeNine = $this->get_Datatypes($id,'o9');
          $this->of_typeTen = $this->get_Datatypes($id,'o10');
+         $this->of_typeEleven = $this->get_Datatypes($id,'o11');
     }
 
 

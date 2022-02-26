@@ -30,8 +30,15 @@ class UserPodcasts extends Model
     public function get_episodes(){
         return $this->hasMany('App\Models\UserPodcastEpisodes', 'poditem_podcastid', 'id');
     }
+
+    public function get_categories(){
+        return $this->hasMany('App\Models\PodcastCategories', 'pc_podcastid', 'id');
+    }
+
     public function check_episodes($audioid){
         return $this->hasMany('App\Models\UserPodcastEpisodes', 'poditem_podcastid', 'id')->where(['poditem_audioid'=>$audioid]);
     }
+
+
 
 }

@@ -494,6 +494,19 @@
 
                                   </div>
 
+                                  <div class="col-span-2">
+                                    <div class="relative flex items-start">
+                                      <div class="flex items-center h-5">
+                                        <input wire:model="of_typeEleven" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                      </div>
+                                      <div class="ml-3 text-sm">
+                                        <label for="comments" class="font-bold text-gray-900">Create Multiple Channels</label>
+                                        <p id="comments-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
+                                      </div>
+                                    </div>
+
+                                </div>
+
                                 
                                 </div>
 

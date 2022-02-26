@@ -31,6 +31,10 @@
       <main class="lg:col-span-12 xl:col-span-10">
 
         <div class="mt-4">
+
+			
+
+
           <div class="mb-5 w-full ">
           	 <h1 class="font-bold text-gray-800 text-xl">Dashboard</h1> 
           </div>

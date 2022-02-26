@@ -60,7 +60,7 @@ class AdminPlanCreate extends Component
         $this->onCreate($plan->id,'Chapter Breakdown','o8',$this->of_typeEight);    
         $this->onCreate($plan->id,'Affiliate Marketing Features','o9',$this->of_typeNine);  
         $this->onCreate($plan->id,'Create Channels','o10',$this->of_typeTen);  
-		
+        $this->onCreate($plan->id,'Create Multiple Channels','o11',$this->of_typeEleven);  
 		
 
 

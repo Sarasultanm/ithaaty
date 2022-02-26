@@ -23,6 +23,7 @@ class UserPodcastEpisodes extends Model
     {
         return $this->belongsTo('App\Models\Audio', 'poditem_audioid', 'id');
     }
+    
 
     
 }

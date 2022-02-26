@@ -221,16 +221,18 @@ class EditorSetup extends Component
         $data->setup_typestatus = "Incomplete";
         $data->save();
 
-
-        foreach($this->interest_option as $value){
-            if($value != 0){
-                 UserInterest::updateOrCreate(
-                        ['interest_ownerid'=>Auth::user()->id,'interest_id'=>$value],
-                        ['interest_type'=>"interest",'interest_typestatus' => "check"]
-                 );
+        if($this->interest_option){
+            foreach($this->interest_option as $value){
+                if($value != 0){
+                     UserInterest::updateOrCreate(
+                            ['interest_ownerid'=>Auth::user()->id,'interest_id'=>$value],
+                            ['interest_type'=>"interest",'interest_typestatus' => "check"]
+                     );
+                }
             }
+            
         }
-
+        
 
         $this->currentSteps = 3;
         $this->stepTwo = 1;

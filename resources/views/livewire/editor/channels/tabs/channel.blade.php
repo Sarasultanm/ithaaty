@@ -1,11 +1,13 @@
 <div x-data="{modal: false}" class="flex justify-between space-x-3 mb-5">
     <h3 class="text-gray-900 text-xl font-bold">Channel List</h3>
+    @if(Auth::user()->get_plan->check_features('o11')->count() != 0 )
     <button @click="modal = !modal" class="inline-flex items-center cursor-pointer hover:underline hover-text-custom-pink font-bold text-md text-custom-pink text-md">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         Create Channel
     </button>
+    @endif
 
     <!-- sub channel create -->
 

@@ -53,9 +53,17 @@
                                                             {{$podcast->podcast_description}}
                                                            @endif
                                                            <div class="mt-4">
-                                                                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-custom-pink text-white"> Music</span>
-                                                                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-custom-pink text-white"> Games</span>
-                                                           </div>
+                                                                @foreach ($podcast->get_categories()->get() as $category)
+                                                                    @if($category->pc_typestatus == 'active')
+                                                                        <span class="inline-flex items-center px-3 py-0.5 rounded-full 
+                                                                        text-sm font-medium bg-custom-pink text-white">
+                                                                            {{ $category->get_category->category_name }}
+                                                                        </span>
+                                                                    @endif
+                                                          
+                                                                @endforeach
+                                                              
+                                                            </div>
                                                         
                                                         </p>
                                                   

@@ -306,7 +306,12 @@ class EditorViewUsers extends Component
     	// $favorite = UserFav::orderBy('id', 'DESC');
     	// $displayUser = User::orderBy('id', 'DESC');
         // return view('livewire.editor.editor-view-users',compact('audioList','categoryList','topPodcast','following','favorite','displayUser'));
-        $topOneView = UserViews::where('view_ownerid',Auth::user()->id)->orderBy('total','DESC')->groupBy('view_audioid')->selectRaw('count(*) as total, view_audioid')->take(1)->first();
+        $topOneView = UserViews::where('view_ownerid',Auth::user()->id)
+                    ->orderBy('total','DESC')
+                    ->groupBy('view_audioid')
+                    ->selectRaw('count(*) as total, view_audioid')
+                    ->take(1)
+                    ->first();
 
         $topOneLikes = UserLikes::where('like_ownerid',Auth::user()->id)->orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1)->first();
         $audioList = Audio::orderBy('id', 'DESC')->where('audio_editor',Auth::user()->id);

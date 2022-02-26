@@ -45,7 +45,7 @@ class EditorEpisodeCreate extends Component
                 'season' => 'required',
                 'episode' => 'required',
                 'status' => 'required',
-                'category' => 'required',
+                //'category' => 'required',
                 // 'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,mp4,wav',
                 
             ]);
@@ -55,7 +55,8 @@ class EditorEpisodeCreate extends Component
             $data->audio_name = $this->title;
             $data->audio_season = $this->season;
             $data->audio_episode = $this->episode;
-            $data->audio_category = $this->category;
+            // $data->audio_category = $this->category;
+            $data->audio_category = "none";
             $data->audio_tags = "none";
             $data->audio_status = $this->status;
             $data->audio_summary = (empty($this->summary)) ? "" : $this->summary;
@@ -97,7 +98,7 @@ class EditorEpisodeCreate extends Component
                 'season' => 'required',
                 'episode' => 'required',
                 'status' => 'required',
-                'category' => 'required',
+               // 'category' => 'required',
                 'embedlink' => 'required',
             ]);
     
@@ -112,7 +113,8 @@ class EditorEpisodeCreate extends Component
             $data->audio_name = $this->title;
             $data->audio_season = $this->season;
             $data->audio_episode = $this->episode;
-            $data->audio_category = $this->category;
+            // $data->audio_category = $this->category;
+            $data->audio_category = "none";
             $data->audio_tags = "none";
             $data->audio_status = $this->status;
             $data->audio_summary = (empty($this->summary)) ? "" : $this->summary;

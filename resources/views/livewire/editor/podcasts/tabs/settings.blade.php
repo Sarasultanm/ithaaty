@@ -61,9 +61,17 @@
                     </div>
                     @foreach($categories as $category)
                     <div class="col-span-2">
+                    
                         <div class="relative flex items-start">
                             <div class="flex items-center h-5">
-                                <input type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                                @if( $category->checkPodcastCategory($podcast->id)->where('pc_typestatus','active')->count() == 0)
+                                    <input wire:click="addCategory({{ $category->id }})" type="checkbox" 
+                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                                @else
+                                    <input checked wire:click="removeCategory({{ $category->id }})" type="checkbox" 
+                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                                @endif
+                                
                             </div>
                             <div class="ml-3 text-sm">
                                 <label for="comments" class="font-bold text-gray-900">{{$category->category_name}}</label>

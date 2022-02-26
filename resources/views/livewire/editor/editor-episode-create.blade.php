@@ -69,23 +69,22 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 						@error('title') <span class="text-xs text-red-600">Empty fields</span> @enderror
 					</div>
 
-			  <div class="mt-5">
+			  {{-- <div class="mt-5">
 
-							<label for="email" class="block text-sm font-medium text-gray-700">Category</label>
+						<label for="email" class="block text-sm font-medium text-gray-700">Category</label>
 						@if($categoryList->count() == 0 )
-						<span class="text-sm font-medium text-red-600">Add category in the settings</span>
-					   @else
-					   <select id="country" name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="category">
-						<option>Select</option>
-						@foreach($categoryList->get() as $cat)
-						<option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
-						@endforeach
-					  </select> 
+							<span class="text-sm font-medium text-red-600">Add category in the settings</span>
+					   	@else
+						<select id="country" name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="category">
+							<option>Select</option>
+							@foreach($categoryList->get() as $cat)
+								<option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
+							@endforeach
+						</select> 
+					  	@endif
+							@error('category') <span class="text-xs text-red-600">Empty fields</span> @enderror
 
-					   @endif
-						@error('category') <span class="text-xs text-red-600">Empty fields</span> @enderror
-
-						</div>
+				</div> --}}
 
 			 
 			<div class="mt-5">
