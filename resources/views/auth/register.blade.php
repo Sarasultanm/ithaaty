@@ -9,28 +9,29 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('register') }}" id="registerform">
+        <form method="POST" action="{{ route('register') }}" id="registerForm">
             @csrf
 
+            <input type="hidden" class="g-recaptcha" name="recaptcha_token" id="recaptcha_token">
             <!-- Name -->
             <div>
                 <x-label for="name" :value="__('Name')"  class="text-white"/>
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <x-input id="name" class="block w-full mt-1" type="text" name="name" :value="old('name')" required autofocus />
             </div>
 
             <!-- Email Address -->
             <div class="mt-4">
                 <x-label for="email" :value="__('Email')" class="text-white"/>
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')" required />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" class="text-white"/>
 
-                <x-input id="password" class="block mt-1 w-full"
+                <x-input id="password" class="block w-full mt-1"
                                 type="password"
                                 name="password"
                                 required autocomplete="new-password" />
@@ -40,7 +41,7 @@
             <div class="mt-4">
                 <x-label for="password_confirmation" :value="__('Confirm Password')" class="text-white"/>
 
-                <x-input id="password_confirmation" class="block mt-1 w-full"
+                <x-input id="password_confirmation" class="block w-full mt-1"
                                 type="password"
                                 name="password_confirmation" required />
             </div>
@@ -49,7 +50,7 @@
                
                   <label  class="block text-sm font-medium text-white">Birthday</label>
                 <div class="flex space-x-4">
-                  <select id="months" name="months" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                  <select id="months" name="months" class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     <option selected="" disabled="">Month</option>
                     <option value="January">January</option>
                     <option value="Febuary">Febuary</option>
@@ -65,7 +66,7 @@
                     <option value="December">December</option>
                   </select>
 
-                 <select id="days" name="days" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                 <select id="days" name="days" class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     <option selected="" disabled="">Day</option>
                     <option value="01">01</option>
                     <option value="02">02</option>
@@ -100,7 +101,7 @@
                     <option value="31">31</option>
                   </select>
 
-                 <select id="years" name="years" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                 <select id="years" name="years" class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     <option selected="" disabled="">Year</option>
                     <option value="2005">2005</option>
                     <option value="2004">2004</option>
@@ -186,7 +187,7 @@
             <div class="mt-4">
                 <div>
                   <label  class="block text-sm font-medium text-white">Gender</label>
-                  <select id="gender" name="gender" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                  <select id="gender" name="gender" class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     <option selected="" disabled="">Select Gender</option>
                      <option value="Female">
                             Female
@@ -202,7 +203,7 @@
             <div class="mt-4">
                 <div>
                   <label  class="block text-sm font-medium text-white">Country</label>
-                  <select id="location" name="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                  <select id="location" name="location" class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     <option selected="" disabled="">Select Country</option>
                     <option value="Afganistan">Afghanistan</option>
                     <option value="Albania">Albania</option>
@@ -463,7 +464,7 @@
 
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-white " href="{{ route('login') }}">
+                <a class="text-sm text-white underline " href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
 
@@ -473,4 +474,18 @@
             </div>
         </form>
     </x-auth-card>
+    @push('scripts')
+        <script>
+            grecaptcha.ready(function () {
+                document.getElementById('registerForm').addEventListener("submit", function (event) {
+                    event.preventDefault();
+                    grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', { action: 'register' })
+                        .then(function (token) {
+                            document.getElementById("recaptcha_token").value = token;
+                            document.getElementById('registerForm').submit();
+                        });
+                });
+            });
+        </script>
+    @endpush
 </x-guest-layout>

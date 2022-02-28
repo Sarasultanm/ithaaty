@@ -252,9 +252,9 @@
                   <li @click="openTab = 7" :class="openTab === 7 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
                     <a>Episodes</a>
                   </li>
-                   <li @click="openTab = 6" :class="openTab === 6 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                   {{-- <li @click="openTab = 6" :class="openTab === 6 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
                     <a>Playlist</a>
-                  </li>
+                  </li> --}}
                    <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
                     <a>About</a>
                   </li>
@@ -283,9 +283,9 @@
                 <div x-show="openTab === 5">
                     @include('livewire.editor.channels.tabs.podcast')
                 </div>
-                <div x-show="openTab === 6">
+                {{-- <div x-show="openTab === 6">
                     @include('livewire.editor.channels.tabs.playlist') 
-                </div>
+                </div> --}}
                 <div x-show="openTab === 7">
                      @include('livewire.editor.channels.tabs.episode') 
                   

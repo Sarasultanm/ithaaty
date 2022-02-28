@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str; 
 
+use App\Rules\Recaptcha;
+
 
 class RegisteredUserController extends Controller
 {
@@ -45,6 +47,7 @@ class RegisteredUserController extends Controller
             'years' => 'required',
             'gender' => 'required',
             'location' => 'required',
+            'recaptcha_token' => ['required', new Recaptcha($request->recaptcha_token)]
         ]);
         // $randomStr = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 5);
 
@@ -63,6 +66,7 @@ class RegisteredUserController extends Controller
             'plan' => $plan_default,
             'alias' => "User".$randomStr,
             'about' => ' ',
+            
         ]);
 
         // event(new Registered($user));

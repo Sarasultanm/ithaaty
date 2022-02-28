@@ -50,12 +50,26 @@
 
         <div class=" w-full flex xl:p-0 lg:p-0 md:p-0 sm:p-0 xs:p-0">
             <div class="flex-1">
-               <h1 class="font-bold text-gray-800 text-xl">My Podcast </h1> 
-               @if(empty(Auth::user()->alias))
-               <small class="">Click <a href="{{ route('editorSettings') }}" class="text-custom-pink pointer">settings</a> and update your name</small>
-               @else
-               <small class="text-custom-pink">@ {{Auth::user()->alias}} </small>
-               @endif
+              <h1 class="font-bold text-gray-800 text-xl">My Podcast </h1> 
+                @forelse (Auth::user()->channels()->get() as $user_channel )
+                  <a href="{{ route('editorChannelView',['link' => $user_channel->channel_uniquelink ]) }}" target="_blank"><small class="text-custom-pink">@ {{ $user_channel->channel_name }} </small></a>
+                 
+                @empty
+                @if(empty(Auth::user()->alias))
+                <small class="">Click <a href="{{ route('editorSettings') }}" class="text-custom-pink pointer">settings</a> and update your name</small>
+                @else
+                <small class="text-custom-pink">@ {{Auth::user()->alias}} </small>
+                @endif
+              @endforelse
+
+
+
+
+
+
+
+              
+              
             </div>
             <div>
 

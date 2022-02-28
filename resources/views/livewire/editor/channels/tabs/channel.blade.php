@@ -111,7 +111,7 @@
             <?php $s3_link = config('app.s3_public_link')."/users/channe_img/".$img_path; ?>
             <img class="w-32 h-32 flex-shrink-0 mx-auto rounded-full" src="{{ $s3_link }}" alt="" />
 
-            <h3 class="mt-6 font-bold text-gray-900 text-lg text-sm truncate">{{$sub_channel->channel_name}}</h3>
+            <h3 class="mt-6 font-bold text-gray-900 text-lg truncate">{{$sub_channel->channel_name}}</h3>
             <dl class="mt-1 flex-grow flex flex-col justify-between">
                 <dd class="text-gray-500 text-sm">{{ $sub_channel->get_subs()->count() }} subcribers</dd>
             </dl>

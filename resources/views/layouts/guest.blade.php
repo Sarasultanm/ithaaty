@@ -19,14 +19,15 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="{{ asset('js/jquery.validate.js') }}"></script>
         <script src="{{ asset('js/validation.js') }}"></script>
+        <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
          @livewireStyles
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased">
+        <div class="font-sans antialiased text-gray-900">
             {{ $slot }}
         </div>
          @livewireScripts
 
-        
+         @stack('scripts')
     </body>
 </html>

@@ -57,7 +57,7 @@
               <ul class="mt-5 space-y-1">
                 @forelse ($userInfo->channels()->get() as $user_channel )
                 <li class="text-gray-500">
-                  <a href="">
+                  <a href="{{ route('editorChannelView',['link' => $user_channel->channel_uniquelink ]) }}" target="_blank">
                     <i class="fas fa-podcast pl-1 mr-2 h-5 w-5 text-xl text-center"></i>
                     <span><b>{{ $user_channel->channel_name }}</b></span>
                   </a>
@@ -125,7 +125,7 @@
                     @else   
                          <p class="font-bold text-gray-900 mt-2 text-sm  truncate">
                           <a class="truncate" href="{{ route('editorViewUser',['id' => $friends->get_add_friend->id ]) }}" target="_blank">
-                            <span  class="truncate"> {{ $friends->get_add_friend->name}}</span?
+                            <span  class="truncate"> {{ $friends->get_add_friend->name}}</span>
                         </a>
                          </p>
                     @endif
