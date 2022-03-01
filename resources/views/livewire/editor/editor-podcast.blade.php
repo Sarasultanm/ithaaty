@@ -48,12 +48,15 @@
              <x-auth-session-status-custom class="mt-4 mb-4" :status="session('status')" />
         </div>
 
-        <div class="flex w-full  xl:p-0 lg:p-0 md:p-0 sm:p-0 xs:p-0">
+        <div class="flex w-full xl:p-0 lg:p-0 md:p-0 sm:p-0 xs:p-0">
             <div class="flex-1">
               <h1 class="text-xl font-bold text-gray-800">My Podcast </h1> 
                 @forelse (Auth::user()->channels()->get() as $user_channel )
-                  <a href="" target="_blank"><small class="text-custom-pink">@ {{ $user_channel->channel_name }} </small></a>
-                 
+                  @if(!empty($user_channel->channel_uniquelink))
+                    <a href="{{ route('editorChannelView',['link' => $user_channel->channel_uniquelink ]) }}" target="_blank"><small class="text-custom-pink">@ {{ $user_channel->channel_name }} </small></a>
+                  @else
+                  <a href="#" target="_blank"><small class="text-custom-pink">@ {{ $user_channel->channel_name }} </small></a>
+                  @endif
                 @empty
                 @if(empty(Auth::user()->alias))
                 <small class="">Click <a href="{{ route('editorSettings') }}" class="text-custom-pink pointer">settings</a> and update your name</small>
@@ -74,8 +77,8 @@
             <div>
 
                 @if(Auth::user()->get_audio->count() != 0)
-                <a href="{{ route('editorSettings') }}" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm  bg-custom-pink sm:col-start-2 sm:text-sm">Import RSS</a>
-                <a href="{{ route('editorPodcastCreate') }}" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm  bg-custom-pink sm:col-start-2 sm:text-sm">Add Episodes</a>
+                <a href="{{ route('editorSettings') }}" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink sm:col-start-2 sm:text-sm">Import RSS</a>
+                <a href="{{ route('editorPodcastCreate') }}" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink sm:col-start-2 sm:text-sm">Add Episodes</a>
                 @endif
             </div>
                
