@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Audio;
 use App\Models\Category;
 use App\Models\AudioReferences;
+use App\Models\UserPodcasts;
+use App\Models\UserPodcastEpisodes;
 use Livewire\WithFileUploads;
 
 
@@ -17,7 +19,7 @@ class EditorCreatePost extends Component
 	
 	public $count = 0;
  	
-	public $title,$season,$episode,$category,$summary,$embedlink,$hashtags,$status,$audio;
+	public $podcast_item,$title,$season,$episode,$category,$summary,$embedlink,$hashtags,$status,$audio;
 
 
     public $showSummary = true;
@@ -52,7 +54,9 @@ class EditorCreatePost extends Component
             'season' => 'required',
             'episode' => 'required',
             'status' => 'required',
-            'category' => 'required',
+            'podcast_item' => 'required',
+            
+            // 'category' => 'required',
             // 'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,mp4,wav',
             
         ]);
@@ -62,7 +66,7 @@ class EditorCreatePost extends Component
         $data->audio_name = $this->title;
         $data->audio_season = $this->season;
         $data->audio_episode = $this->episode;
-        $data->audio_category = $this->category;
+        $data->audio_category = "none";
         $data->audio_tags = "none";
         $data->audio_status = $this->status;
         $data->audio_summary = (empty($this->summary)) ? "" : $this->summary;
@@ -77,6 +81,12 @@ class EditorCreatePost extends Component
         $path = $this->audio->storeAs('audio',$mediafile);
 
         $s3_storage = $this->audio->store('audio', 's3');
+
+        UserPodcastEpisodes::create([
+            'poditem_podcastid'=>$this->podcast_item,
+            'poditem_audioid'=>$data->id,
+            'poditem_type'=>"Upload",
+        ]);
 
         session()->flash('status', "You updated your podcast but its not publish. If you want to publish your podcast now hit the publish button.");
 
@@ -93,7 +103,8 @@ class EditorCreatePost extends Component
             'season' => 'required',
             'episode' => 'required',
             'status' => 'required',
-            'category' => 'required',
+            'podcast_item' => 'required',
+            // 'category' => 'required',
             'embedlink' => 'required',
         ]);
 
@@ -108,7 +119,7 @@ class EditorCreatePost extends Component
         $data->audio_name = $this->title;
         $data->audio_season = $this->season;
         $data->audio_episode = $this->episode;
-        $data->audio_category = $this->category;
+        $data->audio_category = "none";
         $data->audio_tags = "none";
         $data->audio_status = $this->status;
         $data->audio_summary = (empty($this->summary)) ? "" : $this->summary;
@@ -133,6 +144,12 @@ class EditorCreatePost extends Component
         // $audiofile = $this->audiofile->hashName();
         // $path = $this->audiofile->storeAs('audio',$audiofile);
 
+        UserPodcastEpisodes::create([
+            'poditem_podcastid'=>$this->podcast_item,
+            'poditem_audioid'=>$data->id,
+            'poditem_type'=>"Embed",
+        ]);
+
         session()->flash('status', "You updated your podcast but its not publish. If you want to publish your podcast now hit the publish button.");
 
         // redirect()->to('/editor/dashboard');
@@ -153,6 +170,7 @@ class EditorCreatePost extends Component
     public function render()
     {
     	$categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
-        return view('livewire.editor.editor-create-post',compact('categoryList'));
+        $podcasts = UserPodcasts::where('podcast_ownerid',Auth::user()->id)->get();
+        return view('livewire.editor.editor-create-post',compact('categoryList','podcasts'));
     }
 }

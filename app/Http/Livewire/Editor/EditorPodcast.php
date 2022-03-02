@@ -80,13 +80,14 @@ class EditorPodcast extends Component
             $data->audio_name = $item->get_title();
             $data->audio_season = "1";
             $data->audio_episode = "1";
-            $data->audio_category = "1";
+            $data->audio_category = "none";
             $data->audio_tags = "none";
             $data->audio_status = "public";
             $data->audio_summary = str_replace(['<p>', '</p>'], '', $item->get_description());
             $data->audio_path = $i['enclosure_link'];
             $data->audio_type = "RSS";
             $data->audio_hashtags = "";
+            $data->audio_publish = "Draft";
             $data->save();
 
             $result['items'][] = $i;

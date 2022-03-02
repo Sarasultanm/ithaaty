@@ -1,5 +1,5 @@
 <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+    <h2 class="text-xl font-semibold leading-tight text-gray-800">
         {{ __('Channel') }}
     </h2>
 </x-slot>
@@ -23,30 +23,30 @@
                         </div>
                         <main class="xl:col-span-10 lg:col-span-9">
                             <div class="w-full">
-                                <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
+                                <x-auth-session-status-custom class="mt-4 mb-4" :status="session('status')" />
                             </div>
 
                             <div class="mt-4">
                                 <div class="w-full xl:p-0 lg:p-0 md:p-0 sm:p-0 xs:p-0">
                                     <div class="w-full">
                                         <div class="grid grid-cols-1 gap-4">
-                                            <div class="relative w-full flex items-center space-x-3 hover:border-gray-400 ">
-                                                <div class="flex-shrink-0  w-44 h-44 ">
+                                            <div class="relative flex items-center w-full space-x-3 hover:border-gray-400 ">
+                                                <div class="flex-shrink-0 w-44 h-44 ">
                                                     <?php $podcast_imgpath = $podcast->get_channel_photo->gallery_path ?>
                                                     <?php $podcast_s3_link = config('app.s3_public_link')."/users/podcast_img/".$podcast_imgpath; ?>
-                                                    <img class="h-full w-full rounded-lg" src="{{ $podcast_s3_link }}" alt="image" />
+                                                    <img class="w-full h-full rounded-lg" src="{{ $podcast_s3_link }}" alt="image" />
                                                     
                                                 </div>
                                                 <div class="flex-1 min-w-0">
                                         
                                                         <!--  <span class="absolute inset-0" aria-hidden="true"></span> -->
-                                                        <p class="text-5xl font-bold text-gray-900 mt-5">
+                                                        <p class="mt-5 text-5xl font-bold text-gray-900">
                                                             {{$podcast->podcast_title}}
                                                         </p>
-                                                         <p class="text-xl font-bold text-gray-900 mt-5">
+                                                         <p class="mt-5 text-xl font-bold text-gray-900">
                                                             {{$podcast->get_channel->channel_name}}
                                                         </p>
-                                                        <p class="text-md text-gray-500 inline-grid">
+                                                        <p class="inline-grid text-gray-500 text-md">
                                                            @if($podcast->podcast_description == null)
                                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at risus facilisis, dapibus ex nec, porta massa. Duis quis massa vitae nisl gravida laoreet. Interdum et malesuada fames ac ante ipsum primis in faucibus.
                                                            @else
@@ -74,7 +74,7 @@
                                         </div>
                                     </div>
 
-                                    <section class="mt-5 w-full">
+                                    <section class="w-full mt-5">
                                         <div
                                             x-data="{
                                               openTab: 1,
@@ -84,14 +84,14 @@
                                             class=""
                                         >
                                             <div class="border-b border-gray-200 ">
-                                                <ul class="-mb-px flex ">
-                                                    <li @click="openTab = 1" :class="openTab === 1 ? activeClasses : inactiveClasses" class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
-                                                        <a>Home</a>
-                                                    </li>
-                                                    <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses" class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                                                <ul class="flex -mb-px ">
+                                                    <li @click="openTab = 1" :class="openTab === 1 ? activeClasses : inactiveClasses" class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
                                                         <a>Episodes</a>
                                                     </li>
-                                                    <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses" class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                                                    {{-- <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses" class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
+                                                        <a>Episodes</a>
+                                                    </li> --}}
+                                                    <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses" class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
                                                         <a>Settings</a>
                                                     </li>
                                                 </ul>
@@ -101,9 +101,9 @@
                                                 <div x-show="openTab === 1">
                                                     @include('livewire.editor.podcasts.tabs.home')
                                                 </div>
-                                                <div x-show="openTab === 2">
+                                                {{-- <div x-show="openTab === 2">
                                                     @include('livewire.editor.podcasts.tabs.episodes')
-                                                </div>
+                                                </div> --}}
                                                 <div x-show="openTab === 3">
                                                     @include('livewire.editor.podcasts.tabs.settings')
                                                 </div>

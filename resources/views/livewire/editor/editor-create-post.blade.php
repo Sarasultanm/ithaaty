@@ -1,6 +1,6 @@
 
  <x-slot name="header">
-	<h2 class="font-semibold text-xl text-gray-800 leading-tight">
+	<h2 class="text-xl font-semibold leading-tight text-gray-800">
 		{{ __('Podcast Create') }}
 	</h2>
 </x-slot>
@@ -35,7 +35,7 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 	<div class="mt-4">
 	  
 	  <div class="w-full ">
-		   <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
+		   <x-auth-session-status-custom class="mt-4 mb-4" :status="session('status')" />
 	  </div>
 	  
 	@if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
@@ -44,17 +44,13 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 
 	@else
 
-  
-
-
-
 		<div class="w-full pt-4">
 				<div >
 					 @if(Auth::user()->get_plan->check_features('p3')->count() != 0 )
 				<!-- 	<form wire:submit.prevent="save">  -->
 
 				<div>
-			  <h2 class="text-lg leading-6 font-medium text-gray-900"> Creat Post</h2>
+			  <h2 class="text-lg font-medium leading-6 text-gray-900"> Creat Post</h2>
 			  <p class="mt-1 text-sm text-gray-500">
 				This information will be displayed publicly so be careful what you share.
 			  </p>
@@ -64,18 +60,34 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 					<div class="mt-5">
 						<label for="email" class="block text-sm font-medium text-gray-700">Title</label>
 						<div class="mt-1">
-						  <input type="text" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  wire:model="title">
+						  <input type="text" name="email" id="email" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="title">
 						</div>
-						@error('title') <span class="text-xs text-red-600">Empty fields</span> @enderror
+						@error('title') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
 					</div>
 
-			  <div class="mt-5">
+			<div class="mt-5">
+			
+			@if(Auth::user()->get_podcasts()->count() != 0)
+			<label for="email" class="block text-sm font-medium text-gray-700">Podcast</label>
+				<select wire:model="podcast_item" id="podcast" name="podcast" autocomplete="podcast" class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="category">
+					<option>Select</option>
+					@foreach ($podcasts as $podcast  )
+					<option value="{{ $podcast->id }}">{{ $podcast->podcast_title }}</option>
+					@endforeach
+				</select>
+				@error('podcast_item') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
+			</div>
+			@else
+				<p class="text-center text-red-400 font-regular text-md">No Podcast Available <a href="{{ route('editorChannel') }}" class="font-bold text-indigo-600">click here</a> to create podcast and channel <p>
+			@endif
 
-							<label for="email" class="block text-sm font-medium text-gray-700">Category</label>
-						@if($categoryList->count() == 0 )
+			{{-- <div class="hidden mt-5">
+
+				<label for="email" class="block text-sm font-medium text-gray-700">Category</label>
+					@if($categoryList->count() == 0 )
 						<span class="text-sm font-medium text-red-600">Add category in the settings</span>
-					   @else
-					   <select id="country" name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="category">
+					 @else
+					   <select id="country" name="country" autocomplete="country" class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="category">
 						<option>Select</option>
 						@foreach($categoryList->get() as $cat)
 						<option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
@@ -83,9 +95,9 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 					  </select> 
 
 					   @endif
-						@error('category') <span class="text-xs text-red-600">Empty fields</span> @enderror
+						@error('category') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
 
-						</div>
+			</div> --}}
 
 			 
 			<div class="mt-5">
@@ -93,33 +105,33 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 						  <div class="flex-1 mr-2">
 
 							  <label for="email" class="block text-sm font-medium text-gray-700">Season</label>
-			  <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="season">
+			  <select class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="season">
 				  <option>Select</option>
 				  @for ($s = 1; $s < 50; $s++)
 					 <option value="{{ $s }}">{{ $s }}</option>
 										@endfor
 					  </select> 
-					 @error('season') <span class="text-xs text-red-600">Empty fields</span> @enderror
+					 @error('season') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
 						  </div>
 				  <div class="flex-1 ml-2">
 					  <label for="email" class="block text-sm font-medium text-gray-700">Episode</label>
-					  <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="episode">
+					  <select class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="episode">
 						<option>Select</option>
 						@for ($e = 1; $e < 50; $e++)
 						   <option value="{{ $e }}">{{ $e }}</option>
 						@endfor
 					  </select> 
-					  @error('episode') <span class="text-xs text-red-600">Empty fields</span> @enderror
+					  @error('episode') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
 
 				  </div>
 				   <div class="flex-1 ml-2">
 					  <label for="email" class="block text-sm font-medium text-gray-700">Status</label>
-					  <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="status">
+					  <select class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="status">
 						<option>Select</option>
 						   <option value="public">Public</option>
 							<option value="private">Private</option>
 					  </select> 
-					  @error('status') <span class="text-xs text-red-600">Empty fields</span> @enderror
+					  @error('status') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
 
 				  </div>
 				 
@@ -129,23 +141,23 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 			<div class="mt-5" x-data="{ on: false }" >
 					<div class="flex">
 						<div class="flex-1">
-							 <label for="about" class="text-sm font-medium text-gray-700 mr-2" :class="{ 'hidden': on, 'block': !(on) }">
+							 <label for="about" class="mr-2 text-sm font-medium text-gray-700" :class="{ 'hidden': on, 'block': !(on) }">
 								Transcript
 							 </label>
 						</div>
 						<div>
-							 <label for="about" class="block text-xs font-medium text-gray-700 float-left mr-2 mt-1">
+							 <label for="about" class="block float-left mt-1 mr-2 text-xs font-medium text-gray-700">
 								Toggle to hide textbox:
 							 </label>
-							 <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200  bg-gray-500  " role="switch" aria-checked="false" :aria-checked="on.toString()" @click="on = !on" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-custom-pink': on, 'bg-gray-500': !(on) }">
+							 <button type="button" class="relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out bg-gray-500 border-transparent rounded-full cursor-pointer w-11 " role="switch" aria-checked="false" :aria-checked="on.toString()" @click="on = !on" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-custom-pink': on, 'bg-gray-500': !(on) }">
 								<span class="sr-only">Use setting</span>
-								<span aria-hidden="true" class="inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': on, 'translate-x-0': !(on) }" style="margin-top:2px;"></span>
+								<span aria-hidden="true" class="inline-block w-5 h-5 transition duration-200 ease-in-out transform translate-x-0 bg-white rounded-full shadow ring-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': on, 'translate-x-0': !(on) }" style="margin-top:2px;"></span>
 							</button>
 							
 						</div>
 					</div>
 					  <div class="mt-1" :class="{ 'hidden': on, 'block': !(on) }">
-						<textarea id="about" name="about" rows="15" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="summary" ></textarea>
+						<textarea id="about" name="about" rows="15" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:model="summary" ></textarea>
 					  </div>
 					  
 			</div>
@@ -153,23 +165,23 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 			<div class="mt-5" x-data="{ on: false }" >
 					<div class="flex">
 						<div class="flex-1">
-							 <label for="about" class="text-sm font-medium text-gray-700 mr-2" :class="{ 'hidden': on, 'block': !(on) }">
+							 <label for="about" class="mr-2 text-sm font-medium text-gray-700" :class="{ 'hidden': on, 'block': !(on) }">
 								Hashtags
 							 </label>
 						</div>
 						<div>
-							 <label for="about" class="block text-xs font-medium text-gray-700 float-left mr-2 mt-1">
+							 <label for="about" class="block float-left mt-1 mr-2 text-xs font-medium text-gray-700">
 								Toggle to hide textbox:
 							 </label>
-							 <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200  bg-gray-500  " role="switch" aria-checked="false" :aria-checked="on.toString()" @click="on = !on" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-custom-pink': on, 'bg-gray-500': !(on) }">
+							 <button type="button" class="relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out bg-gray-500 border-transparent rounded-full cursor-pointer w-11 " role="switch" aria-checked="false" :aria-checked="on.toString()" @click="on = !on" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-custom-pink': on, 'bg-gray-500': !(on) }">
 								<span class="sr-only">Use setting</span>
-								<span aria-hidden="true" class="inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': on, 'translate-x-0': !(on) }" style="margin-top:2px;"></span>
+								<span aria-hidden="true" class="inline-block w-5 h-5 transition duration-200 ease-in-out transform translate-x-0 bg-white rounded-full shadow ring-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': on, 'translate-x-0': !(on) }" style="margin-top:2px;"></span>
 							</button>
 							
 						</div>
 					</div>
 					  <div class="mt-1" :class="{ 'hidden': on, 'block': !(on) }">
-						<textarea id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="hashtags" ></textarea>
+						<textarea id="about" name="about" rows="3" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:model="hashtags" ></textarea>
 					  </div>
 					  
 			   </div>	
@@ -186,15 +198,15 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 		class="mb-20">
 
 		<div class="mt-10 border-b border-gray-200">
-			  <ul class="-mb-px flex" >
+			  <ul class="flex -mb-px" >
 				   @if(Auth::user()->get_plan->check_features('p3')->count() != 0 )
-			  <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
+			  <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/2 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer" >
 				<a  >Embed Code</a>
 			  </li>
 			  @endif
 
 			  @if(Auth::user()->get_plan->check_features('u1')->count() == 0 )
-			  <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+			  <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/2 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
 				<a  >Media Files (mp3,mp4..)</a>
 			  </li>
 			  @endif
@@ -208,25 +220,27 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 
 			<div>
 				<div class="mt-5">
-					  <h2 class="text-lg leading-6 font-medium text-gray-900"> Embed Code</h2>
+					  <h2 class="text-lg font-medium leading-6 text-gray-900"> Embed Code</h2>
 					  <p class="mt-1 text-sm text-gray-500">
 						This information will be displayed publicly so be careful what you share.
 					  </p>
 				</div>   
 				<div class="mt-5">
 				 <div class="mt-1">
-						<textarea id="about" name="about" rows="4" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" wire:model="embedlink" ></textarea>
+						<textarea id="about" name="about" rows="4" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:model="embedlink" ></textarea>
 					  </div>
-					   @error('embedlink') <span class="text-xs text-red-600">Empty fields</span> @enderror
+					   @error('embedlink') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
 			  </div>
 
 
 
-		  <div class="mt-3  sm:mt-5 mb-20">
+		  <div class="mt-3 mb-20 sm:mt-5">
 				  <div class="w-full">
-					  <div class="w-1/2 float-left">&nbsp;</div>
-						<div class="w-1/2 float-left text-right">
-							<button type="submit" wire:click="save()" class="w-1/2 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white sm:col-start-2 sm:text-md">Save</button>
+					  <div class="float-left w-1/2">&nbsp;</div>
+						<div class="float-left w-1/2 text-right">
+							@if(Auth::user()->get_podcasts()->count() != 0)
+							<button type="submit" wire:click="save()" class="inline-flex justify-center w-1/2 px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink sm:col-start-2 sm:text-md">Save</button>
+							@endif
 						</div>
 							  </div>    
 					   </div>
@@ -246,7 +260,7 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 			<div>
 			   
 				<div class="mt-5">
-					  <h2 class="text-lg leading-6 font-medium text-gray-900"> Upload Media File</h2>
+					  <h2 class="text-lg font-medium leading-6 text-gray-900"> Upload Media File</h2>
 					  <p class="mt-1 text-sm text-gray-500">
 						This information will be displayed publicly so be careful what you share.
 					  </p>
@@ -270,25 +284,27 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 					<div class="text-center text-gray-700">
 					  Please wait while uploading the file .. <input x-bind:value="`${progress}%`" disabled style="width: 60px;">
 					</div>
-					<div  class="overflow-hidden h-2 text-xs flex rounded bg-purple-200 progress">
+					<div  class="flex h-2 overflow-hidden text-xs bg-purple-200 rounded progress">
 					  <div x-bind:style="`width:${progress}%`"
-						class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom-pink"
+						class="flex flex-col justify-center text-center text-white shadow-none whitespace-nowrap bg-custom-pink"
 					  ></div>
 					</div>
 
 				  </div>
 
 				 <div  x-show="success">
-					 <div class="mt-3  sm:mt-5 mb-20">
+					 <div class="mt-3 mb-20 sm:mt-5">
 							  <div class="w-full">
-								<div class="w-1/2 float-left">&nbsp;
-									<div class="text-center text-custom-pink font-bold text-gray-800 text-sm"" wire:loading wire:target="saveMedia">
+								<div class="float-left w-1/2">&nbsp;
+									<div class="text-sm font-bold text-center text-gray-800 text-custom-pink"" wire:loading wire:target="saveMedia">
 													Please wait while saving your file to server...
 												</div>
 								</div>
-									<div class="w-1/2 float-left text-right">
+									<div class="float-left w-1/2 text-right">
 									<div class="text-right">
-										<button type="submit" wire:click="saveMedia()" wire:loading.attr="disabled" class="w-1/2 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white sm:col-start-2 sm:text-md">Save Podcast</button>
+										@if(Auth::user()->get_podcasts()->count() != 0)
+										<button type="submit" wire:click="saveMedia()" wire:loading.attr="disabled" class="inline-flex justify-center w-1/2 px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink sm:col-start-2 sm:text-md">Save Podcast</button>
+										@endif
 									</div>
 										  </div>    
 									   </div>
@@ -298,8 +314,8 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 
 				</div>
 
-				  <!-- <p x-show="success" class="text-center text-custom-pink font-bold text-gray-800 text-sm">File Upload Complete</p>  -->
-				   <p x-show="error" class="text-center font-bold text-red-800 text-sm">*Error to upload the file</p> 
+				  <!-- <p x-show="success" class="text-sm font-bold text-center text-gray-800 text-custom-pink">File Upload Complete</p>  -->
+				   <p x-show="error" class="text-sm font-bold text-center text-red-800">*Error to upload the file</p> 
 
 				</div>
 
