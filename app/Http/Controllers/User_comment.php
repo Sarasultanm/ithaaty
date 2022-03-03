@@ -1,21 +1,47 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Product;
-use Illuminate\Http\Request;
 
-class ProductController extends Controller
+use Illuminate\Http\Request;
+use App\Models\UserComments;
+use App\Models\Audio;
+use Illuminate\Support\Facades\DB;
+class User_comment extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     *s
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         //
-        return Product::all();
     }
+
+
+    public function Search_comment(Request $request){
+
+        // $fields=$request->validate([
+        //     'setup_ownerid'=>'required|string',
+        // ]);
+
+        // $search = '%'.$request->input('searchdata').'%';
+
+        $usercomment= DB::table('audio')
+        ->join('user_comments', 'user_comments.coms_audioid', '=', 'audio.id')
+            ->select('audio.id','audio.audio_name','audio.audio_episode','user_comments.coms_message')
+        ->where('user_comments.coms_status','active')
+        ->get();
+
+
+
+
+
+        return response($usercomment, 201);
+
+
+
+        }   
 
     /**
      * Store a newly created resource in storage.
@@ -26,12 +52,6 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-        'name'=>'required',
-        'slug'=>'required',
-        'price'=>'required',
-        ]);
-        return  Product::create($request->all());
     }
 
     /**
@@ -43,7 +63,6 @@ class ProductController extends Controller
     public function show($id)
     {
         //
-           return Product::find($id);
     }
 
     /**
@@ -56,10 +75,6 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
-
-        $product=Product::find($id);
-        $product->update($request->all());
-        return $product;
     }
 
     /**
@@ -70,23 +85,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        
-        return Product::destroy($id);
-
-    }
-
-
-
-        /**
-     * Search for name
-     *
-     * @param  str  $name
-     * @return \Illuminate\Http\Response
-     */
-    public function search($name)
-    {
-        
-        return Product::where('name','like','%'.$name.'%')->get();
-
+        //
     }
 }

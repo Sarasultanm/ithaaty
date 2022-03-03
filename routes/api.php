@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SetupController;
 use App\Http\Controllers\Channel;
 use App\Http\Controllers\Popular;
+use App\Http\Controllers\User_comment;
+
 
 
 
@@ -31,6 +33,9 @@ use App\Http\Controllers\Popular;
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/searchfriends',[SetupController::class,'searchFriend']);
+
+
+//
 Route::group(['middleware'=>['auth:sanctum']], function () {
 
 
@@ -42,8 +47,11 @@ Route::post('/searchpodcast',[Channel::class,'Search_Podcast']);
 Route::post('/searchpopular_channel',[Popular::class,'Searchpopular_Channel']);	
 Route::post('/searchpopular_episode',[Popular::class,'Searchpopular_Episode']);	
 
+//user comment
 
 
+
+Route::post('/search_comment',[User_comment::class,'Search_comment']);	
 //SETUP	
 
 Route::post('/setupstep',[SetupController::class,'Step_setup']);
