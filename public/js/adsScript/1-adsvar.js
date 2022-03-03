@@ -1,1 +1,0 @@
- var adsLink = "<?php echo $adsList->first()->get_adslist->adslist_videolink; ?>";

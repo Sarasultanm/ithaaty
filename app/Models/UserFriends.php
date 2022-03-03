@@ -9,23 +9,14 @@ class UserFriends extends Model
 {
     use HasFactory;
 
-    public function get_request_user(){
-        return $this->belongsTo('App\Models\User', 'friend_requestid', 'id');
-    }
 
-    public function get_add_friend(){
-        return $this->belongsTo('App\Models\User', 'friend_userid', 'id');
-    }
-
-
-    public function get_block(){
-        return $this->belongsTo('App\Models\UserBlockList','id','block_friendtblid');
-    }
-
-   
-
+        protected $fillable = [
+        'friend_userid',
+        'friend_requestid',
+        'friend_type',
+        'friend_status',
+        'friend_block_type',
+    
+    ];
 
 }
-
-
-
