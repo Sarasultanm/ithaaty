@@ -23,6 +23,11 @@ class UserPodcastEpisodes extends Model
     {
         return $this->belongsTo('App\Models\Audio', 'poditem_audioid', 'id');
     }
+
+    public function get_podcast()
+    {
+        return $this->belongsTo('App\Models\UserPodcasts', 'poditem_podcastid', 'id');
+    }
     
 
     
