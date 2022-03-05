@@ -20,6 +20,8 @@ class EditorPodcastDetail extends Component
 
 	public function mount($id)
     {
+        if(Audio::where('id',$id)->first()->audio_editor == Auth::user()->id ){
+
         $this->audio = Audio::where('id',$id)->first();
         $this->jan_views = UserViews::where('view_audioid',$id)->whereMonth('created_at', date('01'))->whereYear('created_at', date('Y'))->count();
         $this->feb_views = UserViews::where('view_audioid',$id)->whereMonth('created_at', date('02'))->whereYear('created_at', date('Y'))->count();
@@ -34,6 +36,9 @@ class EditorPodcastDetail extends Component
         $this->nov_views = UserViews::where('view_audioid',$id)->whereMonth('created_at', date('11'))->whereYear('created_at', date('Y'))->count();
         $this->dec_views = UserViews::where('view_audioid',$id)->whereMonth('created_at', date('12'))->whereYear('created_at', date('Y'))->count();
         $this->wordCount = $this->wordCounter($id);
+        }else{
+            abort(404);
+        }
 
     }
     public function getEpisodes($audio_category){

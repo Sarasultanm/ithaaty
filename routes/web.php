@@ -60,6 +60,7 @@ use App\Http\Livewire\Editor\{
 	EditorChannelView,
 	EditorNewPodcastView,
 	EditorEpisodeCreate,
+	EditorEpisodeView,
 };
 
 /*
@@ -177,7 +178,7 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 
 	Route::get('channel/podcast/{link}',EditorNewPodcastView::class)->name('editorNewPodcastView');
 	Route::get('channel/podcast/{link}/create',EditorEpisodeCreate::class)->name('editorEpisodeCreate');
-
+	Route::get('channel/podcast/{link}/episode/{id}',EditorEpisodeView::class)->name('editorEpisodeView');
 });
 
 
