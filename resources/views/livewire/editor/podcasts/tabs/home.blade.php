@@ -1,17 +1,20 @@
 <div x-data="{modal: false}" class="flex justify-between mb-5 space-x-3">
     <h3 class="text-xl font-bold text-gray-900">Episodes</h3>
+
+    @if($podcast->podcast_ownerid == Auth::user()->id)
     <a target="_blank" href="{{ route('editorEpisodeCreate',['link' => $podcast_uniquelink ]) }}" class="inline-flex items-center font-bold cursor-pointer hover:underline hover-text-custom-pink text-md text-custom-pink">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         Create Episode
     </a>
+    @endif
 </div>
 
 <ul role="list" class="divide-y divide-gray-200">
     @forelse($podcast->get_episodes()->get() as $episode)
     <li class="relative px-4 py-5 mb-5 bg-white rounded-lg shadow-md">
-        <a target="_blank" href="{{ route('editorPodcastDetails',['id' => $episode->get_audio->id]) }}">
+        <a target="_blank" href="{{ route('editorPodcastView',['id' => $episode->get_audio->id]) }}">
             <div class="flex justify-between space-x-3">
                 @if ($episode->get_audio->get_thumbnail->count() != 0) 
                     @php 

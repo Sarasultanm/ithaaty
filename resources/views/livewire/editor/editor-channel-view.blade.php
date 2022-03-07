@@ -1,5 +1,5 @@
  <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Channel') }}
         </h2>
   </x-slot>
@@ -32,15 +32,15 @@
       <main class="xl:col-span-10 lg:col-span-9">
 
         <div class="w-full ">
-             <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
+             <x-auth-session-status-custom class="mt-4 mb-4" :status="session('status')" />
         </div>
 
         <div class="mt-4">
-         <div class=" w-full xl:p-0 lg:p-0 md:p-0 sm:p-0 xs:p-0">
+         <div class="w-full  xl:p-0 lg:p-0 md:p-0 sm:p-0 xs:p-0">
           
                   <?php $cover_photo = $channel->get_channel_cover->gallery_path ?>
                   <?php $s3_cover_photo = config('app.s3_public_link')."/users/channel_cover/".$cover_photo; ?>
-                    <div class="w-full h-48  bg-custom-pink bg-cover bg-center" style="background-image: url({{ $s3_cover_photo }});">
+                    <div class="w-full h-48 bg-center bg-cover bg-custom-pink" style="background-image: url({{ $s3_cover_photo }});">
                         &nbsp;
                     </div>
                 
@@ -48,21 +48,21 @@
                
 
                 <div class="grid grid-cols-1 gap-4 ">
-                  <div class="relative w-full flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 ">
+                  <div class="relative flex items-center w-full space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 ">
                     <div class="flex-shrink-0">
 
                         <?php $logo_photo = $channel->get_channel_photo->gallery_path; ?>
                         <?php $s3_logo_photo = config('app.s3_public_link')."/users/channe_img/".$logo_photo; ?>
-                        <img class="mt-5 ml-5 w-24 h-24  rounded-full" src="{{ $s3_logo_photo }}" alt=""> 
+                        <img class="w-24 h-24 mt-5 ml-5 rounded-full" src="{{ $s3_logo_photo }}" alt=""> 
                       
                     </div>
                     <div class="flex-1 min-w-0">
                       <a >
                        <!--  <span class="absolute inset-0" aria-hidden="true"></span> -->
-                        <p class="text-xl font-bold text-gray-900 mt-5">
+                        <p class="mt-5 text-xl font-bold text-gray-900">
                           {{$channel->channel_name}}
                         </p>
-                        <p class="text-md text-gray-500 truncate">
+                        <p class="text-gray-500 truncate text-md">
                           {{ $channel->get_subs()->count() }}  subcribers   
                         </p>
                       </a>
@@ -75,7 +75,7 @@
 
             </div>
 
-            <section class="mt-5 w-full">
+            <section class="w-full mt-5">
 
 
             <div 
@@ -88,26 +88,27 @@
               >
 
             <div class="border-b border-gray-200">
-                <ul class="-mb-px flex" >
-                  <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
+                <ul class="flex -mb-px" >
+                  <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer" >
                     <a>Home</a>
                   </li>
-                   <li @click="openTab = 5" :class="openTab === 5 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                   <li @click="openTab = 5" :class="openTab === 5 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
                     <a>Podcast</a>
                   </li>
-                   {{-- <li @click="openTab = 6" :class="openTab === 6 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                   {{-- <li @click="openTab = 6" :class="openTab === 6 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
                     <a>Playlist</a>
                   </li> --}}
-                  <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                  <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
                     <a>Channels</a>
                   </li>
-                   <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                   <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
                     <a>About</a>
                   </li>
-                   <li @click="openTab = 4" :class="openTab === 4 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                  @if($channel->channel_ownerid == Auth::user()->id)
+                   <li @click="openTab = 4" :class="openTab === 4 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
                     <a>Settings</a>
                   </li>
-
+                  @endif
 
                 </ul>
               </div>

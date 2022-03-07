@@ -91,9 +91,11 @@
                                                     {{-- <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses" class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
                                                         <a>Episodes</a>
                                                     </li> --}}
+                                                    @if($podcast->podcast_ownerid == Auth::user()->id)
                                                     <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses" class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
                                                         <a>Settings</a>
                                                     </li>
+                                                    @endif
                                                 </ul>
                                             </div>
 
@@ -104,10 +106,11 @@
                                                 {{-- <div x-show="openTab === 2">
                                                     @include('livewire.editor.podcasts.tabs.episodes')
                                                 </div> --}}
+                                                @if($podcast->podcast_ownerid == Auth::user()->id)
                                                 <div x-show="openTab === 3">
                                                     @include('livewire.editor.podcasts.tabs.settings')
                                                 </div>
-
+                                                @endif
                                             </div>
                                         </div>
                                     </section>
