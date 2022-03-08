@@ -131,15 +131,17 @@
               <article aria-labelledby="question-title-81614">
 
               <!-- new updates -->  
+
+               <!-- audio-parts -->
+               @include('livewire.editor.dashboard.parts.episodes')
+
+               <!-- audio-parts -->
+             
                 <!-- podcast-parts -->
                   @include('livewire.editor.dashboard.parts.podcasts')
                 <!-- podcast-parts -->
 
-                <!-- audio-parts -->
-                @include('livewire.editor.dashboard.parts.episodes')
-
-                <!-- audio-parts -->
-              
+               
 
               <!-- new updates -->
 

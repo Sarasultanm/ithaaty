@@ -6,25 +6,25 @@
                   $podcast_img = $audio->check_in_podcasts->get_podcast->get_channel_photo->gallery_path;
                   $podcast_img_s3_link = config('app.s3_public_link')."/users/podcast_img/".$podcast_img;
               @endphp
-                 <img class="h-28 w-28 rounded-md" src="{{ $podcast_img_s3_link }}" alt="">
+                 <img class="h-16 w-16 rounded-md" src="{{ $podcast_img_s3_link }}" alt="">
         </div>
 
       <div class="min-w-0 flex-1">
-        <p class="font-bold text-3xl text-gray-900 h-16 break-words">
+        <p class="font-bold text-md text-gray-900 h-7 break-words">
             <a href="{{ route('editorNewPodcastView',['link' => $audio->check_in_podcasts->get_podcast->podcast_uniquelink ]) }}"  
                 target="_blank" 
                 class="hover:underline">  
                 {{ $audio->check_in_podcasts->get_podcast->podcast_title }}
             </a>
         </p>
-        <p class="font-bold text-gray-700 text-md">
+        <p class="font-regular text-gray-700 text-xs">
             <a href="{{ route('editorChannelView',['link' => $audio->check_in_podcasts->get_podcast->get_channel->channel_uniquelink ]) }}"
                  target="_blank" 
                  class="hover:underline">
                  {{ $audio->check_in_podcasts->get_podcast->get_channel->channel_name }}
             </a>
         </p>
-        <p class="font-regular text-gray-500 text-md">0 Subcribers</p>
+        <p class="font-regular text-gray-500 text-xs">0 Subcribers</p>
       </div>
       {{-- <div class="flex-shrink-0">
         @if($audio->get_user->get_profilephoto->count() == 0)

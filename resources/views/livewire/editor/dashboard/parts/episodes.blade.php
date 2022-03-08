@@ -1,4 +1,4 @@
-<div class="relative flex justify-between p-2 mt-5 space-x-3 rounded-md shadow-md">
+<div class="relative flex justify-between p-2 mb-5 space-x-3 rounded-md shadow-md">
     
     @if ($audio->get_thumbnail->count() != 0) 
         @php 
@@ -11,13 +11,13 @@
         @endphp 
     @endif
 
-    <div class="w-20 h-20 bg-center bg-cover rounded-lg h-25" 
+    <div class="w-28 h-28 bg-center bg-cover rounded-lg" 
         style="background-image:url({{  $episode_s3_thumbnail }})">
     </div>
 
     
     <div class="flex-1 min-w-0">
-        <p class="text-lg font-bold text-gray-900"> {{ $audio->audio_name }}</p>
+        <p class="text-xl font-bold text-gray-900"> {{ $audio->audio_name }}</p>
         <p class="mt-2 text-sm text-gray-500 truncate">{{ $audio->audio_summary }}</p>
         <p class="mt-2 text-xs text-gray-500 truncate">
             Season 1 : Episode 1
