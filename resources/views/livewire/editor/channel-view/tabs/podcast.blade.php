@@ -1,59 +1,133 @@
-<section>
-    <!-- channel episodes -->
-    <div class="grid grid-cols-12 gap-5 mt-5">
-        @foreach($channel_episodes as $episode_items)
-          <div class="p-2 bg-white xl:col-span-4 lg:col-span-6 md:col-span-6 sm:col-span-6 xs:col-span-6 ">
-                    <article aria-labelledby="question-title-81614">
-                     <div>
-                        <div class="flex space-x-3">
-                          <div class="flex-1 min-w-0">
-                            <p class="font-bold text-gray-900 text-md">
-                              <a href="#" class="hover:underline">{{ $episode_items->get_audio->audio_name }}
-                                @if($episode_items->get_audio->audio_publish != "Publish")
-                                <svg class="float-right w-5 h-5 text-custom-pink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg></a>
-                                @endif
-                            </p>
+<section >
+  <div x-data="{modal: false}"  class="flex justify-between mb-5 space-x-3">
+    <h3 class="text-xl font-bold text-gray-900">Podcasts</h3>
+    @if($channel->channel_ownerid == Auth::user()->id)
+    <button @click="modal = !modal" class="inline-flex items-center font-bold cursor-pointer hover:underline hover-text-custom-pink text-md text-custom-pink">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Create Podcasts
+    </button>
+
+    <!-- create podcast modal -->
+    <div x-cloak x-show="modal" class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <div
+          x-transition:enter="transition ease-out duration-100"
+          x-transition:enter-start="transform opacity-0 scale-95"
+          x-transition:enter-end="transform opacity-100 scale-100"
+          x-transition:leave="transition ease-in duration-75"
+          x-transition:leave-start="transform opacity-100 scale-100"
+          x-transition:leave-end="transform opacity-0 scale-95"
+          class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0"
+      >
+          <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" aria-hidden="true" @click="modal = false, share = false"></div>
+
+          <!-- This element is to trick the browser into centering the modal contents. -->
+          <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+          <div
+              x-transition:enter="transition ease-out duration-300"
+              x-transition:enter-start="transform opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              x-transition:enter-end="transform opacity-100 translate-y-0 sm:scale-100"
+              x-transition:leave="transition ease-in duration-200"
+              x-transition:leave-start="transform opacity-100 translate-y-0 sm:scale-100"
+              x-transition:leave-end="transform opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              class="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+          >
+              <div>
+                  <div class="mt-3 sm:mt-5">
+                      <div class="mt-5">
+                          <div
+                              x-data="{ isUploading: false, progress: 0, success: false, error:false }"
+                              x-on:livewire-upload-start="isUploading = true"
+                              x-on:livewire-upload-finish="isUploading = false,success = true"
+                              x-on:livewire-upload-error="isUploading = false,error= true"
+                              x-on:livewire-upload-progress="progress = $event.detail.progress"
+                          >
+                              <div class="relative hidden overflow-hidden rounded-full lg:block">
+                                  <center>
+                                      <div class="mb-5">
+                                          @if ($podcast_photo)
+                                          <img style="width: 200px; height: 200px;" class="rounded-full" src="{{ $podcast_photo->temporaryUrl() }}" />
+                                          @else
+                                          <img style="width: 200px; height: 200px;" class="rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="" />
+                                          @endif
+                                      </div>
+
+                                      <label for="desktop-user-photo" class="relative inset-0 items-center justify-center px-2 py-3 mt-5 text-sm font-bold cursor-pointer text-custom-pink hover:underline">
+                                          <span>Upload Photo</span>
+                                          <span class="sr-only"> user photo</span>
+                                          <input type="file" id="desktop-user-photo" name="user-photo" class="absolute inset-0 w-full h-full border-gray-300 rounded-md opacity-0 cursor-pointer" wire:model="podcast_photo" />
+                                      </label>
+                                  </center>
+                              </div>
+                              <center>@error('podcast_photo') <span class="text-xs text-center text-red-600">{{$message}}</span> @enderror</center>
+                              <div class="mt-5">
+                                  <div x-show="isUploading" class="relative pt-1">
+                                      <div class="text-center text-gray-700">Please wait while uploading the file .. <input x-bind:value="`${progress}%`" disabled style="width: 60px;" /></div>
+                                      <div class="flex h-2 overflow-hidden text-xs bg-purple-200 rounded progress">
+                                          <div x-bind:style="`width:${progress}%`" class="flex flex-col justify-center text-center text-white shadow-none whitespace-nowrap bg-custom-pink"></div>
+                                      </div>
+                                  </div>
+                                  <p x-show="success" class="text-sm font-bold text-center text-gray-800 text-custom-pink">File Upload Complete</p>
+                                  <p x-show="error" class="text-sm font-bold text-center text-red-800">*Error to upload the file</p>
+                              </div>
                           </div>
-                        </div>
-                      </div>
-                      <div class="mt-2 space-y-4 text-sm text-gray-700">
-                          @if($episode_items->get_audio->get_thumbnail->count() == 0)
-                             <?php $s3_ep_thumbnail = "images/default_podcast.jpg"; ?>
-                          @else
-                            <?php $ep_img_path = $episode_items->get_audio->get_thumbnail->first()->gallery_path; ?>
-                            <?php $s3_ep_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$ep_img_path; ?>
-                          @endif
-                          <div class="text-white bg-cover h-36" style="background-image: url(<?php echo $s3_ep_thumbnail; ?>);"></div>
-                          
                       </div>
 
-                      <div>
-                        <div class="flex space-x-3">
-                          <div class="flex-1 min-w-0">                      
-                            <p class="mt-2 text-xs text-gray-500">
-                              <a class="hover:underline">
-                               
-                                <?php $date = date_create($episode_items->get_audio->created_at); ?>
-                                <time datetime="2020-12-09T11:43:00">{{ date_format($date,"M, Y") }}</time>  <span class="float-left">SE:{{ $episode_items->get_audio->audio_season }} | EP:{{ $episode_items->get_audio->audio_episode }}</span>
-                              </a>
-                            </p>
-                          <!--   <div class="mt-5 text-xs font-bold text-gray-900" x-data="{ open: false }"> -->
-                            <div class="mt-5 text-xs font-bold text-gray-900">
-                              @if($channel->channel_ownerid == Auth::user()->id)
-                              <a href="{{ route('editorPodcastUpdate',['id' => $episode_items->get_audio->id]) }}"  class="hover:underline">Update</a>
-                              <a href="{{ route('editorPodcastDetails',['id' => $episode_items->get_audio->id]) }}" class="float-right hover:underline" >Details</a>
-                              @endif
-                            </div>
+                      <div class="mt-5">
+                          <div class="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                              <label for="name" class="block text-xs font-medium text-gray-900">Podcast Name</label>
+                              <input type="text" class="block w-full p-0 text-gray-900 placeholder-gray-500 border-0 focus:ring-0 sm:text-sm" placeholder="Enter your Channel Name" wire:model="podcast_name" />
+                              @error('podcast_name') <span class="text-xs text-red-600">{{$message}}</span> @enderror
                           </div>
-                         
-                        </div>
                       </div>
-
-                    </article>
                   </div>
-        @endforeach
-      </div>
-      <!-- channel episodes -->
+              </div>
 
+              <div class="flex justify-between mt-5 space-x-3 sm:mt-6">
+                  <a @click="modal = !modal" type="button" class="mt-3 text-custom-pink hover:underline">
+                      Cancel
+                  </a>
+                  <button wire:click="createPodcast({{$channel->id}})" type="button" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink">
+                      Create Podcast
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
+    <!-- create podcast modal -->
+    @endif
+  </div>
+ 
+
+    <ul role="list" class="grid grid-cols-1 gap-6 mb-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        @forelse($channel->get_podcast()->get() as $podcast_items)
+    
+        <li class="flex flex-col col-span-1 text-center bg-white rounded-lg shadow">
+            <a target="_blank" href="{{ route('editorNewPodcastView',['link' => $podcast_items->podcast_uniquelink ]) }}">
+                <div class="relative flex-auto w-auto p-2 h-52">
+                    <?php $img_path = $podcast_items->get_channel_photo->gallery_path ?>
+                    <?php $s3_link = config('app.s3_public_link')."/users/podcast_img/".$img_path; ?>
+                    <img class="w-full h-full rounded-lg" src="{{ $s3_link }}" alt="" />
+                </div>
+                <div class="flex flex-col flex-1 p-2 text-left">
+                    <h3 class="text-lg font-bold text-gray-900 truncate">{{$podcast_items->podcast_title}}</h3>
+                    <p class="text-sm text-gray-500">{{$podcast_items->get_channel->channel_name}}</p>
+                    <p class="flex mt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+                        </svg>
+                        <span class="text-sm text-gray-500 truncate">{{ $podcast_items->get_episodes->count()   }}</span>
+                    </p>
+                </div>
+            </a>
+        </li>
+    
+        @empty
+        <p>No Podcast</p>
+    
+        @endforelse
+    </ul>
 
 </section>

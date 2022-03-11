@@ -117,6 +117,39 @@
                                                                     {{ $episode->audio_summary }}
                                                                 </p>
                                                             </div>
+                                                            <div>
+                                                               
+                                                                <div  x-data="{ open: false }" class="mt-4 hidden">
+                                                                    <div  @click="open = !open" x-cloak>
+                                                                    
+                                                                        <button   x-show="!open" onclick="playAudio()"
+                                                                    class="vjs-big-play-button bg-custom-pink cursor-pointer font-bold hover-bg-custom-pink inline-flex items-center p-2 rounded-md shadow-md text-md text-white">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                                        </svg>
+                                                                    Play
+                                                                        </button>
+                                                                        <button x-show="open" onclick="pauseAudio()"
+                                                                    
+                                                                    class="vjs-big-play-button bg-custom-pink cursor-pointer font-bold hover-bg-custom-pink inline-flex items-center p-2 rounded-md shadow-md text-md text-white">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                                        </svg>
+                                                                    Pause
+                                                                        </button>
+
+
+
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                                </div>
+                                                             
+                                                                
+                                                            </div>
                                                         </div>
                                                         <div class="inline-flex flex-shrink-0 text-sm text-gray-500 whitespace-nowrap">
                                                             @if($episode->audio_publish != "Publish")
@@ -126,10 +159,140 @@
                                                             <span class="text-sm font-bold truncate text-custom-pink">Draft</span>
                                                             @endif
                                                         </div>
+                                                   
                                                         {{-- <time datetime="2021-01-27T16:35" class="flex-shrink-0 text-sm text-gray-500 whitespace-nowrap">1d ago</time> --}}
                                                     </div>
+
                                                
                                             </li>
+                                            <div>
+                                                <div class="bg-white shadow p-1 ">        
+                                                    @if($episode->audio_type == "Upload")
+                                                  @if($episode->get_thumbnail->count() == 0)
+                                                     <?php $s3_thumbnail = "images/default_podcast.jpg"; ?>
+                                                  @else
+                                                    <?php $img_path = $episode->get_thumbnail->first()->gallery_path; ?>
+                                                    <?php $s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$img_path; ?>
+                                                  @endif
+                                                 <script src="{{ asset('videojs/video.min.js') }}"></script>
+                                                  <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
+
+                                                 <video
+                                                  id="my-video"
+                                                    class="video-js vjs-default-skin vjs-fluid"
+                                                    controls
+                                                    width="100%"
+                                                    height="450px"
+                                                
+                                                  data-setup="{}"
+                                                >
+                                                 <?php $s3_link = config('app.s3_public_link')."/audio/"; ?>
+                                                  <source src="{{ $s3_link.$episode->audio_path }}" type="video/mp4" />
+                                                  <source src="{{ $s3_link.$episode->audio_path }}" type="audio/mpeg" />
+                                                  <source src="{{ $s3_link.$episode->audio_path }}" type="video/webm" />
+                                                  @if($episode->get_chapters()->count() != 0)
+                                                     <?php  $chapter_link = $episode->get_chapters()->first()->chapter_filename;  ?>
+                                                    <track kind="chapters" src="{{ asset('vtt/'.$chapter_link) }}" srclang="en"> 
+                                                  @endif 
+                                                  <p class="vjs-no-js">
+                                                    To view this video please enable JavaScript, and consider upgrading to a
+                                                    web browser that
+                                                    <a href="https://videojs.com/html5-video-support/" target="_blank"
+                                                      >supports HTML5 video</a
+                                                    >
+                                                  </p>
+                                                </video>
+                                                <script>
+                                                    var x = document.getElementById("my-video"); 
+                                                    
+                                                    function playAudio() { 
+                                                      x.play(); 
+                                                    } 
+                                                    
+                                                    function pauseAudio() { 
+                                                      x.pause(); 
+                                                    } 
+                                                </script>
+                                                {{-- <script> 
+                                                      var player=videojs('my-video'); 
+                                                      player.nuevo({
+                                                        qualityMenu: true,
+                                                        buttonRewind: true,
+                                                        buttonForward: true
+                                                      });
+                                                  </script> --}}
+                          
+
+                                                    @elseif($episode->audio_type == "RSS") 
+                          
+                                                  @if($episode->get_thumbnail->count() == 0)
+                                                     <?php $s3_thumbnail = "images/default_podcast.jpg"; ?>
+                                                  @else
+                                                    <?php $img_path = $episode->get_thumbnail->first()->gallery_path; ?>
+                                                    <?php $s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$img_path; ?>
+                                                  @endif
+                                                  
+                                                          <script src="{{ asset('videojs/video.min.js') }}"></script>
+                                                  <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
+                          
+                                                            <video
+                                                    id="my-video"
+                                                    class="video-js vjs-default-skin vjs-fluid"
+                                                    controls
+                                                    width="100%"
+                                                    height="450px"
+                                                    poster="{{ $s3_thumbnail }}"
+                                                     data-setup="{}"
+                                                  >
+                                                    <source src="{{ $episode->audio_path }}" res="240" label="240p" type="video/mp4">
+                                                    <source src="{{ $episode->audio_path }}" res="360" label="360p" type="video/mp4">
+                                                    <source src="{{ $episode->audio_path }}" default res="480" label="480p" type="video/mp4">
+                                                    <source src="{{ $episode->audio_path }}" res="720" label="720p" type="video/mp4">
+                                                    @if($episode->get_chapters()->count() != 0)
+                                                       <?php  $chapter_link = $episode->get_chapters()->first()->chapter_filename;  ?>
+                                                      <track kind="chapters" src="{{ asset('vtt/'.$chapter_link) }}" srclang="en"> 
+                                                    @endif 
+                                                    <p class="vjs-no-js">
+                                                      To view this video please enable JavaScript, and consider upgrading to a
+                                                      web browser that
+                                                      <a href="https://videojs.com/html5-video-support/" target="_blank"
+                                                        >supports HTML5 video</a
+                                                      >
+                                                    </p>
+                                                  </video>
+                                                  {{-- <script> 
+                                                      var player=videojs('my-video'); 
+                                                      player.nuevo({
+                                                        qualityMenu: true,
+                                                        buttonRewind: true,
+                                                        buttonForward: true
+                                                      });
+                                                  </script> --}}
+                          
+                          
+                          
+                                                    @else
+                          
+                                                    <div class="audio-embed-container">
+                                                            <?php echo $episode->audio_path; ?>
+                                                            <script>
+                                                                var x = document.getElementById("my-video"); 
+                                                                
+                                                                function playAudio() { 
+                                                                  x.play(); 
+                                                                } 
+                                                                
+                                                                function pauseAudio() { 
+                                                                  x.pause(); 
+                                                                } 
+                                                            </script>
+                                                     </div>
+                          
+                                                    @endif
+                          
+                                      </div> 
+
+                                            </div>
                                            
                                             <!-- More messages... -->
                                         </ul>

@@ -97,6 +97,7 @@ Route::get('/playlist/{id}', [MainController::class, 'viewPlaylist']);
 Route::get('/popular', [MainController::class, 'viewPopular'])->name('popular');
 Route::get('/trending', [MainController::class, 'viewTrending'])->name('trending');
 Route::get('/podcaster', [MainController::class, 'viewPodcaster'])->name('podcaster');
+Route::get('/podcast', [MainController::class, 'viewPodcast'])->name('podcast');
 Route::get('/aboutus', [MainController::class, 'viewAboutus'])->name('aboutus');
 Route::get('/advertise', [MainController::class, 'viewAdvertise'])->name('advertise');
 
@@ -146,17 +147,36 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 	//Route::get('users/{id}', [MainController::class, 'viewUsers']);
 	Route::get('users/{id}',EditorViewUsers::class)->name('editorViewUser');
 
-	Route::get('podcast',EditorPodcast::class)->name('editorPodcast');
-	Route::get('podcast/details/{id}',EditorPodcastDetail::class)->name('editorPodcastDetails');
-	Route::get('podcast/view/{id}',EditorPodcastView::class)->name('editorPodcastView');
-	Route::get('podcast/create',EditorCreatePost::class)->name('editorPodcastCreate');
-	Route::get('podcast/update/{id}',EditorUpdatePost::class)->name('editorPodcastUpdate');
+	Route::group(['prefix'=>'podcast'], function(){
+		Route::get('/',EditorPodcast::class)->name('editorPodcast');
+		Route::get('details/{id}',EditorPodcastDetail::class)->name('editorPodcastDetails');
+		Route::get('view/{id}',EditorPodcastView::class)->name('editorPodcastView');
+		Route::get('create',EditorCreatePost::class)->name('editorPodcastCreate');
+		Route::get('update/{id}',EditorUpdatePost::class)->name('editorPodcastUpdate');
+	});
 
-	Route::get('ads',EditorAds::class)->name('editorAds');
-	Route::get('ads/company',EditorAdsCompany::class)->name('editorAdsCompany');
-	Route::get('ads/podcast',EditorAdsPodcast::class)->name('editorAdsPodcast');
-	Route::get('ads/stats/{id}',EditorAdsStats::class)->name('editorAdsStats');
-	Route::get('ads/update/{id}',EditorAdsUpdate::class)->name('editorAdsUpdate');
+	Route::group(['prefix'=>'ads'], function(){
+		Route::get('/',EditorAds::class)->name('editorAds');
+		Route::get('company',EditorAdsCompany::class)->name('editorAdsCompany');
+		Route::get('podcast',EditorAdsPodcast::class)->name('editorAdsPodcast');
+		Route::get('stats/{id}',EditorAdsStats::class)->name('editorAdsStats');
+		Route::get('update/{id}',EditorAdsUpdate::class)->name('editorAdsUpdate');
+	});
+
+	Route::group(['prefix'=>'channel'], function(){
+		
+		Route::get('/',EditorChannel::class)->name('editorChannel');
+		Route::get('create',EditorChannelCreate::class)->name('editorChannelCreate');
+		Route::get('update/{id}',EditorChannelUpdate::class)->name('editorChannelUpdate');
+		Route::get('{link}',EditorChannelView::class)->name('editorChannelView');
+
+		Route::group(['prefix'=>'podcast'], function(){
+			Route::get('{link}',EditorNewPodcastView::class)->name('editorNewPodcastView');
+			Route::get('{link}/create',EditorEpisodeCreate::class)->name('editorEpisodeCreate');
+			Route::get('{link}/episode/{id}',EditorEpisodeView::class)->name('editorEpisodeView');
+		});
+
+	});
 
 	Route::get('activity',EditorActivity::class)->name('editorActivity');
 	Route::get('friends',EditorFriends::class)->name('editorFriends');
@@ -171,14 +191,30 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 
 	Route::get('setup',EditorSetup::class)->name('editorSetup');
 
-	Route::get('channel',EditorChannel::class)->name('editorChannel');
-	Route::get('channel/create',EditorChannelCreate::class)->name('editorChannelCreate');
-	Route::get('channel/update/{id}',EditorChannelUpdate::class)->name('editorChannelUpdate');
-	Route::get('channel/{link}',EditorChannelView::class)->name('editorChannelView');
+	//Route::get('podcast',EditorPodcast::class)->name('editorPodcast');
+	//Route::get('podcast/details/{id}',EditorPodcastDetail::class)->name('editorPodcastDetails');
+	//Route::get('podcast/view/{id}',EditorPodcastView::class)->name('editorPodcastView');
+	//Route::get('podcast/create',EditorCreatePost::class)->name('editorPodcastCreate');
+	//Route::get('podcast/update/{id}',EditorUpdatePost::class)->name('editorPodcastUpdate');
 
-	Route::get('channel/podcast/{link}',EditorNewPodcastView::class)->name('editorNewPodcastView');
-	Route::get('channel/podcast/{link}/create',EditorEpisodeCreate::class)->name('editorEpisodeCreate');
-	Route::get('channel/podcast/{link}/episode/{id}',EditorEpisodeView::class)->name('editorEpisodeView');
+	
+
+	// Route::get('ads',EditorAds::class)->name('editorAds');
+	// Route::get('ads/company',EditorAdsCompany::class)->name('editorAdsCompany');
+	// Route::get('ads/podcast',EditorAdsPodcast::class)->name('editorAdsPodcast');
+	// Route::get('ads/stats/{id}',EditorAdsStats::class)->name('editorAdsStats');
+	// Route::get('ads/update/{id}',EditorAdsUpdate::class)->name('editorAdsUpdate');
+
+	// Route::get('channel',EditorChannel::class)->name('editorChannel');
+	// Route::get('channel/create',EditorChannelCreate::class)->name('editorChannelCreate');
+	// Route::get('channel/update/{id}',EditorChannelUpdate::class)->name('editorChannelUpdate');
+	// Route::get('channel/{link}',EditorChannelView::class)->name('editorChannelView');
+
+	// Route::get('channel/podcast/{link}',EditorNewPodcastView::class)->name('editorNewPodcastView');
+	// Route::get('channel/podcast/{link}/create',EditorEpisodeCreate::class)->name('editorEpisodeCreate');
+	// Route::get('channel/podcast/{link}/episode/{id}',EditorEpisodeView::class)->name('editorEpisodeView');
+
+
 });
 
 

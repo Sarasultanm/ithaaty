@@ -36,7 +36,7 @@
         </div>
 
         <div class="mt-4">
-         <div class="w-full  xl:p-0 lg:p-0 md:p-0 sm:p-0 xs:p-0">
+         <div class="w-full xl:p-0 lg:p-0 md:p-0 sm:p-0 xs:p-0">
           
                   <?php $cover_photo = $channel->get_channel_cover->gallery_path ?>
                   <?php $s3_cover_photo = config('app.s3_public_link')."/users/channel_cover/".$cover_photo; ?>
@@ -80,7 +80,7 @@
 
             <div 
                 x-data="{
-                  openTab: 1,
+                  openTab: 5,
                   activeClasses: 'border-custom-pink text-custom-pink',
                   inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }" 
@@ -148,11 +148,11 @@
                 </div>
 
 
-                <div x-show="openTab === 6">
+                {{-- <div x-show="openTab === 6">
                   <!-- tab 6 -->
                   @include('livewire.editor.channel-view.tabs.playlist')
                   <!-- tab 6 -->
-                </div>
+                </div> --}}
 
 
               </div>

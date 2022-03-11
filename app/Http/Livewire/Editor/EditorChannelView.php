@@ -6,10 +6,14 @@ use App\Models\{
     UserGallery,
     UserChannelSub,
     Category,
+    UserPodcasts,
 };
 use Auth;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+
+use App\Http\Controllers\Controller;
 
 class EditorChannelView extends Component
 {
@@ -17,8 +21,35 @@ class EditorChannelView extends Component
 
     use WithFileUploads;
 
-    public $channel_photo,$channel_cover,$channel_name;
+    public $channel_photo,$podcast_photo,$podcast_name,$channel_cover,$channel_name;
 
+    public function createPodcast($channel_id)
+    {
+        $this->validate([
+            'podcast_photo' => 'required|image|max:1024',
+            'podcast_name' => 'required|max:50',
+        ]);
+
+        $data = UserChannel::find($channel_id);
+
+        if (Auth::user()->id == $data->channel_ownerid) {
+            
+            $image = Controller::makeImage('podcast_img', $this->podcast_photo, 'users/podcast_img');
+
+            UserPodcasts::create([
+                'podcast_ownerid' => Auth::user()->id,
+                'podcast_channelid' => $channel_id,
+                'podcast_title' => $this->podcast_name,
+                'podcast_logo_id' => $image->id,
+                'podcast_cover_id' => $image->id,
+                'podcast_uniquelink' => Str::random(24),
+            ]);
+        }
+
+        redirect()->to('/editor/channel/'.$data->channel_uniquelink);
+
+        //redirect()->to('/editor/channel');
+    }
 
     public function saveLogo($channel_id){
 
@@ -123,17 +154,26 @@ class EditorChannelView extends Component
     }
 
     public function mount($link){
+
         $getLink = UserChannel::where('channel_uniquelink',$link)->first();
+        if($getLink){
+
         $this->channel = UserChannel::where("id",$getLink->id)->first();
         $this->channel_list = Auth::user()->get_channels()->first();
         $this->channel_about = $this->channel->channel_description;
         $this->channel_uniquelink = $this->channel->channel_uniquelink;
 
-        $this->sub_channel_list = Auth::user()->channels()->get();
+        //$this->sub_channel_list = Auth::user()->channels()->get();
+        $this->sub_channel_list = UserChannel::where('channel_ownerid',$getLink->channel_ownerid)->get();
 
         $this->allchannels = UserChannel::orderBy('id')->get();
 
         $this->channel_episodes = $this->channel->get_episode()->get();
+            
+        }else{
+            abort(404);
+        }
+
     }
 
     public function render()

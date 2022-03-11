@@ -64,15 +64,6 @@
                 <small class="text-custom-pink">@ {{Auth::user()->alias}} </small>
                 @endif
               @endforelse
-
-
-
-
-
-
-
-              
-              
             </div>
             <div>
 
@@ -96,7 +87,7 @@
             @forelse (Auth::user()->get_podcasts()->get() as $podcast )
 
             <div class="col-span-6 p-2 bg-white ">
-              <h2>{{ $podcast->podcast_title }}</h2>
+              <h2 class="font-bold">{{ $podcast->podcast_title }}</h2>
             </div>
 
             @forelse($podcast->get_episodes()->get() as $episode)
@@ -155,10 +146,10 @@
                 </div>
             </div>
             @empty
-            <div class="col-span-12">
-                <center>
-                    <h3 class="text-xl font-bold text-gray-900">No Episodes Found</h3>
-                </center>
+            <div class="col-span-6">
+              <center>
+                  <h3 class="text-xl font-bold text-gray-900">No Episodes Found</h3>
+              </center>
             </div>
             @endforelse
 
