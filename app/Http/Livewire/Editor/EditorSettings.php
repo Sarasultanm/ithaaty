@@ -16,6 +16,7 @@ use App\Models\{
     UserSocialLinks,
     UserInterest,
     Interest,
+    UserCollaborator,
 };
 
 use App\Http\Controllers\Controller;
@@ -37,7 +38,44 @@ class EditorSettings extends Component
      public $arr_checkbox = array();
      public $colors = array();
      public $userFacebook,$userTwitter,$userInstagram;
+     public $colab_username,$email,$colab_password,$colab_channel;
 
+
+
+    public function addUsers(){
+        $this->validate([
+            'colab_username' => 'required|string|max:50',
+            'email' => 'required|string|email|max:50|unique:users',
+            'colab_password' => 'required',
+        ]);
+
+        $user = User::create([
+            'name' => $this->colab_username,
+            'email' => $this->email,
+            'password' => Hash::make($this->colab_password),
+            'roles' => 'collaborators',
+            'gender' => ' ',
+            'birthday' => ' ',
+            'country' => ' ',
+            'age' => ' ',
+            'plan' => ' ',
+            'alias' => ' ',
+            'about' => ' ',
+        ]);
+        
+        UserCollaborator::create([
+            'usercol_ownerid'=>Auth::user()->id,
+            'usercol_userid'=>$user->id,
+            'usercol_channel_id'=> $this->colab_channel,
+            'usercol_email'=> 0,
+            'usercol_type'=> 'Channel Editor',
+            'usercol_typestatus'=> 'active'
+        ]);
+
+        session()->flash('status', 'Add new Users');
+        redirect()->to('/editor/settings');
+
+    }
 
     public function updateSocialLink($social_type){
 

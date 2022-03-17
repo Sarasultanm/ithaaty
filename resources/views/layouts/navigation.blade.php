@@ -1,6 +1,8 @@
 @if(Auth::user()->roles == 'admin')
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
- @else
+@elseif(Auth::user()->roles == 'collaborators')  
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 hidden">  
+@else
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 hidden">
 @endif
     <!-- Primary Navigation Menu -->

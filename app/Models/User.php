@@ -128,6 +128,13 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UserChannel', 'channel_ownerid','id')->where(['channel_type'=>'sub_channel']);
     }
 
+    public function get_collaborators(){
+        return $this->hasMany('App\Models\UserCollaborator', 'usercol_ownerid','id');
+    }
+
+    public function get_user_collaborators(){
+        return $this->belongsTo('App\Models\UserCollaborator','id','usercol_userid',);
+    }
 
 
 

@@ -7,12 +7,18 @@ use App\Models\{
     UserChannelSub,
     Category,
     UserPodcasts,
+    User,
+    UserMail,
+    UserCollaborator,
 };
 use Auth;
-use Illuminate\Support\Str;
-use Livewire\Component;
+use Mail;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
+use Livewire\Component;
 
+use App\Mail\ChannelInvitation;
 use App\Http\Controllers\Controller;
 
 class EditorChannelView extends Component
@@ -22,6 +28,63 @@ class EditorChannelView extends Component
     use WithFileUploads;
 
     public $channel_photo,$podcast_photo,$podcast_name,$channel_cover,$channel_name;
+    public $search = "",$result,$emailInvitation;
+
+
+
+
+    public function get_search()
+    {
+        return $this->result = User::search($this->search)->get();
+    }
+
+    public function sendInvitation($channel_id)
+    {
+        $this->validate([
+            'emailInvitation' => 'required|string|email|max:50',
+        ]);
+
+        $channel = UserChannel::where('id', $channel_id)->first();
+
+        $user = User::findOrFail($channel->channel_ownerid);
+        $photo_link = $channel->get_channel_photo->gallery_path;
+        $channel_photo = config('app.s3_public_link') . "/users/channe_img/" . $photo_link;
+        $subcribers = $channel->get_subs()->count();
+
+        //asia time zone
+        $expiredDate = Carbon::now()
+            ->addHour()
+            ->timezone('Asia/Hong_Kong');
+
+        $mail_link = Str::random(30);
+        UserMail::create([
+            'mail_sender_id'=>$user->id,
+            'mail_link_id'=> $mail_link,
+            'mail_type'=>'channel_invitation',
+            'mail_typestatus'=>'active',
+            'mail_expired'=> $expiredDate
+        ]);
+
+        UserCollaborator::create([
+            'usercol_userid'=>$user->id,
+            'usercol_channel_id'=> $channel->id,
+            'usercol_email'=> $this->emailInvitation,
+            'usercol_type'=> 'channel_invitation',
+            'usercol_typestatus'=> 'active'
+        ]);
+
+        $this->sendEmail($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers,$mail_link);
+
+        session()->flash('status', 'Email Invitation Send');
+        redirect()->to('/editor/channel/'.$channel->channel_uniquelink);
+    }
+
+    public function sendEmail($user, $email, $channel_name, $channel_photo, $subcribers,$link)
+    {
+        Mail::to($email)->send(new ChannelInvitation($user, $channel_name, $channel_photo, $subcribers,$link));
+    }
+
+
 
     public function createPodcast($channel_id)
     {

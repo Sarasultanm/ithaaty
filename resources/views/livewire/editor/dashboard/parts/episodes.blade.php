@@ -11,7 +11,7 @@
         @endphp 
     @endif
 
-    <div class="w-28 h-28 bg-center bg-cover rounded-lg" 
+    <div class="bg-center bg-cover rounded-lg w-28 h-28" 
         style="background-image:url({{  $episode_s3_thumbnail }})">
     </div>
 
@@ -38,7 +38,8 @@
             </a>
           </p>
     </div>
-    <a href="{{ route('editorEpisodeView',['link' => $audio->check_in_podcasts->get_podcast->podcast_uniquelink,'id'=>$audio->id ]) }}" 
+    <a 
+    href="{{ route('editorPodcastView',['id' => $audio->id]) }}"
        class="absolute inset-0 cursor-pointer" 
        aria-hidden="true"></a>
 </div>

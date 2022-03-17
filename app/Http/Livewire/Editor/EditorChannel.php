@@ -276,32 +276,32 @@ class EditorChannel extends Component
         $expiredDate = Carbon::now()
             ->addHour()
             ->timezone('Asia/Hong_Kong');
+        $mail_link = Str::random(30);
+        UserMail::create([
+            'mail_sender_id'=>$user->first()->id,
+            'mail_link_id'=> $mail_link,
+            'mail_type'=>'channel_invitation',
+            'mail_typestatus'=>'active',
+            'mail_expired'=> $expiredDate
+        ]);
 
-        // UserMail::create([
-        //     'mail_sender_id'=>$user->first()->id,
-        //     'mail_link_id'=> Str::random(30),
-        //     'mail_type'=>'channel_invitation',
-        //     'mail_typestatus'=>'active',
-        //     'mail_expired'=> $expiredDate
-        // ]);
+        UserCollaborator::create([
+            'usercol_userid'=>$user->first()->id,
+            'usercol_channel_id'=> $channel->first()->id,
+            'usercol_email'=> $this->emailInvitation,
+            'usercol_type'=> 'channel_invitation',
+            'usercol_typestatus'=> 'active'
+        ]);
 
-        // UserCollaborator::create([
-        //     'usercol_userid'=>$user->first()->id,
-        //     'usercol_channel_id'=> $channel->first()->id,
-        //     'usercol_email'=> $this->emailInvitation,
-        //     'usercol_type'=> 'channel_invitation',
-        //     'usercol_typestatus'=> 'active'
-        // ]);
+        $this->sendEmail($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers,$mail_link);
 
-        $this->sendEmail($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers);
-
-        session()->flash('status', 'Email Invitation Send' . $expiredDate);
+        session()->flash('status', 'Email Invitation Send');
         redirect()->to('/editor/channel');
     }
 
-    public function sendEmail($user, $email, $channel_name, $channel_photo, $subcribers)
+    public function sendEmail($user, $email, $channel_name, $channel_photo, $subcribers,$link)
     {
-        Mail::to($email)->send(new ChannelInvitation($user, $channel_name, $channel_photo, $subcribers));
+        Mail::to($email)->send(new ChannelInvitation($user, $channel_name, $channel_photo, $subcribers,$link));
     }
 
     public function mount()

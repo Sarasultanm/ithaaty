@@ -18,15 +18,16 @@ class ChannelInvitation extends Mailable
      *
      * @return void
      */
-    public $user,$channel_name,$channel_photo,$subcribers;
+    public $user,$channel_name,$channel_photo,$subcribers,$link;
 
 
-    public function __construct(User $user,$channel_name,$channel_photo,$subcribers)
+    public function __construct(User $user,$channel_name,$channel_photo,$subcribers,$link)
     {
         $this->user = $user;
         $this->channel_name = $channel_name;
         $this->channel_photo = $channel_photo;
         $this->subcribers = $subcribers;
+        $this->link = $link;
         $this->subject('Ithaaty : Channel Invitation');
     }
 

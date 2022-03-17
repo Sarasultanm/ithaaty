@@ -119,7 +119,7 @@
                                                             </div>
                                                             <div>
                                                                
-                                                                <div  x-data="{ open: false }" class="mt-4 hidden">
+                                                                <div  x-data="{ open: false }" class="mt-4 ">
                                                                     <div  @click="open = !open" x-cloak>
                                                                     
                                                                         <button   x-show="!open" onclick="playAudio()"
@@ -166,7 +166,7 @@
                                                
                                             </li>
                                             <div>
-                                                <div class="bg-white shadow p-1 ">        
+                                                <div class="bg-white shadow p-1 hidden">        
                                                     @if($episode->audio_type == "Upload")
                                                   @if($episode->get_thumbnail->count() == 0)
                                                      <?php $s3_thumbnail = "images/default_podcast.jpg"; ?>

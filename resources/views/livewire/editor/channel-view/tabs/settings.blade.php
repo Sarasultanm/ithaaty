@@ -161,6 +161,72 @@
 
           <!--end cover-->
 
+          <section class="mt-5 col-span-10">
+            <div class="shadow-sm sm:rounded-md sm:overflow-hidden">
+                <div class="bg-white py-6 px-4 sm:p-6">
+                  <div class="flex justify-between">
+                    <div class="flex-auto">
+                      <h3 class="text-gray-900 font-bold text-md">Add Users</h3>
+                      <p class="text-gray-500 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                    <input wire:model.debounce.300ms="search" wire:keydown.enter="get_search()" 
+                           type="text" placeholder="Search" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md flex-1" />
+                  </div>  
+                    @if($result) @if($result->count() != 0 )
+                    <div class="grid grid-cols-6 gap-4 sm:grid-cols-2 w-full mt-5">
+                        @foreach($result as $items) @if(Auth::user()->id != $items->id)
+                        <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                            <div class="flex-shrink-0">
+                                @if($items->get_profilephoto->count() == 0)
+                                  <img class="h-10 w-10 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="" />
+                                @else
+                                  @php
+                                   $img_path = $items->get_profilephoto->first()->gallery_path;
+                                   $s3_profilelink = config('app.s3_public_link')."/users/profile_img/".$img_path; 
+                                   $userviewprofile = $items->get_profilephoto->first()->gallery_path; 
+                                  @endphp
+                                <img class="h-10 w-10 rounded-full" src="{{$s3_profilelink}}" alt="" />
+                                @endif
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <a class="focus:outline-none">
+                                    <p class="text-sm font-medium text-gray-900">
+                                        {{ $items->name }}
+                                    </p>
+                                    <p class="text-sm text-gray-500 truncate">
+                                        {{ $items->email }}
+                                    </p>
+                                </a>
+                            </div>
+                            <div class="flex-auto min-w-0">
+                                <button type="button" class="float-right inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-custom-pink">
+                                    Send Invitation
+                                </button>
+                            </div>
+                        </div>
+                        @endif @endforeach
+                    </div>
+    
+                    @else
+                    <div class="text-center">
+                        <h3 class="text-gray-900 font-bold text-md">User not found</h3>
+                        <p class="text-gray-500 text-sm mt-2">Try sending a invitation using the email address.</p>
+    
+                        <div>
+                            <div class="mt-1">
+                                <input type="email" class="item-center w-1/4 pr-10 sm:text-sm rounded-md" placeholder="Enter your email" wire:model="emailInvitation" />
+                            </div>
+                            <button wire:click="sendInvitation({{$channel->id}})" type="button" class="mt-2 items-center px-2.5 py-1.5 border border-transparent text-sm font-medium rounded shadow-sm text-white bg-custom-pink">
+                                Send Invitation
+                            </button>
+                        </div>
+                        <div>@error('emailInvitation') <span class="text-center text-xs text-red-600">{{$message}}</span> @enderror</div>
+                    </div>
+    
+                    @endif @endif
+                </div>
+            </div>
+        </section>
 
 
       </div>

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MainController;
-
+use App\Http\Controllers\Mail\VerificationController;
 /*-- Admin ---*/
 use App\Http\Middleware\Administrator;
 use App\Http\Livewire\Admin\{
@@ -63,30 +63,21 @@ use App\Http\Livewire\Editor\{
 	EditorEpisodeView,
 };
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-// Route::get('/', function () {
-//     return view('about');
-// });
+/*-- Collaborators ---*/
+use App\Http\Middleware\Collaborators;
+use App\Http\Livewire\Collaborators\{
+	CollaboratorsDashboard,
+	CollaboratorsChannel,
+	CollaboratorsChannelPodcastView,
+	CollaboratorsChannelPodcastCreate,
+	CollaboratorsChannelPodcastEpisodeView,
+	CollaboratorsPodcast,
+	CollaboratorsSettings,
+	CollaboratorsNotification,
+};
 
 
-// Route::get('/about', function () {
-//     return view('about');
-// });
 
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
 
 Route::get('/', [MainController::class, 'about']);
 
@@ -104,6 +95,10 @@ Route::get('/advertise', [MainController::class, 'viewAdvertise'])->name('advert
 Route::get('rss/feed/{username}', [MainController::class, 'viewGenerateRSS'])->name('generateRSS');
 // https://anchor.fm/s/6aa1b994/podcast/rss
 Route::get('feed/{rsslink}', [MainController::class, 'feedRSS'])->name('generateFeed');
+
+Route::get('/channel/invitation/verify/{link}',[VerificationController::class, 'verifyChannelInvitation'])->name('verifyChannelInvitation');
+
+
 
 
 Route::group(['middleware' => Administrator::class,'prefix'=>'admin'], function(){
@@ -124,6 +119,33 @@ Route::group(['middleware' => Administrator::class,'prefix'=>'admin'], function(
 });
 
 
+
+Route::group(['middleware' => Collaborators::class,'prefix'=>'collaborators'], function(){
+
+	Route::redirect('dashboard', 'channel');
+
+	Route::group(['prefix'=>'channel'], function(){
+		Route::get('/',CollaboratorsChannel::class)->name('collaboratorsChannel');
+
+		Route::group(['prefix'=>'podcast'], function(){
+			Route::get('{link}',CollaboratorsChannelPodcastView::class)->name('collaboratorsChannelPodcastView');
+			Route::get('{link}/create',CollaboratorsChannelPodcastCreate::class)->name('collaboratorsChannelPodcastCreate');
+			//Route::get('{link}/episode/{id}',EditorEpisodeView::class)->name('editorEpisodeView');
+			Route::get('{link}/episode/{id}',CollaboratorsChannelPodcastEpisodeView::class)->name('collaboratorsChannelPodcastEpisodeView');
+		
+			// Route::group(['prefix'=>'{link}'], function(){
+			// 	Route::get('episode/{id}',CollaboratorsChannelPodcastEpisodeView::class)->name('collaboratorsChannelPodcastEpisodeView');
+			// });
+		});
+
+
+	});
+
+	Route::get('podcast',CollaboratorsPodcast::class)->name('collaboratorsPodcast');
+	Route::get('notification',CollaboratorsNotification::class)->name('collaboratorsNotification');
+	Route::get('settings',CollaboratorsSettings::class)->name('collaboratorsSettings');
+
+});
 
 
 
@@ -190,6 +212,31 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 	Route::get('search/{data}',EditorSearch::class)->name('editorSearch');
 
 	Route::get('setup',EditorSetup::class)->name('editorSetup');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/**   
+	 * Routes for verifications
+	 * 
+	 * 
+	 */
+	
 
 	//Route::get('podcast',EditorPodcast::class)->name('editorPodcast');
 	//Route::get('podcast/details/{id}',EditorPodcastDetail::class)->name('editorPodcastDetails');

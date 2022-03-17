@@ -54,6 +54,8 @@ class AuthenticatedSessionController extends Controller
                     return redirect('editor/dashboard');
                 }
 
+            }elseif(Auth::user()->roles == 'collaborators'){
+                return redirect('collaborators/channel');
             }else{
                  // return redirect(RouteServiceProvider::HOME);
                 return redirect('admin/dashboard');

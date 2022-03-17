@@ -95,7 +95,7 @@
                                         display: inline-block;
                                         text-align: center;
                                         padding: 1rem 2rem;
-                                    " href=""><strong>Accept Invitation</strong></a>
+                                    " href="{{ route('verifyChannelInvitation',['link' => $link ]) }}"><strong>Accept Invitation</strong></a>
                                     </center>
                                 </td>
                             </tr>

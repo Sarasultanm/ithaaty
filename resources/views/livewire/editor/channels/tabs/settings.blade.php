@@ -172,14 +172,17 @@
 
     <!--end cover-->
 
-    <section class="mt-5 col-span-10">
+    <section class="mt-5 col-span-10 hidden">
         <div class="shadow-sm sm:rounded-md sm:overflow-hidden">
             <div class="bg-white py-6 px-4 sm:p-6">
-                <h3 class="text-gray-900 font-bold text-md">Add Users</h3>
-                <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <br />
-                <input wire:model.debounce.300ms="search" wire:keydown.enter="get_search()" type="text" placeholder="Search" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md" />
-
+                <div class="flex justify-between">
+                    <div class="flex-auto">
+                      <h3 class="text-gray-900 font-bold text-md">Add Users</h3>
+                      <p class="text-gray-500 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                    <input wire:model.debounce.300ms="search" wire:keydown.enter="get_search()" 
+                           type="text" placeholder="Search" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md flex-1" />
+                </div> 
                 @if($result) @if($result->count() != 0 )
                 <div class="grid grid-cols-6 gap-4 sm:grid-cols-2 w-full mt-5">
                     @foreach($result as $items) @if(Auth::user()->id != $items->id)
