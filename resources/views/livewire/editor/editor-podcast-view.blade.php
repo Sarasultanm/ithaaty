@@ -56,7 +56,7 @@
                           <?php $img_path = $audio->get_thumbnail->first()->gallery_path; ?>
                           <?php $s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$img_path; ?>
                         @endif
-                       <script src="{{ asset('videojs/video.min.js') }}"></script>
+                        <script src="{{ asset('videojs/video.min.js') }}"></script>
                         <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
 
                        <video
