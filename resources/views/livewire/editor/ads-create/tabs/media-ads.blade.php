@@ -45,10 +45,11 @@
                 </video>     
                 <script> 
                   var player=videojs('my-video'); 
-                  var adsVideoLink = "http://127.0.0.1:8000/ads/pepsi-ads.mp4";
-                  var adsSkip = 0;
-                  var adsDisplay = 1%;
-                 
+                  player.nuevo({
+                    qualityMenu: true,
+                    buttonRewind: true,
+                    buttonForward: true
+                  });
                   player.vroll({ 
                           // src: adsVideoLink,
                           // type:"video/mp4", 
@@ -56,11 +57,11 @@
                           // offset:adsDisplay,
                           // skip:adsSkip,
                           // id:1
-                          src:"{{ asset('ads/big_buck_bunny.mp4') }}", 
+                          src:"{{ asset('ads/pepsi-ads.mp4') }}", 
                           type: "video/mp4",
                           href: "url-to-go-on-preroll-click",
-                          offset:0,
-                          skip: 5 //optional skip video option.
+                          offset:1%,
+                          skip: 5, //optional skip video option.
                           id=1 
                   });
 
