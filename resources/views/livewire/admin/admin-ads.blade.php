@@ -2,7 +2,7 @@
 
 
  <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Admin Ads') }}
         </h2>
   </x-slot>
@@ -34,15 +34,15 @@
 
          <div class="w-full ">
           	
-          	 <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
+          	 <x-auth-session-status-custom class="mt-4 mb-4" :status="session('status')" />
           	 
           </div>
 
 
-          <div class="mb-5 w-full ">
+          <div class="w-full mb-5 ">
           	<div class="flex">
-          		 <h1 class="flex-1  font-bold text-gray-800 text-xl">Ads List</h1> 
-          	   <a href="{{route('adminAdsCreate')}}" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Add New
+          		 <h1 class="flex-1 text-xl font-bold text-gray-800">Ads List</h1> 
+          	   <a href="{{route('adminAdsCreate')}}" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white bg-green-500 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Add New
                 </a> 
           	</div>
           	
@@ -51,7 +51,7 @@
 
         	<!-- table list -->
         	<div x-data="{
-			      openTab: 1,
+			      openTab: 4,
 			      activeClasses: 'border-indigo-500 text-indigo-600',
 			      inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
 			    }" 
@@ -60,12 +60,18 @@
 
 
 			    <div class="border-b border-gray-200">
-				  	<ul class="-mb-px flex" >
-				      <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer" >
+				  	<ul class="flex -mb-px" >
+				      <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer" >
 				        <a>Company List</a>
 				      </li>
-				      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
-				        <a>Video Ads List</a>
+				      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
+				        <a>Media Ads List</a>
+				      </li>
+					  <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
+				        <a>Social Ads List</a>
+				      </li>
+					  <li @click="openTab = 4" :class="openTab === 4 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
+				        <a>Context Ads List</a>
 				      </li>
 				    </ul>
 				</div>
@@ -74,202 +80,19 @@
 				<div class="w-full pt-4">
 
 					<div x-show="openTab === 1">
+                        @include('livewire.admin.admin-ads.tabs.company-list') 
+					</div> 
+					<div  x-show="openTab === 2">
+						@include('livewire.admin.admin-ads.tabs.media-ads-list') 
+					</div>
+					<div  x-show="openTab === 3">
+						@include('livewire.admin.admin-ads.tabs.social-ads-list') 
+					</div> 
+					<div  x-show="openTab === 4">
+						@include('livewire.admin.admin-ads.tabs.context-ads-list') 
+					</div> 	
 
-
-						<!-- list -->
-
-					<div class="flex flex-col">
-					  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-					    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-					      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-					        <table class="min-w-full divide-y divide-gray-200">
-					          <thead class="bg-gray-50">
-					            <tr>
-					              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-					               Name
-					              </th>
-					             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-					               
-					              </th>
-					              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-					                Status
-					              </th>
-					              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-					                Action
-					              </th>
-					            <!--   <th scope="col" class="relative px-6 py-3">
-					                <span class="sr-only">Edit</span>
-					              </th> -->
-					            </tr>
-					          </thead>
-					          <tbody class="bg-white divide-y divide-gray-200">
-					          @foreach($ads->get() as $adsitem)
-					            <tr>
-					              <td class="px-6 py-4 whitespace-nowrap">
-					                <div class="flex items-center">
-					                  <div class="flex-shrink-0 h-10 w-10">
-					                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
-					                  </div>
-					                  <div class="ml-4">
-					                    <div class="text-sm font-medium text-gray-900">
-					                    {{ $adsitem->ads_name }}
-					                    </div>
-					                    <div class="text-sm text-gray-500">
-					                      {{ $adsitem->ads_location }}
-					                    </div>
-					                    <div class="text-sm text-gray-500">
-					                      <strong>   {{ $adsitem->ads_website }}</strong>
-					                    </div>
-					                  </div>
-					                </div>
-					              </td>
-					              <td class="px-6 py-4 whitespace-nowrap">
-					               <!--  <div class="text-sm text-gray-900">Category</div> -->
-					                <div class="text-sm text-gray-500"></div>
-					              </td>
-					              <td class="px-6 py-4 whitespace-nowrap">
-					              	 <div class="text-sm font-bold text-gray-500">{{ $adsitem->ads_website }}</div>
-					              </td>
-					              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-
-					           			 <a href="{{ route('adminAdsDetails',['id' => $adsitem->id]) }}" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-2 py-2 border-gray-200 text-base font-medium text-black hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Details
-               							 </a> 
-					               
-					              </td>
-					             <!--  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-					                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-					              </td> -->
-					            </tr>
-					            @endforeach
-					            <!-- More people... -->
-					          </tbody>
-					        </table>
-					      </div>
-					    </div>
-					  </div>
-				</div>
-
-						<!-- list -->
-
-
-
-				    </div>		
-
-
-				    <div x-show="openTab === 2">
-
-
-
-						<!-- table list -->
-
-			        		<div class="flex flex-col">
-								  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-								    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-								      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-								        <table class="min-w-full divide-y divide-gray-200">
-								          <thead class="bg-gray-50">
-								            <tr>
-								              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-								               Activity
-								              </th>
-								             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-								               Skip Duration
-								              </th>
-								              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-								             	Display Time
-								              </th>
-								              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-								                Status
-								              </th>
-								               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-								                File Link
-								              </th>
-								              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-								                Action
-								              </th>
-								            <!--   <th scope="col" class="relative px-6 py-3">
-								                <span class="sr-only">Edit</span>
-								              </th> -->
-								            </tr>
-								          </thead>
-								          <tbody class="bg-white divide-y divide-gray-200">
-								         
-								          	@foreach($adslist->get() as $ads)
-								            <tr>
-								              <td class="px-6 py-4 whitespace-nowrap">
-								                <div class="flex items-center">
-								                  <div class="flex-shrink-0 h-10 w-10">
-								                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
-								                  </div>
-								                  <div class="ml-4">
-								                    <div class="text-sm font-medium text-gray-900">
-								                    {{ $ads->adslist_name }}
-								                    </div>
-								                    <div class="text-sm text-gray-500">
-								                      {{ $ads->adslist_videolink }}
-								                    </div>
-								                    <div class="text-sm text-gray-500">
-								                      <strong>   </strong>
-								                    </div>
-								                  </div>
-								                </div>
-								              </td>
-								              <td class="px-6 py-4 whitespace-nowrap">
-								               <!--  <div class="text-sm text-gray-900">Category</div> -->
-								                <div class="text-sm text-gray-500">{{ $ads->adslist_adstype }}</div>
-								              </td>
-								              <td class="px-6 py-4 whitespace-nowrap">
-								               <!--  <div class="text-sm text-gray-900">Category</div> -->
-								                <div class="text-sm text-gray-500">{{ $ads->adslist_displaytime }}</div>
-								              </td>
-								              <td class="px-6 py-4 whitespace-nowrap">
-								              	 <div class="text-sm font-bold text-gray-500">{{ $ads->adslist_status }}</div>
-								              </td>
-								               <td class="px-6 py-4 whitespace-nowrap">
-								              	  <a href="{{ $ads->adslist_videolink }}" target="_blank" class="inline-flex justify-center shadow-sm text-base font-medium text-indigo-500 hover:text-indigo-800 hover:underline  sm:col-start-2 sm:text-sm">Open link
-			               						 </a> 
-								              </td>
-								              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-								              	  @if($ads->adslist_status == "Confirm")
-								           		 <a href="{{ route('adminAdsSetup',['id' => $ads->id]) }}" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-2 py-2 border-gray-200 text-base font-medium text-black hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Setup
-			               						 </a> 
-
-			               						 @else
-
-			               						 <button wire:click="confirmVideo({{$ads->id}})" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-2 py-2 border-gray-200 text-base font-medium text-black hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Approve
-			               						 </button> 
-
-								               	@endif
-								              </td>
-								             <!--  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-								                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-								              </td> -->
-								            </tr>
-								            @endforeach
-
-
-								            <!-- More people... -->
-								          </tbody>
-								        </table>
-								      </div>
-								    </div>
-								  </div>
-							</div>
-
-						<!-- table list-->
-
-				    </div>		
-
-
-
-
-
-
-
-
-
-
-
+					
 				</div>	
 
 
@@ -309,7 +132,7 @@
 
 
 
-  <!--  <div class="text-xs bottom-0 hidden" wire:poll.750ms> Current time: {{ now() }} </div> -->
+  <!--  <div class="bottom-0 hidden text-xs" wire:poll.750ms> Current time: {{ now() }} </div> -->
 
         </div>
 </div>

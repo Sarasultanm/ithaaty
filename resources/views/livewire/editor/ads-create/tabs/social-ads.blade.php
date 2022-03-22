@@ -1,38 +1,38 @@
 <section>
-    <div class="grid gap-4 grid-cols-5 mt-5">
+    <div class="grid grid-cols-5 gap-4 mt-5">
         <div class="col-span-2">
-            <h1 class="flex-1 font-bold text-gray-800 text-lg ">Preview Ads</h1> 
-            <div class="border-2 mt-3 p-3 shadow-md space-y-3">
+            <h1 class="flex-1 text-lg font-bold text-gray-800 ">Preview Ads</h1> 
+            <div class="p-3 mt-3 space-y-3 border-2 shadow-md">
                 
-                <div class="min-w-0 flex-1">
-                    <p class="font-bold text-lg text-gray-900 h-7 break-words">
+                <div class="flex-1 min-w-0">
+                    <p class="text-lg font-bold text-gray-900 break-words h-7">
                         <a href="#" target="_blank" class="hover:underline">
                            {{ $contextTitle }} 
                         </a>
                     </p>
-                    <p class="font-regular text-gray-700 text-xs">
+                    <p class="text-xs text-gray-700 font-regular">
                         <a href="#" target="_blank" class="hover:underline">
                             {{ $contextUrlName }}
                         </a>
                     </p>
-                    <p class="font-regular text-gray-500 text-xs">{{ $contextDescription }}</p>
+                    <p class="text-xs text-gray-500 font-regular">{{ $contextDescription }}</p>
                 </div>
                 <div class="flex-shrink-0">
                     @if ($socialAdsFile)
                         @php $file = $this->checkFile($socialAdsFile->getMimeType()); @endphp
                           
                         @if ($file == "image")
-                            <img class="h-80 rounded-md w-full" src="{{ $socialAdsFile->temporaryUrl() }}" alt="" />
+                            <img class="w-full rounded-md h-80" src="{{ $socialAdsFile->temporaryUrl() }}" alt="" />
 
                         @elseif($file == "video")
-                            <video class="h-80 rounded-md w-full" poster="{{ asset('images/default_user.jpg') }}" controls>
+                            <video class="w-full rounded-md h-80" poster="{{ asset('images/default_user.jpg') }}" controls>
                                 <source src="{{ $socialAdsFile->temporaryUrl() }}" type="video/mp4">
                                 <source src="{{ $socialAdsFile->temporaryUrl() }}" type="video/ogg">
                                 Your browser does not support the video tag.
                             </video>
 
                         @elseif($file == "audio")
-                            <video class="h-80 rounded-md w-full" poster="{{ asset('images/default_user.jpg') }}"  controls>
+                            <video class="w-full rounded-md h-80" poster="{{ asset('images/default_user.jpg') }}"  controls>
                                 <source src="{{ $socialAdsFile->temporaryUrl() }}" type="video/mp4">
                                 <source src="{{ $socialAdsFile->temporaryUrl() }}" type="video/ogg">
                                 Your browser does not support the video tag.
@@ -41,10 +41,10 @@
 
                     @else
 
-                    <img class="h-80 rounded-md w-full" src="{{ asset('images/default_user.jpg') }}" alt="" />
+                    <img class="w-full rounded-md h-80" src="{{ asset('images/default_user.jpg') }}" alt="" />
                     @endif
                 </div>
-                {{-- <div class="flex-shrink-0 self-center flex mb-auto"></div> --}}
+                {{-- <div class="flex self-center flex-shrink-0 mb-auto"></div> --}}
             </div>
         </div>
         <div class="col-span-3">
@@ -66,14 +66,14 @@
                              <div class="text-center text-gray-700">
                                Please wait while uploading the file .. <input x-bind:value="`${progress}%`" disabled style="width: 60px;">
                              </div>
-                             <div  class="overflow-hidden h-2 text-xs flex rounded bg-purple-200 progress">
+                             <div  class="flex h-2 overflow-hidden text-xs bg-purple-200 rounded progress">
                                <div x-bind:style="`width:${progress}%`"
-                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-custom-pink"
+                                 class="flex flex-col justify-center text-center text-white shadow-none whitespace-nowrap bg-custom-pink"
                                ></div>
                              </div>
                            </div>
-                           <p x-show="success" class="text-center text-custom-pink font-bold text-gray-800 text-sm">File Upload Complete</p> 
-                            <p x-show="error" class="text-center font-bold text-red-800 text-sm">*Error to upload the file</p> 
+                           <p x-show="success" class="text-sm font-bold text-center text-gray-800 text-custom-pink">File Upload Complete</p> 
+                            <p x-show="error" class="text-sm font-bold text-center text-red-800">*Error to upload the file</p> 
                          </div>
 
                         </div>
@@ -81,7 +81,7 @@
 
                 </div>
                 @include('livewire.editor.ads-create.parts.details')  
-
+                
 
             </div>
         </div>
@@ -92,31 +92,6 @@
             @include('livewire.editor.ads-create.parts.segments') 
              
         </div>
-
-        <div class="col-span-5">
-
-            @include('livewire.editor.ads-create.parts.duration') 
-             
-        </div>
-
-        <div class="col-span-5">
-
-            @include('livewire.editor.ads-create.parts.payment-summary') 
-             
-        </div> 
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     </div>

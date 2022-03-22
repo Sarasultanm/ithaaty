@@ -30,6 +30,7 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
             @foreach($ads_list as $ads)
+            @if($ads->adslist_type != "Context Ads" && $ads->adslist_type != "Social Ads" )
               <tr>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
@@ -77,6 +78,7 @@
                   <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                 </td>  -->
               </tr>
+              @endif
               @endforeach
               <!-- More people... -->
             </tbody>

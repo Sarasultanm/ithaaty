@@ -15,6 +15,8 @@ use App\Models\UserNotes;
 use App\Models\UserViews;
 use App\Models\AudioReport;
 use App\Models\UserFriends;
+use App\Models\Ads;
+use App\Models\AdsList;
 use Auth;
 use Share;
 use URL;
@@ -455,10 +457,10 @@ class EditorDashboard extends Component
         $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
         $randomList = User::inRandomOrder()->where('id','!=',Auth::user()->id)->take(3)->get();
         $mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1);
+        $contextAds = AdsList::inRandomOrder()->where(['adslist_type'=>'Context Ads','adslist_status'=>'Confirm'])->take(1)->get();
 
 
-
-        return view('livewire.editor.editor-dashboard',compact('audioList','categoryList','randomList','mostlike'));
+        return view('livewire.editor.editor-dashboard',compact('audioList','categoryList','randomList','mostlike','contextAds'));
     }
 
    

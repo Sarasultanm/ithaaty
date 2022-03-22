@@ -6,17 +6,17 @@
             <thead class="bg-gray-50">
               <tr>
                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                  Activity
+                  Title
                 </th>
                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                  Ads Type
+                  Days
                   </th>
-                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                {{-- <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Skip Duration
                 </th>
                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Display Time
-                </th>
+                </th> --}}
                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Status
                 </th>
@@ -30,18 +30,22 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
             @foreach($ads_list as $ads)
+              @if($ads->adslist_type == "Context Ads")
               <tr>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-10 h-10">
-                      <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                      @php
+                        $ads_image_link = config('app.s3_public_link')."/ads/context_ads/".$ads->get_gallery->gallery_path ; 
+                      @endphp
+                      <img class="w-10 h-10 rounded-full" src="{{ $ads_image_link }}" alt="">
                     </div>
                     <div class="ml-4">
-                      <div class="text-sm font-medium text-gray-900">
-                      {{ $ads->adslist_name }}
+                      <div class="text-sm font-bold text-gray-900">
+                     {{ $ads->adslist_name }}
                       </div>
                       <div class="text-sm text-gray-500">
-                        {{ $ads->adslist_videolink }}
+                        <span class="truncate">{{ $ads->adslist_desc }}</span>
                       </div>
                       <div class="text-sm text-gray-500">
                         <strong>   </strong>
@@ -50,17 +54,8 @@
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <!--  <div class="text-sm text-gray-900">Category</div> -->
-                    <div class="text-sm text-gray-500"></div>
+                    <div class="text-sm text-gray-500">{{ $ads->adslist_days }}</div>
                   </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <!--  <div class="text-sm text-gray-900">Category</div> -->
-                  <div class="text-sm text-gray-500">{{ $ads->adslist_adstype }}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <!--  <div class="text-sm text-gray-900">Category</div> -->
-                  <div class="text-sm text-gray-500">{{ $ads->adslist_displaytime }}</div>
-                </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     <div class="text-sm font-bold text-gray-500">{{ $ads->adslist_status }}</div>
                 </td>
@@ -77,6 +72,7 @@
                   <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                 </td>  -->
               </tr>
+              @endif
               @endforeach
               <!-- More people... -->
             </tbody>

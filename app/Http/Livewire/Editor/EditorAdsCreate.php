@@ -14,22 +14,34 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\URL;
 
+use App\Http\Controllers\Controller;
+
+
 class EditorAdsCreate extends Component
 {
 
     use WithFileUploads;
 
 
-    public $contextAdsImage,$socialAdsFile;
+    public $contextAdsImage,$socialAdsFile,$mediaAdsFile;
     public $contextTitle = "Ads Title Here";
     public $contextDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit non scelerisque aliquet";
     public $contextUrlName = "Website Name";
     public $contextUrlLink = "Website Link";
-    
+
+    public $socialTitle = "Ads Title Here";
+    public $socialDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit non scelerisque aliquet";
+    public $socialUrlName = "Website Name";
+    public $socialUrlLink = "Website Link";
+
+    public $ads_name,$ads_website,$ads_location,$ads_logo,$ads_file;
+    public $ads_list,$adslist_name,$adslist_videolink,$adslist_videoupload,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc,$country_slc,$agebracket_list,$adslist_days,$adslist_videotype,$adslist_end;
+
 
 
 
     public $compSkip = 50,$compDisplay = 100,$compDays = 3,$compTotal = 450;
+    public $adsContextValue = 100;
     public $select = 'Red';
 
     protected $rules = [
@@ -46,6 +58,46 @@ class EditorAdsCreate extends Component
         'contextAdsImage' =>'required|mimes:png,jpg,jpeg,gif|max:1000',
     ];
 
+    public function updateTitle(){
+        $this->contextTitle = $this->adslist_name;
+    }
+
+    public function addContextAds($id){
+
+        $this->validate([
+            'contextTitle' => 'required',
+            'contextDescription' => 'required',
+            'contextUrlName' => 'required',
+            'contextUrlLink' => 'required',
+        ]);
+
+        $image = Controller::makeImage('context_adsimage', $this->contextAdsImage, 'ads/context_ads');
+
+        $data = new AdsList;
+        $data->adslist_id = $id;
+        $data->adslist_name = $this->contextTitle;
+        $data->adslist_videolink =  $image->id;
+        $data->adslist_type = "Context Ads";
+        $data->adslist_adstype = "none";
+        $data->adslist_durationtype = "none";
+        $data->adslist_displaytime = "none";
+        $data->adslist_status = "Pending";
+        $data->adslist_agebracket = $this->adslist_agebracket;
+        $data->adslist_country = $this->adslist_country;
+        $data->adslist_webname = $this->contextUrlName;
+        $data->adslist_weblink = $this->contextUrlLink;
+        $data->adslist_desc = $this->contextDescription;
+        $data->adslist_days = $this->adslist_days;
+        $data->adslist_videotype = "image";
+        $data->adslist_end = "none";
+
+
+        $data->save(); 
+
+         session()->flash('status', 'New ads added as file');
+        redirect()->to('editor/ads');    
+
+    }
 
     public function selectType($type){
         $this->select = $type;
@@ -100,6 +152,7 @@ class EditorAdsCreate extends Component
 
 		
 	}
+
 
     public function addAdsList($id){
 
@@ -256,6 +309,26 @@ class EditorAdsCreate extends Component
         }
         
         $this->compTotal = ( $this->compSkip + $this->compDisplay ) * $this->compDays;
+        
+
+
+    }
+    public function adsContextComputation($value){
+        if($value == 'Select'){
+        $this->compDays = 0;
+        }elseif($value == '3'){
+                $this->compDays = 3;
+        }elseif($value == '7'){
+                $this->compDays = 7;
+        }elseif($value == '9'){
+                $this->compDays = 9;
+        }elseif($value == '12'){
+                $this->compDays = 12;
+        }
+        
+    
+
+        $this->compTotal = ( $this->adsContextValue ) * $this->compDays;
         
 
 

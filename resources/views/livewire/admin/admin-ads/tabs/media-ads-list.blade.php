@@ -1,3 +1,5 @@
+<!-- table list -->
+
 <div class="flex flex-col">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -6,21 +8,21 @@
             <thead class="bg-gray-50">
               <tr>
                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                  Activity
+                 Activity
+                </th>
+               <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                 Skip Duration
                 </th>
                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                  Ads Type
-                  </th>
-                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                  Skip Duration
-                </th>
-                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                Display Time
+                   Display Time
                 </th>
                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Status
                 </th>
-                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
+                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  File Link
+                </th>
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Action
                 </th>
               <!--   <th scope="col" class="relative px-6 py-3">
@@ -29,7 +31,9 @@
               </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-            @foreach($ads_list as $ads)
+               @foreach($adslist->get() as $ads)
+
+               @if($ads->adslist_type != "Context Ads" && $ads->adslist_type != "Social Ads" )
               <tr>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
@@ -50,34 +54,40 @@
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <!--  <div class="text-sm text-gray-900">Category</div> -->
-                    <div class="text-sm text-gray-500"></div>
-                  </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <!--  <div class="text-sm text-gray-900">Category</div> -->
+                 <!--  <div class="text-sm text-gray-900">Category</div> -->
                   <div class="text-sm text-gray-500">{{ $ads->adslist_adstype }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <!--  <div class="text-sm text-gray-900">Category</div> -->
+                 <!--  <div class="text-sm text-gray-900">Category</div> -->
                   <div class="text-sm text-gray-500">{{ $ads->adslist_displaytime }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm font-bold text-gray-500">{{ $ads->adslist_status }}</div>
+                     <div class="text-sm font-bold text-gray-500">{{ $ads->adslist_status }}</div>
                 </td>
-                <td class="px-6 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
-                  <a href="{{ route('editorAdsUpdate',['id' => $ads->id ]) }}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Update</a> / 
-                    <a href="{{ route('editorAdsStats',['id' => $ads->id ]) }}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Stats</a>
-                  @if($ads->adslist_status == "Confirm")
-                <!--  <a href="{{ route('adminAdsSetup',['id' => $ads->id]) }}" class="inline-flex justify-center px-2 py-2 text-base font-medium text-black border border-transparent border-gray-200 rounded-md shadow-sm hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Setup
-                    </a>  -->
-                  @endif
+                 <td class="px-6 py-4 whitespace-nowrap">
+                      <a href="{{ $ads->adslist_videolink }}" target="_blank" class="inline-flex justify-center text-base font-medium text-indigo-500 shadow-sm hover:text-indigo-800 hover:underline sm:col-start-2 sm:text-sm">Open link
+                      </a> 
                 </td>
+                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                      @if($ads->adslist_status == "Confirm")
+                      <a href="{{ route('adminAdsSetup',['id' => $ads->id]) }}" class="inline-flex justify-center px-2 py-2 text-base font-medium text-black border border-transparent border-gray-200 rounded-md shadow-sm hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Setup
+                      </a> 
 
-                <!-- <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                      @else
+
+                      <button wire:click="confirmVideo({{$ads->id}})" class="inline-flex justify-center px-2 py-2 text-base font-medium text-black border border-transparent border-gray-200 rounded-md shadow-sm hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Approve
+                      </button> 
+
+                     @endif
+                </td>
+               <!--  <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                   <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                </td>  -->
+                </td> -->
               </tr>
+              @endif
               @endforeach
+
+
               <!-- More people... -->
             </tbody>
           </table>
@@ -85,3 +95,5 @@
       </div>
     </div>
 </div>
+
+<!-- table list-->

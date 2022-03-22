@@ -316,8 +316,8 @@ class EditorPodcastView extends Component
         $this->notes = UserNotes::where('notes_audioid',$id)->get();
         $this->adsList = AdsListSetup::where('adssetup_audioid',$id)->get();
         $this->numAds = AdsListSetup::where('adssetup_audioid',$id)->count();
-        $this->newAdsList = AdsList::where('adslist_country',Auth::User()->country)->get();
-        $this->newNumAds = AdsList::where('adslist_country',Auth::User()->country)->count();
+        $this->newAdsList = AdsList::where('adslist_country',Auth::User()->country)->whereNull('adslist_type')->get();
+        $this->newNumAds = AdsList::where('adslist_country',Auth::User()->country)->whereNull('adslist_type')->count();
     }    
 
 

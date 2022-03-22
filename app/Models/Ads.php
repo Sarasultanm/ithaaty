@@ -9,7 +9,9 @@ class Ads extends Model
 {
     use HasFactory;
 
-     public function get_user(){
+    public function get_user(){
         return $this->belongsTo('App\Models\User', 'ads_ownerid', 'id');
     }
+
+  
 }
