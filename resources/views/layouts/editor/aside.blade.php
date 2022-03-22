@@ -123,7 +123,7 @@
           </section>
 
           <section aria-labelledby="trending-heading">
-            @if($contextAds)
+            @if($contextAds->count() != 0)
                 <h2 class="mt-2 ml-2 text-base font-bold text-gray-900">
                   Sponsors
                 </h2>
