@@ -36,7 +36,7 @@
                 <div class="flex items-center">
                   <div class="flex-shrink-0 w-10 h-10">
                     @php
-                      $ads_image_link = config('app.s3_public_link')."/ads/context_ads/".$ads->get_gallery->gallery_path ; 
+                      $ads_image_link = config('app.s3_public_link')."/ads/social_ads/".$ads->get_gallery->gallery_path ; 
                     @endphp
                     <img class="w-10 h-10 rounded-full" src="{{ $ads_image_link }}" alt="">
                   </div>

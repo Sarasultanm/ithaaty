@@ -125,8 +125,11 @@
         <div class="col-span-5">
 
             @include('livewire.editor.ads-create.parts.segments') 
+
+
+            @include('livewire.editor.ads-create.parts.interest') 
             
-            <div class="mt-3 mb-5 text-right sm:mt-5">
+            <div class="pt-10 mt-3 mb-5 text-right border-t-2 sm:mt-5 border-custom-pink">
                        
                 <button wire:click="addContextAds({{$checkAds->first()->id}})" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink hover:bg-green-700 sm:col-start-2 sm:text-md">
                   Save Ads

@@ -99,6 +99,43 @@ class EditorAdsCreate extends Component
 
     }
 
+    public function addSocialAds($id){
+
+        $this->validate([
+            'contextTitle' => 'required',
+            'contextDescription' => 'required',
+            'contextUrlName' => 'required',
+            'contextUrlLink' => 'required',
+        ]);
+
+        $image = Controller::makeImage('context_adsimage', $this->socialAdsFile, 'ads/social_ads');
+
+        $data = new AdsList;
+        $data->adslist_id = $id;
+        $data->adslist_name = $this->contextTitle;
+        $data->adslist_videolink =  $image->id;
+        $data->adslist_type = "Social Ads";
+        $data->adslist_adstype = "none";
+        $data->adslist_durationtype = "none";
+        $data->adslist_displaytime = "none";
+        $data->adslist_status = "Pending";
+        $data->adslist_agebracket = $this->adslist_agebracket;
+        $data->adslist_country = $this->adslist_country;
+        $data->adslist_webname = $this->contextUrlName;
+        $data->adslist_weblink = $this->contextUrlLink;
+        $data->adslist_desc = $this->contextDescription;
+        $data->adslist_days = $this->adslist_days;
+        $data->adslist_videotype = $this->checkFile($this->socialAdsFile->getMimeType());
+        $data->adslist_end = "none";
+
+
+        $data->save(); 
+
+         session()->flash('status', 'New ads added as file');
+        redirect()->to('editor/ads');    
+
+    }
+
     public function selectType($type){
         $this->select = $type;
     }

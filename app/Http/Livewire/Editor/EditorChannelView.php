@@ -66,6 +66,7 @@ class EditorChannelView extends Component
         ]);
 
         UserCollaborator::create([
+            'usercol_ownerid'=>Auth::user()->id,
             'usercol_userid'=>$user->id,
             'usercol_channel_id'=> $channel->id,
             'usercol_email'=> $this->emailInvitation,

@@ -138,15 +138,15 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 
               <div class="w-full">
                   <div x-show="openTab === 1">
-                         @include('livewire.editor.ads-create.tabs.context-ads')    
+                       @include('livewire.editor.ads-create.tabs.context-ads')    
                   </div>  
 
                   <div  x-show="openTab === 2">
-                    @include('livewire.editor.ads-create.tabs.social-ads') 
+                      @include('livewire.editor.ads-create.tabs.social-ads') 
                   </div> 
                 
                   <div  x-show="openTab === 3">
-                    @include('livewire.editor.ads-create.tabs.media-ads')  
+                      @include('livewire.editor.ads-create.tabs.media-ads')  
                   </div> 
                   {{-- <div  x-show="openTab === 4">
                     @include('livewire.editor.ads-create.tabs.video-ads')  

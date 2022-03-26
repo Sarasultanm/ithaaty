@@ -1,5 +1,5 @@
-<div class="border-b-2 pb-10 pt-5 border-green-500 ">
-    <h1 class="flex-1 font-bold text-gray-800 text-xl ">Segments</h1> 
+<div class="pt-5 ">
+    <h1 class="flex-1 text-xl font-bold text-gray-800 ">Segments</h1> 
     <p class="mt-1 text-sm text-gray-500">
          Please click the link below to see the documents
     </p>
@@ -7,7 +7,7 @@
         <label for="email" class="block text-sm font-medium text-gray-700">Country</label>
         <div class="flex">
           <div class="flex-1 pr-5">
-           <select class="mt-1 mr-5 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:model="country_slc" wire:keydown.enter="addCountry()">
+           <select class="block w-full px-3 py-2 mt-1 mr-5 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:model="country_slc" wire:keydown.enter="addCountry()">
                   <option selected="" disabled="">Select Country</option>
                   <option value="Afganistan">Afghanistan</option>
                   <option value="Albania">Albania</option>
@@ -258,7 +258,7 @@
               </select> 
           </div>
           <div>
-             <button wire:click="addCountry()" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+             <button wire:click="addCountry()" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
               Add Country
              </button>
           </div>
@@ -266,7 +266,7 @@
         <div class="">
              <!-- <label  class="block text-sm font-medium text-gray-700">Description</label> -->
              <div class="mt-1">
-               <textarea id="countryList" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " wire:model="adslist_country"></textarea>
+               <textarea id="countryList" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm " wire:model="adslist_country"></textarea>
                @error('adslist_country') <span class="text-xs text-red-600">Empty fields</span> @enderror
              </div>
      </div>
@@ -277,7 +277,7 @@
         <label for="email" class="block text-sm font-medium text-gray-700">Age Bracket</label>
         <div class="flex">
           <div class="flex-1 pr-5">
-           <select class="mt-1 mr-5 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="agebracket_list" wire:keydown.enter="addBracket()">
+           <select class="block w-full px-3 py-2 mt-1 mr-5 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="agebracket_list" wire:keydown.enter="addBracket()">
            <option value="age0">No specific</option>
            <option value="age1">18 - 24 years</option>
            <option value="age2">25 - 40 years</option>
@@ -287,7 +287,7 @@
         </select> 
           </div>
           <div>
-             <button wire:click="addBracket()" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-pink text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+             <button wire:click="addBracket()" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
               Add Bracket
              </button>
           </div>
@@ -295,7 +295,7 @@
         <div class="">
              <!-- <label  class="block text-sm font-medium text-gray-700">Description</label> -->
              <div class="mt-1">
-               <textarea id="countryList" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " wire:model="adslist_agebracket"></textarea>
+               <textarea id="countryList" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm " wire:model="adslist_agebracket"></textarea>
                 @error('adslist_agebracket') <span class="text-xs text-red-600">Empty fields</span> @enderror
              </div>
      </div>
@@ -304,7 +304,7 @@
 
   <!--     <div class="mt-5">
         <label for="email" class="block text-sm font-medium text-gray-700">Age Bracket</label>
-        <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
+        <select class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
         <option>Select</option>
            <option value="age0">No specific</option>
            <option value="age1">18 - 24 years</option>
@@ -317,69 +317,7 @@
 
 
 
-
-   <div class="mt-5">
-     <h1 class="text-sm font-medium text-gray-700 ">Interest</h1> 
-    <p class="mt-1 text-sm text-gray-500">
-         Please check the checkbox for the interest.
-    </p>
-     <div class="grid grid-cols-4 gap-4 mt-3">
-
-       <div class="col-span-2">
-           <div class="relative flex items-start">
-             <div class="flex items-center h-5">
-               <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-             </div>
-             <div class="ml-3 text-sm">
-               <label for="comments" class="font-bold text-gray-900">Social Issues, Election or Politics</label>
-               <p id="comments-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-             </div>
-           </div>
-       </div>
-        <div class="col-span-2">
-           <div class="relative flex items-start">
-             <div class="flex items-center h-5">
-               <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-             </div>
-             <div class="ml-3 text-sm">
-               <label for="comments" class="font-bold text-gray-900">Housing</label>
-               <p id="comments-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-             </div>
-           </div>
-
-       </div>
-
-        <div class="col-span-2">
-           <div class="relative flex items-start">
-             <div class="flex items-center h-5">
-               <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-             </div>
-             <div class="ml-3 text-sm">
-               <label for="comments" class="font-bold text-gray-900">Employment</label>
-               <p id="comments-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-             </div>
-           </div>
-       </div>
-        <div class="col-span-2">
-           <div class="relative flex items-start">
-             <div class="flex items-center h-5">
-               <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-             </div>
-             <div class="ml-3 text-sm">
-               <label for="comments" class="font-bold text-gray-900">Credits</label>
-               <p id="comments-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-             </div>
-           </div>
-
-       </div>
-     </div>
-
-
-
-
-    
-
-   </div>
+   
 
 
 </div> 

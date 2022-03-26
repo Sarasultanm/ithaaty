@@ -30,7 +30,7 @@ class EditorDashboard extends Component
 	use WithFileUploads;
 
 
-
+        public $post_ads = 0;
 	    public $title,$season,$episode,$category,$summary,$audiofile,$uploadType,$embedlink,$comments,$hashtags,$notes_message,$notes_time;
         public $report_type,$report_message;
 
@@ -449,6 +449,22 @@ class EditorDashboard extends Component
 
     }
 
+    public function checkMediaFile($mime){
+
+        if(Str::contains($mime  , 'image')){
+            $file = "image";
+        }elseif(Str::contains($mime  , 'video')){
+            $file = "video";
+        }else{
+            $file = "audio";
+        }
+        return $file;
+
+        //return Str::contains($mime  , 'image')  ? "image" : "audio";
+        //return $mime;
+    }
+
+
     public function render()
     {   
 
@@ -458,9 +474,10 @@ class EditorDashboard extends Component
         $randomList = User::inRandomOrder()->where('id','!=',Auth::user()->id)->take(3)->get();
         $mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1);
         $contextAds = AdsList::inRandomOrder()->where(['adslist_type'=>'Context Ads','adslist_status'=>'Confirm'])->take(1)->get();
+        $socialAds = AdsList::inRandomOrder()->where(['adslist_type'=>'Social Ads','adslist_status'=>'Confirm'])->take(1)->get();
+    
 
-
-        return view('livewire.editor.editor-dashboard',compact('audioList','categoryList','randomList','mostlike','contextAds'));
+        return view('livewire.editor.editor-dashboard',compact('audioList','categoryList','randomList','mostlike','contextAds','socialAds'));
     }
 
    
