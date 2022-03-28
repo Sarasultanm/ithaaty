@@ -1,9 +1,9 @@
-<nav aria-label="Sidebar" class="sticky top-4 divide-y divide-gray-300">
+<nav aria-label="Sidebar" class="sticky divide-y divide-gray-300 top-4">
           <div class="pb-8 space-y-1">
             <!-- Current: "bg-gray-200 text-gray-900", Default: "text-gray-600 hover:bg-gray-50" -->
           
              <x-nav-link-custom :href="route('editorDashboard')" :active="request()->routeIs('editorDashboard')">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg><span class="truncate">Home</span>
@@ -15,7 +15,7 @@
             </svg><span class="truncate">Notification</span>
              </x-nav-link-custom>
 
-             <x-nav-link-custom :href="route('editorAds')" :active="request()->routeIs('editorAds')">
+             <x-nav-link-custom :href="route('editorAds')" :active="request()->routeIs('editorAds','editorAdsCreate','editorAdsStats')">
               <svg xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                 </svg>
@@ -42,7 +42,7 @@
 
               @if(Auth::user()->get_plan->check_features('p3')->count() != 0 || Auth::user()->get_plan->check_features('p2')->count() != 0 )
 
-              <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
+              <p class="px-3 pt-5 text-xs font-semibold tracking-wider text-gray-500 uppercase" id="communities-headline">
                Podcast
               </p>
               
@@ -108,7 +108,7 @@
             @endif
 
 
-              <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
+              <p class="px-3 pt-5 text-xs font-semibold tracking-wider text-gray-500 uppercase" id="communities-headline">
                 Highlights
               </p>
 
@@ -139,7 +139,7 @@
 
             @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )
 
-            <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
+            <p class="px-3 pt-5 text-xs font-semibold tracking-wider text-gray-500 uppercase" id="communities-headline">
                Social
             </p>  
              <x-nav-link-custom :href="route('editorActivity')" :active="request()->routeIs('editorActivity')">
@@ -164,7 +164,7 @@
             @if(Auth::user()->plan == 'new' || Auth::user()->plan =="")
             @else
             @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )
-             <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
+             <p class="px-3 pt-5 text-xs font-semibold tracking-wider text-gray-500 uppercase" id="communities-headline">
                Subscribers
             </p> 
 
@@ -190,7 +190,7 @@
 
 
 
-            <p class="pt-5 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
+            <p class="px-3 pt-5 text-xs font-semibold tracking-wider text-gray-500 uppercase" id="communities-headline">
                Others
             </p>    
 

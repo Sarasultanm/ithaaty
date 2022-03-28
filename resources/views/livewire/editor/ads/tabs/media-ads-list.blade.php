@@ -66,8 +66,8 @@
                     <div class="text-sm font-bold text-gray-500">{{ $ads->adslist_status }}</div>
                 </td>
                 <td class="px-6 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
-                  <a href="{{ route('editorAdsUpdate',['id' => $ads->id ]) }}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Update</a> / 
-                    <a href="{{ route('editorAdsStats',['id' => $ads->id ]) }}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Stats</a>
+                  <a href="{{ route('editorAdsUpdate',['id' => $ads->id,'type'=>'media' ]) }}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Update</a> / 
+                    <a href="{{ route('editorAdsStats',['id' => $ads->id,'type'=>'media']) }}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Stats</a>
                   @if($ads->adslist_status == "Confirm")
                 <!--  <a href="{{ route('adminAdsSetup',['id' => $ads->id]) }}" class="inline-flex justify-center px-2 py-2 text-base font-medium text-black border border-transparent border-gray-200 rounded-md shadow-sm hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Setup
                     </a>  -->

@@ -17,6 +17,7 @@ use App\Models\AudioReport;
 use App\Models\UserFriends;
 use App\Models\Ads;
 use App\Models\AdsList;
+use App\Models\AdsStats;
 use Auth;
 use Share;
 use URL;
@@ -24,11 +25,15 @@ use Request;
 
 use Livewire\WithFileUploads;
 
+
+use App\Repo\BrowsersRepositories;
+
 class EditorDashboard extends Component
 {
 
 	use WithFileUploads;
 
+        protected $BrowsersRepositories;
 
         public $post_ads = 0;
 	    public $title,$season,$episode,$category,$summary,$audiofile,$uploadType,$embedlink,$comments,$hashtags,$notes_message,$notes_time;
@@ -49,6 +54,7 @@ class EditorDashboard extends Component
         'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav',
 	    ];
 
+     
 
         public function reportAudio($audio_id){
             $this->validate([
@@ -184,6 +190,8 @@ class EditorDashboard extends Component
              redirect()->to('/editor/dashboard');
 
         }
+
+       
 
         public function like($id,$audio_editor,$like_type){
 
@@ -464,7 +472,32 @@ class EditorDashboard extends Component
         //return $mime;
     }
 
+    public function mount(BrowsersRepositories $BrowsersRepositories){
 
+        $this->browser = $BrowsersRepositories->getBrowser();
+ 
+    }
+
+
+    public function viewContextLink($id){
+        $ads_list = AdsList::find($id);
+        $users = Auth::user();
+        
+        
+
+        AdsStats::create([
+            'as_adslistid'=>$id,
+            'as_country'=>$users->country,
+            'as_age'=>$users->age,
+            'as_gender'=>$users->gender,
+            'as_device'=> $this->browser['userAgent'],
+            'as_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
+        ]);
+       
+        redirect()->away($ads_list->adslist_weblink);
+   }
+
+  
     public function render()
     {   
 

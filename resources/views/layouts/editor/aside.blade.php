@@ -136,7 +136,7 @@
                             <div class="flex-shrink-0">
                               @php
                                   $ads_image_link = config('app.s3_public_link')."/ads/context_ads/".$contextAds->first()->get_gallery->gallery_path ; 
-                                @endphp
+                              @endphp
                                 <img class="w-24 h-24 rounded-md" src="{{ $ads_image_link }}" alt="" />
                             </div>
                             <div class="flex-1 min-w-0">
@@ -150,9 +150,16 @@
                                       {{ $contextAds->first()->adslist_webname }}
                                     </a>
                                 </p>
-                                <p class="text-xs text-gray-500 break-all font-regular">{{ $contextAds->first()->adslist_desc }}</p>
+                                <p class="text-xs text-gray-500 break-all font-regular">
+                                  {{ $contextAds->first()->adslist_desc }} 
+                                 
+                                
+                                </p>
                             </div>
-                            <a target="_blank" href="{{ $contextAds->first()->adslist_weblink }}" class="absolute inset-0 cursor-pointer" aria-hidden="true"></a>
+                           
+                            {{-- <a target="_blank"  href="{{ route('editorAdsStatsContext',['id' => $contextAds->first()->id]) }}" class="absolute inset-0 cursor-pointer" aria-hidden="true"></a> --}}
+                            <a target="_blank" wire:click="viewContextLink({{ $contextAds->first()->id }})" class="absolute inset-0 cursor-pointer" aria-hidden="true"></a>
+                         
                           </div>
                     
                     </div>

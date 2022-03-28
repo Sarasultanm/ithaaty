@@ -45,7 +45,8 @@
                         </div>
 
                         <ul class="space-y-4">
-                         
+        
+                          
                             @foreach($audioList->get() as $audio) 
 
                                 @if($audio->check_in_podcasts()->count() != 0) 

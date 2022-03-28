@@ -12,4 +12,9 @@ class AdsList extends Model
     public function get_gallery(){
         return $this->belongsTo('App\Models\UserGallery','adslist_videolink','id');
     }
+
+    public function get_ads_stats(){
+        return $this->hasMany('App\Models\AdsStats', 'as_adslistid','id');
+    }
+
 }

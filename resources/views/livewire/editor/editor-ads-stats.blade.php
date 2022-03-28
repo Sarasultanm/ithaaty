@@ -1,5 +1,5 @@
  <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Ads Update') }}
         </h2>
   </x-slot>
@@ -30,67 +30,31 @@
         <!-- sidebar -->
       </div>
       <main class="xl:col-span-10 lg:col-span-9">
-
         <div class="mt-4">
-         <div class="mb-5 w-full ">
-             <h1 class="font-bold text-gray-800 text-xl">Ads Analytics</h1> 
+          <div class="w-full mb-5 ">
+             <h1 class="text-xl font-bold text-gray-800">Ads Analytics</h1> 
           </div>
 
           <div class="w-full ">
-             <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
+             <x-auth-session-status-custom class="mt-4 mb-4" :status="session('status')" />
           </div>
-          
-            <div>
-              <dl class="mt-5 grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
-                <div class="px-4 py-5 sm:p-6">
-                  <dt class="text-base font-normal text-gray-900">
-                    Total Views
-                  </dt>
-                  <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                    <div class="flex items-baseline text-2xl font-semibold text-custom-pink">
-                      <a>0</a>
-                    
-                    </div>
+        
+            @if($type == "context")
 
+                @include('livewire.editor.ads-stats.context-stats')
 
-                  </dd>
-                </div>
+            @elseif($type == "social")
 
-                <div class="px-4 py-5 sm:p-6">
-                  <dt class="text-base font-normal text-gray-900">
-                    Avg. Open Rate
-                  </dt>
-                  <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                    <div class="flex items-baseline text-2xl font-semibold text-custom-pink">
-                      0%
-    
-                    </div>
+                @include('livewire.editor.ads-stats.social-stats')
 
+            @elseif($type == "media")
 
-                  </dd>
-                </div>
+                @include('livewire.editor.ads-stats.media-stats')
 
-                <div class="px-4 py-5 sm:p-6">
-                  <dt class="text-base font-normal text-gray-900">
-                    Avg. Watch Time
-                  </dt>
-                  <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                    <div class="flex items-baseline text-2xl font-semibold text-custom-pink">
-                      0%
-                      
-                    </div>
+            @endif
+            
 
-
-                  </dd>
-                </div>
-              </dl>
-            </div>
-
-            <div class="grid grid-cols-12 mt-5 gap-5">
-                <div class="xl:col-span-8 lg:col-span-12 md:col-span-12 sm:col-span-12">
-
-                </div>
-            </div>
+           
           
             <!-- More questions... -->
           
