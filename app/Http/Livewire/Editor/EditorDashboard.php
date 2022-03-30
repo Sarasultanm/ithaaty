@@ -494,22 +494,22 @@ class EditorDashboard extends Component
    }
 
    public function viewSocialAds($id){
-        // $ads_list = AdsList::find($id);
-        // $users = Auth::user();
+        $ads_list = AdsList::find($id);
+        $users = Auth::user();
 
-        // AdsStats::create([
-        //     'as_adslistid'=>$id,
-        //     'as_country'=>$users->country,
-        //     'as_age'=>$users->age,
-        //     'as_gender'=>$users->gender,
-        //     'as_device'=> $this->browser['userAgent'],
-        //     'as_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
-        // ]);
+        AdsStats::create([
+            'as_adslistid'=>$id,
+            'as_country'=>$users->country,
+            'as_age'=>$users->age,
+            'as_gender'=>$users->gender,
+            'as_device'=> $this->browser['userAgent'],
+            'as_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
+        ]);
 
-        //redirect()->away($ads_list->adslist_weblink);
+        redirect()->away($ads_list->adslist_weblink);
         //redirect()->to('editor/dashboard');   
         //session()->flash('status', 'Audio Status change to Private');  
-        $this->emit('refreshParent');     
+        //$this->emit('refreshParent');     
     }
 
     public function mount(BrowsersRepositories $BrowsersRepositories,
