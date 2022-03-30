@@ -32,6 +32,7 @@ class UserRepositories
         return $this->getUsers()->find($id); 
     }
 
+    
 
     
 }

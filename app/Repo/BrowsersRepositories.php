@@ -94,7 +94,9 @@ class BrowsersRepositories
                 'platform'  => $platform,
                 'pattern'    => $pattern
             );
-        }
+    }
+
+  
 
 
     

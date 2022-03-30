@@ -27,6 +27,8 @@ use Livewire\WithFileUploads;
 
 
 use App\Repo\BrowsersRepositories;
+use App\Repo\AdsListRepositories;
+
 
 class EditorDashboard extends Component
 {
@@ -34,6 +36,7 @@ class EditorDashboard extends Component
 	use WithFileUploads;
 
         protected $BrowsersRepositories;
+        protected $AdsListRepositories;
 
         public $post_ads = 0;
 	    public $title,$season,$episode,$category,$summary,$audiofile,$uploadType,$embedlink,$comments,$hashtags,$notes_message,$notes_time;
@@ -472,19 +475,12 @@ class EditorDashboard extends Component
         //return $mime;
     }
 
-    public function mount(BrowsersRepositories $BrowsersRepositories){
-
-        $this->browser = $BrowsersRepositories->getBrowser();
- 
-    }
 
 
     public function viewContextLink($id){
         $ads_list = AdsList::find($id);
         $users = Auth::user();
-        
-        
-
+    
         AdsStats::create([
             'as_adslistid'=>$id,
             'as_country'=>$users->country,
@@ -497,6 +493,33 @@ class EditorDashboard extends Component
         redirect()->away($ads_list->adslist_weblink);
    }
 
+   public function viewSocialAds($id){
+        // $ads_list = AdsList::find($id);
+        // $users = Auth::user();
+
+        // AdsStats::create([
+        //     'as_adslistid'=>$id,
+        //     'as_country'=>$users->country,
+        //     'as_age'=>$users->age,
+        //     'as_gender'=>$users->gender,
+        //     'as_device'=> $this->browser['userAgent'],
+        //     'as_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
+        // ]);
+
+        //redirect()->away($ads_list->adslist_weblink);
+        //redirect()->to('editor/dashboard');   
+        //session()->flash('status', 'Audio Status change to Private');  
+        $this->emit('refreshParent');     
+    }
+
+    public function mount(BrowsersRepositories $BrowsersRepositories,
+                          AdsListRepositories $AdsListRepositories){
+
+        $this->browser = $BrowsersRepositories->getBrowser();
+        $this->AdsListRepositories = $AdsListRepositories;
+
+    }
+
   
     public function render()
     {   
@@ -506,8 +529,9 @@ class EditorDashboard extends Component
         $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
         $randomList = User::inRandomOrder()->where('id','!=',Auth::user()->id)->take(3)->get();
         $mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1);
-        $contextAds = AdsList::inRandomOrder()->where(['adslist_type'=>'Context Ads','adslist_status'=>'Confirm'])->take(1)->get();
-        $socialAds = AdsList::inRandomOrder()->where(['adslist_type'=>'Social Ads','adslist_status'=>'Confirm'])->take(1)->get();
+        // $contextAds = AdsList::inRandomOrder()->where(['adslist_type'=>'Context Ads','adslist_status'=>'Confirm'])->take(2)->get();
+        $contextAds = $this->AdsListRepositories->getAdsListContextAds();
+        $socialAds = $this->AdsListRepositories->getAdsListSocialAds();
     
 
         return view('livewire.editor.editor-dashboard',compact('audioList','categoryList','randomList','mostlike','contextAds','socialAds'));

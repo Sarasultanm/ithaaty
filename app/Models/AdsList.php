@@ -17,4 +17,8 @@ class AdsList extends Model
         return $this->hasMany('App\Models\AdsStats', 'as_adslistid','id');
     }
 
+    public function get_ads_shown(){
+        return $this->hasMany('App\Models\AdsShow', 'ash_adslistid','id');
+    }
+
 }

@@ -124,41 +124,41 @@
 
           <section aria-labelledby="trending-heading">
             @if($contextAds->count() != 0)
-                <h2 class="mt-2 ml-2 text-base font-bold text-gray-900">
-                  Sponsors
-                </h2>
-                <div class="bg-white rounded-lg shadow">
+              <h2 class="mt-2 ml-2 text-base font-bold text-gray-900">
+                Sponsors
+              </h2>
+              @foreach ($contextAds as $contextAdsItems)
+                <div class="mb-3 bg-white rounded-lg shadow">
                   <div class="">
                     <div class="flow-root">
-                      
-                   
+                    
                           <div class="relative flex p-1 space-x-3">
                             <div class="flex-shrink-0">
                               @php
-                                  $ads_image_link = config('app.s3_public_link')."/ads/context_ads/".$contextAds->first()->get_gallery->gallery_path ; 
+                                  $ads_image_link = config('app.s3_public_link')."/ads/context_ads/".$contextAdsItems->get_gallery->gallery_path ; 
                               @endphp
                                 <img class="w-24 h-24 rounded-md" src="{{ $ads_image_link }}" alt="" />
                             </div>
                             <div class="flex-1 min-w-0">
                                 <p class="text-lg font-bold text-gray-900 break-words h-7">
                                     <a href="#" target="_blank" class="hover:underline">
-                                      {{ $contextAds->first()->adslist_name }}
+                                      {{ $contextAdsItems->adslist_name }}
                                     </a>
                                 </p>
                                 <p class="text-xs text-gray-700 font-regular">
-                                    <a href="{{ $contextAds->first()->adslist_weblink }}" target="_blank" class="hover:underline">
-                                      {{ $contextAds->first()->adslist_webname }}
+                                    <a href="{{ $contextAdsItems->first()->adslist_weblink }}" target="_blank" class="hover:underline">
+                                      {{ $contextAdsItems->adslist_webname }}
                                     </a>
                                 </p>
                                 <p class="text-xs text-gray-500 break-all font-regular">
-                                  {{ $contextAds->first()->adslist_desc }} 
+                                  {{ $contextAdsItems->adslist_desc }} 
                                  
                                 
                                 </p>
                             </div>
                            
                             {{-- <a target="_blank"  href="{{ route('editorAdsStatsContext',['id' => $contextAds->first()->id]) }}" class="absolute inset-0 cursor-pointer" aria-hidden="true"></a> --}}
-                            <a target="_blank" wire:click="viewContextLink({{ $contextAds->first()->id }})" class="absolute inset-0 cursor-pointer" aria-hidden="true"></a>
+                            <a target="_blank" wire:click="viewContextLink({{ $contextAdsItems->id }})" class="absolute inset-0 cursor-pointer" aria-hidden="true"></a>
                          
                           </div>
                     
@@ -166,6 +166,7 @@
                   
                   </div>
                 </div>
+                @endforeach
                 @endif
           </section>
 

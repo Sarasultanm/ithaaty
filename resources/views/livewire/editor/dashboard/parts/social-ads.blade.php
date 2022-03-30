@@ -25,20 +25,40 @@
         
             @if($socialAds->first()->adslist_videotype == 'image')
                 <img class="w-full rounded-md h-80" src="{{ $ads_social_link }}" alt="" />
-                <a target="_blank" href="{{ $socialAds->first()->adslist_weblink }}" class="absolute inset-0 cursor-pointer" aria-hidden="true"></a>
-       
+                <a  wire:click="viewSocialAds({{ $socialAds->first()->id }})" class="absolute inset-0 cursor-pointer" aria-hidden="true"  ></a>
+
+                {{-- <a target="_blank" href="{{ $socialAds->first()->adslist_weblink }}" class="absolute inset-0 cursor-pointer" aria-hidden="true"></a>
+        --}}
             @elseif($socialAds->first()->adslist_videotype == 'video')
-                <video class="w-full rounded-md h-80"" controls>
+                <video id="my-video" class="w-full rounded-md h-80">
                     <source src="{{ $ads_social_link }}" type="video/mp4">
                     <source src="{{ $ads_social_link }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
+
+                {{-- <button  wire:click="viewSocialAds({{ $socialAds->first()->id }})"   class="absolute inset-0 cursor-pointer bg-gray-700" aria-hidden="true"  ></button>
+                 --}}
+                {{-- <div  x-data="{ open: false }">
+                  <div  @click="open = !open" x-cloak >
+                  
+                    <a  x-show="!open" wire:click="viewSocialAds({{ $socialAds->first()->id }})"   class="absolute inset-0 cursor-pointer" aria-hidden="true"  ></a>
+                    <a  x-show="open"  onclick="pauseAudio()" class="absolute inset-0 cursor-pointer" aria-hidden="true"  ></a>
+                  </div>
+                </div> --}}
+             
+                <script>
+                  var video = document.getElementById("my-video"); 
+                    function playAudio() {  video.play();  } 
+                    function pauseAudio() {   video.pause();  } 
+              </script>
             @else
                 <video class="w-full rounded-md h-80" poster="{{ asset('images/default_user.jpg') }}"  controls>
                     <source src="{{ $ads_social_link }}" type="video/mp4">
                     <source src="{{ $ads_social_link  }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
+                <a  wire:click="viewSocialAds({{ $socialAds->first()->id }})" class="absolute inset-0 cursor-pointer" aria-hidden="true"  ></a>
+            
             @endif
         </div>
 
