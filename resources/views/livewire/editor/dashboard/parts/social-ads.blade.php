@@ -1,6 +1,7 @@
+@if($socialAds->count() != 0)
 <li class="relative px-4 py-6 bg-white shadow sm:p-6 sm:rounded-lg">
                                             
-    @if($socialAds->count() != 0)
+
 
     
         <div class="flex-1 min-w-0">
@@ -63,6 +64,7 @@
         </div>
 
         
-    @endif
+
   
   </li>
+  @endif
