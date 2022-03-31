@@ -30,6 +30,7 @@ class EditorAdsStats extends Component
         $this->totalImpression = $AdsStatsRepositories->getTotalImpression($id);
         $this->listTopCountry = $AdsStatsRepositories->getTopCountry($id,5);
         $this->totalCTR =  $AdsStatsRepositories->getTotalCTR($id);
+        $this->listTopCountryMediaAds = $AdsStatsRepositories->getTopCountryMediaAds($id,5);
     }
 
     

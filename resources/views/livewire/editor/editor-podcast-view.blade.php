@@ -123,7 +123,7 @@
                                   buttonForward: true
                                 });
                             </script>
-
+       
                             @if($newNumAds != 0)
                               @foreach($newAdsList as $adsl)
                                 @php 

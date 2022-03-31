@@ -17,6 +17,7 @@ use Auth;
 
 use App\Repo\BrowsersRepositories;
 use App\Repo\AdsShowRepositories;
+
 class AdsListRepositories
 {
 
@@ -73,7 +74,7 @@ class AdsListRepositories
 
         foreach($adslist as $adslist_items){
 
-            if($this->AdsShowRepositories->checkAdsShowIp() == 0){
+            if($this->AdsShowRepositories->checkAdsShowIp($adslist_items->id) == 0){
                 AdsShow::create([
                     'ash_adslistid'=>$adslist_items->id,
                     'ash_country'=>$users->country,
@@ -103,7 +104,7 @@ class AdsListRepositories
                         ->get();
 
         foreach($adslist as $adslist_items){
-            if($this->AdsShowRepositories->checkAdsShowIp() == 0){
+            if($this->AdsShowRepositories->checkAdsShowIp($adslist_items->id) == 0){
                 AdsShow::create([
                     'ash_adslistid'=>$adslist_items->id,
                     'ash_country'=>$users->country,
@@ -117,9 +118,56 @@ class AdsListRepositories
 
         return $adslist;
 
+    }
 
+    public function getAdsListMediaAds(){
+
+        $users = Auth::user();
+
+        $adslist = $this->getAdsList()
+                        ->inRandomOrder()
+                        ->whereNull('adslist_type')
+                        ->where('adslist_status','Confirm')
+                        ->where('adslist_country', 'like', '%'.$users->country.'%')
+                        ->get();
+
+        foreach($adslist as $adslist_items){
+            if($this->AdsShowRepositories->checkAdsShowIp($adslist_items->id) == 0){
+                AdsShow::create([
+                    'ash_adslistid'=>$adslist_items->id,
+                    'ash_country'=>$users->country,
+                    'ash_age'=>$users->age,
+                    'ash_gender'=>$users->gender,
+                    'ash_device'=> $this->browser['userAgent'],
+                    'ash_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
+                ]);
+            }
+        }
+
+        return $adslist;
 
     }
+
+    // $this->newAdsList = AdsList::where('adslist_country',Auth::User()->country)->whereNull('adslist_type')->get();
+    // $this->newNumAds = AdsList::where('adslist_country',Auth::User()->country)->whereNull('adslist_type')->count();
+
+    public function getAdsListMediaNumber(){
+
+        $users = Auth::user();
+
+        $adslist = $this->getAdsList()
+                        ->inRandomOrder()
+                        ->whereNull('adslist_type')
+                        ->where('adslist_status','Confirm')
+                        ->where('adslist_country', 'like', '%'.$users->country.'%')
+                        ->count();
+
+        return $adslist;
+    }
+
+   
+
+
 
 
     public function getRandomContextAds(){

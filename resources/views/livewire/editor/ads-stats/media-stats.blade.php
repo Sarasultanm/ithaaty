@@ -5,15 +5,16 @@
               <div>
                   <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-4">
                   <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
-                      <dt class="text-md font-bold text-gray-900 truncate">Total Clicks</dt>
-                      <dt class="text-xs font-regular text-gray-500 truncate">Number of clicks that your ad receives</dt>
-                      <dd class="mt-3 text-3xl font-semibold text-gray-900">{{ $totalClick }}</dd>
+                      <dt class="text-md font-bold text-gray-900 truncate">Total Skip</dt>
+                      <dt class="text-xs font-regular text-gray-500 ">Number of skip that your ad receives</dt>
+                      <dd class="mt-0 text-3xl font-semibold text-gray-900">{{ $totalClick }}</dd>
                   </div>
                   <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
                       <dt class="text-md font-bold text-gray-900 truncate">Total Impression</dt>
                       <dt class="text-xs font-regular text-gray-500 truncate">Number of times your ad is shown</dt>
                       <dd class="mt-3 text-3xl font-semibold text-gray-900">{{ $totalImpression }}</dd>
                   </div>
+                  
                   <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
                       <dt class="text-md font-bold text-gray-900 truncate">Click through rate(CTR)</dt>
                       <dt class="text-xs font-regular text-gray-500 truncate">Avg. Click Rate of your ads</dt>
@@ -21,8 +22,8 @@
                   </div>
 
                   <div class="px-4 py-5 bg-custom-pink shadow rounded-lg overflow-hidden sm:p-6">
-                      <dt class="text-md font-bold text-white truncate">Today Click</dt>
-                      <dt class="text-xs font-regular text-white truncate">Number of click this day</dt>
+                      <dt class="text-md font-bold text-white truncate">Today View</dt>
+                      <dt class="text-xs font-regular text-white truncate">Number of view this day</dt>
                       <dd class="mt-3 text-3xl font-semibold text-white">{{ $totalClickToday }}</dd>
                   </div>
 
@@ -123,13 +124,13 @@
           <!-- This example requires Tailwind CSS v2.0+ -->
               <h2 class="flex-1 text-xl font-bold text-gray-800">Country </h2>
               <ul role="list" class="divide-y divide-gray-200 ">
-                 @foreach($listTopCountry as $country_items) 
+                 @foreach($listTopCountryMediaAds as $country_items) 
                   <li class="py-4 flex">
                       <div class="h-10 w-10 rounded-full bg-custom-pink text-white font-bold p-2" alt="">
-                              {{ Str::upper(Str::substr($country_items->as_country, 0, 2));   }}
+                              {{ Str::upper(Str::substr($country_items->ash_country, 0, 2));   }}
                       </div>
                       <div class="ml-3">
-                          <p class="text-md font-medium text-gray-900 mt-2">{{ $country_items->as_country }}</p>
+                          <p class="text-md font-medium text-gray-900 mt-2">{{ $country_items->ash_country }}</p>
                       </div>
                       <div class="ml-auto ">
                           <p class="mt-2 font-bold">{{ $country_items->total }}</p>

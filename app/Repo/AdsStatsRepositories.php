@@ -120,6 +120,17 @@ class AdsStatsRepositories
                     ->get();
     }
 
+    public function getTopCountryMediaAds($id,$take){
+        return $this->getAdsListById($id)
+                    ->get_ads_shown()
+                    ->orderBy('total','DESC')
+                    ->groupBy('ash_country')
+                    ->selectRaw('count(*) as total, ash_country')
+                    ->take($take)
+                    ->get();
+    }
+
+
    
     
 

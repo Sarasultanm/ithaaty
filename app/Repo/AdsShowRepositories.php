@@ -39,9 +39,9 @@ class AdsShowRepositories
                     ->get();
     }
 
-    public function checkAdsShowIp(){
+    public function checkAdsShowIp($id){
         return $this->getAdsShow()
-                    ->where('ash_ipaddress',$_SERVER['REMOTE_ADDR'] )
+                    ->where(['ash_adslistid'=>$id,'ash_ipaddress'=>$_SERVER['REMOTE_ADDR']])
                     ->count();
     }
     
