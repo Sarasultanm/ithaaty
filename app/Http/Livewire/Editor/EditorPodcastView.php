@@ -3,17 +3,6 @@
 namespace App\Http\Livewire\Editor;
 
 use Livewire\Component;
-// use App\Models\User;
-// use App\Models\Audio;
-// use App\Models\UserFollow;
-// use App\Models\UserLikes;
-// use App\Models\UserViews;
-// use App\Models\UserFav;
-// use App\Models\UserNotes;
-// use App\Models\AudioSponsor;
-// use App\Models\UserComments;
-// use App\Models\UserNotifications;
-// use App\Models\AdsListSetup;
 use App\Models\{
     User,
     Audio,
@@ -34,11 +23,14 @@ use App\Models\{
 };
 use Auth;
 
+use App\Repo\AdsListRepositories;
+
 class EditorPodcastView extends Component
 {
 
 	public $audio,$notes,$comments,$notes_message,$notes_time,$adsList,$numAds,$newAdsList,$newNumAds,$qa_answer,$report_type,$report_message;
 
+    protected $AdsListRepositories;
 
      protected $listeners = [
         'refreshParent' =>'$refresh'
@@ -310,7 +302,7 @@ class EditorPodcastView extends Component
 
 
 
-    public function mount($id)
+    public function mount($id,AdsListRepositories $AdsListRepositories)
     {
         $this->audio = Audio::where('id',$id)->first();
         $this->notes = UserNotes::where('notes_audioid',$id)->get();
@@ -318,6 +310,7 @@ class EditorPodcastView extends Component
         $this->numAds = AdsListSetup::where('adssetup_audioid',$id)->count();
         $this->newAdsList = AdsList::where('adslist_country',Auth::User()->country)->whereNull('adslist_type')->get();
         $this->newNumAds = AdsList::where('adslist_country',Auth::User()->country)->whereNull('adslist_type')->count();
+        $this->AdsListRepositories = $AdsListRepositories;
     }    
 
 

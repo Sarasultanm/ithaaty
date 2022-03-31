@@ -16,11 +16,11 @@ use App\Models\{
 use Auth;
 
 use App\Repo\BrowsersRepositories;
-
+use App\Repo\AdsShowRepositories;
 class AdsListRepositories
 {
 
-    protected $BrowsersRepositories;
+    protected $BrowsersRepositories,$AdsShowRepositories;
     protected $user,$ads,$adsList,$adsStats;
 
     public function __construct(
@@ -28,7 +28,8 @@ class AdsListRepositories
         Ads $ads,
         AdsList $adsList,
         AdsStats $adsStats,
-        BrowsersRepositories $BrowsersRepositories
+        BrowsersRepositories $BrowsersRepositories,
+        AdsShowRepositories $AdsShowRepositories
     ) 
     {
         $this->user = $user;
@@ -36,6 +37,7 @@ class AdsListRepositories
         $this->adsList = $adsList;
         $this->adsStats = $adsStats;
         $this->browser = $BrowsersRepositories->getBrowser();
+        $this->AdsShowRepositories = $AdsShowRepositories;
     }
 
     public function getAdsList(){
@@ -70,14 +72,18 @@ class AdsListRepositories
                         ->get();
 
         foreach($adslist as $adslist_items){
-            AdsShow::create([
-                'ash_adslistid'=>$adslist_items->id,
-                'ash_country'=>$users->country,
-                'ash_age'=>$users->age,
-                'ash_gender'=>$users->gender,
-                'ash_device'=> $this->browser['userAgent'],
-                'ash_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
-            ]);
+
+            if($this->AdsShowRepositories->checkAdsShowIp() == 0){
+                AdsShow::create([
+                    'ash_adslistid'=>$adslist_items->id,
+                    'ash_country'=>$users->country,
+                    'ash_age'=>$users->age,
+                    'ash_gender'=>$users->gender,
+                    'ash_device'=> $this->browser['userAgent'],
+                    'ash_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
+                ]);
+
+            }
 
         }
 
@@ -97,15 +103,16 @@ class AdsListRepositories
                         ->get();
 
         foreach($adslist as $adslist_items){
-            AdsShow::create([
-                'ash_adslistid'=>$adslist_items->id,
-                'ash_country'=>$users->country,
-                'ash_age'=>$users->age,
-                'ash_gender'=>$users->gender,
-                'ash_device'=> $this->browser['userAgent'],
-                'ash_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
-            ]);
-
+            if($this->AdsShowRepositories->checkAdsShowIp() == 0){
+                AdsShow::create([
+                    'ash_adslistid'=>$adslist_items->id,
+                    'ash_country'=>$users->country,
+                    'ash_age'=>$users->age,
+                    'ash_gender'=>$users->gender,
+                    'ash_device'=> $this->browser['userAgent'],
+                    'ash_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
+                ]);
+            }
         }
 
         return $adslist;
