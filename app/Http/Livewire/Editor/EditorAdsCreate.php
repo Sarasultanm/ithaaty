@@ -7,6 +7,8 @@ use App\Models\Ads;
 use App\Models\AdsList;
 use App\Models\User;
 use App\Models\UserGallery;
+use App\Models\Interest;
+use App\Models\AdsInterest;
 use Auth;
 use Livewire\WithFileUploads;
 
@@ -34,7 +36,7 @@ class EditorAdsCreate extends Component
     public $socialUrlName = "Website Name";
     public $socialUrlLink = "Website Link";
 
-    public $ads_name,$ads_website,$ads_location,$ads_logo,$ads_file;
+    public $ads_name,$ads_website,$ads_location,$ads_logo,$ads_file,$interest_option;
     public $ads_list,$adslist_name,$adslist_videolink,$adslist_videoupload,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc,$country_slc,$agebracket_list,$adslist_days,$adslist_videotype,$adslist_end;
 
 
@@ -91,8 +93,27 @@ class EditorAdsCreate extends Component
         $data->adslist_videotype = "image";
         $data->adslist_end = "none";
 
-
         $data->save(); 
+
+
+        if($this->interest_option){
+            foreach($this->interest_option as $interest_item){
+                if($interest_item != 0){
+                    AdsInterest::create([
+                        'ai_ownerid'=>Auth::user()->id,
+                        'ai_adsid'=>$data->id,
+                        'ai_interestid'=>$interest_item,
+                        'ai_type'=>'interest',
+                        'ai_typestatus'=>'active'
+                    ]);
+                }
+            }
+        }
+
+
+
+
+       
 
          session()->flash('status', 'New ads added as file');
         redirect()->to('editor/ads');    
@@ -131,7 +152,22 @@ class EditorAdsCreate extends Component
 
         $data->save(); 
 
-         session()->flash('status', 'New ads added as file');
+        if($this->interest_option){
+            foreach($this->interest_option as $interest_item){
+                if($interest_item != 0){
+                    AdsInterest::create([
+                        'ai_ownerid'=>Auth::user()->id,
+                        'ai_adsid'=>$data->id,
+                        'ai_interestid'=>$interest_item,
+                        'ai_type'=>'interest',
+                        'ai_typestatus'=>'active'
+                    ]);
+                }
+            }
+        }
+
+
+        session()->flash('status', 'New ads added as file');
         redirect()->to('editor/ads');    
 
     }
@@ -375,7 +411,7 @@ class EditorAdsCreate extends Component
     public function render()
     {   
         $checkAds = Ads::where('ads_ownerid',Auth::user()->id);
-
-        return view('livewire.editor.editor-ads-create',compact('checkAds'));
+        $interest_list = Interest::where('status','active')->get();
+        return view('livewire.editor.editor-ads-create',compact('checkAds','interest_list'));
     }
 }

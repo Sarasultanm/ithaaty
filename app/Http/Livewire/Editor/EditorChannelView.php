@@ -21,6 +21,8 @@ use Livewire\Component;
 use App\Mail\ChannelInvitation;
 use App\Http\Controllers\Controller;
 
+use App\Events\PodcastInvitationProcessed;
+
 class EditorChannelView extends Component
 {
 
@@ -74,7 +76,12 @@ class EditorChannelView extends Component
             'usercol_typestatus'=> 'active'
         ]);
 
-        $this->sendEmail($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers,$mail_link);
+       // $this->sendEmail($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers,$mail_link);
+
+        event(new PodcastInvitationProcessed($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers,$mail_link));
+
+
+
 
         session()->flash('status', 'Email Invitation Send');
         redirect()->to('/editor/channel/'.$channel->channel_uniquelink);

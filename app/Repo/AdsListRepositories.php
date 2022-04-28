@@ -11,6 +11,7 @@ use App\Models\{
     AdsList,
     AdsStats,
     AdsShow,
+    AdsInterest,
 };
 
 use Auth;
@@ -22,13 +23,14 @@ class AdsListRepositories
 {
 
     protected $BrowsersRepositories,$AdsShowRepositories;
-    protected $user,$ads,$adsList,$adsStats;
+    protected $user,$ads,$adsList,$adsStats,$adsInterest;
 
     public function __construct(
         User $user,
         Ads $ads,
         AdsList $adsList,
         AdsStats $adsStats,
+        AdsInterest $adsInterest,
         BrowsersRepositories $BrowsersRepositories,
         AdsShowRepositories $AdsShowRepositories
     ) 
@@ -37,6 +39,7 @@ class AdsListRepositories
         $this->ads = $ads;
         $this->adsList = $adsList;
         $this->adsStats = $adsStats;
+        $this->adsInterest = $adsInterest;
         $this->browser = $BrowsersRepositories->getBrowser();
         $this->AdsShowRepositories = $AdsShowRepositories;
     }
@@ -59,6 +62,19 @@ class AdsListRepositories
                     ->get();
                     
     }
+
+
+    public function getAdsContextAdsByInterest(){
+
+        $user = Auth::user();
+
+        
+
+
+
+
+    }
+
 
 
     public function getAdsListContextAds(){
@@ -148,8 +164,6 @@ class AdsListRepositories
 
     }
 
-    // $this->newAdsList = AdsList::where('adslist_country',Auth::User()->country)->whereNull('adslist_type')->get();
-    // $this->newNumAds = AdsList::where('adslist_country',Auth::User()->country)->whereNull('adslist_type')->count();
 
     public function getAdsListMediaNumber(){
 

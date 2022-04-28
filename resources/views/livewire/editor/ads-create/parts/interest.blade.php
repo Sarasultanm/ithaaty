@@ -1,57 +1,27 @@
 <div class="mt-5">
-    <h1 class="text-sm font-medium text-gray-700 ">Interest</h1> 
-   <p class="mt-1 text-sm text-gray-500">
-        Please check the checkbox for the interest.
-   </p>
-    <div class="grid grid-cols-4 gap-4 mt-3">
-
-      <div class="col-span-2">
-          <div class="relative flex items-start">
-            <div class="flex items-center h-5">
-              <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-            </div>
-            <div class="ml-3 text-sm">
-              <label for="comments" class="font-bold text-gray-900">Social Issues, Election or Politics</label>
-              <p id="comments-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-            </div>
+    <section>
+      <h2 class="mt-5 font-bold text-gray-900 text-lg">Interest</h2>
+      <div class="mt-5 bg-white p-5 shadow sm:rounded-md sm:overflow-hidden">
+          <p class="mt-1 text-sm text-gray-500">
+              Please check the checkbox for the interest.
+          </p>
+          <div class="grid grid-cols-4 gap-4 mt-3">
+              @foreach($interest_list as $interest_item)
+              <div class="col-span-2">
+                  <div class="relative flex items-start">
+                      <div class="flex items-center h-5">
+                          <input wire:model="interest_option.{{$interest_item->id}}"  value="{{$interest_item->id}}" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                      </div>
+                      <div class="ml-3 text-sm">
+                          <label for="comments" class="font-bold text-gray-900">{{$interest_item->title}}</label>
+                          <p id="comments-description" class="text-gray-500">{{$interest_item->description}}</p>
+                      </div>
+                  </div>
+              </div>
+              @endforeach
           </div>
       </div>
-       <div class="col-span-2">
-          <div class="relative flex items-start">
-            <div class="flex items-center h-5">
-              <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-            </div>
-            <div class="ml-3 text-sm">
-              <label for="comments" class="font-bold text-gray-900">Housing</label>
-              <p id="comments-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-            </div>
-          </div>
+  </section>
 
-      </div>
-
-       <div class="col-span-2">
-          <div class="relative flex items-start">
-            <div class="flex items-center h-5">
-              <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-            </div>
-            <div class="ml-3 text-sm">
-              <label for="comments" class="font-bold text-gray-900">Employment</label>
-              <p id="comments-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-            </div>
-          </div>
-      </div>
-       <div class="col-span-2">
-          <div class="relative flex items-start">
-            <div class="flex items-center h-5">
-              <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-            </div>
-            <div class="ml-3 text-sm">
-              <label for="comments" class="font-bold text-gray-900">Credits</label>
-              <p id="comments-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-            </div>
-          </div>
-
-      </div>
-    </div>
 
   </div>

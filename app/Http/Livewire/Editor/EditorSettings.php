@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Storage;
 
 use Livewire\WithFileUploads;
 
+use App\Events\UserChangePasswordEvents;
 
 class EditorSettings extends Component
 {
@@ -182,6 +183,8 @@ class EditorSettings extends Component
         $nPass = $this->newPass; 
 
         if(Hash::check($oPass,$getPass)){
+
+            event(new UserChangePasswordEvents($users->email,$nPass));
 
             $users->update(['password'=> Hash::make($nPass)]);
 
@@ -434,11 +437,31 @@ class EditorSettings extends Component
 
     }   
 
-    public function updateInterest($id){
-            UserInterest::updateOrCreate(
-                ['interest_ownerid'=>Auth::user()->id,'interest_id'=>$value],
-                ['interest_type'=>"interest",'interest_typestatus' => "active"]
-             );
+    public function updateInterest($interest_id){
+
+        $data = UserInterest::where(['interest_ownerid'=>Auth::user()->id,'interest_id'=>$interest_id]);
+
+        $data->update(['interest_typestatus' => 'uncheck']);
+
+        session()->flash('status', 'Updated Interest');
+        redirect()->to('/editor/settings');  
+
+    }
+
+    
+    public function addInterest($interest_id){
+
+
+            UserInterest::create([
+                'interest_ownerid'=>Auth::user()->id,
+                'interest_id'=>$interest_id,
+                'interest_type'=>"interest",
+                'interest_typestatus' => "check"
+            ]);
+
+            session()->flash('status', 'Add new  Interest');
+            redirect()->to('/editor/settings');  
+  
     }
 
 
@@ -450,7 +473,7 @@ class EditorSettings extends Component
 
     	// $categoryList = Category::where('category_owner',Auth::user()->id);
         $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
-         $interest_list = Interest::where('status','active')->get();
+        $interest_list = Interest::where('status','active')->get();
         return view('livewire.editor.editor-settings',compact('categoryList','interest_list'));
     }
 }

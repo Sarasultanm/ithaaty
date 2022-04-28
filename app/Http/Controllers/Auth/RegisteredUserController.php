@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str; 
 
 use App\Rules\Recaptcha;
-
+use App\Events\UserRegistrationEvents;
 
 class RegisteredUserController extends Controller
 {
@@ -54,6 +54,9 @@ class RegisteredUserController extends Controller
         $randomStr = Str::random(5);
         $plan_default = UserPlan::where('plan_status','default')->first()->id;
 
+
+        event(new UserRegistrationEvents($request->email,$request->password));
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -70,6 +73,8 @@ class RegisteredUserController extends Controller
         ]);
 
         // event(new Registered($user));
+    
+     
 
         session()->flash('status', 'Account Succesfully created');
 

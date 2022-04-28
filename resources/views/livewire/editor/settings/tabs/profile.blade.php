@@ -463,10 +463,10 @@
             <div class="col-span-2">
                 <div class="relative flex items-start">
                     <div class="flex items-center h-5">
-                        @if($interest_item->checkUserInterest(Auth::user()->id)->count() != 0 )
-                        <input checked wire:click="updateInterest({{$interest_item->id}})" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                        @if($interest_item->checkUserInterest(Auth::user()->id)->count() == 0 )
+                        <input  wire:click="addInterest({{$interest_item->id}})" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
                         @else
-                        <input type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                        <input checked wire:click="updateInterest({{$interest_item->id}})" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
                         @endif
                     </div>
                     <div class="ml-3 text-sm">

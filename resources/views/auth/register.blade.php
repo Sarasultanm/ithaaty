@@ -12,7 +12,7 @@
         <form method="POST" action="{{ route('register') }}" id="registerForm">
             @csrf
 
-            <input type="hidden" class="g-recaptcha" name="recaptcha_token" id="recaptcha_token">
+            <input type="hidden" class="g-recaptcha" name="recaptcha_token" id="recaptcha_token"> 
             <!-- Name -->
             <div>
                 <x-label for="name" :value="__('Name')"  class="text-white"/>
