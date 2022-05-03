@@ -53,6 +53,7 @@ use App\Http\Livewire\Editor\{
 	EditorSearch,
 	EditorAdsStats,
 	EditorAdsUpdate,
+	EditorAdsNewUpdate,
 	EditorAdsCreate,
 	EditorSetup,
 	EditorChannel,
@@ -183,7 +184,8 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 		Route::get('company',EditorAdsCompany::class)->name('editorAdsCompany');
 		Route::get('podcast',EditorAdsPodcast::class)->name('editorAdsPodcast');
 		Route::get('stats/{id}/{type}',EditorAdsStats::class)->name('editorAdsStats');
-		Route::get('update/{id}',EditorAdsUpdate::class)->name('editorAdsUpdate');
+		Route::get('update/{id}/{type}',EditorAdsNewUpdate::class)->name('editorAdsUpdate');
+		// Route::get('update/{id}',EditorAdsUpdate::class)->name('editorAdsUpdate');
 		Route::get('create',EditorAdsCreate::class)->name('editorAdsCreate');
 	});
 

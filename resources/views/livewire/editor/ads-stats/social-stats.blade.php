@@ -3,26 +3,26 @@
 
         <div class="col-span-6 mb-6">
                 <div>
-                    <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-4">
-                    <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
-                        <dt class="text-md font-bold text-gray-900 truncate">Total Clicks</dt>
-                        <dt class="text-xs font-regular text-gray-500 truncate">Number of clicks that your ad receives</dt>
+                    <dl class="grid grid-cols-1 gap-5 mt-5 sm:grid-cols-4">
+                    <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
+                        <dt class="font-bold text-gray-900 truncate text-md">Total Clicks</dt>
+                        <dt class="text-xs text-gray-500 truncate font-regular">Number of clicks that your ad receives</dt>
                         <dd class="mt-3 text-3xl font-semibold text-gray-900">{{ $totalClick }}</dd>
                     </div>
-                    <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
-                        <dt class="text-md font-bold text-gray-900 truncate">Total Impression</dt>
-                        <dt class="text-xs font-regular text-gray-500 truncate">Number of times your ad is shown</dt>
+                    <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
+                        <dt class="font-bold text-gray-900 truncate text-md">Total Impression</dt>
+                        <dt class="text-xs text-gray-500 truncate font-regular">Number of times your ad is shown</dt>
                         <dd class="mt-3 text-3xl font-semibold text-gray-900">{{ $totalImpression }}</dd>
                     </div>
-                    <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
-                        <dt class="text-md font-bold text-gray-900 truncate">Click through rate(CTR)</dt>
-                        <dt class="text-xs font-regular text-gray-500 truncate">Avg. Click Rate of your ads</dt>
+                    <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
+                        <dt class="font-bold text-gray-900 truncate text-md">Click through rate(CTR)</dt>
+                        <dt class="text-xs text-gray-500 truncate font-regular">Avg. Click Rate of your ads</dt>
                         <dd class="mt-3 text-3xl font-semibold text-gray-900"> {{ round($totalCTR, 2);  }}%</dd>
                     </div>
 
-                    <div class="px-4 py-5 bg-custom-pink shadow rounded-lg overflow-hidden sm:p-6">
-                        <dt class="text-md font-bold text-white truncate">Today Click</dt>
-                        <dt class="text-xs font-regular text-white truncate">Number of click this day</dt>
+                    <div class="px-4 py-5 overflow-hidden rounded-lg shadow bg-custom-pink sm:p-6">
+                        <dt class="font-bold text-white truncate text-md">Today Click</dt>
+                        <dt class="text-xs text-white truncate font-regular">Number of click this day</dt>
                         <dd class="mt-3 text-3xl font-semibold text-white">{{ $totalClickToday }}</dd>
                     </div>
 
@@ -54,9 +54,9 @@
                                             @forelse ($latestRecordClick as $adsStatItem )
                                                 <tr>
                                                     <td class="py-2 pl-4 pr-3 text-sm text-gray-500 whitespace-nowrap sm:pl-6">{{ $adsStatItem->as_country }}</td>
-                                                    <td class="px-2 py-2 text-sm font-medium text-gray-900 whitespace-nowrap text-center">{{ $adsStatItem->as_age}}</td>
-                                                    <td class="px-2 py-2 text-sm text-gray-900 whitespace-nowrap text-center">{{ $adsStatItem->as_gender }}</td>
-                                                    <td class="px-4 py-2 text-sm text-gray-900 whitespace-nowrap text-right ">{{ Carbon\Carbon::parse($adsStatItem->created_at)->format('M d Y')  }}</td>
+                                                    <td class="px-2 py-2 text-sm font-medium text-center text-gray-900 whitespace-nowrap">{{ $adsStatItem->as_age}}</td>
+                                                    <td class="px-2 py-2 text-sm text-center text-gray-900 whitespace-nowrap">{{ $adsStatItem->as_gender }}</td>
+                                                    <td class="px-4 py-2 text-sm text-right text-gray-900 whitespace-nowrap ">{{ Carbon\Carbon::parse($adsStatItem->created_at)->format('M d Y')  }}</td>
                                                 </tr>
                                             @empty
                                                 
@@ -97,9 +97,9 @@
                                             @forelse ($latestRecordShown as $adsShownItem )
                                                 <tr>
                                                     <td class="py-2 pl-4 pr-3 text-sm text-gray-500 whitespace-nowrap sm:pl-6">{{ $adsShownItem->ash_country }}</td>
-                                                    <td class="px-2 py-2 text-sm font-medium text-gray-900 whitespace-nowrap text-center">{{ $adsShownItem->ash_age}}</td>
-                                                    <td class="px-2 py-2 text-sm text-gray-900 whitespace-nowrap text-center">{{ $adsShownItem->ash_gender }}</td>
-                                                    <td class="px-4 py-2 text-sm text-gray-900 whitespace-nowrap text-right ">{{ Carbon\Carbon::parse($adsShownItem->created_at)->format('M d Y')  }}</td>
+                                                    <td class="px-2 py-2 text-sm font-medium text-center text-gray-900 whitespace-nowrap">{{ $adsShownItem->ash_age}}</td>
+                                                    <td class="px-2 py-2 text-sm text-center text-gray-900 whitespace-nowrap">{{ $adsShownItem->ash_gender }}</td>
+                                                    <td class="px-4 py-2 text-sm text-right text-gray-900 whitespace-nowrap ">{{ Carbon\Carbon::parse($adsShownItem->created_at)->format('M d Y')  }}</td>
                                                 </tr>
                                             @empty
                                                 
@@ -121,12 +121,12 @@
                 <h2 class="flex-1 text-xl font-bold text-gray-800">Country </h2>
                 <ul role="list" class="divide-y divide-gray-200 ">
                    @foreach($listTopCountry as $country_items) 
-                    <li class="py-4 flex">
-                        <div class="h-10 w-10 rounded-full bg-custom-pink text-white font-bold p-2" alt="">
+                    <li class="flex py-4">
+                        <div class="w-10 h-10 p-2 font-bold text-white rounded-full bg-custom-pink" alt="">
                                 {{ Str::upper(Str::substr($country_items->as_country, 0, 2));   }}
                         </div>
                         <div class="ml-3">
-                            <p class="text-md font-medium text-gray-900 mt-2">{{ $country_items->as_country }}</p>
+                            <p class="mt-2 font-medium text-gray-900 text-md">{{ $country_items->as_country }}</p>
                         </div>
                         <div class="ml-auto ">
                             <p class="mt-2 font-bold">{{ $country_items->total }}</p>
@@ -180,7 +180,7 @@
                           Your browser does not support the video tag.
                       </video>
                   @endif
-             </div>
+            </div>
             
 
 

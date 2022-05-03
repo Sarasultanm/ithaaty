@@ -9,6 +9,13 @@ class AdsList extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'adslist_name',
+        'adslist_desc',
+        'adslist_weblink',
+        'adslist_webname',
+    ];
+
     public function get_gallery(){
         return $this->belongsTo('App\Models\UserGallery','adslist_videolink','id');
     }
