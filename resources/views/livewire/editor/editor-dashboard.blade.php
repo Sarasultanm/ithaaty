@@ -46,8 +46,8 @@
 
                         <ul class="space-y-4">
         
-                          
-                            @foreach($audioList->get() as $audio) 
+                            {{-- @foreach($audioList->get() as $audio)  --}}
+                            @foreach($audioList as $audio) 
 
                                 @if($audio->check_in_podcasts()->count() != 0) 
 
@@ -110,7 +110,7 @@
                                     @php $post_ads++; @endphp
                                     
                                     @if ($post_ads % 2 != 0)
-                                       @include('livewire.editor.dashboard.parts.social-ads')  
+                                       @include('livewire.editor.dashboard.parts.social-ads')
                                     @endif
 
                                     <!-- social ads disple here -->
@@ -123,13 +123,14 @@
                         </ul>
                     </div>
                 </main>
-                @if(Auth::user()->plan == 'new' || Auth::user()->plan =="") 
-                @else
-                 @include('layouts.editor.aside') 
-                @endif
+                
+                
 
                 <!-- aside -->
-
+                @if(Auth::user()->plan == 'new' || Auth::user()->plan =="") 
+                @else
+                     @include('layouts.editor.aside') 
+                @endif
                 <!-- aside -->
 
             </div>
@@ -166,4 +167,3 @@
 
              {{-- <div class="bottom-0 hidden text-xs" wire:poll.750ms> Current time: {{ now() }} </div> --}}
 </div>
-

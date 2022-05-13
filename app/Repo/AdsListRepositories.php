@@ -25,6 +25,8 @@ class AdsListRepositories
     protected $BrowsersRepositories,$AdsShowRepositories;
     protected $user,$ads,$adsList,$adsStats,$adsInterest;
 
+
+
     public function __construct(
         User $user,
         Ads $ads,
@@ -68,10 +70,6 @@ class AdsListRepositories
 
         $user = Auth::user();
 
-        
-
-
-
 
     }
 
@@ -81,28 +79,50 @@ class AdsListRepositories
 
         $users = Auth::user();
 
-        $adslist = $this->getAdsList()
-                        ->inRandomOrder()
+        // $adslist = $this->getAdsList()
+        //                 ->inRandomOrder()
+        //                 ->where(['adslist_type'=>'Context Ads','adslist_status'=>'Confirm'])
+        //                 ->where('adslist_country', 'like', '%'.$users->country.'%')
+        //                 ->take(2)
+        //                 ->get();
+
+        $adslist = AdsList::inRandomOrder()
                         ->where(['adslist_type'=>'Context Ads','adslist_status'=>'Confirm'])
                         ->where('adslist_country', 'like', '%'.$users->country.'%')
                         ->take(2)
                         ->get();
 
-        foreach($adslist as $adslist_items){
+        if($adslist) {
+            foreach($adslist as $adslist_items){
 
-            if($this->AdsShowRepositories->checkAdsShowIp($adslist_items->id) == 0){
-                AdsShow::create([
-                    'ash_adslistid'=>$adslist_items->id,
-                    'ash_country'=>$users->country,
-                    'ash_age'=>$users->age,
-                    'ash_gender'=>$users->gender,
-                    'ash_device'=> $this->browser['userAgent'],
-                    'ash_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
-                ]);
-
+                // if($this->AdsShowRepositories->checkAdsShowIp($adslist_items->id) == 0){
+                //     AdsShow::create([
+                //         'ash_adslistid'=>$adslist_items->id,
+                //         'ash_country'=>$users->country,
+                //         'ash_age'=>$users->age,
+                //         'ash_gender'=>$users->gender,
+                //         'ash_device'=> $this->browser['userAgent'],
+                //         'ash_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
+                //     ]);
+    
+                // }
+    
+                if(AdsShowRepositories::checkAdsShowIps($adslist_items->id) == 0){
+                    AdsShow::create([
+                        'ash_adslistid'=>$adslist_items->id,
+                        'ash_country'=>$users->country,
+                        'ash_age'=>$users->age,
+                        'ash_gender'=>$users->gender,
+                        'ash_device'=> $this->browser['userAgent'],
+                        'ash_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
+                    ]);
+    
+                }
+    
             }
+        }               
+       
 
-        }
 
         return $adslist;
 
@@ -112,15 +132,22 @@ class AdsListRepositories
 
         $users = Auth::user();
 
-        $adslist = $this->getAdsList()
-                        ->inRandomOrder()
+        // $adslist = $this->getAdsList()
+        //                 ->inRandomOrder()
+        //                 ->where(['adslist_type'=>'Social Ads','adslist_status'=>'Confirm'])
+        //                 ->where('adslist_country', 'like', '%'.$users->country.'%')
+        //                 ->take(2)
+        //                 ->get();
+
+        $adslist = AdsList::inRandomOrder()
                         ->where(['adslist_type'=>'Social Ads','adslist_status'=>'Confirm'])
                         ->where('adslist_country', 'like', '%'.$users->country.'%')
                         ->take(2)
                         ->get();
 
+
         foreach($adslist as $adslist_items){
-            if($this->AdsShowRepositories->checkAdsShowIp($adslist_items->id) == 0){
+            if(AdsShowRepositories::checkAdsShowIps($adslist_items->id) == 0){
                 AdsShow::create([
                     'ash_adslistid'=>$adslist_items->id,
                     'ash_country'=>$users->country,
@@ -130,6 +157,16 @@ class AdsListRepositories
                     'ash_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
                 ]);
             }
+            // if($this->AdsShowRepositories->checkAdsShowIp($adslist_items->id) == 0){
+            //     AdsShow::create([
+            //         'ash_adslistid'=>$adslist_items->id,
+            //         'ash_country'=>$users->country,
+            //         'ash_age'=>$users->age,
+            //         'ash_gender'=>$users->gender,
+            //         'ash_device'=> $this->browser['userAgent'],
+            //         'ash_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
+            //     ]);
+            // }
         }
 
         return $adslist;

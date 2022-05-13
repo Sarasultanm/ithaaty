@@ -38,7 +38,10 @@
                 class="absolute right-0 z-30 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                   <div class="py-1" role="none">
                     <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                    <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 group" role="menuitem" tabindex="-1" id="menu-item-0">
+                    {{-- <a wire:click="hideAds({{ $socialAds->first()->id }})" class="flex items-center px-4 py-2 text-sm text-gray-700 cursor-pointer group" role="menuitem" tabindex="-1" id="menu-item-0"> --}}
+                      {{-- <a wire:click ="hideAds({{ $socialAds->first()->id }})" class="flex items-center px-4 py-2 text-sm text-gray-700 cursor-pointer group" role="menuitem" tabindex="-1" id="menu-item-0"> --}}
+                        <a wire:click ="hideAds({{ $socialAds->first()->id }})" class="flex items-center px-4 py-2 text-sm text-gray-700 cursor-pointer group" role="menuitem" tabindex="-1" id="menu-item-0">
+                      
                       <!-- Heroicon name: solid/pencil-alt -->
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
@@ -47,7 +50,7 @@
                       
                       Hide ads
                     </a>
-                    <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 group" role="menuitem" tabindex="-1" id="menu-item-1">
+                    <a wire:click="reportAds({{ $socialAds->first()->id }})" class="flex items-center px-4 py-2 text-sm text-gray-700 cursor-pointer group" role="menuitem" tabindex="-1" id="menu-item-1">
                       <!-- Heroicon name: solid/duplicate -->
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />

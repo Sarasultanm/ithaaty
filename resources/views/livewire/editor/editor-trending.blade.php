@@ -173,7 +173,7 @@
                               <div class="ml-4">
                                 <div class="text-sm font-medium text-gray-900">
                                   
-                                   <small>{{ $tops->get_categories->category_name }} - Trending</small><br>
+                                   {{-- <small>{{ $tops->get_categories->category_name }} - Trending</small><br> --}}
                                      <strong>{{ $tops->audio_name }}</strong>
                                 </div>
                                 <div class="text-sm text-gray-500">

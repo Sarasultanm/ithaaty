@@ -18,6 +18,8 @@ use App\Models\UserFriends;
 use App\Models\Ads;
 use App\Models\AdsList;
 use App\Models\AdsStats;
+use App\Models\UserAdsDisplay;
+use App\Models\AdsShow;
 use Auth;
 use Share;
 use URL;
@@ -35,19 +37,18 @@ class EditorDashboard extends Component
 
 	use WithFileUploads;
 
+        protected $listeners = [
+            'refreshParent' =>'$refresh'
+        ];
+
         protected $BrowsersRepositories;
         protected $AdsListRepositories;
-
+  
+      
         public $post_ads = 0;
 	    public $title,$season,$episode,$category,$summary,$audiofile,$uploadType,$embedlink,$comments,$hashtags,$notes_message,$notes_time;
         public $report_type,$report_message;
-
-        protected $listeners = [
-        'refreshParent' =>'$refresh'
-        ];
-
-
-
+        
 	    protected $rules = [
         'title' => 'required',
         'season' => 'required',
@@ -56,8 +57,6 @@ class EditorDashboard extends Component
         'summary' => 'required',
         'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav',
 	    ];
-
-     
 
         public function reportAudio($audio_id){
             $this->validate([
@@ -222,9 +221,9 @@ class EditorDashboard extends Component
              $notif1->status = "active";
              $notif1->save();
 
-
+             redirect()->to('editor/dashboard'); 
             
-            $this->emit('refreshParent');
+           // $this->emit('refreshParent');
 
         }
 
@@ -259,7 +258,7 @@ class EditorDashboard extends Component
 
 
             
-             $this->emit('refreshParent');
+             //$this->emit('refreshParent');
 
              return redirect()->to('editor/podcast/view/'.$id);
 
@@ -276,7 +275,7 @@ class EditorDashboard extends Component
              $data->save();
             
             $this->emit('refreshParent');
-
+            redirect()->to('editor/dashboard'); 
         }
 
 
@@ -314,7 +313,7 @@ class EditorDashboard extends Component
             session()->flash('status', 'Copy Link');
 
             $this->emit('refreshParent');
-
+            redirect()->to('editor/dashboard'); 
            
 
         }
@@ -361,7 +360,7 @@ class EditorDashboard extends Component
              $this->clearFields();
 
             $this->emit('refreshParent');
-
+            redirect()->to('editor/dashboard'); 
         }
 
         public function saveNotes($id,$audio_editor){
@@ -395,7 +394,7 @@ class EditorDashboard extends Component
              $this->clearFieldsNotes();
 
             $this->emit('refreshParent');
-
+            redirect()->to('editor/dashboard'); 
         }
 
 
@@ -512,29 +511,139 @@ class EditorDashboard extends Component
         //$this->emit('refreshParent');     
     }
 
+
+    public function hideAds($id){
+
+        $ads_list = AdsList::find($id);
+        $users = Auth::user();
+
+        UserAdsDisplay::create([
+            'uad_userid'=> $users->id,
+            'uad_adsid' => $id,
+            'uad_type' => 'Context Ads',
+            'uad_typestatus' => 'Hidden',
+        ]);
+        session()->flash('status', 'Ads Hide');
+        //$this->emit('refreshParent');
+        //$this->emitUp('refreshParent');
+        //$this->getListeners();
+        redirect()->to('editor/dashboard'); 
+
+        //$this->emitSelf('refreshParent');
+         //$this->emit('reRenderParent');
+    }
+
+    public function reportAds($id){
+
+    }
+
+
+    public function contextAdsResult(){
+
+        $users = Auth::user();
+
+        $adslist = AdsList::inRandomOrder()
+                        ->where(['adslist_type'=>'Context Ads','adslist_status'=>'Confirm'])
+                        ->where('adslist_country', 'like', '%'.$users->country.'%')
+                        ->take(2)
+                        ->get();
+        if($adslist) {
+            foreach($adslist as $adslist_items){
+                
+                if((AdsShow::where(['ash_adslistid'=>$adslist_items->id,'ash_ipaddress'=>$_SERVER['REMOTE_ADDR']])
+                ->count() )== 0){
+                    AdsShow::create([
+                        'ash_adslistid'=>$adslist_items->id,
+                        'ash_country'=>$users->country,
+                        'ash_age'=>$users->age,
+                        'ash_gender'=>$users->gender,
+                        'ash_device'=> $this->browser['userAgent'],
+                        'ash_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
+                    ]);
+    
+                }
+    
+            }
+        }               
+        
+        return $adslist;
+
+
+    }
+
+    public function socialAdsResult(){
+
+        $users = Auth::user();
+
+        $adslist = AdsList::inRandomOrder()
+                        ->where(['adslist_type'=>'Social Ads','adslist_status'=>'Confirm'])
+                        ->where('adslist_country', 'like', '%'.$users->country.'%')
+                        ->take(2)
+                        ->get();
+
+        foreach($adslist as $adslist_items){
+            if((AdsShow::where(['ash_adslistid'=>$adslist_items->id,'ash_ipaddress'=>$_SERVER['REMOTE_ADDR']])
+            ->count() )== 0){
+                AdsShow::create([
+                    'ash_adslistid'=>$adslist_items->id,
+                    'ash_country'=>$users->country,
+                    'ash_age'=>$users->age,
+                    'ash_gender'=>$users->gender,
+                    'ash_device'=> $this->browser['userAgent'],
+                    'ash_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
+                ]);
+            }
+
+        }
+
+        return $adslist; 
+
+
+
+    }
+
+
+
     public function mount(BrowsersRepositories $BrowsersRepositories,
                           AdsListRepositories $AdsListRepositories){
 
         $this->browser = $BrowsersRepositories->getBrowser();
         $this->AdsListRepositories = $AdsListRepositories;
+        $this->contextAds = $AdsListRepositories::getAdsListContextAds();
+        $this->socialAds = $AdsListRepositories::getAdsListSocialAds();     
+        $this->audioList = Audio::orderBy('id','DESC')->where('audio_publish','Publish')->whereIn('audio_status', ['active','public','private'])->get();
+        $this->categoryList = Category::orderBy('id', 'DESC')->where('category_status','active')->get();
+        $this->randomList = User::inRandomOrder()->where('id','!=',Auth::user()->id)->take(3)->get();
+        $this->mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1)->first();        
+
 
     }
 
   
     public function render()
     {   
+         //$audioList = Audio::orderBy('id','DESC')->where(['audio_status'=>'active','audio_status'=>'public','audio_status'=>'private']);
 
-    	$audioList = Audio::orderBy('id','DESC')->where('audio_publish','Publish')->whereIn('audio_status', ['active','public','private']);
-        //$audioList = Audio::orderBy('id','DESC')->where(['audio_status'=>'active','audio_status'=>'public','audio_status'=>'private']);
-        $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
-        $randomList = User::inRandomOrder()->where('id','!=',Auth::user()->id)->take(3)->get();
-        $mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1);
+    	// $audioList = Audio::orderBy('id','DESC')->where('audio_publish','Publish')->whereIn('audio_status', ['active','public','private']);
+        // $categoryList = Category::orderBy('id', 'DESC')->where('category_status','active');
+        // $randomList = User::inRandomOrder()->where('id','!=',Auth::user()->id)->take(3)->get();
+        // $mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1);
+
         // $contextAds = AdsList::inRandomOrder()->where(['adslist_type'=>'Context Ads','adslist_status'=>'Confirm'])->take(2)->get();
-        $contextAds = $this->AdsListRepositories->getAdsListContextAds();
-        $socialAds = $this->AdsListRepositories->getAdsListSocialAds();
-    
+       
+        //$contextAds = $this->AdsListRepositories->getAdsListContextAds();
+       // $socialAds = $this->AdsListRepositories->getAdsListSocialAds();   
+        
+        // $contextAds = AdsListRepositories::getAdsListContextAds();
+        // $socialAds = AdsListRepositories::getAdsListSocialAds();   
+        
+        // $contextAds = $this->contextAdsResult();
+        // $socialAds = $this->socialAdsResult();
 
-        return view('livewire.editor.editor-dashboard',compact('audioList','categoryList','randomList','mostlike','contextAds','socialAds'));
+
+      // return view('livewire.editor.editor-dashboard',compact('audioList','categoryList','randomList','mostlike','contextAds','socialAds'));
+       return view('livewire.editor.editor-dashboard');
+
     }
 
    

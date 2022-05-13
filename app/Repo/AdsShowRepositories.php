@@ -44,6 +44,11 @@ class AdsShowRepositories
                     ->where(['ash_adslistid'=>$id,'ash_ipaddress'=>$_SERVER['REMOTE_ADDR']])
                     ->count();
     }
+
+    public function checkAdsShowIps($id){
+        return AdsShow::where(['ash_adslistid'=>$id,'ash_ipaddress'=>$_SERVER['REMOTE_ADDR']])
+                    ->count();
+    }
     
 }
 

@@ -7,11 +7,11 @@
 
 
         <title>Ithaaty</title>
-
+        @livewireStyles
         <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">    
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
+      
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/audio.css') }}">
@@ -71,7 +71,7 @@
               display: none !important;
             }
         </style>
-         @livewireStyles
+       
       
      <!--  <script src="https://vjs.zencdn.net/7.14.3/video.min.js"></script> 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs.ads.min.js" ></script>  -->
@@ -104,8 +104,8 @@
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-            <header class="bg-white shadow hidden">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <header class="hidden bg-white shadow">
+                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
             </header>

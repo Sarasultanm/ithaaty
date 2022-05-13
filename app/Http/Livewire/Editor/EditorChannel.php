@@ -24,6 +24,11 @@ class EditorChannel extends Component
         $result,
         $emailInvitation;
 
+
+    protected $listeners = [
+            'refreshParent' =>'$refresh'
+            ];
+
     public function createPodcast($channel_id)
     {
         $this->validate([
@@ -141,6 +146,7 @@ class EditorChannel extends Component
 
             session()->flash('status', 'Update Success');
             redirect()->to('/editor/channel');
+            // $this->emit('refreshParent');
         }
     }
 

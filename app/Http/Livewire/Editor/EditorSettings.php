@@ -41,7 +41,7 @@ class EditorSettings extends Component
      public $userFacebook,$userTwitter,$userInstagram;
      public $colab_username,$email,$colab_password,$colab_channel;
 
-
+   
 
     public function addUsers(){
         $this->validate([

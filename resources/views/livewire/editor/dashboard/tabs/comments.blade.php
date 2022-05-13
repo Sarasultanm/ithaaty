@@ -10,14 +10,13 @@
                     id="email"
                     placeholder="Comments"
                     class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    wire:model="comments"
+                    wire:model.lazy="comments"
                     wire:keydown.enter="saveComment({{ $audio->id }},{{$audio->audio_editor}})"
                 />
             </div>
         </div>
     @endif
 @endif 
-
 @if($audio->get_comments->count() != 0 )
     <div x-data="{ open: false }">
         <div class="mt-5">
