@@ -30,9 +30,9 @@
       </div>
 
       <main class="xl:col-span-10 lg:col-span-9">
-      	
+      	@if($playlist->playlist_status != "Deleted")
       	<!-- playlist -->
-        <div class="mt-4 mt-4 p-5 bg-custom-pink rounded-md">
+        <div class="mt-4 mt-4 p-5 bg-custom-pink rounded-md ">
 	        <div class="grid gap-4 grid-cols-10">
 	            <div class="col-span-2 bg-white p-1">
 	                <div class="text-sm text-gray-700">
@@ -47,7 +47,7 @@
 	            	<p class="text-6xl font-bold text-white mt-2 mb-5">{{ $playlist->playlist_title }} </p>
 	            	<p class="text-white mt-2"><span class="text-xs font-bold ">{{ $playlist->get_user->name }}</span> , <span class="text-xs font-regular ">{{ $playlist->get_playlistItems->count() }} podcast</span> </p>
 	            	<div x-data="{ share: false }" @click.away="share = false">
-	            		<button @click="share = !share"  class="bg-white text-custom-pink font-regular text-sm py-1 px-3 rounded">Share</button>
+	            		<button @click="share = !share"  class="bg-white text-custom-pink font-regular text-sm py-1 px-3 rounded">Option</button>
 	            		 <div 
                            x-show="share" 
                            x-transition:enter="transition ease-out duration-100" 
@@ -62,7 +62,7 @@
 
                           	 <a @click="modal = !modal"  class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-0">
                 								<svg xmlns="http://www.w3.org/2000/svg" class="mr-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg>
-                                 <span>Friends</span>
+                                 <span> Share to Friends</span>
                              </a>
 
                              <!-- modal -->
@@ -142,12 +142,17 @@
                             
                              <a wire:click="shareButton('facebook',{{ $playlist->id }})"  class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
                                   <i class="fab fa-facebook-square mr-3 h-5 w-5 text-gray-400" style="font-size: 20px;"></i>
-                                  <span>Facebook</span>
+                                  <span>Share to Facebook</span>
                              </a>
                              <a wire:click="shareButton('twitter',{{ $playlist->id }})" class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
                                   <i class="fab fa-twitter-square mr-3 h-5 w-5 text-gray-400" style="font-size: 20px;"></i>
-                                  <span>Twitter</span>
+                                  <span>Share to Twitter</span>
                              </a>
+							 <a wire:click="removePlaylist({{ $playlist->id }})" class="cursor-pointer text-gray-700 flex px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
+								<i class="fa-solid fa-trash-can mr-3 h-5 w-5 text-gray-400" style="font-size: 20px;"></i>
+						
+								<span>Remove Playlist</span>
+						   </a>
                          </div>
 
                   </div>
@@ -188,7 +193,7 @@
 					                Post
 					              </th> -->
 					              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-					                Date Added
+					                
 					              </th>
 					            <!--   <th scope="col" class="relative px-6 py-3">
 					                <span class="sr-only">Edit</span>
@@ -227,7 +232,7 @@
 					              	 <div class="text-sm font-bold text-gray-500">asdasd</div>
 					              </td> -->
 						              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-						             	12/12/12
+										<button type="button" class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Remove</button>
 						               
 						              </td>
 					             <!--  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -258,10 +263,13 @@
             </div>
 
 
-          </div>
+        </div>
           <!-- playlist -->
-          
-      </main>
+        @else
+		@include('layouts.editor.page-404')
+		@endif
+		
+		</main>
       <!-- aside -->
     
       <!-- aside -->

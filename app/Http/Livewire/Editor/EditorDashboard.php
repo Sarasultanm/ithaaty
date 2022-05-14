@@ -26,7 +26,7 @@ use URL;
 use Request;
 
 use Livewire\WithFileUploads;
-
+use Livewire\WithPagination;
 
 use App\Repo\BrowsersRepositories;
 use App\Repo\AdsListRepositories;
@@ -36,6 +36,8 @@ class EditorDashboard extends Component
 {
 
 	use WithFileUploads;
+    use WithPagination;
+
 
         protected $listeners = [
             'refreshParent' =>'$refresh'
@@ -45,7 +47,7 @@ class EditorDashboard extends Component
         protected $AdsListRepositories;
   
       
-        public $post_ads = 0;
+        public $post_ads = 0,$post_number = 1;
 	    public $title,$season,$episode,$category,$summary,$audiofile,$uploadType,$embedlink,$comments,$hashtags,$notes_message,$notes_time;
         public $report_type,$report_message;
         
@@ -642,7 +644,17 @@ class EditorDashboard extends Component
 
 
       // return view('livewire.editor.editor-dashboard',compact('audioList','categoryList','randomList','mostlike','contextAds','socialAds'));
-       return view('livewire.editor.editor-dashboard');
+      
+        // $this->audioList = Audio::orderBy('id','DESC')->where('audio_publish','Publish')->whereIn('audio_status', ['active','public','private'])->get();
+        return view('livewire.editor.editor-dashboard');
+
+
+        // return view('livewire.editor.editor-dashboard', [
+        //     'audioList' => Audio::orderBy('id','DESC')->where('audio_publish','Publish')->whereIn('audio_status', ['active','public','private'])->paginate(10),
+        // ]);
+
+
+
 
     }
 

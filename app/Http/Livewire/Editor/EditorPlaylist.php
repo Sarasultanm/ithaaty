@@ -35,6 +35,21 @@ class EditorPlaylist extends Component
 
 	}
 
+	public function removePlaylist($playlist_id){
+
+		UserPlaylist::where('id',$playlist_id)->update([
+				'playlist_status'=>'Deleted'
+		]);
+
+		session()->flash('status', 'Playlist Succesfully deleted');
+		redirect()->to('/editor/playlist/');
+
+	}
+
+
+
+
+
 	 public function shareButton($socialMedia,$id){
         if($socialMedia == "facebook"){
              $link ="https://www.facebook.com/sharer/sharer.php?u=https://ithaaty.com/playlist/".$id;

@@ -64,119 +64,38 @@
                         <a  >Private</a>
                       </li>
                        <li @click="openTab = 30" :class="openTab === 30 ? activeClasses : inactiveClasses"  class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
-                        <a  >Shared Playlist</a>
+                        <a  >Shared</a>
+                      </li>
+                      <li @click="openTab = 40" :class="openTab === 40 ? activeClasses : inactiveClasses"  class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                        <a >Deleted</a>
                       </li>
                     </ul>
                   </div>
 
                    <div x-show="openTab === 10">
-                     <div class="grid gap-4 xl:grid-cols-9 md:grid-cols-6 sm:grid-cols-6">
-                        @foreach($playlist->get() as $plist)
-                          @if($plist->playlist_status == "Public")
-                          
-                              <div class="xl:col-span-3 md:col-span-2 sm:col-span-2 bg-white p-2 ">
-                                 <a href="{{ route('editorPlaylist',['id' => $plist->id ]) }}" class="pointer">
-                                  <div class="mt-2 text-sm text-gray-700 space-y-4">
-                                     <div class="text-white bg-cover h-36">
-                                        <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
-                                        <img class="h-full mx-auto my-0" src="{{ asset('images/slider-img/'.$defaul_img) }}" alt="">        
-                                     </div>  
-                                  </div>
-                                  <div>
-                                    <div class="flex space-x-3">
-                                      <div class="min-w-0 flex-1">
-                                        <p class="text-md font-bold text-gray-900 mt-2">
-                                         {{ $plist->playlist_title }}
-                                        </p>
-                                        <p class="text-xs text-gray-500">
-                                          <a class="hover:underline">
-                                           {{ $plist->playlist_status }} <span class="float-right">{{  $plist->get_playlistItems->count() }}</span>
-                                          </a>
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  </a>
-                              </div>
-                            
-                          @endif
-                        @endforeach
-                     </div>
+                     <!-- public playlist -->
+                        @include('livewire.editor.playlist-details.tabs.public')
+                     <!-- public playlist  -->
                     </div>
 
                     <div x-show="openTab === 20">
-                       <div class="grid gap-4 grid-cols-9">
-                  
-                        @foreach($playlist->get() as $plist)
-                          @if($plist->playlist_status == "Private")
-                          <div class="col-span-3 bg-white p-2 ">
-                            <a href="{{ route('editorPlaylist',['id' => $plist->id ]) }}" class="pointer">
-                              <div class="mt-2 text-sm text-gray-700 space-y-4">
-                                 <div class="text-white bg-cover h-36">
-                                  <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
-                                        <img class="h-full mx-auto my-0" src="{{ asset('images/slider-img/'.$defaul_img) }}" alt=""> 
-                                    
-                                 </div>  
-                              </div>
-                              <div>
-                                <div class="flex space-x-3">
-                                  <div class="min-w-0 flex-1">
-                                    <p class="text-md font-bold text-gray-900 mt-2">
-                                     {{ $plist->playlist_title }}
-                                    </p>
-                                    <p class="text-xs text-gray-500">
-                                      <a class="hover:underline">
-                                       {{ $plist->playlist_status }} <span class="float-right">1</span>
-                                      </a>
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </a>
-                          </div>
-                          @endif
-                        @endforeach
-                 
-                     </div>
+                      <!-- private playlist -->
+                         @include('livewire.editor.playlist-details.tabs.private')
+                      <!-- private playlist  -->
+                      
                     </div>
 
                     <div x-show="openTab === 30">
-                       <div class="grid gap-4 grid-cols-9">
-                  
-                        @foreach($sharedplaylist->get() as $sharedplist)
-                          @if($sharedplist->plshared_status == "active")
-                          <div class="col-span-3 bg-white p-2 ">
-                            <a href="{{ route('editorPlaylist',['id' => $sharedplist->plshared_playlistid ]) }}" class="pointer">
-                              <div class="mt-2 text-sm text-gray-700 space-y-4">
-                                 <div class="text-white bg-cover h-36">
-                                  <?php  $defaul_img = 'slide'.rand(1,10).'.jpg'; ?>
-                                        <img class="h-full mx-auto my-0" src="{{ asset('images/slider-img/'.$defaul_img) }}" alt=""> 
-                                    
-                                 </div>  
-                              </div>
-                              <div>
-                                <div class="flex space-x-3">
-                                  <div class="min-w-0 flex-1">
-                                    <p class="text-md font-bold text-gray-900 mt-2">
-                                     {{ $sharedplist->get_playlist()->first()->playlist_title }}
-                                    </p>
-                                    <p class="text-xs text-gray-500">
-                                      <a class="hover:underline">
-                                       {{ $sharedplist->get_playlist()->first()->playlist_status }} <span class="float-right">1</span>
-                                      </a>
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </a>
-                          </div>
-                          @endif
-                        @endforeach
-                 
-                     </div>
+                      <!-- shared playlist -->
+                        @include('livewire.editor.playlist-details.tabs.shared')
+                      <!-- shared playlist  -->
                     </div>
 
-
+                    <div x-show="openTab === 40">
+                      <!-- shared playlist -->
+                        @include('livewire.editor.playlist-details.tabs.deleted')
+                      <!-- shared playlist  -->
+                    </div>
 
                   </div>
 

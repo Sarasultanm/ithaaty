@@ -38,7 +38,16 @@ class EditorPlaylistDetails extends Component
 
     }
 
+    public function restorePlaylist($id){
 
+      UserPlaylist::where('id',$id)->update([
+          'playlist_status'=>'Private'
+      ]);
+  
+      session()->flash('status', 'Playlist Succesfully restore');
+      redirect()->to('/editor/playlist/');
+  
+    }
 
     public function render()
     {

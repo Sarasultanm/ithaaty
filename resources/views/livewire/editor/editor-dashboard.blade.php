@@ -44,17 +44,21 @@
                           @endif
                         </div>
 
-                        <ul class="space-y-4">
+                        <ul id="post_list" class="space-y-4">
         
                             {{-- @foreach($audioList->get() as $audio)  --}}
                             @foreach($audioList as $audio) 
-
+                               
                                 @if($audio->check_in_podcasts()->count() != 0) 
-
+                                  
+                                  
                                   @if( $audio->audio_status == 'public' || $audio->audio_editor == Auth::user()->id || $this->get_if_friends($audio->audio_editor) == "Friends")
-
+                                 
                                     <!-- post-->
-                                    <li class="px-4 py-6 bg-white shadow sm:p-6 sm:rounded-lg">
+                                    @php
+                                        $post_class_number = "post_number".$post_number++;
+                                    @endphp
+                                    <li class="px-4 py-6 bg-white shadow sm:p-6 sm:rounded-lg {{ $post_class_number }}" >
                                         <!-- episode-parts -->
                                         @include('livewire.editor.dashboard.parts.episodes')
                                         <!-- episode-parts -->
@@ -105,23 +109,33 @@
                                         </div>
                                     </li>
                                     <!-- post-->
-
+                                   
                                     <!-- social ads disple here -->
                                     @php $post_ads++; @endphp
                                     
                                     @if ($post_ads % 2 != 0)
                                        @include('livewire.editor.dashboard.parts.social-ads')
                                     @endif
-
+                                   
                                     <!-- social ads disple here -->
+                                   
 
                                   @endif 
 
-                                @endif
+                               
 
+                                @endif
+                                
                             @endforeach
+  
                         </ul>
+                        <div class=" mt-5" >
+                            <a id="loadMore" class="cursor-pointer w-auto px-4 py-2 mb-5 text-sm font-medium text-center text-white border border-transparent rounded-md shadow-sm" style="background-color: #f98b88;">
+                               Load More
+                            </a>
+                          </div>
                     </div>
+                   
                 </main>
                 
                 
@@ -162,6 +176,17 @@
                 // alert("Copied the text: " + copyText.value);
                 alert("Embed was copy");
             }
+        </script>
+        <script>
+            $(document).ready(function () {
+                posts=2;
+                $('#post_list li').slice(0, 2).show();
+                $('#loadMore').on('click', function (e) {
+                    e.preventDefault();
+                    posts = posts+2;
+                    $('#post_list li').slice(0, posts).slideDown();
+                });
+            });
         </script>
       </div>
 
