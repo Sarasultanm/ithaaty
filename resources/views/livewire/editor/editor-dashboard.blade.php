@@ -55,10 +55,8 @@
                                   @if( $audio->audio_status == 'public' || $audio->audio_editor == Auth::user()->id || $this->get_if_friends($audio->audio_editor) == "Friends")
                                  
                                     <!-- post-->
-                                    @php
-                                        $post_class_number = "post_number".$post_number++;
-                                    @endphp
-                                    <li class="px-4 py-6 bg-white shadow sm:p-6 sm:rounded-lg {{ $post_class_number }}" >
+                                   
+                                    <li class="px-4 py-6 bg-white shadow sm:p-6 sm:rounded-lg " >
                                         <!-- episode-parts -->
                                         @include('livewire.editor.dashboard.parts.episodes')
                                         <!-- episode-parts -->
