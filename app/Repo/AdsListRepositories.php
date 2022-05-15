@@ -75,7 +75,7 @@ class AdsListRepositories
 
 
 
-    public function getAdsListContextAds(){
+    public static function getAdsListContextAds(){
 
         $users = Auth::user();
 
@@ -128,7 +128,7 @@ class AdsListRepositories
 
     }
 
-    public function getAdsListSocialAds(){
+    public static function getAdsListSocialAds(){
 
         $users = Auth::user();
 
