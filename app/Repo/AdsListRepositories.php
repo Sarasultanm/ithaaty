@@ -154,8 +154,8 @@ class AdsListRepositories
                     'ash_country'=>$users->country,
                     'ash_age'=>$users->age,
                     'ash_gender'=>$users->gender,
-                    // 'ash_device'=> "",
-                    'ash_device'=> $this->browser['userAgent'],
+                    'ash_device'=> "",
+                    // 'ash_device'=> $this->browser['userAgent'],
                     'ash_ipaddress'=> $_SERVER['REMOTE_ADDR'] 
                 ]);
             }
