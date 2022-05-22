@@ -17,6 +17,7 @@ class UserMail extends Model
         'mail_typestatus',
         'mail_expired',
         'mail_status',
+        'mail_receiver_email'
     ];
 
 

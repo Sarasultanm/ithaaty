@@ -17,6 +17,7 @@ class UserCollaborator extends Model
         'usercol_type',
         'usercol_typestatus',
         'usercol_status',
+        'usercol_status_mail_id',
     ];
 
     public function get_user(){

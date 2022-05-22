@@ -34,13 +34,22 @@ class UserChannel extends Model
         return $this->hasMany('App\Models\UserPodcasts','podcast_channelid','id')->where(['podcast_status'=>'active']);
     }
 
-
-
     public function get_subs(){
         return $this->hasMany('App\Models\UserChannelSub', 'sub_channelid','id');
     }
 
-   
+    public function get_invitation($invitation_type){
+        return $this->hasMany('App\Models\UserCollaborator','usercol_channel_id','id')->where(['usercol_type'=>$invitation_type]);
+    }
+
+
+    public function get_channel_access($email){
+        return $this->hasMany('App\Models\ChannelAccessList','cal_channel_id','id')->where(['cal_receiver_email'=>$email,'cal_typestatus'=>'access']);
+    }
+
+
+
+
 
 
 }

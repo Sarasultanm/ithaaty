@@ -10,6 +10,7 @@ use App\Models\{
     User,
     UserMail,
     UserCollaborator,
+    ChannelAccessList,
 };
 use Auth;
 use Mail;
@@ -23,6 +24,7 @@ use App\Http\Controllers\Controller;
 
 use App\Events\PodcastInvitationProcessed;
 
+
 class EditorChannelView extends Component
 {
 
@@ -31,7 +33,7 @@ class EditorChannelView extends Component
 
     public $channel_photo,$podcast_photo,$podcast_name,$channel_cover,$channel_name;
     public $search = "",$result,$emailInvitation;
-
+    public $vpc_email,$vpc_code;
 
 
 
@@ -39,6 +41,64 @@ class EditorChannelView extends Component
     {
         return $this->result = User::search($this->search)->get();
     }
+
+
+
+    public function verifyPrivateCode($id){
+
+
+        $check = ChannelAccessList::where([
+            'cal_receiver_email'=>$this->vpc_email,
+            'cal_channel_private_code'=>$this->vpc_code,
+        ]);
+
+        if($check->count() != 0){
+
+            $dateResult = $this->verifyMailExpiredDate($check->first()->cal_expireddate);
+
+            if($dateResult == "Active"){
+
+                $check->update([
+                    'cal_typestatus'=>'access'
+                ]);
+                
+                UserCollaborator::where([
+                    'usercol_channel_id'=>$check->first()->cal_channel_id ,
+                    'usercol_email'=>$check->first()->cal_receiver_email
+                ])->update(['usercol_typestatus'=>'Access']);
+
+                session()->flash('status', 'Success');
+                redirect()->to('/editor/channel/'.$this->channel_uniquelink);
+
+            }else{
+
+                session()->flash('status', 'Failed to verify expired code');
+                redirect()->to('/editor/channel/'.$this->channel_uniquelink);
+
+            }
+
+        }else{
+            session()->flash('status', 'Not found');
+            redirect()->to('/editor/channel/'.$this->channel_uniquelink);
+        }
+
+
+    }
+
+    public function verifyMailExpiredDate($end){
+
+        $now = Carbon::now();
+        $expiredDate = Carbon::parse($end)->format('d.m.Y h:m:sa');
+
+        if ($now->between($now->format('d.m.Y h:m:sa'), $expiredDate)) {
+            return 'Active';
+        } else {
+            return 'Expired';
+        }
+
+    }
+
+
 
     public function sendInvitation($channel_id)
     {
@@ -62,7 +122,7 @@ class EditorChannelView extends Component
         UserMail::create([
             'mail_sender_id'=>$user->id,
             'mail_link_id'=> $mail_link,
-            'mail_type'=>'channel_invitation',
+            'mail_type'=>'channel_collaborator',
             'mail_typestatus'=>'active',
             'mail_expired'=> $expiredDate
         ]);
@@ -72,16 +132,13 @@ class EditorChannelView extends Component
             'usercol_userid'=>$user->id,
             'usercol_channel_id'=> $channel->id,
             'usercol_email'=> $this->emailInvitation,
-            'usercol_type'=> 'channel_invitation',
+            'usercol_type'=> 'channel_collaborator',
             'usercol_typestatus'=> 'active'
         ]);
 
        // $this->sendEmail($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers,$mail_link);
 
         event(new PodcastInvitationProcessed($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers,$mail_link));
-
-
-
 
         session()->flash('status', 'Email Invitation Send');
         redirect()->to('/editor/channel/'.$channel->channel_uniquelink);

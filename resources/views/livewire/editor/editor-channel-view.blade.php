@@ -77,93 +77,55 @@
 
             <section class="w-full mt-5">
 
+          @if ($channel->channel_typestatus == 'private')
+             
+              @if($channel->channel_ownerid == Auth::user()->id)
 
-            <div 
-                x-data="{
-                  openTab: 5,
-                  activeClasses: 'border-custom-pink text-custom-pink',
-                  inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }" 
-                class=""
-              >
-
-            <div class="border-b border-gray-200">
-                <ul class="flex -mb-px" >
-                  <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer" >
-                    <a>Home</a>
-                  </li>
-                   <li @click="openTab = 5" :class="openTab === 5 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
-                    <a>Podcast</a>
-                  </li>
-                   {{-- <li @click="openTab = 6" :class="openTab === 6 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
-                    <a>Playlist</a>
-                  </li> --}}
-                  <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
-                    <a>Channels</a>
-                  </li>
-                   <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
-                    <a>About</a>
-                  </li>
-                  @if($channel->channel_ownerid == Auth::user()->id)
-                   <li @click="openTab = 4" :class="openTab === 4 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
-                    <a>Settings</a>
-                  </li>
-                  @endif
-
-                </ul>
-              </div>
+            
+              <!-- main tabs-->
+               @include('livewire.editor.channel-view.body-tabs')
+              <!-- main tabs-->
 
 
+              @else
 
-              <div class="w-full pt-4">
-                
-                <div x-show="openTab === 4">
-                  <!-- tab 4 -->
-                    @include('livewire.editor.channel-view.tabs.settings')
-                  <!-- tab 4 -->
+              @if($channel->get_channel_access(Auth::user()->email)->count() != 0)
+
+              <!-- main tabs-->
+               @include('livewire.editor.channel-view.body-tabs')
+              <!-- main tabs-->
+
+              @else
+              
+
+                <center>
+                <p class="text-center ">This channel is private</p>
+                <div>
+                  <div class="mt-1">
+                    <input wire:model="vpc_email" type="text" class="block w-1/3 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Enter your email">
+                  </div>
+                  <div class="mt-1">
+                    <input wire:model="vpc_code"  type="text" class="block w-1/3 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Enter your code">
+                  </div>
                 </div>
+                <button wire:click="verifyPrivateCode({{ $channel->id }})" type="button" class="mt-2 items-center px-2.5 py-1.5 border border-transparent text-sm font-medium rounded shadow-sm text-white bg-custom-pink">
+                    Submit
+                </button>
+              </center>
 
-                <div x-show="openTab === 1">
-                  <!-- tab 1 -->
-                   @include('livewire.editor.channel-view.tabs.home')
-                  <!-- tab 1 -->
-                </div>
-
-                <div x-show="openTab === 2">
-                  <!-- tab 2 -->
-                    @include('livewire.editor.channel-view.tabs.channels')
-                 <!-- tab 2 -->
-                </div>
-
-                <div x-show="openTab === 3">
-                  <!-- tab 3 -->
-                  @include('livewire.editor.channel-view.tabs.about')
-                  <!-- tab 3 -->
-                </div>
-
-                <div x-show="openTab === 5">
-                  <!-- tab 5 -->
-                  @include('livewire.editor.channel-view.tabs.podcast')
-                  <!-- tab 5 -->
-                </div>
+              @endif
 
 
-                {{-- <div x-show="openTab === 6">
-                  <!-- tab 6 -->
-                  @include('livewire.editor.channel-view.tabs.playlist')
-                  <!-- tab 6 -->
-                </div> --}}
+              @endif
 
 
-              </div>
-            </div>
+          @else
+          
+           <!-- main tabs-->
+           @include('livewire.editor.channel-view.body-tabs')
+           <!-- main tabs-->
 
-
-
-
-
-
-
+          @endif
 
          </section>
 

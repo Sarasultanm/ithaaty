@@ -101,6 +101,8 @@ Route::get('feed/{rsslink}', [MainController::class, 'feedRSS'])->name('generate
 Route::get('/channel/invitation/verify/{link}',[VerificationController::class, 'verifyChannelInvitation'])->name('verifyChannelInvitation');
 
 
+Route::get('/channel/invitation/verify/private/{link}',[VerificationController::class, 'verifyPrivateChannelInvitation'])->name('verifyPrivateChannelInvitation');
+
 
 
 Route::group(['middleware' => Administrator::class,'prefix'=>'admin'], function(){

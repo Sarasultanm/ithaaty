@@ -15,6 +15,10 @@ use Livewire\WithFileUploads;
 
 use App\Http\Controllers\Controller;
 
+use App\Events\PodcastInvitationProcessed;
+use App\Events\ChannelPrivateInviation;
+
+
 class EditorChannel extends Component
 {
     use WithFileUploads;
@@ -28,6 +32,8 @@ class EditorChannel extends Component
     protected $listeners = [
             'refreshParent' =>'$refresh'
             ];
+
+    
 
     public function createPodcast($channel_id)
     {
@@ -265,6 +271,50 @@ class EditorChannel extends Component
         return $this->result = User::search($this->search)->get();
     }
 
+    public function sendInvitationByButtonClick($channel_id,$user_email)
+    {
+        // $this->validate([
+        //     'emailInvitation' => 'required|string|email|max:50',
+        // ]);
+
+        // $channel = UserChannel::where('id', $channel_id)->first();
+
+        // $user = User::findOrFail($channel->channel_ownerid);
+        // $photo_link = $channel->get_channel_photo->gallery_path;
+        // $channel_photo = config('app.s3_public_link') . "/users/channe_img/" . $photo_link;
+        // $subcribers = $channel->get_subs()->count();
+
+        // //asia time zone
+        // $expiredDate = Carbon::now()
+        //     ->addHour()
+        //     ->timezone('Asia/Hong_Kong');
+        // $mail_link = Str::random(30);
+        // UserMail::create([
+        //     'mail_sender_id'=>$user->first()->id,
+        //     'mail_link_id'=> $mail_link,
+        //     'mail_type'=>'channel_invitation',
+        //     'mail_typestatus'=>'Pending',
+        //     'mail_expired'=> $expiredDate
+        // ]);
+        
+        // UserCollaborator::create([
+        //     'usercol_ownerid'=>Auth::user()->id,
+        //     'usercol_userid'=>$user->id,
+        //     'usercol_channel_id'=> $channel->id,
+        //     'usercol_email'=> $user_email,
+        //     'usercol_type'=> 'channel_invitation',
+        //     'usercol_typestatus'=> 'Pending'
+        // ]);
+
+
+        // //$this->sendEmail($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers,$mail_link);
+        // event(new ChannelPrivateInviation($user, $user_email, $channel->channel_name, $channel_photo, $subcribers,$mail_link,$channel->channel_privatecode));
+        
+
+        session()->flash('status', 'Email Invitation Send');
+        redirect()->to('/editor/channel');
+    }
+
     public function sendInvitation($channel_id)
     {
         $this->validate([
@@ -283,32 +333,83 @@ class EditorChannel extends Component
             ->addHour()
             ->timezone('Asia/Hong_Kong');
         $mail_link = Str::random(30);
-        UserMail::create([
+
+        $createMail = UserMail::create([
             'mail_sender_id'=>$user->first()->id,
             'mail_link_id'=> $mail_link,
-            'mail_type'=>'channel_invitation',
-            'mail_typestatus'=>'active',
-            'mail_expired'=> $expiredDate
+            'mail_type'=>'channel_private_invitation',
+            'mail_typestatus'=>'Pending',
+            'mail_expired'=> $expiredDate,
+            'mail_receiver_email' => $this->emailInvitation,
         ]);
-
+        
         UserCollaborator::create([
-            'usercol_userid'=>$user->first()->id,
-            'usercol_channel_id'=> $channel->first()->id,
+            'usercol_ownerid'=>Auth::user()->id,
+            'usercol_userid'=>$user->id,
+            'usercol_channel_id'=> $channel->id,
             'usercol_email'=> $this->emailInvitation,
-            'usercol_type'=> 'channel_invitation',
-            'usercol_typestatus'=> 'active'
+            'usercol_type'=> 'channel_private_invitation',
+            'usercol_typestatus'=> 'Pending',
+            'usercol_status_mail_id' => $createMail->id
         ]);
 
-        $this->sendEmail($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers,$mail_link);
+
+        //$this->sendEmail($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers,$mail_link);
+        event(new ChannelPrivateInviation($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers,$mail_link,$channel->channel_privatecode));
+        
 
         session()->flash('status', 'Email Invitation Send');
         redirect()->to('/editor/channel');
     }
 
+
+
+
+
+
+
     public function sendEmail($user, $email, $channel_name, $channel_photo, $subcribers,$link)
     {
         Mail::to($email)->send(new ChannelInvitation($user, $channel_name, $channel_photo, $subcribers,$link));
     }
+
+
+    public function updateChanneltoPrivate($id){
+
+        $channel = UserChannel::where("id", $id);
+
+        if (Auth::user()->id == $channel->first()->channel_ownerid) {
+            $channel->update([
+                'channel_typestatus' => "private",
+                'channel_privatecode' => Str::random(24),    
+            ]);
+
+            session()->flash('status', 'Update Channel Visibility to private');
+            redirect()->to('/editor/channel');
+        }
+
+
+    }
+
+    public function updateChanneltoPublic($id){
+
+        $channel = UserChannel::where("id", $id);
+
+        if (Auth::user()->id == $channel->first()->channel_ownerid) {
+            $channel->update([
+                'channel_typestatus' => "active",
+            ]);
+
+            session()->flash('status', 'Update Channel Visibility to public');
+            redirect()->to('/editor/channel');
+        }
+
+
+    }
+
+
+
+
 
     public function mount()
     {
@@ -322,6 +423,7 @@ class EditorChannel extends Component
                 ->first();
             $this->channel_about = $this->channel_list->channel_description;
             $this->channel_uniquelink = $this->channel_list->channel_uniquelink;
+            $this->channel_privatecode = $this->channel_list->channel_privatecode;
             $this->channel_episodes = $this->channel_list->get_episode()->get();
             $this->sub_channel_list = Auth::user()
                 ->channels()

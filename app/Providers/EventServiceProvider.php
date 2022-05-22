@@ -27,6 +27,9 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\UserChangePasswordEvents::class => [
             \App\Listeners\UserSendChangePasswordMailListeners::class,
         ],
+        \App\Events\ChannelPrivateInviation::class => [
+            \App\Listeners\SendChannelPrivateInvitation::class,
+        ],
     ];
 
     /**
