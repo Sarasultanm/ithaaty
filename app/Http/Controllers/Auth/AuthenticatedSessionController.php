@@ -67,7 +67,7 @@ class AuthenticatedSessionController extends Controller
             }
 
         }else{
-            session()->flash('status', 'User not verified');
+            session()->flash('status', 'User not verified, check your email for the verification');
             return redirect()->to('/login');
         }
 
