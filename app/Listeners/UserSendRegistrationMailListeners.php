@@ -27,6 +27,6 @@ class UserSendRegistrationMailListeners
      */
     public function handle($event)
     {
-        Mail::to($event->username)->send(new UserRegistrationMail($event->username, $event->password));
+        Mail::to($event->username)->send(new UserRegistrationMail($event->username, $event->password,$event->link));
     }
 }

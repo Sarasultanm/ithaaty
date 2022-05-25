@@ -28,6 +28,29 @@ class VerificationController extends Controller
         $this->userRepo = $userRepo;
     }
 
+    public function verifyUser($link){
+
+        $user = User::where('verified_link',$link);
+
+        if($user->count() != 0){
+
+            $user->update(['verified_user'=>0]);
+            // $message = "Activeted click here to login <a href='http://127.0.0.1:8000/login'>Login</a>";
+            session()->flash('status', 'Verification Success');
+            return redirect()->to('/login');
+
+        }else{
+
+            session()->flash('status', 'Verfication token not found');
+            return redirect()->to('/login');
+
+        }
+
+
+        return $message;
+
+    }
+
 
     public function verifyChannelInvitation($link){
         
@@ -91,6 +114,9 @@ class VerificationController extends Controller
         }
 
     }
+
+
+
 
     // $now = Carbon::now();
     // $startDate = Carbon::parse($yourModelObject['created_at'])->format('d.m.Y h:m:sa');

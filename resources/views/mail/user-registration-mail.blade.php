@@ -54,11 +54,7 @@
                                     <font size="4">Username: <strong>{{$username}}</strong></font>
                                 </td>
                             </tr> 
-                            <tr align="center">
-                                <td>
-                                    <font size="4">Password: <strong>{{$password}}</strong></font>
-                                </td>
-                            </tr> 
+                           
 
                             <tr>
                                 <td>
@@ -90,7 +86,7 @@
                                         display: inline-block;
                                         text-align: center;
                                         padding: 1rem 2rem;
-                                    " href=""><strong>Click to Login</strong></a>
+                                    " href="{{ route('verifyUser',['link' => $link ]) }}"><strong>Click to Verified</strong></a>
                                     </center>
                                 </td>
                             </tr>

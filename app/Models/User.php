@@ -28,7 +28,9 @@ class User extends Authenticatable
         'plan',
         'alias',
         'about',
-        'firstlogin'
+        'firstlogin',
+        'verified_user',
+        'verified_link'
     ];
 
     /**

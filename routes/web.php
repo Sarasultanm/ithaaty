@@ -102,6 +102,7 @@ Route::get('/channel/invitation/verify/{link}',[VerificationController::class, '
 
 
 Route::get('/channel/invitation/verify/private/{link}',[VerificationController::class, 'verifyPrivateChannelInvitation'])->name('verifyPrivateChannelInvitation');
+Route::get('/user/verify/{link}',[VerificationController::class, 'verifyUser'])->name('verifyUser');
 
 
 

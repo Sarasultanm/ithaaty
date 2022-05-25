@@ -47,15 +47,16 @@ class RegisteredUserController extends Controller
             'years' => 'required',
             'gender' => 'required',
             'location' => 'required',
-            'recaptcha_token' => ['required', new Recaptcha($request->recaptcha_token)]
+            // 'recaptcha_token' => ['required', new Recaptcha($request->recaptcha_token)]
         ]);
         // $randomStr = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 5);
 
         $randomStr = Str::random(5);
+        $verified_link =  Str::random(25);
         $plan_default = UserPlan::where('plan_status','default')->first()->id;
 
 
-        event(new UserRegistrationEvents($request->email,$request->password));
+        event(new UserRegistrationEvents($request->email,$request->password,$verified_link));
 
         $user = User::create([
             'name' => $request->name,
@@ -69,7 +70,8 @@ class RegisteredUserController extends Controller
             'plan' => $plan_default,
             'alias' => "User".$randomStr,
             'about' => ' ',
-            
+            'verified_user' => '1',
+            'verified_link' => $verified_link
         ]);
 
         // event(new Registered($user));

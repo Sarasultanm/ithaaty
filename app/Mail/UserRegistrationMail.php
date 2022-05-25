@@ -17,13 +17,14 @@ class UserRegistrationMail extends Mailable
      *
      * @return void
      */
-    public $username,$password;
+    public $username,$password,$link;
 
 
-    public function __construct($username,$password)
+    public function __construct($username,$password,$link)
     {
         $this->username = $username;
         $this->password = $password;
+        $this->link = $link;
         $this->subject('Ithaaty : User Registration');
     }
 

@@ -37,31 +37,40 @@ class AuthenticatedSessionController extends Controller
 
         $email  =  $request->input('email'); 
         $user = User::where(['email'=>$email]);
-        if($user->count() == 0){
-            session()->flash('status', 'Email does not exist');
 
-            return redirect()->to('/login');
-        }else{
+        if($user->first()->verified_user == 0){
 
-
-            $request->authenticate();
-            $request->session()->regenerate();
-
-            if (Auth::user()->roles == 'editor') {
-                if(Auth::user()->firstlogin == 0){
-                    return redirect('editor/setup');
-                }else{
-                    return redirect('editor/dashboard');
-                }
-
-            }elseif(Auth::user()->roles == 'collaborators'){
-                return redirect('collaborators/channel');
+            if($user->count() == 0){
+                session()->flash('status', 'Email does not exist');
+    
+                return redirect()->to('/login');
             }else{
-                 // return redirect(RouteServiceProvider::HOME);
-                return redirect('admin/dashboard');
+    
+    
+                $request->authenticate();
+                $request->session()->regenerate();
+    
+                if (Auth::user()->roles == 'editor') {
+                    if(Auth::user()->firstlogin == 0){
+                        return redirect('editor/setup');
+                    }else{
+                        return redirect('editor/dashboard');
+                    }
+    
+                }elseif(Auth::user()->roles == 'collaborators'){
+                    return redirect('collaborators/channel');
+                }else{
+                     // return redirect(RouteServiceProvider::HOME);
+                    return redirect('admin/dashboard');
+                }
+    
             }
 
+        }else{
+            session()->flash('status', 'User not verified');
+            return redirect()->to('/login');
         }
+
 
     }
 
