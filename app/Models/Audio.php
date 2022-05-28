@@ -9,6 +9,10 @@ class Audio extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'audio_publish',
+    ];
+
     public function get_categories(){
         return $this->belongsTo('App\Models\Category', 'audio_category', 'id');
     }
@@ -71,7 +75,10 @@ class Audio extends Model
     } 
     
 
-
+    public function check_if_premier(){
+        return $this->belongsTo('App\Models\AudioPremier', 'id', 'ap_audioid');
+       
+    }
 
 
 }

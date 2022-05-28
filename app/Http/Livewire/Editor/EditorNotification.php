@@ -26,13 +26,19 @@ class EditorNotification extends Component
         // ]);
 
 
+        // return view('livewire.editor.editor-notification',[
+        // 	'notif_list'=>UserNotifications::orderBy('id', 'DESC')
+        //                     ->where('notif_userid',Auth::user()->id)
+        //                     ->whereIn('notif_type', ['follow','following','like','liked','comments','commenting','addnotes','friend now','friend'])
+        //                     ->paginate(10),
+        // ]);
+
         return view('livewire.editor.editor-notification',[
         	'notif_list'=>UserNotifications::orderBy('id', 'DESC')
                             ->where('notif_userid',Auth::user()->id)
-                            ->whereIn('notif_type', ['follow','following','like','liked','comments','commenting','addnotes','friend now','friend'])
+                            ->whereIn('notif_type', ['register'])
                             ->paginate(10),
         ]);
-
 
 
 

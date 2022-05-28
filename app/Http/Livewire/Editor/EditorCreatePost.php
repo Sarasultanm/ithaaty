@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\AudioReferences;
 use App\Models\UserPodcasts;
 use App\Models\UserPodcastEpisodes;
+use App\Models\AudioPremier;
 use Livewire\WithFileUploads;
 
 
@@ -20,7 +21,7 @@ class EditorCreatePost extends Component
 	public $count = 0;
  	
 	public $podcast_item,$title,$season,$episode,$category,$summary,$embedlink,$hashtags,$status,$audio;
-
+    public $pr_month,$pr_day,$pr_year;
 
     public $showSummary = true;
 
@@ -55,10 +56,6 @@ class EditorCreatePost extends Component
             'episode' => 'required',
             'status' => 'required',
             'podcast_item' => 'required',
-            
-            // 'category' => 'required',
-            // 'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,mp4,wav',
-            
         ]);
 
         $data = new Audio;
@@ -87,6 +84,16 @@ class EditorCreatePost extends Component
             'poditem_audioid'=>$data->id,
             'poditem_type'=>"Upload",
         ]);
+
+        if($this->pr_month != 0 || $this->pr_day != 0 || $this->pr_year != 0){
+            $pr_createdate = $this->pr_month.'/'.$this->pr_day.'/'.$this->pr_year;
+            AudioPremier::create([
+                'ap_audioid'=>$data->id,
+                'ap_date'=>$pr_createdate,        
+            ]);
+            $data->update(['audio_publish'=>'Publish']);
+        }
+
 
         session()->flash('status', "You updated your podcast but its not publish. If you want to publish your podcast now hit the publish button.");
 
@@ -144,11 +151,24 @@ class EditorCreatePost extends Component
         // $audiofile = $this->audiofile->hashName();
         // $path = $this->audiofile->storeAs('audio',$audiofile);
 
+        
+
         UserPodcastEpisodes::create([
             'poditem_podcastid'=>$this->podcast_item,
             'poditem_audioid'=>$data->id,
             'poditem_type'=>"Embed",
         ]);
+
+
+        if($this->pr_month != 0 || $this->pr_day != 0 || $this->pr_year != 0){
+            $pr_createdate = $this->pr_month.'/'.$this->pr_day.'/'.$this->pr_year;
+            AudioPremier::create([
+                'ap_audioid'=>$data->id,
+                'ap_date'=>$pr_createdate,        
+            ]);
+            $data->update(['audio_publish'=>'Publish']);
+        }
+
 
         session()->flash('status', "You updated your podcast but its not publish. If you want to publish your podcast now hit the publish button.");
 

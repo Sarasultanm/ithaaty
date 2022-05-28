@@ -25,11 +25,14 @@ use Share;
 use URL;
 use Request;
 
+
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 use App\Repo\BrowsersRepositories;
 use App\Repo\AdsListRepositories;
+
+use Illuminate\Support\Carbon;
 
 
 class EditorDashboard extends Component
@@ -39,10 +42,7 @@ class EditorDashboard extends Component
     use WithPagination;
 
 
-        protected $listeners = [
-            'refreshParent' =>'$refresh'
-        ];
-
+       
         protected $BrowsersRepositories;
         protected $AdsListRepositories;
   
@@ -50,6 +50,8 @@ class EditorDashboard extends Component
         public $post_ads = 0,$post_number = 1;
 	    public $title,$season,$episode,$category,$summary,$audiofile,$uploadType,$embedlink,$comments,$hashtags,$notes_message,$notes_time;
         public $report_type,$report_message;
+
+        public $searchbar,$seach_select;
         
 	    protected $rules = [
         'title' => 'required',
@@ -59,6 +61,18 @@ class EditorDashboard extends Component
         'summary' => 'required',
         'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav',
 	    ];
+
+        protected $listeners = [
+            'refreshParent' =>'$refresh'
+        ];
+
+
+        public function getSearchResult(){
+
+            session()->flash('status', 'search for'.$this->seach_select);
+            redirect()->to('/editor/dashboard');
+
+        }
 
         public function reportAudio($audio_id){
             $this->validate([
@@ -604,6 +618,20 @@ class EditorDashboard extends Component
 
     }
 
+
+
+    public function checkPremierDate($premier_date){
+
+        $now = Carbon::now();
+        $expiredDate = Carbon::parse($premier_date)->format('d.m.Y h:m:sa');
+
+        if ($now->between($now->format('d.m.Y h:m:sa'), $expiredDate)) {
+            return 'Active';
+        } else {
+            return 'Expired';
+        }
+
+    }
 
 
     public function mount(BrowsersRepositories $BrowsersRepositories,

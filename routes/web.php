@@ -63,6 +63,8 @@ use App\Http\Livewire\Editor\{
 	EditorNewPodcastView,
 	EditorEpisodeCreate,
 	EditorEpisodeView,
+	EditorSearchList,
+	EditorFav,
 };
 
 /*-- Collaborators ---*/
@@ -220,8 +222,10 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 
 	Route::get('setup',EditorSetup::class)->name('editorSetup');
 
+	Route::get('search',EditorSearchList::class)->name('editorSearchList');
 
-
+	Route::get('favorites',EditorFav::class)->name('editorFavorites');
+	
 
 
 

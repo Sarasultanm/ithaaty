@@ -7,7 +7,7 @@
 
 
         <title>Ithaaty</title>
-        @livewireStyles
+      
         <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">    
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -18,8 +18,8 @@
         <link rel="stylesheet" href="{{ asset('css/custom-css.css') }}">
 
         <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js"></script>
        <!--  <script src="{{ asset('js/audio.js') }}" ></script> -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/custom-js.js') }}" ></script> 
@@ -72,7 +72,7 @@
             }
         </style>
        
-      
+       @livewireStyles
      <!--  <script src="https://vjs.zencdn.net/7.14.3/video.min.js"></script> 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs.ads.min.js" ></script>  -->
 
@@ -117,8 +117,9 @@
             </main>
            
         </div>
-        @livewireScripts
+     
        
     </body>
-  
+    @livewireScripts
+   
 </html>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserPlan;
 use App\Models\UserChannel;
+use App\Models\UserNotifications;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -74,11 +75,19 @@ class RegisteredUserController extends Controller
             'verified_link' => $verified_link
         ]);
 
+        $notif = new UserNotifications;
+        $notif->notif_userid = $user->id;
+        $notif->notif_type = "register";
+        $notif->notif_type_id = $user->id;
+        $notif->notif_message = "Welcome to Ithaaty";
+        $notif->status = "active";
+        $notif->save();
+
         // event(new Registered($user));
     
      
 
-        session()->flash('status', 'Account Succesfully created');
+        session()->flash('status', 'Account successfully created. Please verify your email. Thanks!');
 
         return redirect()->to('/login');
 

@@ -1,4 +1,7 @@
-<?php use App\Http\Livewire\Editor\EditorDashboard; ?>
+<?php 
+use App\Http\Livewire\Editor\EditorDashboard; 
+use \Carbon\Carbon;
+?>
 <x-slot name="header">
     <h2 class="text-xl font-semibold leading-tight text-gray-800">
         {{ __('Editor Dashboard') }}
@@ -57,6 +60,25 @@
                                     <!-- post-->
                                    
                                     <li class="px-4 py-6 bg-white shadow sm:p-6 sm:rounded-lg " >
+                                        <!-- premuer banner -->
+                                        @if($audio->check_if_premier()->count() != 0)
+
+                                            @php 
+                                                $premier_date = $audio->check_if_premier()->first()->ap_date;
+                                            @endphp
+                                            
+                                            @if($this->checkPremierDate($premier_date) == "Active")
+                                            <div class="relative p-2 mb-5 space-x-3 shadow-md bg-custom-pink">
+                                                <p class="text-white text-center">Premier on 
+                                                    {{ Carbon::parse($premier_date)->format('M d, Y') }}
+                                                </p>
+                                            </div>
+
+                                            @endif
+                                             
+                                           
+                                        @endif
+                                        <!-- premuer banner -->
                                         <!-- episode-parts -->
                                         @include('livewire.editor.dashboard.parts.episodes')
                                         <!-- episode-parts -->

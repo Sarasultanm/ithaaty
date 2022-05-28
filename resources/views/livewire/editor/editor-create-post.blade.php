@@ -105,12 +105,12 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 						  <div class="flex-1 mr-2">
 
 							  <label for="email" class="block text-sm font-medium text-gray-700">Season</label>
-			  <select class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="season">
+			    <select class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="season">
 				  <option>Select</option>
 				  @for ($s = 1; $s < 50; $s++)
 					 <option value="{{ $s }}">{{ $s }}</option>
 										@endfor
-					  </select> 
+				</select> 
 					 @error('season') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
 						  </div>
 				  <div class="flex-1 ml-2">
@@ -184,7 +184,82 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
 						<textarea id="about" name="about" rows="3" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:model="hashtags" ></textarea>
 					  </div>
 					  
-			   </div>	
+			</div>	
+
+
+			<div class="mt-5 border-2 border-custom-pink rounded-sm px-2 py-5" x-data="{ on: true }" >
+				<div class="flex">
+					<div class="flex-1">
+						 <label for="about" class="mr-2 text-sm  text-gray-700 font-bold">
+							Premier Options
+						 </label>
+					</div>
+					<div>
+						 <label for="about" class="block float-left mt-1 mr-2 text-xs font-medium text-gray-700">
+							Toggle to set premier option:
+						 </label>
+						 <button type="button" class="relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out bg-gray-500 border-transparent rounded-full cursor-pointer w-11 " role="switch" aria-checked="false" :aria-checked="on.toString()" @click="on = !on" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-custom-pink': on, 'bg-gray-500': !(on) }">
+							<span class="sr-only">Use setting</span>
+							<span aria-hidden="true" class="inline-block w-5 h-5 transition duration-200 ease-in-out transform translate-x-0 bg-white rounded-full shadow ring-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': on, 'translate-x-0': !(on) }" style="margin-top:2px;"></span>
+						</button>
+						
+					</div>
+				</div>
+				  <div class="mt-1" :class="{ 'hidden': on, 'block': !(on) }">
+					<div class="flex">
+						<div class="flex-1 mr-2">
+
+						<label for="email" class="block text-sm font-medium text-gray-700">Month</label>
+							<select wire:model="pr_month" class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="season">
+								<option selected value="0">Select</option>
+								<option value='01'>Janaury</option>
+								<option value='02'>February</option>
+								<option value='03'>March</option>
+								<option value='04'>April</option>
+								<option value='05'>May</option>
+								<option value='06'>June</option>
+								<option value='07'>July</option>
+								<option value='08'>August</option>
+								<option value='09'>September</option>
+								<option value='10'>October</option>
+								<option value='11'>November</option>
+								<option value='12'>December</option>
+							</select> 
+							@error('pr_month') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
+						</div>
+
+						<div class="flex-1 ml-2">
+							<label for="email" class="block text-sm font-medium text-gray-700">Days</label>
+								<select  wire:model="pr_day" class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="episode">
+									<option selected  value="0">Select</option>
+									@for ($e = 1; $e < 31; $e++)
+										<option value="{{ $e }}">{{ $e }}</option>
+									@endfor
+								</select> 
+							@error('pr_day') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
+
+						</div>
+
+						<div class="flex-1 ml-2">
+							<label for="email" class="block text-sm font-medium text-gray-700">Year</label>
+								<select  wire:model="pr_year" class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  wire:model="status">
+								<option selected value="0">Select</option>
+									<option value="2022">2022</option>
+									<option value="2023">2023</option>
+								</select> 
+							@error('pr_year') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
+
+						</div>
+			   
+			  </div>
+
+
+
+					{{-- <textarea id="about" name="about" rows="3" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:model="hashtags" ></textarea> --}}
+				  </div>
+				  
+		   </div>	
+
 
 
 

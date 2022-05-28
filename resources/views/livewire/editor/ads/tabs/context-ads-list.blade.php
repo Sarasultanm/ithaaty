@@ -45,7 +45,7 @@
                      {{ $ads->adslist_name }}
                       </div>
                       <div class="text-sm text-gray-500">
-                        <span class="truncate">{{ $ads->adslist_desc }}</span>
+                        <span class="truncate">{{ Str::limit($ads->adslist_desc, 30) }}</span>
                       </div>
                       <div class="text-sm text-gray-500">
                         <strong>   </strong>

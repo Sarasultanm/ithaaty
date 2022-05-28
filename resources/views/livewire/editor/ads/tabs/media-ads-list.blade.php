@@ -42,7 +42,8 @@
                       {{ $ads->adslist_name }}
                       </div>
                       <div class="text-sm text-gray-500">
-                        {{ $ads->adslist_videolink }}
+                   
+                        {{ Str::limit($ads->adslist_videolink, 30) }}
                       </div>
                       <div class="text-sm text-gray-500">
                         <strong>   </strong>
