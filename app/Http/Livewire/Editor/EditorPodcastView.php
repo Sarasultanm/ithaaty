@@ -25,6 +25,8 @@ use Auth;
 
 use App\Repo\AdsListRepositories;
 
+use Illuminate\Support\Carbon;
+
 class EditorPodcastView extends Component
 {
 
@@ -297,8 +299,18 @@ class EditorPodcastView extends Component
 
         }
 
+        public function checkPremierDate($premier_date){
 
-
+            $now = Carbon::now();
+            $expiredDate = Carbon::parse($premier_date)->format('d.m.Y h:m:sa');
+    
+            if ($now->between($now->format('d.m.Y h:m:sa'), $expiredDate)) {
+                return 'Active';
+            } else {
+                return 'Expired';
+            }
+    
+        }
 
 
 
