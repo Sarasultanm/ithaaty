@@ -135,7 +135,7 @@ class User extends Authenticatable
     }
 
     public function get_user_collaborators(){
-        return $this->belongsTo('App\Models\UserCollaborator','id','usercol_userid',);
+        return $this->belongsTo('App\Models\UserCollaborator','id','usercol_userid');
     }
 
 

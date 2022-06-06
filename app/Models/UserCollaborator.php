@@ -25,7 +25,7 @@ class UserCollaborator extends Model
     }
 
     public function get_channel(){
-        return $this->belongsTo('App\Models\UserChannel', 'usercol_channel_id', 'id');
+        return $this->belongsTo('App\Models\UserChannel','usercol_channel_id','id');
     }
 
 }

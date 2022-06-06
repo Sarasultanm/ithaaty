@@ -30,6 +30,9 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\ChannelPrivateInviation::class => [
             \App\Listeners\SendChannelPrivateInvitation::class,
         ],
+        \App\Events\UserCreateCollaboratorEvents::class => [
+            \App\Listeners\UserSendCollaboratorsCredsListiners::class,
+        ],
     ];
 
     /**

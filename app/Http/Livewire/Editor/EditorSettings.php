@@ -17,6 +17,9 @@ use App\Models\{
     UserInterest,
     Interest,
     UserCollaborator,
+    UserChannel,
+    UserMail,
+    UserNotifications
 };
 
 use App\Http\Controllers\Controller;
@@ -26,6 +29,10 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 
 use App\Events\UserChangePasswordEvents;
+use App\Events\UserCreateCollaboratorEvents;
+
+use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 
 class EditorSettings extends Component
 {
@@ -50,6 +57,20 @@ class EditorSettings extends Component
             'colab_password' => 'required',
         ]);
 
+        $channel = UserChannel::where('id', $this->colab_channel)->first();
+
+        $photo_link = $channel->get_channel_photo->gallery_path;
+        $channel_photo = config('app.s3_public_link') . "/users/channe_img/" . $photo_link;
+        $subcribers = $channel->get_subs()->count();
+
+        //asia time zone
+        $expiredDate = Carbon::now()
+            ->addHour()
+            ->timezone('Asia/Hong_Kong');
+
+        $mail_link = Str::random(30);
+        $verified_link =  Str::random(25);
+
         $user = User::create([
             'name' => $this->colab_username,
             'email' => $this->email,
@@ -62,16 +83,58 @@ class EditorSettings extends Component
             'plan' => ' ',
             'alias' => ' ',
             'about' => ' ',
+            'verified_user' => '1',
+            'verified_link' => $verified_link
         ]);
-        
-        UserCollaborator::create([
+
+        $createMail = UserMail::create([
+            'mail_sender_id'=>$user->first()->id,
+            'mail_link_id'=> $mail_link,
+            'mail_type'=>'channel_collaborators',
+            'mail_typestatus'=>'Pending',
+            'mail_expired'=> $expiredDate,
+            'mail_receiver_email' => $this->email,
+        ]);
+      
+        $createCollab = UserCollaborator::create([
             'usercol_ownerid'=>Auth::user()->id,
             'usercol_userid'=>$user->id,
-            'usercol_channel_id'=> $this->colab_channel,
-            'usercol_email'=> 0,
-            'usercol_type'=> 'Channel Editor',
-            'usercol_typestatus'=> 'active'
+            'usercol_channel_id'=> $channel->id,
+            'usercol_email'=> $this->email,
+            'usercol_type'=> 'channel_collaborators',
+            'usercol_typestatus'=> 'Pending',
+            'usercol_status_mail_id' => $createMail->id
         ]);
+
+        $notif = new UserNotifications;
+        $notif->notif_userid = Auth::user()->id;
+        $notif->notif_type = "channel_collaborators";
+        $notif->notif_type_id = $createCollab->id;
+        $notif->notif_message = "You inviting ".$this->email. " to your private channel as Collaborators.";
+        $notif->status = "active";
+        $notif->save();
+
+        // UserCollaborator::create([
+        //     'usercol_ownerid'=>Auth::user()->id,
+        //     'usercol_userid'=>$user->id,
+        //     'usercol_channel_id'=> $this->colab_channel,
+        //     'usercol_email'=> 0,
+        //     'usercol_type'=> 'Channel Editor',
+        //     'usercol_typestatus'=> 'active'
+        // ]);
+
+
+        event(new UserCreateCollaboratorEvents(
+            $user, 
+            Auth::user()->email, 
+            $channel->channel_name, 
+            $channel_photo, 
+            $subcribers,
+            $mail_link,
+            $this->colab_password)
+        );
+       
+
 
         session()->flash('status', 'Add new Users');
         redirect()->to('/editor/settings');

@@ -102,10 +102,10 @@ Route::get('feed/{rsslink}', [MainController::class, 'feedRSS'])->name('generate
 
 Route::get('/channel/invitation/verify/{link}',[VerificationController::class, 'verifyChannelInvitation'])->name('verifyChannelInvitation');
 
-
 Route::get('/channel/invitation/verify/private/{link}',[VerificationController::class, 'verifyPrivateChannelInvitation'])->name('verifyPrivateChannelInvitation');
 Route::get('/user/verify/{link}',[VerificationController::class, 'verifyUser'])->name('verifyUser');
 
+Route::get('/channel/invitation/verify/collaborators/{link}',[VerificationController::class, 'verifyCollabInvitationLink'])->name('verifyCollabInvitationLink');
 
 
 Route::group(['middleware' => Administrator::class,'prefix'=>'admin'], function(){

@@ -35,7 +35,7 @@
         </div>
 
         <div class="mt-4">
-         <div class="w-full  xl:p-0 lg:p-0 md:p-0 sm:p-0 xs:p-0">
+         <div class="w-full xl:p-0 lg:p-0 md:p-0 sm:p-0 xs:p-0">
             @if(Auth::user()->get_channels()->count() == 0)
              <div x-data="{modal: false}" >
 
@@ -60,7 +60,7 @@
             </div>
 
            
-               <!--  <a   class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm cursor-pointer  bg-custom-pink sm:col-start-2 sm:text-sm">Create Channels</a>
+               <!--  <a   class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm cursor-pointer bg-custom-pink sm:col-start-2 sm:text-sm">Create Channels</a>
                  -->
                 <!--modal-->
                   <!-- This example requires Tailwind CSS v2.0+ -->
@@ -231,7 +231,7 @@
        
             <div 
                 x-data="{
-                  openTab: 4,
+                  openTab: 8,
                   activeClasses: 'border-custom-pink text-custom-pink',
                   inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }" 
@@ -261,6 +261,9 @@
                         <li @click="openTab = 4" :class="openTab === 4 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
                           <a>Settings</a>
                         </li>
+                        <li @click="openTab = 8" :class="openTab === 8 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
+                          <a>Users</a>
+                        </li>
                       </ul>
                     </div>
 
@@ -286,6 +289,9 @@
                       </div> --}}
                       <div x-show="openTab === 7">
                           @include('livewire.editor.channels.tabs.episode') 
+                      </div>
+                      <div x-show="openTab === 8">
+                        @include('livewire.editor.channels.tabs.users')
                       </div>
                       
                     </div>

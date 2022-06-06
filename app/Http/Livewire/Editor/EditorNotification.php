@@ -36,7 +36,7 @@ class EditorNotification extends Component
         return view('livewire.editor.editor-notification',[
         	'notif_list'=>UserNotifications::orderBy('id', 'DESC')
                             ->where('notif_userid',Auth::user()->id)
-                            ->whereIn('notif_type', ['register'])
+                            ->whereIn('notif_type', ['register','channel_collaborators','channel_collaborators_accept'])
                             ->paginate(10),
         ]);
 

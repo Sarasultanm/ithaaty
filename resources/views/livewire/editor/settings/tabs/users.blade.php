@@ -63,8 +63,9 @@
                                             @error('colab_password') <span class="text-center text-xs text-red-600"> {{ $message }}</span> @enderror
                                         </div>
                                         <div class="mt-5">
-                                            <label for="location" class="block text-sm font-medium text-gray-700">Podcast</label>
+                                            <label for="location" class="block text-sm font-medium text-gray-700">Channel</label>
                                             <select wire:model="colab_channel" id="location" name="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                              <option value="">Select</option>
                                               @foreach (Auth::user()->channels as $channel_items )
                                                   <option value="{{ $channel_items->id }}">{{ $channel_items->channel_name }}</option>
                                               @endforeach
@@ -99,7 +100,7 @@
                               <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0">Username</th>
                               <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Email</th>
                              
-                              <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Podcast</th>
+                              <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Channel</th>
                               <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Role</th>
                               <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 md:pr-0">
                                 <span class="sr-only">Edit</span>
@@ -119,7 +120,7 @@
                                 </td>
                               </tr>
                             @empty
-                              Empty
+                            
                             @endforelse
                             
                 

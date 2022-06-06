@@ -5,8 +5,8 @@
           <img class="h-10 w-10 rounded-full" src="{{ asset('images/logo.png') }}" alt="">
         </div> --}}
         <div class="ml-4">
-          <div class="text-sm font-medium text-gray-900">
-           Ithaaty
+          <div class="text-sm font-bold text-gray-900">
+            {{ $notif->get_collaborators_info->get_channel->channel_name }}
           </div>
           <div class="text-sm text-gray-500">
            {{ $notif->notif_message }} </b>
@@ -19,7 +19,9 @@
      
     </td>
     <td class="px-6 py-4 whitespace-nowrap">
-         <div class="text-sm font-bold text-gray-500">{{ $notif->notif_type }}</div>
+         <div class="text-sm font-bold text-gray-500">
+             {{-- {{ $notif->notif_type }} --}}
+        </div>
     </td>
     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
    <?php $date = $notif->created_at; echo $date->format('M d,Y'); ?>

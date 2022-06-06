@@ -119,12 +119,13 @@ class EditorChannelView extends Component
             ->timezone('Asia/Hong_Kong');
 
         $mail_link = Str::random(30);
-        UserMail::create([
+        $createMail = UserMail::create([
             'mail_sender_id'=>$user->id,
             'mail_link_id'=> $mail_link,
             'mail_type'=>'channel_collaborator',
             'mail_typestatus'=>'active',
-            'mail_expired'=> $expiredDate
+            'mail_expired'=> $expiredDate,
+            'mail_receiver_email' => $this->emailInvitation,
         ]);
 
         UserCollaborator::create([
@@ -133,8 +134,11 @@ class EditorChannelView extends Component
             'usercol_channel_id'=> $channel->id,
             'usercol_email'=> $this->emailInvitation,
             'usercol_type'=> 'channel_collaborator',
-            'usercol_typestatus'=> 'active'
+            'usercol_typestatus'=> 'active',
+            'usercol_status_mail_id' => $createMail->id
         ]);
+
+
 
        // $this->sendEmail($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers,$mail_link);
 

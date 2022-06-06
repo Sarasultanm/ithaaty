@@ -62,10 +62,10 @@
 					               Notification
 					              </th>
 					             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-					               Activity
+					               {{-- Activity --}}
 					              </th>
 					              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-					                Post
+					                {{-- Post --}}
 					              </th>
 					              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 					                Time
@@ -78,7 +78,13 @@
 					          <tbody class="bg-white divide-y divide-gray-200">
 					          	@foreach($notif_list as $notif)
 
+								@if($notif->notif_type == 'register' )  
 								  @include('livewire.editor.notification.register-notifcation')
+								@elseif($notif->notif_type == 'channel_collaborators')
+									@include('livewire.editor.notification.channel-collaborators-invite')
+								@elseif($notif->notif_type == 'channel_collaborators_accept')
+									@include('livewire.editor.notification.channel-collaborators-accept')
+								@endif
 					          	{{--
 								 @if($notif->notif_type == 'follow' )
 								

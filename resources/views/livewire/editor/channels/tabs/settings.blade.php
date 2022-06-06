@@ -1,4 +1,21 @@
 <div class="grid grid-cols-10 gap-4">
+
+    <section class="col-span-10 mt-5">
+        <div class="shadow-sm sm:rounded-md sm:overflow-hidden">
+            <div class="px-4 py-6 bg-white sm:p-6">
+                <div class="grid grid-cols-4 gap-6">
+                    <div class="col-span-4 sm:col-span-3">
+                        <h3 class="font-bold text-gray-900 text-md">Channel Name</h3>
+                        <input type="email" class="w-1/3 pr-10 mt-2 rounded-md item-center sm:text-sm"  wire:model="channel_name" />
+                    </div>
+                    <div class="col-span-4 mt-5 text-right sm:col-span-1">
+                        <button wire:click="renameChannel({{$channel_list->id}})" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="col-span-10 mt-5">
         <div class="shadow-sm sm:rounded-md sm:overflow-hidden">
             <div class="px-4 py-6 bg-white sm:p-6">

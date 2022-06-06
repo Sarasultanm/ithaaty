@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Editor;
 
 use Livewire\Component;
-use App\Models\{UserChannel, UserGallery, UserChannelSub, Category, Audio, User, UserMail, UserViews, UserCollaborator, UserPodcasts};
+use App\Models\{UserChannel, UserGallery, UserChannelSub, Category, Audio, User, UserMail, UserViews, UserCollaborator, UserPodcasts, UserNotifications};
 use Auth;
 use Mail;
 use App\Mail\ChannelInvitation;
@@ -26,14 +26,30 @@ class EditorChannel extends Component
     public $channel_photo, $channel_cover, $channel_name, $podcast_photo, $podcast_name;
     public $search = "",
         $result,
-        $emailInvitation;
-
+        $emailInvitation,
+        $emailCollabInvitation;
 
     protected $listeners = [
             'refreshParent' =>'$refresh'
             ];
 
     
+
+    public function renameChannel($channel_id){
+
+        $channel = UserChannel::where("id", $channel_id);
+
+        if (Auth::user()->id == $channel->first()->channel_ownerid) {
+            $channel->update([
+                'channel_name' => $this->channel_name,
+            ]);
+
+            session()->flash('status', 'Update Success');
+            redirect()->to('/editor/channel');
+        }
+
+    }
+
 
     public function createPodcast($channel_id)
     {
@@ -353,6 +369,13 @@ class EditorChannel extends Component
             'usercol_status_mail_id' => $createMail->id
         ]);
 
+        $notif = new UserNotifications;
+        $notif->notif_userid = Auth::user()->id;
+        $notif->notif_type = "channel_private_invitation";
+        $notif->notif_type_id = $user->id;
+        $notif->notif_message = "You inviting ".$this->emailInvitation. " to your private channel.";
+        $notif->status = "active";
+        $notif->save();
 
         //$this->sendEmail($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers,$mail_link);
         event(new ChannelPrivateInviation($user, $this->emailInvitation, $channel->channel_name, $channel_photo, $subcribers,$mail_link,$channel->channel_privatecode));
@@ -363,8 +386,7 @@ class EditorChannel extends Component
     }
 
 
-
-
+   
 
 
 
@@ -421,6 +443,7 @@ class EditorChannel extends Component
             $this->channel_list = Auth::user()
                 ->get_channels()
                 ->first();
+            $this->channel_name = $this->channel_list->channel_name;
             $this->channel_about = $this->channel_list->channel_description;
             $this->channel_uniquelink = $this->channel_list->channel_uniquelink;
             $this->channel_privatecode = $this->channel_list->channel_privatecode;
