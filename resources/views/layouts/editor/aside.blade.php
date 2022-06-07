@@ -70,6 +70,11 @@
           </section>
           @endif
            @endif
+           
+
+          @if ($audioList->count() != 0)
+            
+          @endif 
           <section aria-labelledby="trending-heading">
             <div class="bg-white rounded-lg shadow">
               <div class="p-6">
@@ -121,7 +126,7 @@
               </div>
             </div>
           </section>
-
+          @endif
           <section aria-labelledby="trending-heading">
             @if($contextAds->count() != 0)
               <h2 class="mt-2 ml-2 text-base font-bold text-gray-900">
