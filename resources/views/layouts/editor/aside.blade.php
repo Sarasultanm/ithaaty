@@ -73,6 +73,8 @@
            
 
           @if ($audioList->count() != 0)
+            @if($totalLikes != 0)
+            
           <section aria-labelledby="trending-heading">
             <div class="bg-white rounded-lg shadow">
               <div class="p-6">
@@ -124,6 +126,7 @@
               </div>
             </div>
           </section>
+          @endif
           @endif
           <section aria-labelledby="trending-heading">
             @if($contextAds->count() != 0)

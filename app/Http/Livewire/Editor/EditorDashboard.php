@@ -637,7 +637,7 @@ class EditorDashboard extends Component
         $this->categoryList = Category::orderBy('id', 'DESC')->where('category_status','active')->get();
         $this->randomList = User::inRandomOrder()->where('id','!=',Auth::user()->id)->take(3)->get();
         $this->mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1)->first();        
-
+        $this->totalLikes = UserLikes::where('like_status','active')->count();                   
 
     }
 
