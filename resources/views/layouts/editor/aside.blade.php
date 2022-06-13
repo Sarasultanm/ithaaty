@@ -73,61 +73,112 @@
            
 
           @if ($audioList->count() != 0)
-            @if($totalLikes != 0)
-            
-          <section aria-labelledby="trending-heading">
-            <div class="bg-white rounded-lg shadow">
-              <div class="p-6">
-                <h2 id="trending-heading" class="text-base font-medium text-gray-900">
-                  Trending
-                </h2>
-                <div class="flow-root mt-6">
-                  <ul class="-my-4 divide-y divide-gray-200">
-                    <li class="flex py-4 space-x-3">
-                      <div class="flex-shrink-0">
-                        <img class="w-8 h-8 rounded-full" src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Floyd Miles">
-                      </div>
-                      <div class="flex-1 min-w-0">
-                        <p class="text-sm text-gray-800">{{$mostlike->first()->get_audio->get_user->name}} </p>
-                        <p class="text-sm text-gray-800"> {{$mostlike->first()->get_audio->audio_name}} 
-                        </p>
-                        <div class="flex mt-2 space-x-6">
-                          <span class="inline-flex items-center text-sm">
-                            <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500"> 
-                              <!-- Heroicon name: solid/thumb-up -->
-                              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
-                              </svg>
-                              <span class="font-medium text-gray-900">{{ $mostlike->first()->get_audio->get_like->count() }}</span>
-                              <span class="sr-only">likes</span>
-                            </button>
-                          </span>
-                          <span class="inline-flex items-center text-sm">
-                            <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                              <!-- Heroicon name: solid/chat-alt -->
-                              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
-                              </svg>
-                              <span class="font-medium text-gray-900">{{ $mostlike->first()->get_audio->get_comments->count() }}</span>
-                            </button>
-                          </span>
+
+              @if($totalLikes != 0)
+                  <section aria-labelledby="trending-heading">
+                    <div class="bg-white rounded-lg shadow">
+                      <div class="p-6">
+                        <h2 id="trending-heading" class="text-base font-medium text-gray-900">
+                          Trending
+                        </h2>
+                        <div class="flow-root mt-6">
+                          <ul class="-my-4 divide-y divide-gray-200">
+                            <li class="flex py-4 space-x-3">
+                              <div class="flex-shrink-0">
+                                <img class="w-8 h-8 rounded-full" src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixqx=cZT0ApgKqn&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Floyd Miles">
+                              </div>
+                              <div class="flex-1 min-w-0">
+                                <p class="text-sm text-gray-800">{{$mostlike->first()->get_audio->get_user->name}} </p>
+                                <p class="text-sm text-gray-800"> {{$mostlike->first()->get_audio->audio_name}} 
+                                </p>
+                                <div class="flex mt-2 space-x-6">
+                                  <span class="inline-flex items-center text-sm">
+                                    <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500"> 
+                                      <!-- Heroicon name: solid/thumb-up -->
+                                      <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                                      </svg>
+                                      <span class="font-medium text-gray-900">{{ $mostlike->first()->get_audio->get_like->count() }}</span>
+                                      <span class="sr-only">likes</span>
+                                    </button>
+                                  </span>
+                                  <span class="inline-flex items-center text-sm">
+                                    <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                                      <!-- Heroicon name: solid/chat-alt -->
+                                      <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
+                                      </svg>
+                                      <span class="font-medium text-gray-900">{{ $mostlike->first()->get_audio->get_comments->count() }}</span>
+                                    </button>
+                                  </span>
+                                </div>
+                              </div>
+                            </li>
+
+                            <!-- More posts... -->
+                          </ul>
+                        </div>
+                        <div class="mt-6">
+                          <a href="#" class="block w-full px-4 py-2 text-sm font-medium text-center text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50">
+                            View all
+                          </a>
                         </div>
                       </div>
-                    </li>
+                    </div>
+                  </section>
 
-                    <!-- More posts... -->
-                  </ul>
-                </div>
-                <div class="mt-6">
-                  <a href="#" class="block w-full px-4 py-2 text-sm font-medium text-center text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50">
-                    View all
-                  </a>
-                </div>
-              </div>
-            </div>
-          </section>
+              @endif
+         
+              @if($recommended->count() != 0)
+                  <section aria-labelledby="trending-heading">
+                    <div class="bg-white rounded-lg shadow">
+                      <div class="p-6">
+                        <h2 id="trending-heading" class="text-base font-medium text-gray-900">
+                          Recommendation
+                        </h2>
+                    
+                        <div class="flow-root mt-6">
+                          <ul class="-my-4 divide-y divide-gray-200">
+                            @foreach ($recommended as $reco )
+                            <li class="relative flex py-4 space-x-3">
+                              <div class="flex-shrink-0">
+                                @if ($reco->get_audio->get_thumbnail->count() != 0) 
+                                    @php 
+                                        $reco_img_path =$reco->get_audio->get_thumbnail->first()->gallery_path; 
+                                        $reco_s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$episode_img_path; 
+                                    @endphp 
+                                @else 
+                                    @php 
+                                        $reco_s3_thumbnail = asset('images/default_podcast.jpg');
+                                    @endphp 
+                                @endif
+                                <img class="w-12 h-12 rounded" src="{{ $reco_s3_thumbnail }}">
+                              </div>
+                              <div class="flex-1 min-w-0">
+                                <p class="text-sm font-bold text-gray-800">{{ $reco->get_audio->audio_name }}</p>
+                                <p class="text-sm text-gray-800"> {{ Str::limit( $reco->get_audio->audio_summary , 30) }}
+                                </p>
+                            
+                              </div>
+                              <a 
+                              href="{{ route('editorPodcastView',['id' => $reco->get_audio->id]) }}"
+                                class="absolute inset-0 cursor-pointer" 
+                                aria-hidden="true"></a>
+                            </li>
+                            @endforeach
+                            <!-- More posts... -->
+                          </ul>
+                        </div>
+                      
+
+                      </div>
+                    </div>
+                  </section>
+              @endif
+
           @endif
-          @endif
+
+          
           <section aria-labelledby="trending-heading">
             @if($contextAds->count() != 0)
               <h2 class="mt-2 ml-2 text-base font-bold text-gray-900">

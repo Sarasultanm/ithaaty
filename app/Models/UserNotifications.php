@@ -37,5 +37,9 @@ class UserNotifications extends Model
         return $this->belongsTo('App\Models\UserCollaborator', 'notif_type_id', 'id');
     }
 
+    public function get_audio(){
+        return $this->belongsTo('App\Models\Audio', 'notif_type_id','id');
+    }
+
     
 }

@@ -67,6 +67,10 @@
                         </p>
                       </a>
                     </div>
+                    <div class="flex-1 min-w-0">
+                      <button  class="float-right  inline-flex  rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Subcriber
+                      </button>
+                    </div>
                   </div>
 
                   <!-- More people... -->

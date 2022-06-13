@@ -51,7 +51,7 @@ class EditorDashboard extends Component
 	    public $title,$season,$episode,$category,$summary,$audiofile,$uploadType,$embedlink,$comments,$hashtags,$notes_message,$notes_time;
         public $report_type,$report_message;
 
-        public $searchbar,$seach_select;
+        public $searchbar,$seach_select,$recommended;
         
 
         protected $listeners = [
@@ -638,7 +638,8 @@ class EditorDashboard extends Component
         $this->randomList = User::inRandomOrder()->where('id','!=',Auth::user()->id)->take(3)->get();
         $this->mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1)->first();        
         $this->totalLikes = UserLikes::where('like_status','active')->count();                   
-
+        $this->recommended =  UserNotifications::inRandomOrder()->where('notif_type','like')->take(2)->get();    
+                   
     }
 
   
@@ -666,6 +667,7 @@ class EditorDashboard extends Component
       // return view('livewire.editor.editor-dashboard',compact('audioList','categoryList','randomList','mostlike','contextAds','socialAds'));
       
         // $this->audioList = Audio::orderBy('id','DESC')->where('audio_publish','Publish')->whereIn('audio_status', ['active','public','private'])->get();
+        //$reco = UserNotifications::orderBy('id', 'DESC')->where('notif_type','like')->get();
         return view('livewire.editor.editor-dashboard');
 
 

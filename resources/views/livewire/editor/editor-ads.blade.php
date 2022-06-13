@@ -40,7 +40,7 @@
           	 <x-auth-session-status-custom class="mt-4 mb-4" :status="session('status')" />
           </div>
           
-          @if($checkAds->count() == 0 )
+          @if($checkAds->count() != 0 )
           <div class="mt-4">
 
           <div class="w-full mb-5 ">
@@ -90,29 +90,62 @@
 		     <div class="w-full pt-5 mt-5 border-t-2 border-custom-pink">
 	          	<div class="">
 	          		 <h1 class="flex-1 text-xl font-bold text-gray-800">Add Supporting files</h1> 
-	          	  	<p class="mt-1 text-sm text-gray-500">
+	          	  
+	          	</div>
+              <div x-data="{
+                openTab: 'link',
+                activeClasses: 'border-custom-pink text-custom-pink font-bold',
+                inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }" 
+              class="">
+                    <div class="border-b border-gray-200">
+                      <ul class="-mb-px flex" >
+                        <li @click="openTab = 'link'"  :class="openTab === 'link' ? activeClasses : inactiveClasses"   class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                          <a>Link</a>
+                        </li>
+                        <li @click="openTab = 'upload'" :class="openTab === 'upload' ? activeClasses : inactiveClasses"  class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                          <a>Upload</a>
+                        </li>
+                      </ul>
+                  </div>
+
+                  <div  x-show="openTab === 'link'" >
+                   
+                    <p class="mt-3 text-sm text-gray-500">
 	                    Put the link of the supported files.
 	                  </p>
-	          	</div>
-
-	          	 <div class="mt-5">
-                    <!-- <label for="email" class="block text-sm font-medium text-gray-700">Upload File</label>
-                    <div class="mt-1">
-                      <input type="file"  class="" wire:model="ads_file">
-                    </div> -->
-                    <div class="mt-1">
-                      <input type="text" name="location" id="location" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:model="ads_file">
-
+                    <input type="text" name="location" id="location" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:model="ads_file">
+                   
+                    <div class="mt-3 mb-5 text-right sm:mt-5">		
+                      <button wire:click="saveAds()" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+                       Save 
+                      </button>
                     </div>
+
+                  </div>
+
+                  <div  x-show="openTab === 'upload'">
+
+                    <p class="mt-3 text-sm text-gray-500">
+	                    Upload Documents
+	                  </p>
+                    <input type="file"  class="" wire:model="ads_logo">
+                    <div class="mt-3 mb-5 text-right sm:mt-5">		
+                      <button wire:click="saveAds()" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+                       Save 
+                      </button>
+                    </div>
+
+
+
+                  </div>
+
+              </div>
+	          
 				      </div>
 	          	
 	       </div>
-  			<div class="mt-3 mb-5 text-right sm:mt-5">
-  				              			
-  		        <button wire:click="saveAds()" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
-  		         Save 
-  		        </button>
-  			</div>
+  
 
         	<!-- table list-->
 
