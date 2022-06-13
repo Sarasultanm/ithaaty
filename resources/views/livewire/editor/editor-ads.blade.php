@@ -40,7 +40,7 @@
           	 <x-auth-session-status-custom class="mt-4 mb-4" :status="session('status')" />
           </div>
           
-          @if($checkAds->count() != 0 )
+          @if($checkAds->count() == 0 )
           <div class="mt-4">
 
           <div class="w-full mb-5 ">
@@ -84,6 +84,7 @@
                     <div class="mt-1">
                       <input type="file"  class="" wire:model="ads_logo">
                     </div>
+                    <p class="text-xs"> (must be maximum of 120kb with 120px resolution)</p>
 				</div>
 		    </div>
 
@@ -130,6 +131,7 @@
 	                    Upload Documents
 	                  </p>
                     <input type="file"  class="" wire:model="ads_logo">
+                    <p class="text-xs"> (Compress the files in zip format. Make sure file size not more than 1MB)</p>
                     <div class="mt-3 mb-5 text-right sm:mt-5">		
                       <button wire:click="saveAds()" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
                        Save 
