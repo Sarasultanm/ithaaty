@@ -42,6 +42,20 @@ class EditorChannelView extends Component
         return $this->result = User::search($this->search)->get();
     }
 
+    public function subcriber($id){
+
+        $data = new UserChannelSub;
+        $data->sub_channelid = $id;
+        $data->sub_userid = Auth::user()->id;
+        $data->sub_type  = "channel";
+        $data->save();
+
+
+        session()->flash('status', 'Subcribe Success');
+        redirect()->to('/editor/channel/'.$this->channel_uniquelink);
+
+
+    }
 
 
     public function verifyPrivateCode($id){

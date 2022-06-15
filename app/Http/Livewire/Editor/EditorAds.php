@@ -16,27 +16,37 @@ class EditorAds extends Component
     use WithFileUploads;
 
     public $compSkip = 50,$compDisplay = 100,$compDays = 3,$compTotal = 450;
-    public $ads_name,$ads_website,$ads_location,$ads_logo,$ads_file;
+    public $ads_name,$ads_website,$ads_location,$ads_logo,$ads_file,$ads_link;
 
     public $ads_list,$adslist_name,$adslist_videolink,$adslist_videoupload,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc,$country_slc,$agebracket_list,$adslist_days,$adslist_videotype,$adslist_end;
 
 
-    protected $rules = [
-        'adslist_name' => 'required',
-        'adslist_desc' => 'required',
-        'adslist_weblink' => 'required',
-        'adslist_videotype' => 'required',
-        'adslist_country' => 'required',
-        'adslist_agebracket' => 'required',
-        'adslist_adstype' => 'required',
-        'adslist_displaytime' => 'required',
-        'adslist_days' => 'required',
-        // 'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav',
-        
-    ];
+    // protected $rules = [
+    //          'adslist_name' => 'required',
+    //         'adslist_desc' => 'required',
+    //         'adslist_weblink' => 'required',
+    //         'adslist_videotype' => 'required',
+    //         'adslist_country' => 'required',
+    //         'adslist_agebracket' => 'required',
+    //         'adslist_adstype' => 'required',
+    //         'adslist_displaytime' => 'required',
+    //         'adslist_days' => 'required',
+    //         'ads_logo'=>'file|mimes:png,jpg,pdf|max:1200'
+    // ];
 
 
 	public function saveAds(){
+
+
+        $this->validate([
+            'ads_name' => 'required',
+            'ads_website' => 'required',
+            'ads_location' => 'required',
+            'ads_link' => 'required',
+            'ads_logo' => 'required|image|max:1024',
+          
+        ]);
+
 
         if($this->ads_logo){ 
 
@@ -49,14 +59,14 @@ class EditorAds extends Component
             $data->ads_status = "Pending";
             $data->ads_ownerid = Auth::user()->id;
             $data->ads_filetype = "link";
-            $data->ads_filelink = $this->ads_file;
+            $data->ads_filelink = $this->ads_link;
             $data->ads_filepath = "none";
             $data->save();  
 
             $imagefile = $this->ads_logo->hashName();
             $path = $this->ads_logo->storeAs('ads/company',$imagefile);
 
-             // $s3_storage = $this->ads_logo->store('ads/company/', 's3');
+            // $s3_storage = $this->ads_logo->store('ads/company/', 's3');
 
             session()->flash('status', 'Please wait for the admin confirmation about your company');
             redirect()->to('editor/ads');   
@@ -66,6 +76,54 @@ class EditorAds extends Component
             session()->flash('status', 'Ads Image not loaded');
             redirect()->to('editor/ads');  
         }
+             
+
+		
+	}
+
+    public function saveAdsUpload(){
+
+
+        $this->validate([
+            'ads_name' => 'required',
+            'ads_website' => 'required',
+            'ads_location' => 'required',
+            'ads_file' => 'required|file|mimes:zip|max:10000',
+            'ads_logo' => 'required|image|max:1024',
+            
+          
+        ]);
+
+
+        if($this->ads_logo){ 
+
+            $data = new Ads;
+            $data->ads_name = $this->ads_name;
+            $data->ads_website = $this->ads_website;
+            $data->ads_location = $this->ads_location;
+            $data->ads_linktolocation = "none";
+            $data->ads_logo = $this->ads_logo->hashName();
+            $data->ads_status = "Pending";
+            $data->ads_ownerid = Auth::user()->id;
+            $data->ads_filetype = "upload";
+            $data->ads_filelink = "none";
+            $data->ads_filepath = $this->ads_file->hashName();
+            $data->save();  
+
+            $imagefile = $this->ads_logo->hashName();
+            $path = $this->ads_logo->storeAs('ads/company',$imagefile);
+            $file_path = $this->ads_file->storeAs('ads/company/file',$this->ads_file->hashName());
+            // $s3_storage = $this->ads_logo->store('ads/company/', 's3');
+
+            session()->flash('status', 'Please wait for the admin confirmation about your company');
+            redirect()->to('editor/ads');   
+
+        }else{
+
+            session()->flash('status', 'Ads Image not loaded');
+            redirect()->to('editor/ads');  
+        }
+             
 
 		
 	}

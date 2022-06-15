@@ -44,7 +44,16 @@
                                                             {{$podcast->podcast_title}}
                                                         </p>
                                                          <p class="mt-5 text-xl font-bold text-gray-900">
-                                                            {{$podcast->get_channel->channel_name}}
+                                                            {{$podcast->get_channel->channel_name}} 
+                                                                @if($podcast->get_channel->channel_ownerid != Auth::user()->id)
+
+                                                                    @if($podcast->get_channel->check_user_subs(Auth::user()->id)->count() == 0)
+                                                                         <button wire:click="subcriber({{ $podcast->get_channel->id }})" class="px-2 py-1 ml-5 text-sm text-white rounded bg-custom-pink">Subcribe</button>
+                                                                    @else
+                                                                         <button class="px-2 py-1 ml-5 text-sm text-white rounded bg-custom-pink">Subcribed</button>
+                                                                    @endif
+                                                               
+                                                               @endif
                                                         </p>
                                                         <p class="inline-grid text-gray-500 text-md">
                                                            @if($podcast->podcast_description == null)

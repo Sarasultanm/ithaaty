@@ -8,12 +8,27 @@ use App\Models\{
     UserPodcasts,
     Category,
     PodcastCategories,
+    UserChannelSub,
 };
 
+use Auth;
 
 class EditorNewPodcastView extends Component
 {
 
+    public function subcriber($id){
+
+        $data = new UserChannelSub;
+        $data->sub_channelid = $id;
+        $data->sub_userid = Auth::user()->id;
+        $data->sub_type  = "channel";
+        $data->save();
+
+
+        session()->flash('status', 'Subcribe Success');
+        redirect()->to('editor/channel/podcast/'.$this->podcast_uniquelink);  
+
+    }
 
 
     public function addCategory($category_id){

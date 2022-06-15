@@ -51,7 +51,7 @@
                      <div class="text-sm font-bold text-gray-500">{{ $adsitem->ads_website }}</div>
                 </td>
                 <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-
+                      
                           <a href="{{ route('adminAdsDetails',['id' => $adsitem->id]) }}" class="inline-flex justify-center px-2 py-2 text-base font-medium text-black border border-transparent border-gray-200 rounded-md shadow-sm hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Details
                           </a> 
                  

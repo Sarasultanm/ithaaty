@@ -48,7 +48,7 @@
                
 
                 <div class="grid grid-cols-1 gap-4 ">
-                  <div class="relative flex items-center w-full space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 ">
+                  <div class="relative flex items-center w-full space-x-3 ">
                     <div class="flex-shrink-0">
 
                         <?php $logo_photo = $channel->get_channel_photo->gallery_path; ?>
@@ -68,8 +68,16 @@
                       </a>
                     </div>
                     <div class="flex-1 min-w-0">
-                      <button  class="float-right  inline-flex  rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Subcribe
-                      </button>
+                      @if($channel->channel_ownerid != Auth::user()->id)
+
+                          @if($channel->check_user_subs(Auth::user()->id)->count() == 0)
+                              <button wire:click="subcriber({{ $channel->id }})" class="float-right px-2 py-2 ml-5 text-sm text-white rounded bg-custom-pink">Subcribe</button>
+                          @else
+                              <button class="float-right px-2 py-2 ml-5 text-sm text-white rounded bg-custom-pink">Subcribed</button>
+                          @endif
+                 
+                      @endif
+
                     </div>
                   </div>
 

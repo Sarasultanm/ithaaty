@@ -59,23 +59,24 @@
 	        	<div class="mt-5">
                     <label for="email" class="block text-sm font-medium text-gray-700">Company Name</label>
                     <div class="mt-1">
-                      <input type="text" name="name" id="name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm " wire:model="ads_name">
-
+                      <input  wire:model="ads_name" type="text" name="name" id="name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ">
+                      @error('ads_name') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
+                      
                     </div>
 		        </div>
 		        <div class="mt-5">
                     <label for="email" class="block text-sm font-medium text-gray-700">Company Website</label>
                     <div class="mt-1">
-                      <input type="text" name="website" id="website" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:model="ads_website">
-
+                      <input wire:model="ads_website" type="text" name="website" id="website" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
+                      @error('ads_website') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
                     </div>
 		        </div>
 
 		        <div class="mt-5">
                     <label for="email" class="block text-sm font-medium text-gray-700">Company Location</label>
                     <div class="mt-1">
-                      <input type="text" name="location" id="location" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:model="ads_location">
-
+                      <input wire:model="ads_location" type="text" name="location" id="location" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
+                      @error('ads_location') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
                     </div>
 		        </div>
 
@@ -85,6 +86,7 @@
                       <input type="file"  class="" wire:model="ads_logo">
                     </div>
                     <p class="text-xs"> (must be maximum of 120kb with 120px resolution)</p>
+                    @error('ads_logo') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
 				</div>
 		    </div>
 
@@ -100,11 +102,11 @@
               }" 
               class="">
                     <div class="border-b border-gray-200">
-                      <ul class="-mb-px flex" >
-                        <li @click="openTab = 'link'"  :class="openTab === 'link' ? activeClasses : inactiveClasses"   class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                      <ul class="flex -mb-px" >
+                        <li @click="openTab = 'link'"  :class="openTab === 'link' ? activeClasses : inactiveClasses"   class="w-1/2 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
                           <a>Link</a>
                         </li>
-                        <li @click="openTab = 'upload'" :class="openTab === 'upload' ? activeClasses : inactiveClasses"  class="w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm cursor-pointer">
+                        <li @click="openTab = 'upload'" :class="openTab === 'upload' ? activeClasses : inactiveClasses"  class="w-1/2 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
                           <a>Upload</a>
                         </li>
                       </ul>
@@ -115,7 +117,8 @@
                     <p class="mt-3 text-sm text-gray-500">
 	                    Put the link of the supported files.
 	                  </p>
-                    <input type="text" name="location" id="location" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" wire:model="ads_file">
+                    <input type="text" name="location" id="location" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                    wire:model="ads_link"> @error('ads_link') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
                    
                     <div class="mt-3 mb-5 text-right sm:mt-5">		
                       <button wire:click="saveAds()" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
@@ -130,10 +133,11 @@
                     <p class="mt-3 text-sm text-gray-500">
 	                    Upload Documents
 	                  </p>
-                    <input type="file"  class="" wire:model="ads_logo">
+                    <input type="file"  class="" wire:model="ads_file">
                     <p class="text-xs"> (Compress the files in zip format. Make sure file size not more than 1MB)</p>
+                    @error('ads_file') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
                     <div class="mt-3 mb-5 text-right sm:mt-5">		
-                      <button wire:click="saveAds()" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
+                      <button wire:click="saveAdsUpload()" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-md">
                        Save 
                       </button>
                     </div>
