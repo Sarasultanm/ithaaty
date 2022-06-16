@@ -55,8 +55,9 @@ use \Carbon\Carbon;
                                 @if($audio->check_in_podcasts()->count() != 0) 
                                   
                                   
-                                  @if( $audio->audio_status == 'public' || $audio->audio_editor == Auth::user()->id || $this->get_if_friends($audio->audio_editor) == "Friends")
-                                 
+                                  {{-- @if( $audio->audio_status == 'public' || $audio->audio_editor == Auth::user()->id || $this->get_if_friends($audio->audio_editor) == "Friends") --}}
+                                  @if($audio->audio_editor == Auth::user()->id || $this->get_if_friends($audio->audio_editor) == "Friends")
+                                
                                     <!-- post-->
                                    
                                     <li class="px-4 py-6 bg-white shadow sm:p-6 sm:rounded-lg " >
@@ -69,7 +70,7 @@ use \Carbon\Carbon;
                                             
                                             @if($this->checkPremierDate($premier_date) == "Active")
                                             <div class="relative p-2 mb-5 space-x-3 shadow-md bg-custom-pink">
-                                                <p class="text-white text-center">Premier on 
+                                                <p class="text-center text-white">Premier on 
                                                     {{ Carbon::parse($premier_date)->format('M d, Y') }}
                                                 </p>
                                             </div>
@@ -149,8 +150,8 @@ use \Carbon\Carbon;
                             @endforeach
   
                         </ul>
-                        <div class=" mt-5" >
-                            <a id="loadMore" class="cursor-pointer w-auto px-4 py-2 mb-5 text-sm font-medium text-center text-white border border-transparent rounded-md shadow-sm" style="background-color: #f98b88;">
+                        <div class="mt-5 " >
+                            <a id="loadMore" class="w-auto px-4 py-2 mb-5 text-sm font-medium text-center text-white border border-transparent rounded-md shadow-sm cursor-pointer" style="background-color: #f98b88;">
                                Load More
                             </a>
                           </div>

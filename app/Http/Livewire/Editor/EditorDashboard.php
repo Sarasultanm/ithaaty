@@ -20,6 +20,7 @@ use App\Models\AdsList;
 use App\Models\AdsStats;
 use App\Models\UserAdsDisplay;
 use App\Models\AdsShow;
+use App\Models\UserChannel;
 use Auth;
 use Share;
 use URL;
@@ -639,7 +640,7 @@ class EditorDashboard extends Component
         $this->mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1)->first();        
         $this->totalLikes = UserLikes::where('like_status','active')->count();                   
         $this->recommended =  UserNotifications::inRandomOrder()->where('notif_type','like')->take(2)->get();    
-                   
+        $this->recommended_channel =  UserChannel::inRandomOrder()->where('channel_typestatus','active')->take(2)->get();            
     }
 
   
