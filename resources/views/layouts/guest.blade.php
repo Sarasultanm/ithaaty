@@ -20,6 +20,14 @@
         <script src="{{ asset('js/jquery.validate.js') }}"></script>
         <script src="{{ asset('js/validation.js') }}"></script>
         <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLMWM7Y25M"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-PLMWM7Y25M');
+        </script>
          @livewireStyles
     </head>
     <body>
