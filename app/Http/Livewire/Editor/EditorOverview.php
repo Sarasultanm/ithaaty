@@ -12,6 +12,21 @@ use Auth;
 
 class EditorOverview extends Component
 {
+
+
+	public $searchbar;
+
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
+
+
+
+
     public function render()
     {
     	$recentLikes = UserLikes::orderBy('id','DESC')->where('like_userid',Auth::user()->id)->take(2)->get();

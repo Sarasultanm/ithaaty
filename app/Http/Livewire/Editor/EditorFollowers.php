@@ -11,6 +11,14 @@ use Auth;
 
 class EditorFollowers extends Component
 {
+    public $searchbar;
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+    
     public function render()
     {   
         $following = UserFollow::where(['follow_userid'=>Auth::user()->id,'follow_type'=>'follow']);

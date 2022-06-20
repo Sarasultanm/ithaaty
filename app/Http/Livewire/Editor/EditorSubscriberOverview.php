@@ -14,6 +14,17 @@ class EditorSubscriberOverview extends Component
 	public $jan_likes,$feb_likes,$mar_likes,$apr_likes,$may_likes,$jun_likes,$jul_likes,$aug_likes,$sep_likes,$oct_likes,$nov_likes,$dec_likes;
 	public $jan_coms,$feb_coms,$mar_coms,$apr_coms,$may_coms,$jun_coms,$jul_coms,$aug_coms,$sep_coms,$oct_coms,$nov_coms,$dec_coms;
 
+	
+	public $searchbar;
+
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
+
 	public function mount(){
 
         

@@ -14,6 +14,18 @@ class EditorNotes extends Component
 
 	 use WithPagination;
 
+     public $searchbar;
+
+
+     public function getSearch(){
+ 
+         redirect()->to('editor/s/'.$this->searchbar); 
+ 
+     }
+
+
+
+
     public function shareButton($socialMedia,$id){
         if($socialMedia == "facebook"){
              $link ="https://www.facebook.com/sharer/sharer.php?u=https://ithaaty.com/notes/".$id;

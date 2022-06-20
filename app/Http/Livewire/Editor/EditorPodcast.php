@@ -30,6 +30,18 @@ class EditorPodcast extends Component
         'audio' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav',
     ];
 
+    
+	public $searchbar;
+
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
+
+
     public function loadRss()
     {
         $data = FeedReader::read($this->rss_link);

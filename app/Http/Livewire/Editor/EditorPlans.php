@@ -11,6 +11,23 @@ use Auth;
 class EditorPlans extends Component
 {
 
+
+    public $searchbar;
+
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
+
+
+
+
+
+
+
     public function buyPlan($plan_id){
 
         User::where('id',Auth::user()->id)

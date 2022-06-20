@@ -17,7 +17,17 @@ class EditorPodcastDetail extends Component
     public $jan_views,$feb_views,$mar_views,$apr_views,$may_views,$jun_views,$jul_views,$aug_views,$sep_views,$oct_views,$nov_views,$dec_views;
     public $wordCount,$getEp;
 
+    
+	public $searchbar;
 
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
+    
 	public function mount($id)
     {
         if(Audio::where('id',$id)->first()->audio_editor == Auth::user()->id ){

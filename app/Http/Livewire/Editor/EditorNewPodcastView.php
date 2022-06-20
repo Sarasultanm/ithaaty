@@ -16,6 +16,18 @@ use Auth;
 class EditorNewPodcastView extends Component
 {
 
+
+
+    public $searchbar;
+
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
+
     public function subcriber($id){
 
         $data = new UserChannelSub;

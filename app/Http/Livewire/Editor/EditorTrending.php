@@ -8,6 +8,21 @@ use Auth;
 
 class EditorTrending extends Component
 {
+    
+    
+    
+	public $searchbar;
+
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
+    
+    
+    
     public function render()
     {
 

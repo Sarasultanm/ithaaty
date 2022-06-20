@@ -26,6 +26,20 @@ class EditorSetup extends Component
 
     public $search = "",$result,$addFriend = 0,$interest_option,$result_items = "";
 
+
+    
+	public $searchbar;
+
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
+
+
+
     public function subChannel($id){
         $data = new UserChannelSub;
         $data->sub_channelid = $id;

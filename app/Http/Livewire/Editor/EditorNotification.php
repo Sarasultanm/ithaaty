@@ -12,6 +12,23 @@ class EditorNotification extends Component
 
 	use WithPagination;
 
+
+    public $searchbar;
+
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
+
+
+
+
+
+
+
     public function render()
     {
 

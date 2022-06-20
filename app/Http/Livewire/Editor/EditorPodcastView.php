@@ -37,6 +37,16 @@ class EditorPodcastView extends Component
      protected $listeners = [
         'refreshParent' =>'$refresh'
         ];
+    
+        
+	public $searchbar;
+
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
 
 
     public static function checkFollow($id){

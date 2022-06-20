@@ -10,14 +10,21 @@ use Auth;
 class EditorFriends extends Component
 {
 
+    public $searchbarfriend;
     public $searchbar;
-	
+
+
     public function get_search(){
-        redirect()->to('/editor/search/'.$this->searchbar);
+        redirect()->to('/editor/search/'.$this->searchbarfriend);
     }
 
 
 
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
 
 	public function confirmFriend($friend_id){
 

@@ -11,6 +11,19 @@ use Auth;
 class EditorSubscribers extends Component
 {
 
+    
+	public $searchbar;
+
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
+
+
+
 	public function accept($id,$follow_userid){
 
 

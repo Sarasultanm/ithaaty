@@ -61,6 +61,16 @@ class EditorHomeDashboard extends Component
     ];
 
 
+    public $searchbar;
+
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
+
     public function getSearchResult(){
 
         session()->flash('status', 'search for'.$this->seach_select);

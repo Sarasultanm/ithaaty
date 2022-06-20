@@ -48,7 +48,16 @@ class EditorSettings extends Component
      public $userFacebook,$userTwitter,$userInstagram;
      public $colab_username,$email,$colab_password,$colab_channel;
 
-   
+    
+	public $searchbar;
+
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
 
     public function addUsers(){
         $this->validate([

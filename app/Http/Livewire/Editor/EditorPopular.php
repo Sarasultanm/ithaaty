@@ -12,6 +12,15 @@ class EditorPopular extends Component
 
 
 
+    
+	public $searchbar;
+
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
 
 
 

@@ -32,6 +32,23 @@ class EditorViewUsers extends Component
     public $userFacebook,$userTwitter,$userInstagram,$userFriendList;
 
 
+
+    
+	public $searchbar;
+
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
+
+
+
+
+
+
     public function checkSocialLink($id,$type){
         if(UserSocialLinks::where(['social_ownerid'=>$id,'social_type'=>$type,'social_typestatus'=>'active'])->count() != 0){
             $data = UserSocialLinks::where(['social_ownerid'=>$id,'social_type'=>$type,'social_typestatus'=>'active'])->first()->social_link;

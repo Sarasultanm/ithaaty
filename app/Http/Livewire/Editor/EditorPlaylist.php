@@ -13,7 +13,14 @@ class EditorPlaylist extends Component
 
 	public $playlist,$friends;
 
+	public $searchbar;
 
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
 
 	public function sharedPlaylist($playlist_id){
 

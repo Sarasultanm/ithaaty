@@ -1,5 +1,5 @@
  <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Overview') }}
         </h2>
   </x-slot>
@@ -36,22 +36,22 @@
         @if(Auth::user()->get_plan->check_features('s3')->count() != 0 )
         <!-- friend -->
         <div class="mt-4">
-          <!-- <div class="mb-5 w-full ">
-          	 <h1 class="font-bold text-gray-800 text-xl">Overview</h1> 
+          <!-- <div class="w-full mb-5 ">
+          	 <h1 class="text-xl font-bold text-gray-800">Overview</h1> 
           </div> -->
 
            <div class="w-full ">
-          	 <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
+          	 <x-auth-session-status-custom class="mt-4 mb-4" :status="session('status')" />
           </div>
-          <div class=" w-full flex">
-                <h1 class="font-bold text-gray-800 text-xl flex-auto">Friends</h1>
+          <div class="flex w-full ">
+                <h1 class="flex-auto text-xl font-bold text-gray-800">Friends</h1>
                 <div>
-	                <input wire:model.debounce.300ms="searchbar" wire:keydown.enter="get_search()" type="email" name="email" id="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Search Friends">
+	                <input wire:model.debounce.300ms="searchbarfriend" wire:keydown.enter="get_search()" type="email" name="email" id="email" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Search Friends">
 	              </div>
          	</div> 
           <!-- This example requires Tailwind CSS v2.0+ -->
 			
-			<div class="grid grid-cols-12 mt-5 gap-5">
+			<div class="grid grid-cols-12 gap-5 mt-5">
 				<div class="col-span-12">
 
 			  <div 
@@ -63,17 +63,17 @@
 			    class=""
 			  >
 			  <div class="border-b border-gray-200">
-			  	<ul class="-mb-px flex" >
-			      <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" >
+			  	<ul class="flex -mb-px" >
+			      <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2" >
 			        <a>Friends</a>
 			      </li>
-			      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
+			      <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2">
 			        <a>Confirm</a>
 			      </li>
-			       <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
+			       <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2">
 			        <a>Request</a>
 			      </li>
-			       <li @click="openTab = 4" :class="openTab === 4 ? activeClasses : inactiveClasses"  class="w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm">
+			       <li @click="openTab = 4" :class="openTab === 4 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2">
 			        <a>Block</a>
 			      </li>
 
@@ -94,14 +94,14 @@
 						@if($friends->friend_type == "Friends")
 
 
-			            <div class="xl:col-span-3 lg:col-span-4  md:col-span-4 sm:col-span-4 p-2 rounded-lg">
+			            <div class="p-2 rounded-lg xl:col-span-3 lg:col-span-4 md:col-span-4 sm:col-span-4">
 			            	  <!-- @if(Auth::user()->id == $friends->friend_userid )  
-				              <a href="" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
+				              <a href="" class="float-left w-full bg-white border-2 border-white rounded-lg pointer hover:border-gray-300">
 				              @else
-				               <a href="{{ route('editorViewUser',['id' => $friends->get_add_friend->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
+				               <a href="{{ route('editorViewUser',['id' => $friends->get_add_friend->id ]) }}" class="float-left w-full bg-white border-2 border-white rounded-lg pointer hover:border-gray-300">
 				              @endif -->
-				              <div class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
-				                <div class="mt-2 text-sm text-gray-700 space-y-4">
+				              <div class="float-left w-full bg-white border-2 border-white rounded-lg pointer hover:border-gray-300">
+				                <div class="mt-2 space-y-4 text-sm text-gray-700">
 				                   <div class="text-white bg-cover h-36">
 				                      <!--  <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">    --> 
 				                      @if(Auth::user()->id == $friends->friend_userid )
@@ -128,21 +128,21 @@
 				                </div>
 				                <div>
 				                  <div class="flex space-x-3">
-				                    <div class="min-w-0 flex-1">
+				                    <div class="flex-1 min-w-0">
 				                    	@if(Auth::user()->id == $friends->friend_userid )
-					                      <p class="text-md font-bold text-gray-900 mt-2 text-center">  
+					                      <p class="mt-2 font-bold text-center text-gray-900 text-md">  
 					                      	<a href="#">
 					                      		{{ $friends->get_request_user->name }} 
 					                      	</a>
 						                 	  </p>
-						                  	<p class="text-xs font-regular text-gray-500  text-center">  
+						                  	<p class="text-xs text-center text-gray-500 font-regular">  
 					                      	{{ $friends->get_request_user->email }}
 						                    </p>
 							                @else
-							                  <p class="text-md font-bold text-gray-900 mt-2 text-center">  
+							                  <p class="mt-2 font-bold text-center text-gray-900 text-md">  
 						                      	{{ $friends->get_add_friend->name }}
 							                  </p>
-							                  <p class="text-xs font-regular text-gray-500  text-center">  
+							                  <p class="text-xs text-center text-gray-500 font-regular">  
 						                      	{{ $friends->get_add_friend->email }}
 							                  </p>
 							                @endif  
@@ -189,20 +189,20 @@
 
 							@if($friend->friend_type == "Send Request")
 
-				            <div class="xl:col-span-3 lg:col-span-4  md:col-span-4 sm:col-span-4 p-2 rounded-lg">
-				              <a href="{{ route('editorViewUser',['id' => $friend->get_add_friend->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
-				                <div class="mt-2 text-sm text-gray-700 space-y-4">
+				            <div class="p-2 rounded-lg xl:col-span-3 lg:col-span-4 md:col-span-4 sm:col-span-4">
+				              <a href="{{ route('editorViewUser',['id' => $friend->get_add_friend->id ]) }}" class="float-left w-full bg-white border-2 border-white rounded-lg pointer hover:border-gray-300">
+				                <div class="mt-2 space-y-4 text-sm text-gray-700">
 				                   <div class="text-white bg-cover h-36">
 				                       <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">    
 				                   </div>
 				                </div>
 				                <div>
 				                  <div class="flex space-x-3">
-				                    <div class="min-w-0 flex-1">
-				                      <p class="text-md font-bold text-gray-900 mt-2 text-center">  
+				                    <div class="flex-1 min-w-0">
+				                      <p class="mt-2 font-bold text-center text-gray-900 text-md">  
 				                      	{{ $friend->get_add_friend->name }}
 					                  </p>
-					                  <p class="text-xs font-regular text-gray-500  text-center">  
+					                  <p class="text-xs text-center text-gray-500 font-regular">  
 				                      	{{ $friend->get_add_friend->email }}
 					                  </p>
 				                      <p class="my-2 text-center">
@@ -234,20 +234,20 @@
 				      	@foreach($friendrequest as $requestfriend)
 
 							@if($requestfriend->friend_type == "Send Request")
-				             <div class="xl:col-span-3 lg:col-span-4  md:col-span-4 sm:col-span-4 p-2 rounded-lg">
-				              <a href="{{ route('editorViewUser',['id' => $requestfriend->get_request_user->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
-				                <div class="mt-2 text-sm text-gray-700 space-y-4">
+				             <div class="p-2 rounded-lg xl:col-span-3 lg:col-span-4 md:col-span-4 sm:col-span-4">
+				              <a href="{{ route('editorViewUser',['id' => $requestfriend->get_request_user->id ]) }}" class="float-left w-full bg-white border-2 border-white rounded-lg pointer hover:border-gray-300">
+				                <div class="mt-2 space-y-4 text-sm text-gray-700">
 				                   <div class="text-white bg-cover h-36">
 				                       <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">    
 				                   </div>
 				                </div>
 				                <div>
 				                  <div class="flex space-x-3">
-				                    <div class="min-w-0 flex-1">
-				                      <p class="text-md font-bold text-gray-900 mt-2 text-center">  
+				                    <div class="flex-1 min-w-0">
+				                      <p class="mt-2 font-bold text-center text-gray-900 text-md">  
 				                      	{{ $requestfriend->get_request_user->name }}
 					                  </p>
-					                  <p class="text-xs font-regular text-gray-500  text-center">  
+					                  <p class="text-xs text-center text-gray-500 font-regular">  
 				                      	{{ $requestfriend->get_request_user->email }}
 					                  </p>
 				                     <!--  <p class="my-2 text-center">
@@ -284,14 +284,14 @@
 
 								@if(Auth::user()->id == $friends->get_block->block_userid)
 
-			            <div class="xl:col-span-3 lg:col-span-4  md:col-span-4 sm:col-span-4 p-2 rounded-lg">
+			            <div class="p-2 rounded-lg xl:col-span-3 lg:col-span-4 md:col-span-4 sm:col-span-4">
 			            	  <!-- @if(Auth::user()->id == $friends->friend_userid )  
-				              <a href="" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
+				              <a href="" class="float-left w-full bg-white border-2 border-white rounded-lg pointer hover:border-gray-300">
 				              @else
-				               <a href="{{ route('editorViewUser',['id' => $friends->get_add_friend->id ]) }}" class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
+				               <a href="{{ route('editorViewUser',['id' => $friends->get_add_friend->id ]) }}" class="float-left w-full bg-white border-2 border-white rounded-lg pointer hover:border-gray-300">
 				              @endif -->
-				              <div class="bg-white pointer rounded-lg border-2 border-white hover:border-gray-300 float-left w-full">
-				                <div class="mt-2 text-sm text-gray-700 space-y-4">
+				              <div class="float-left w-full bg-white border-2 border-white rounded-lg pointer hover:border-gray-300">
+				                <div class="mt-2 space-y-4 text-sm text-gray-700">
 				                   <div class="text-white bg-cover h-36">
 				                      <!--  <img class="h-full mx-auto my-0 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">    --> 
 				                      @if(Auth::user()->id == $friends->friend_userid )
@@ -318,21 +318,21 @@
 				                </div>
 				                <div>
 				                  <div class="flex space-x-3">
-				                    <div class="min-w-0 flex-1">
+				                    <div class="flex-1 min-w-0">
 				                    	@if(Auth::user()->id == $friends->friend_userid )
-					                      <p class="text-md font-bold text-gray-900 mt-2 text-center">  
+					                      <p class="mt-2 font-bold text-center text-gray-900 text-md">  
 					                      	<a href="#">
 					                      		{{ $friends->get_request_user->name }} 
 					                      	</a>
 						                 	  </p>
-						                  	<p class="text-xs font-regular text-gray-500  text-center">  
+						                  	<p class="text-xs text-center text-gray-500 font-regular">  
 					                      	{{ $friends->get_request_user->email }}
 						                    </p>
 							                @else
-							                  <p class="text-md font-bold text-gray-900 mt-2 text-center">  
+							                  <p class="mt-2 font-bold text-center text-gray-900 text-md">  
 						                      	{{ $friends->get_add_friend->name }}
 							                  </p>
-							                  <p class="text-xs font-regular text-gray-500  text-center">  
+							                  <p class="text-xs text-center text-gray-500 font-regular">  
 						                      	{{ $friends->get_add_friend->email }}
 							                  </p>
 							                @endif  
