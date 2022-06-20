@@ -145,7 +145,7 @@
 
                                 <div class="mt-5">
                                   <label for="location" class="block text-sm font-medium text-gray-700">Report Type</label>
-                                  <select wire:model="report_type"  class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                  <select wire:model.lazy="report_type"  class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     <option>Select</option>
                                     <option value="r1">Misleading or Scam</option>
                                     <option value="r2">Sexually Inappropriate</option>
@@ -162,7 +162,7 @@
                                     Comments
                                   </label>
                                   <div class="mt-1">
-                                    <textarea  wire:model="report_message" rows="5" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                                    <textarea  wire:model.lazy="report_message" rows="5" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
                                   </div>
                                   @error('report_message') <span class="text-xs text-red-600">Empty fields</span> @enderror
                                 </div>

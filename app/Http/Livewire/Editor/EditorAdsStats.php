@@ -19,7 +19,14 @@ class EditorAdsStats extends Component
     protected  $AdsStatsRepositories;
     public $tpye;
 
+    public $searchbar;
 
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+    
     public function mount($id,$type,AdsStatsRepositories $AdsStatsRepositories){
         $this->type = $type;
         $this->ads_list = $AdsStatsRepositories->getAdsListById($id);

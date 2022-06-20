@@ -1,5 +1,5 @@
  <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Notes') }}
         </h2>
   </x-slot>
@@ -35,44 +35,44 @@
         @else
         @if(Auth::user()->get_plan->check_features('s2')->count() != 0 )
         <div class="mt-4">
-          <!-- <div class="mb-5 w-full ">
-          	 <h1 class="font-bold text-gray-800 text-xl">Overview</h1> 
+          <!-- <div class="w-full mb-5 ">
+          	 <h1 class="text-xl font-bold text-gray-800">Overview</h1> 
           </div> -->
 
            <div class="w-full ">
-          	 <x-auth-session-status-custom class="mb-4 mt-4" :status="session('status')" />
+          	 <x-auth-session-status-custom class="mt-4 mb-4" :status="session('status')" />
           </div>
           
           <!-- This example requires Tailwind CSS v2.0+ -->
-			<div class=" w-full ">
-                <h1 class="font-bold text-gray-800 text-xl">Notes</h1> 
+			<div class="w-full ">
+                <h1 class="text-xl font-bold text-gray-800">Notes</h1> 
          </div> 
 
-				<div class="grid grid-cols-12 mt-5 gap-5">
+				<div class="grid grid-cols-12 gap-5 mt-5">
 					<div class="col-span-12">
 
 					
 							<!-- This example requires Tailwind CSS v2.0+ -->
 				<div class="flex flex-col">
 					  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-					    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-					      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+					    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+					      <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
 					        <table class="min-w-full divide-y divide-gray-200">
 					          <thead class="bg-gray-50">
 					            <tr>
-					              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+					              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
 					               Audio
 					              </th>
-					             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+					             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
 					               
 					              </th>
-					              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+					              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
 					                Message
 					              </th>
-					              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+					              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
 					                Time
 					              </th>
-					              <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+					              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase">
 					                Share
 					              </th>
 					            <!--   <th scope="col" class="relative px-6 py-3">
@@ -86,8 +86,8 @@
 					            <tr>
 					              <td class="px-6 py-4 whitespace-nowrap">
 					                <div class="flex items-center">
-					                  <!-- <div class="flex-shrink-0 h-10 w-10">
-					                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+					                  <!-- <div class="flex-shrink-0 w-10 h-10">
+					                    <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
 					                  </div> -->
 					                  <div class="">
 					                  	<a href="{{ route('editorPodcastView',['id' => $notes->get_audio->id ]) }}">
@@ -108,21 +108,21 @@
 					              <td class="px-6 py-4 whitespace-nowrap">
 					              	 <div class="text-sm font-medium text-gray-500"> {{ $notes->notes_message }}  </div>
 					              </td>
-					              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+					              <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
 					            {{ $notes->notes_time }}
 					               
 					              </td>
-					              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+					              <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
 					            		
 					            	<!-- This example requires Tailwind CSS v2.0+ -->
-													<span class="relative z-0 inline-flex shadow-sm rounded-md float-right">
-													  <button wire:click="shareButton('facebook',{{ $notes->id }})"  type="button" class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+													<span class="relative z-0 inline-flex float-right rounded-md shadow-sm">
+													  <button wire:click="shareButton('facebook',{{ $notes->id }})"  type="button" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
 													    Facebook
 													  </button>
-													 <!--  <button type="button" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+													 <!--  <button type="button" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
 													    Instagram
 													  </button> -->
-													  <button wire:click="shareButton('facebook',{{ $notes->id }})"  type="button" class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+													  <button wire:click="shareButton('facebook',{{ $notes->id }})"  type="button" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
 													    Twitter
 													  </button>
 													</span>
@@ -130,7 +130,7 @@
 													 
 					               
 					              </td>
-					             <!--  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+					             <!--  <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
 					                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
 					              </td> -->
 					            </tr>
@@ -139,7 +139,7 @@
 					            <!-- More people... -->
 					          </tbody>
 					        </table>
-					        <nav class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6" aria-label="Pagination">
+					        <nav class="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200 sm:px-6" aria-label="Pagination">
 			                    {{ $notesList->links() }}
 			                  </nav>
 					      </div>
@@ -167,6 +167,7 @@
       <!-- aside -->
     </div>
   </div>
+  
 </div>
 
 

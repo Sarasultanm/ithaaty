@@ -23,6 +23,18 @@ class EditorAdsNewUpdate extends Component
     public $compSkip = 50,$compDisplay = 100,$compDays = 3,$compTotal = 450;
     public $adsContextValue = 100;
 
+    public $searchbar;
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
+
+
+
+
     public function mount($id,$type,AdsStatsRepositories $AdsStatsRepositories){
         $this->type = $type;
         $this->ads_list = $AdsStatsRepositories->getAdsListById($id);

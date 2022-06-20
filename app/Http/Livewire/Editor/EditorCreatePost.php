@@ -43,6 +43,15 @@ class EditorCreatePost extends Component
  //        // 'ref_link' => 'required',
 	// ];
 
+    public $searchbar;
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
+    
     public function increment()
     {
         $this->count++;

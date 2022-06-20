@@ -15,7 +15,14 @@ use App\Models\{
 class EditorEpisodeView extends Component
 {
 
+    public $searchbar;
 
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+    
     public function checkLink($link){
 
         $data = UserPodcasts::where('podcast_uniquelink',$link);

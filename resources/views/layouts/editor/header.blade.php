@@ -26,15 +26,17 @@
                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                   </svg>
                 </div>
-                <input wire:model="searchbar" name="search" class="block w-3/4 py-2 pl-10 pr-3 text-sm placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-rose-500 focus:border-rose-500 sm:text-sm" placeholder="Search" type="search">
+                <input wire:model.lazy="searchbar" name="search" class="block w-3/4 py-2 pl-10 pr-3 text-sm placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-rose-500 focus:border-rose-500 sm:text-sm" placeholder="Search" type="search">
                 <div class="flex-1 ">
-                  <select  class="block w-4/5 py-2 pr-3 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                    <option wire:click="getSearchResult('podcaster')"  value="podcaster">All</option>
-                    <option value="friends">Friends</option>
-                    <option value="channel">Channel</option>
-                    <option value="podcast">Podcast</option>
-                    <option value="episodes">Episodes</option>
-                  </select>
+                 <button wire:click="getSearch" type="button" class="inline-flex items-center px-3 py-3 ml-3 text-sm font-medium text-white rounded bg-custom-pink">
+                  <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                  </svg>
+                  <span>
+                    Search
+                  </span>
+                </button>
+               
                 </div> 
               
               </div>

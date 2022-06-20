@@ -60,12 +60,13 @@ class EditorDashboard extends Component
         ];
 
 
-        public function getSearchResult(){
 
-            session()->flash('status', 'search for'.$this->seach_select);
-            redirect()->to('/editor/dashboard');
+        public function getSearch(){
+
+           return redirect()->to('editor/s/'.$this->searchbar); 
 
         }
+
 
         public function reportAudio($audio_id){
             $this->validate([
@@ -611,8 +612,6 @@ class EditorDashboard extends Component
 
     }
 
-
-
     public function checkPremierDate($premier_date){
 
         $now = Carbon::now();
@@ -625,6 +624,8 @@ class EditorDashboard extends Component
         }
 
     }
+
+
 
 
     public function mount(BrowsersRepositories $BrowsersRepositories,
@@ -640,7 +641,7 @@ class EditorDashboard extends Component
         $this->mostlike = UserLikes::orderBy('total','DESC')->groupBy('like_audioid')->selectRaw('count(*) as total, like_audioid')->take(1)->first();        
         $this->totalLikes = UserLikes::where('like_status','active')->count();                   
         $this->recommended =  UserNotifications::inRandomOrder()->where('notif_type','like')->take(2)->get();    
-        $this->recommended_channel =  UserChannel::inRandomOrder()->where('channel_typestatus','active')->take(2)->get();            
+       // $this->recommended_channel =  UserChannel::inRandomOrder()->where('channel_typestatus','active')->take(2)->get();            
     }
 
   
@@ -669,14 +670,15 @@ class EditorDashboard extends Component
       
         // $this->audioList = Audio::orderBy('id','DESC')->where('audio_publish','Publish')->whereIn('audio_status', ['active','public','private'])->get();
         //$reco = UserNotifications::orderBy('id', 'DESC')->where('notif_type','like')->get();
-        return view('livewire.editor.editor-dashboard');
+
 
 
         // return view('livewire.editor.editor-dashboard', [
         //     'audioList' => Audio::orderBy('id','DESC')->where('audio_publish','Publish')->whereIn('audio_status', ['active','public','private'])->paginate(10),
         // ]);
 
-
+        $recommended_channel =  UserChannel::inRandomOrder()->where('channel_typestatus','active')->take(2)->get();       
+        return view('livewire.editor.editor-dashboard',compact('recommended_channel'));
 
 
     }

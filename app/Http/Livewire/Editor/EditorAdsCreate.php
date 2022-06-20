@@ -60,6 +60,14 @@ class EditorAdsCreate extends Component
         'contextAdsImage' =>'required|mimes:png,jpg,jpeg,gif|max:1000',
     ];
 
+    public $searchbar;
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+    
     public function updateTitle(){
         $this->contextTitle = $this->adslist_name;
     }

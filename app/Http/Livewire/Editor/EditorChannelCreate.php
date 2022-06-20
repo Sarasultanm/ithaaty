@@ -6,6 +6,15 @@ use Livewire\Component;
 
 class EditorChannelCreate extends Component
 {
+
+    public $searchbar;
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+    
     public function render()
     {
         return view('livewire.editor.editor-channel-create');

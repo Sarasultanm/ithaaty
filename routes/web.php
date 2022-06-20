@@ -65,6 +65,7 @@ use App\Http\Livewire\Editor\{
 	EditorEpisodeView,
 	EditorSearchList,
 	EditorFav,
+	EditorHomeDashboard,
 };
 
 /*-- Collaborators ---*/
@@ -159,6 +160,7 @@ Route::group(['middleware' => Collaborators::class,'prefix'=>'collaborators'], f
 Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 
 	Route::get('dashboard',EditorDashboard::class)->name('editorDashboard');
+	//Route::get('dashboard',EditorHomeDashboard::class)->name('editorDashboard');
 	
 
 	Route::get('settings',EditorSettings::class)->name('editorSettings');
@@ -222,7 +224,7 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 
 	Route::get('setup',EditorSetup::class)->name('editorSetup');
 
-	Route::get('search',EditorSearchList::class)->name('editorSearchList');
+	Route::get('s/{keyword}',EditorSearchList::class)->name('editorSearchList');
 
 	Route::get('favorites',EditorFav::class)->name('editorFavorites');
 	

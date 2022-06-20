@@ -282,11 +282,15 @@
                         <p class="text-sm font-bold text-gray-800">{{ $channel_interest->channel_name }}</p>
                         <p class="text-sm text-gray-800">Subcribers {{ $channel_interest->get_subs->count() }}</p>
                       </div>
-                      <a 
-                      href="{{ route('editorChannelView',['link' => $channel_interest->channel_uniquelink ]) }}"
+                      @if (empty($channel_interest->channel_uniquelink))
+                          @php $channel_interest_link = '#'; @endphp      
+                    @else
+                        @php $channel_interest_link = $channel_interest->channel_uniquelink; @endphp 
+                    @endif
+                       <a 
+                      href="{{ route('editorChannelView',['link' => $channel_interest_link ]) }}"
                         class="absolute inset-0 cursor-pointer" 
-                        aria-hidden="true"></a>
-                    </li>
+                        aria-hidden="true"></a> 
                     @endforeach
                     <!-- More posts... -->
                   </ul>

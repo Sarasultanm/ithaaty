@@ -14,6 +14,14 @@ class EditorActivity extends Component
 
     use WithPagination;
 
+    public $searchbar;
+
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+
 	public function get_if_friends($id){
 
         $request = UserFriends::where(['friend_userid'=>Auth::user()->id,'friend_requestid'=>$id]);

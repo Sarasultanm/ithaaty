@@ -23,6 +23,7 @@
             Season 1 : Episode 1
         </p>
     </div>
+    
     <div class="inline-flex flex-shrink-0 text-sm text-gray-500 whitespace-nowrap">
         <p class="text-sm text-gray-500">
             <a href="#" class="flex hover:underline">

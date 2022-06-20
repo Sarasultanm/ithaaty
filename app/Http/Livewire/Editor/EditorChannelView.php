@@ -35,7 +35,13 @@ class EditorChannelView extends Component
     public $search = "",$result,$emailInvitation;
     public $vpc_email,$vpc_code;
 
+    public $searchbar;
 
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
 
     public function get_search()
     {

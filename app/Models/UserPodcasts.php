@@ -39,6 +39,12 @@ class UserPodcasts extends Model
         return $this->hasMany('App\Models\UserPodcastEpisodes', 'poditem_podcastid', 'id')->where(['poditem_audioid'=>$audioid]);
     }
 
+    public static function search($search){
+
+        return empty($search) ? static::query()
+            : static::query()->where('podcast_title', 'like', '%'.$search.'%');
+
+    }
 
 
 }

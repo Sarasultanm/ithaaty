@@ -18,7 +18,14 @@ class EditorAdsUpdate extends Component
     public $ads_list,$adslist_name,$adslist_videolink,$adslist_videoupload,$adslist_adstype,$adslist_durationtype,$adslist_displaytime,$adslist_agebracket,$adslist_country,$adslist_weblink,$adslist_desc,$country_slc,$agebracket_list,$adslist_days,$adslist_videotype,$adslist_end;
     public $compDisplay = 100,$compDays = 3,$compTotal = 450;
 
+    public $searchbar;
 
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
+    
     public function addCountry(){
         $this->adslist_country = $this->adslist_country."".$this->country_slc.",";
     }

@@ -45,107 +45,56 @@ Menu open: "fixed inset-0 z-40 overflow-y-auto", Menu closed: ""
       <!-- This example requires Tailwind CSS v2.0+ -->
         <div class="w-full ">
             <h1 class="text-xl font-bold text-gray-800">Result List</h1> 
-         </div> 
-        <div class="grid grid-cols-12 gap-5 mt-5">
-            <div class="col-span-12">
-                <div class="w-full pt-4">
-
-                    <div class="relative flex justify-between p-2 mb-5 space-x-3 rounded-md shadow-md">
-
-                        <div class="bg-center bg-cover rounded-lg w-28 h-28" style="background-image:url(http://s3.ap-southeast-1.amazonaws.com/ithaaty-local-new-file/users/podcast_img/Kl1cTnOXbErag3Who2R3x0ZFDDkFBoeZPGB0q1RT.png)">
+        </div> 
+        <div class=" mt-5">
+            <div class="">
+                <div 
+                    x-data="{
+                    openTab: 1,
+                    activeClasses: 'border-custom-pink text-custom-pink',
+                    inactiveClasses: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    }" 
+                    class=""
+                > 
+                
+                        <div class="border-b border-gray-200">
+                            <ul class="flex -mb-px" >
+                            <li @click="openTab = 1"  :class="openTab === 1 ? activeClasses : inactiveClasses"   class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer" >
+                                <a>Users</a>
+                            </li>
+                            <li @click="openTab = 2" :class="openTab === 2 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
+                                <a>Channels</a>
+                            </li>
+                            <li @click="openTab = 3" :class="openTab === 3 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
+                                <a>Podcasts</a>
+                            </li>
+                            <li @click="openTab = 4" :class="openTab === 4 ? activeClasses : inactiveClasses"  class="w-1/4 px-1 py-4 text-sm font-medium text-center border-b-2 cursor-pointer">
+                                <a>Episodes</a>
+                            </li>
+                            </ul>
                         </div>
 
-                        <div class="flex-1 min-w-0">
-                            <p class="text-xl font-bold text-gray-900"> Episode Name</p>
-                            <p class="mt-0 text-sm text-gray-500 truncate">Episode 1 Season 2</p>
-                            <p class="mt-2 text-xs text-gray-500 truncate">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at porttitor elit, ut pulvinar ante. Morbi porta, sem nec porta rhoncus, risus dui cursus metus, in efficitur eros dolor eget est. Cras efficitur leo
-                            </p>
-                        </div>
-                        <div class="inline-flex flex-shrink-0 text-sm text-gray-500 whitespace-nowrap">
-                            {{-- <p class="text-sm text-gray-500">
-                                <a href="#" class="flex hover:underline">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="float-left w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                </a>
-                            </p> --}}
-                        </div>
-                        <a href="http://127.0.0.1:8000/editor/podcast/view/49" class="absolute inset-0 cursor-pointer" aria-hidden="true"></a>
-                    </div>
-                    
+                        <div class="w-full pt-4">
+                        
+                            <div x-show="openTab === 1">
+                                @include('livewire.editor.search-list.user-list')
+                            </div>
+                            <div x-show="openTab === 2">
+                                @include('livewire.editor.search-list.channel-list')
+                            </div>
+                            <div x-show="openTab === 3">
+                                @include('livewire.editor.search-list.podcast-list')
+                            </div>
+                            <div x-show="openTab === 4">
+                                @include('livewire.editor.search-list.episode-list')
+                            </div>
+ 
+                        
+                          </div>
 
-                    
-                    <div class="relative flex justify-between p-2 mb-5 space-x-3 rounded-md shadow-md">
-
-                        <div class="bg-center bg-cover rounded-lg w-28 h-28" style="background-image:url(http://s3.ap-southeast-1.amazonaws.com/ithaaty-local-new-file/users/podcast_img/Kl1cTnOXbErag3Who2R3x0ZFDDkFBoeZPGB0q1RT.png)">
-                        </div>
-
-                        <div class="flex-1 min-w-0">
-                            <p class="text-xl font-bold text-gray-900"> Channel name</p>
-                            <p class="mt-0 text-sm text-gray-500 truncate">0 Subribers</p>
-                            <p class="mt-2 text-xs text-gray-500 truncate">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at porttitor elit, ut pulvinar ante. Morbi porta, sem nec porta rhoncus, risus dui cursus metus, in efficitur eros dolor eget est. Cras efficitur leo
-                            </p>
-                        </div>
-                        <div class="inline-flex flex-shrink-0 text-sm text-gray-500 whitespace-nowrap">
-                            {{-- <p class="text-sm text-gray-500">
-                                <a href="#" class="flex hover:underline">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="float-left w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                </a>
-                            </p> --}}
-                        </div>
-                        <a href="http://127.0.0.1:8000/editor/podcast/view/49" class="absolute inset-0 cursor-pointer" aria-hidden="true"></a>
-                    </div>
-                    
-
-                    <div class="relative flex justify-between p-2 mb-5 space-x-3 rounded-md shadow-md">
-
-                        <div class="bg-center bg-cover rounded-lg w-28 h-28" style="background-image:url(http://s3.ap-southeast-1.amazonaws.com/ithaaty-local-new-file/users/podcast_img/Kl1cTnOXbErag3Who2R3x0ZFDDkFBoeZPGB0q1RT.png)">
-                        </div>
-
-                        <div class="flex-1 min-w-0">
-                            <p class="text-xl font-bold text-gray-900"> Podcasts</p>
-                            <p class="mt-0 text-sm text-gray-500 truncate">0 Videos</p>
-                            <p class="mt-2 text-xs text-gray-500 truncate">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at porttitor elit, ut pulvinar ante. Morbi porta, sem nec porta rhoncus, risus dui cursus metus, in efficitur eros dolor eget est. Cras efficitur leo
-                            </p>
-                        </div>
-                        <div class="inline-flex flex-shrink-0 text-sm text-gray-500 whitespace-nowrap">
-                            {{-- <p class="text-sm text-gray-500">
-                                <a href="#" class="flex hover:underline">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="float-left w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                </a>
-                            </p> --}}
-                        </div>
-                        <a href="http://127.0.0.1:8000/editor/podcast/view/49" class="absolute inset-0 cursor-pointer" aria-hidden="true"></a>
-                    </div>
-                    
-                    <div class="relative flex justify-between p-2 mb-5 space-x-3 rounded-md shadow-md">
-
-                        <div class="bg-center bg-cover rounded-lg w-28 h-28" style="background-image:url(http://s3.ap-southeast-1.amazonaws.com/ithaaty-local-new-file/users/podcast_img/Kl1cTnOXbErag3Who2R3x0ZFDDkFBoeZPGB0q1RT.png)">
-                        </div>
-
-                        <div class="flex-1 min-w-0">
-                            <p class="text-xl font-bold text-gray-900"> Podcaster</p>
-                            <p class="mt-0 text-sm text-gray-500 truncate">0 Subcribers</p>
-                            <p class="mt-2 text-xs text-gray-500 truncate">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at porttitor elit, ut pulvinar ante. Morbi porta, sem nec porta rhoncus, risus dui cursus metus, in efficitur eros dolor eget est. Cras efficitur leo
-                            </p>
-                        </div>
-                        <div class="inline-flex flex-shrink-0 text-sm text-gray-500 whitespace-nowrap">
-                            {{-- <p class="text-sm text-gray-500">
-                                <a href="#" class="flex hover:underline">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="float-left w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                </a>
-                            </p> --}}
-                        </div>
-                        <a href="http://127.0.0.1:8000/editor/podcast/view/49" class="absolute inset-0 cursor-pointer" aria-hidden="true"></a>
-                    </div>
 
                 </div>
+
 
           </div>
 

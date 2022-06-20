@@ -33,7 +33,13 @@ class EditorAds extends Component
     //         'adslist_days' => 'required',
     //         'ads_logo'=>'file|mimes:png,jpg,pdf|max:1200'
     // ];
+    public $searchbar;
 
+    public function getSearch(){
+
+        redirect()->to('editor/s/'.$this->searchbar); 
+
+    }
 
 	public function saveAds(){
 
