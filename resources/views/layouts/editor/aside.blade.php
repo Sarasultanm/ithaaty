@@ -242,7 +242,7 @@
                               </div>
                               <div class="flex-1 min-w-0">
                                 <p class="text-sm font-bold text-gray-800">{{ $reco->get_audio->audio_name }}</p>
-                                <p class="text-sm text-gray-800"> {{ Str::limit( $reco->get_audio->audio_summary , 30) }}
+                                <p class="text-sm text-gray-800 a"> {{ Str::limit( $reco->get_audio->audio_summary , 30) }}
                                 </p>
                             
                               </div>
