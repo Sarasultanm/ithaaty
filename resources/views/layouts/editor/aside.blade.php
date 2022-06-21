@@ -220,15 +220,23 @@
                         <li class="relative flex py-4 space-x-3">
                           <div class="flex-shrink-0">
                             @if ($reco->get_audio->get_thumbnail->count() != 0) 
-                                @php 
-                                    $reco_img_path =$reco->get_audio->get_thumbnail->first()->gallery_path; 
-                                    $reco_s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$episode_img_path; 
-                                @endphp 
+                                @if(empty($reco->get_audio->get_thumbnail->first()->gallery_path))
+                                    @php 
+                                        $reco_s3_thumbnail = asset('images/default_podcast.jpg');
+                                    @endphp 
+                                @else
+                                  @php 
+                                      $reco_img_path =$reco->get_audio->get_thumbnail->first()->gallery_path; 
+                                      $reco_s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$episode_img_path; 
+                                  @endphp 
+
+                                @endif
                             @else 
                                 @php 
                                     $reco_s3_thumbnail = asset('images/default_podcast.jpg');
                                 @endphp 
                             @endif
+
                             <img class="w-12 h-12 rounded" src="{{ $reco_s3_thumbnail }}">
                           </div>
                           <div class="flex-1 min-w-0">
