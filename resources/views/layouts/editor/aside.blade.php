@@ -219,7 +219,7 @@
                         @foreach ($recommended as $reco )
                         <li class="relative flex py-4 space-x-3">
                           <div class="flex-shrink-0">
-                            @if ($reco->get_audio->get_thumbnail->count() != 0) 
+                            {{-- @if ($reco->get_audio->get_thumbnail->count() != 0) 
                                 @if(empty($reco->get_audio->get_thumbnail->first()->gallery_path))
                                     @php 
                                         $reco_s3_thumbnail = asset('images/default_podcast.jpg');
@@ -235,7 +235,11 @@
                                 @php 
                                     $reco_s3_thumbnail = asset('images/default_podcast.jpg');
                                 @endphp 
-                            @endif
+                            @endif --}}
+
+                            @php 
+                                $reco_s3_thumbnail = asset('images/default_podcast.jpg');
+                            @endphp 
 
                             <img class="w-12 h-12 rounded" src="{{ $reco_s3_thumbnail }}">
                           </div>
