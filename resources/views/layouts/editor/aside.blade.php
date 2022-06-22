@@ -214,10 +214,10 @@
                       Recommendation
                     </h2>
                 
-                    <div class="flow-root mt-6">
+                    {{-- <div class="flow-root mt-6">
                       <ul class="-my-4 divide-y divide-gray-200">
                         @foreach ($recommended as $reco )
-                          @if($reco->get_audio->count() != 0)
+                          @if($reco->get_audio)
                             <li class="relative flex py-4 space-x-3">
                               <div class="flex-shrink-0">
                                 @if ($reco->get_audio->get_thumbnail->count() != 0) 
@@ -253,9 +253,9 @@
                             </li>
                           @endif
                         @endforeach
-                        <!-- More posts... -->
+                  
                       </ul>
-                    </div>
+                    </div> --}}
                   
 
                   </div>
