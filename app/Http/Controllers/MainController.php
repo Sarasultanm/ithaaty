@@ -13,6 +13,7 @@ use App\Models\UserPlaylist;
 use App\Models\UserNotes;
 use App\Models\UserRssLink;
 use App\Models\UserPodcasts;
+use App\Models\AudioTimeStats;
 use Auth;
 
 
@@ -159,6 +160,25 @@ class MainController extends Controller
 			return "NotLogin";
 		}
 	}
+
+	
+
+    public function InsertAudioTimePlay(Request $request){
+
+        // $fields=$request->validate([
+        //     'audio_id'=>'required',
+        //     'user_id'=>'required',
+
+        // ]);
+
+        AudioTimeStats::create([
+            'ats_userid'=> Auth::user()->id,
+            'ats_audioid' => $request->audioid,
+            'ats_viewedtime' => $request->currenttime,
+            'ats_audiolenght' => $request->lenghttime
+        ]);
+
+    }
 
 
 }

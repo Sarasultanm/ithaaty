@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\Mail\VerificationController;
 /*-- Admin ---*/
 use App\Http\Middleware\Administrator;
@@ -231,6 +233,18 @@ Route::group(['middleware' => Editor::class,'prefix'=>'editor'], function(){
 
 
 
+	/*video stats ajax */
+
+	Route::post('insertaudiotimeplay', [MainController::class, 'InsertAudioTimePlay']);
+
+	
+	// Route::post('TimeViewSave', [PlayerController::class, 'store']);
+	// Route::post('TimeViewGet', [PlayerController::class, 'getplay']);
+
+	Route::post('TimeViewSave',[PlayerController::class,'store'])->name('storeVideoTime');
+	// Route::post('TimeViewGet',[PlayerController::class,'getplay'])->name('getPlayVideoTime');
+	//Route::get('/popular', [MainController::class, 'viewPopular'])->name('popular');
+	/*video stats ajax */
 
 
 

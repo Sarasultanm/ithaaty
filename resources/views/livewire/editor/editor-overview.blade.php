@@ -1,3 +1,6 @@
+<?php
+	 use Carbon\Carbon;   
+?>
  <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Overview') }}
@@ -64,12 +67,12 @@
 			  <dl class="mt-5 grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
 			    <div class="px-4 py-5 sm:p-6">
 			      <dt class="text-base font-normal text-gray-900">
-			        Total Subscribers
+			        Today Watch Time
 			      </dt>
 			      <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
 			        <div class="flex items-baseline text-2xl font-semibold text-custom-pink">
-			          <a href="{{ route('editorSubscriberOverview') }}">{{ $followers->count() }}</a>
-			    	
+			          {{-- <a href="{{ route('editorSubscriberOverview') }}">{{ $followers->count() }}</a> --}}
+					  {{ $todayWatchTime }}
 			        </div>
 
 
@@ -78,12 +81,11 @@
 
 			    <div class="px-4 py-5 sm:p-6">
 			      <dt class="text-base font-normal text-gray-900">
-			        Avg. Open Rate
+			       Monthly Watch Time
 			      </dt>
 			      <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
 			        <div class="flex items-baseline text-2xl font-semibold text-custom-pink">
-			          0%
-	
+						{{ $monthlyWatchTime }}
 			        </div>
 
 
@@ -92,12 +94,18 @@
 
 			    <div class="px-4 py-5 sm:p-6">
 			      <dt class="text-base font-normal text-gray-900">
-			        Avg. Watch Time
+			        Total Watch Time
 			      </dt>
 			      <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
 			        <div class="flex items-baseline text-2xl font-semibold text-custom-pink">
-			          0%
-			          
+						{{ $totalWatchTime }}
+
+						{{-- {{ $today = Carbon::now()->format('d'); }}<br>
+						Today: {{ $todayWatchTime }}<br>
+						Total: <br>
+						Monthy: {{ $monthlyWatchTime }} --}}
+
+					
 			        </div>
 
 
@@ -109,7 +117,7 @@
 			<div class="grid grid-cols-12 mt-5 gap-5">
 				<div class="xl:col-span-8 lg:col-span-12 md:col-span-12 sm:col-span-12">
 				
-
+				@if($topOneView)
 				<!-- This example requires Tailwind CSS v2.0+ -->
 				<div class="flex flex-col">
 					  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -178,6 +186,7 @@
 					    </div>
 					  </div>
 				</div>
+				@endif
 				<div class="mt-5">
 					
 									<div class="shadow-lg rounded-lg overflow-hidden">

@@ -138,6 +138,9 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\UserCollaborator','id','usercol_userid');
     }
 
+    public function get_audiotimestats(){
+        return $this->hasMany('App\Models\AudioTimeStats', 'ats_ownerid','id');
+    }   
 
 
 

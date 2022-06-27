@@ -80,6 +80,9 @@ class Audio extends Model
        
     }
 
+    public function get_audiotimestats(){
+        return $this->hasMany('App\Models\AudioTimeStats', 'ats_audioid','id');
+    }   
 
 
     public static function search($search){

@@ -8,7 +8,9 @@ use App\Models\UserComments;
 use App\Models\UserFollow;
 use App\Models\UserViews;
 use App\Models\Audio;
+use App\Models\AudioTimeStats;
 use Auth;
+use Carbon\Carbon;
 
 class EditorOverview extends Component
 {
@@ -23,6 +25,76 @@ class EditorOverview extends Component
 
     }
 
+	public function getTotalWatchTime(){
+
+		$today = Carbon::now()->format('d');
+		$data = Auth::user()->get_audiotimestats()->get();
+		$getWatchtime = 0;
+
+		foreach ($data->groupby('ats_userid') as $totaList){
+			$getWatchtime = $getWatchtime +  $totaList->max('ats_viewedtime');
+		}
+
+		$init = round($getWatchtime,0);
+		$day = floor($init / 86400);
+		$hours = floor(($init -($day*86400)) / 3600);
+		$minutes = floor(($init / 60) % 60);
+		$seconds = $init % 60;
+		
+		$totalInString = $hours.'hrs :'.$minutes.'min :'.$seconds.'s';
+
+		return $totalInString;
+
+
+	}
+
+	public function getTodaysWatchTime(){
+
+		$today = Carbon::now()->format('d');
+		$data = Auth::user()->get_audiotimestats()->whereDay('created_at', date($today));
+		$getWatchtime = 0;
+
+		foreach($data->get()->groupby('ats_userid') as $todayList ){
+			$getWatchtime = $getWatchtime +  $todayList->max('ats_viewedtime');
+
+		}
+
+		$init = round($getWatchtime,0);
+		$day = floor($init / 86400);
+		$hours = floor(($init -($day*86400)) / 3600);
+		$minutes = floor(($init / 60) % 60);
+		$seconds = $init % 60;
+		
+		$totalInString = $hours.'hrs :'.$minutes.'min :'.$seconds.'s';
+
+		return $totalInString;
+
+
+	}
+
+	public function getMonthWatchTime(){
+
+		$today = Carbon::now()->format('m');
+		$data = Auth::user()->get_audiotimestats()->whereMonth('created_at', date($today));
+		$getWatchtime = 0;
+
+		foreach($data->get()->groupby('ats_userid') as $todayList ){
+			$getWatchtime = $getWatchtime +  $todayList->max('ats_viewedtime');
+
+		}
+
+		$init = round($getWatchtime,0);
+		$day = floor($init / 86400);
+		$hours = floor(($init -($day*86400)) / 3600);
+		$minutes = floor(($init / 60) % 60);
+		$seconds = $init % 60;
+		
+		$totalInString = $hours.'hrs :'.$minutes.'min :'.$seconds.'s';
+
+		return $totalInString;
+
+
+	}
 
 
 
@@ -49,10 +121,12 @@ class EditorOverview extends Component
         $mostViews = UserViews::where('view_ownerid',Auth::user()->id)->orderBy('total','DESC')->groupBy('view_audioid')->selectRaw('count(*) as total, view_audioid')->take(3)->get();
 
         $topOneView = UserViews::where('view_ownerid',Auth::user()->id)->orderBy('total','DESC')->groupBy('view_audioid')->selectRaw('count(*) as total, view_audioid')->take(1)->first();
-
-
+		
+		$totalWatchTime = $this->getTotalWatchTime();
+		$todayWatchTime = $this->getTodaysWatchTime();
+		$monthlyWatchTime = $this->getMonthWatchTime();
         $audioList = Audio::orderBy('id', 'DESC')->where('audio_editor',Auth::user()->id);
-        return view('livewire.editor.editor-overview',compact('recentLikes','recentComments','jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec','followers','mostViews','topOneView','audioList'));
+        return view('livewire.editor.editor-overview',compact('monthlyWatchTime','todayWatchTime','totalWatchTime','recentLikes','recentComments','jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec','followers','mostViews','topOneView','audioList'));
 
     }
 }

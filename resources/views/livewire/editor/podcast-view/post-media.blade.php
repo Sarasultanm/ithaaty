@@ -8,18 +8,20 @@
               <?php $img_path = $audio->get_thumbnail->first()->gallery_path; ?>
               <?php $s3_thumbnail = config('app.s3_public_link')."/users/podcast_img/".$img_path; ?>
             @endif
-
+            <input type="hidden" id="video_id" value="{{ $audio->id }}">
             <script src="{{ asset('videojs/video.min.js') }}"></script>
             <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
 
               <video  x-show="!open"  
-                id="my-video"
-                  class="video-js vjs-default-skin vjs-fluid"
-                  controls
-                  width="100%"
-                  height="450px"
+                id="my-video_html5_api"
+                class="video-js vjs-default-skin vjs-fluid"
+                controls
+                width="100%"
+                height="450px"
                 poster="{{ $s3_thumbnail }}"
                 data-setup="{}"
+                onpause="getOnTimeOnPause(this)"
+                onended="getOnTimeOnEnded(this)"
               >
                 <?php $s3_link = config('app.s3_public_link')."/audio/"; ?>
                 <source src="{{ $s3_link.$audio->audio_path }}" type="video/mp4" />
@@ -37,6 +39,50 @@
                   >
                 </p>
              </video>
+             {{-- <button wire:click="saveTimePlay">Click Me</button> --}}
+             <input type="text" id="watchtime" class="hidden" style="color: #000;"/>
+             <input type="text" id="watchtimepause" class="hidden" style="color: #000;">
+             <script>
+                  function getOnTimeUpdate(event) {
+                    document.getElementById("watchtime").value = event.currentTime;
+                  } 
+                  function getOnTimeOnPause(event) {
+                    var video_id = document.getElementById("video_id").value; 
+                    $.ajax({
+                        url: "{{ route('storeVideoTime') }}",
+                        type:"POST",
+                          data: {
+                        "_token": "{{ csrf_token() }}",
+                        "audioid": video_id,
+                        "video_time": event.currentTime,
+                        "video_lenght": event.duration,
+                        },
+                        success:function(response){
+                          console.log(response);
+                        }
+                      });
+                      console.log('savetime');  
+                  }
+                  function getOnTimeOnEnded(event) {
+                    var video_id = document.getElementById("video_id").value; 
+                    $.ajax({
+                        url: "{{ route('storeVideoTime') }}",
+                        type:"POST",
+                          data: {
+                        "_token": "{{ csrf_token() }}",
+                        "audioid": video_id,
+                        "video_time": event.currentTime,
+                        "video_lenght": event.duration,
+                        },
+                        success:function(response){
+                          console.log(response);
+                        }
+                      });
+                      console.log('save on ended');  
+                  }  
+             </script>
+
+           
 
              <audio  x-show="open"  
              id="my-video"
@@ -87,7 +133,7 @@
             @endif
     </div>
 
-    <div class="mt-5" >
+    {{-- <div class="mt-5" >
         <div  @click="open = !open" x-cloak >
           <button  x-show="!open"  onclick="reload()"
                   class="text-white bg-custom-pink px-2 py-3 cursor-pointer shadow-md rounded-sm" 
@@ -96,7 +142,7 @@
                   class="text-white bg-custom-pink px-2 py-3 cursor-pointer shadow-md rounded-sm"  
                   aria-hidden="true">Video</button>
         </div>
-    </div>
+    </div> --}}
 
 </div>
 
@@ -112,7 +158,7 @@
                 <script src="{{ asset('videojs/video.min.js') }}"></script>
         <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
 
-                  <video
+        <video
           id="my-video"
           class="video-js vjs-default-skin vjs-fluid"
           controls

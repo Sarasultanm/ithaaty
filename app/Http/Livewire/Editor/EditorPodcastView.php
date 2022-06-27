@@ -19,7 +19,8 @@ use App\Models\{
     UserQa,
     UserQanswer,
     UserPlaylist,
-    UserPlaylistItems
+    UserPlaylistItems,
+    AudioTimeStats
 };
 use Auth;
 
@@ -31,6 +32,7 @@ class EditorPodcastView extends Component
 {
 
 	public $audio,$notes,$comments,$notes_message,$notes_time,$adsList,$numAds,$newAdsList,$newNumAds,$qa_answer,$report_type,$report_message;
+    public $videoTimePause,$timeEnd;
 
     protected $AdsListRepositories;
 
@@ -322,6 +324,27 @@ class EditorPodcastView extends Component
     
         }
 
+        public function saveTimePlay(){
+              AudioTimeStats::create([
+                'ats_userid'=> Auth::user()->id,
+                'ats_audioid' => 2,
+                'ats_viewedtime' => 2,
+                'ats_audiolenght' => 2
+            ]);
+            $this->emit('refreshParent');    
+        }
+
+        public function saveVideoTime(){
+
+            // AudioTimeStats::create([
+            //     'ats_userid'=> Auth::user()->id,
+            //     'ats_audioid' => 2,
+            //     'ats_viewedtime' => 2,
+            //     'ats_audiolenght' => 2
+            // ]);
+             $this->timeEnd = $this->videoTimePause;   
+             $this->emit('refreshParent');
+        }
 
 
     public function mount($id,AdsListRepositories $AdsListRepositories)
