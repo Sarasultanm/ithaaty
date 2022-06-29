@@ -85,6 +85,11 @@ class Audio extends Model
     }   
 
 
+    public function get_channel(){
+        
+    }
+
+
     public static function search($search){
 
         return empty($search) ? static::query()

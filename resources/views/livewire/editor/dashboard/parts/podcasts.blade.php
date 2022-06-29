@@ -21,10 +21,10 @@
             <a href="{{ route('editorChannelView',['link' => $audio->check_in_podcasts->get_podcast->get_channel->channel_uniquelink ]) }}"
                  target="_blank" 
                  class="hover:underline">
-                 {{ $audio->check_in_podcasts->get_podcast->get_channel->channel_name }}
+                 {{ $audio->check_in_podcasts->get_podcast->get_channel->channel_name }} 
             </a>
         </p>
-        <p class="text-xs text-gray-500 font-regular">0 Subcribers</p>
+        <p class="text-xs text-gray-500 font-regular"> {{ $audio->check_in_podcasts->get_podcast->get_channel->get_subs()->count() }} Subcribers</p>
       </div>
       {{-- <div class="flex-shrink-0">
         @if($audio->get_user->get_profilephoto->count() == 0)

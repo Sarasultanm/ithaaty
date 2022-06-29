@@ -21,6 +21,8 @@ use App\Models\AdsStats;
 use App\Models\UserAdsDisplay;
 use App\Models\AdsShow;
 use App\Models\UserChannel;
+use App\Models\UserChannelSub;
+
 use Auth;
 use Share;
 use URL;
@@ -625,7 +627,17 @@ class EditorDashboard extends Component
 
     }
 
+    public function checkifSubscribe($channel_id){
+       
+        $data = UserChannelSub::where(['sub_channelid'=>$channel_id,'sub_userid'=>Auth::user()->id]);
+        if($data->count() != 0){
+            $result=1;
+        }else{
+            $result=0;
+        }
 
+        return $result;
+    }
 
 
     public function mount(BrowsersRepositories $BrowsersRepositories,

@@ -54,14 +54,12 @@ use \Carbon\Carbon;
                             @foreach($audioList as $audio) 
                                
                                 @if($audio->check_in_podcasts()->count() != 0) 
-                                  
-                                  
-                                  {{-- @if( $audio->audio_status == 'public' || $audio->audio_editor == Auth::user()->id || $this->get_if_friends($audio->audio_editor) == "Friends") --}}
-                                  @if($audio->audio_editor == Auth::user()->id || $this->get_if_friends($audio->audio_editor) == "Friends")
+                                  @if($audio->audio_editor == Auth::user()->id || $this->get_if_friends($audio->audio_editor) == "Friends" || $this->checkifSubscribe($audio->check_in_podcasts->get_podcast->get_channel->id) == 1)
                                 
                                     <!-- post-->
-                                   
+                            
                                     <li class="px-4 py-6 bg-white shadow sm:p-6 sm:rounded-lg " >
+                                      
                                         <!-- premuer banner -->
                                         @if($audio->check_if_premier()->count() != 0)
 

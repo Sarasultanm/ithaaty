@@ -115,7 +115,7 @@
 			</div>
 
 			<div class="grid grid-cols-12 mt-5 gap-5">
-				<div class="xl:col-span-8 lg:col-span-12 md:col-span-12 sm:col-span-12">
+				<div class="xl:col-span-12 lg:col-span-12 md:col-span-12 sm:col-span-12">
 				
 				@if($topOneView)
 				<!-- This example requires Tailwind CSS v2.0+ -->
@@ -187,138 +187,187 @@
 					  </div>
 				</div>
 				@endif
-				<div class="mt-5">
+
+				{{-- @include('livewire.editor.overview.bar-graph') --}}
+	
+				</div>
+
+			</div>
+			<div class="grid grid-cols-6 gap-4 mt-10">
+		
+				@foreach ( Auth::user()->get_channels as $channel_list )
+					<div class="col-span-3 bg-white p-1 rounded-md">
+						
+						@if(Auth::user()->get_gallery('channel_cover','active')->count() != 0)
+							<?php $img_path_cover = $channel_list->get_channel_cover->gallery_path ?>
+							<?php $s3_cover_link = config('app.s3_public_link')."/users/channel_cover/".$img_path_cover; ?>
+							<div class="w-full h-24 bg-center bg-cover" style="background-image: url({{ $s3_cover_link }});">
+								&nbsp;
+							</div>
+						@else
+							<div class="w-full h-24 bg-center bg-cover bg-custom-pink">
+								&nbsp;
+							</div>
+			
+						@endif
+						<div class="w-full">
+							<div class="grid grid-cols-1 gap-4 ">
+								<div class="border-b-2 pb-2 relative flex items-center w-full space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 ">
+									<div class="flex-shrink-0">
+									@if(Auth::user()->get_gallery('channel_photo','active')->count() == 0)
+										<img class="w-24 h-24 mt-5 ml-5 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="">
+									@else
+										<?php $img_path = $channel_list->get_channel_photo->gallery_path ?>
+										<?php $s3_link = config('app.s3_public_link')."/users/channe_img/".$img_path; ?>
+										<img class="w-14 h-14 mt-2 ml-2 rounded-full" src="{{ $s3_link }}" alt=""> 
+									@endif
+
+									</div>
+									<div class="flex-1 min-w-0">
+										<a>
+										<p class="mt-5 text-xl font-bold text-gray-900">
+											{{ $channel_list->channel_name }}
+										</p>
+										<p class="text-gray-500 truncate text-md">
+											{{ $channel_list->get_subs()->count() }}  subcribers
+										</p>
+										</a>
+									</div>
+									<div class="pr-5">
+										<p class="text-gray-500 text-sm text-right">
+											Total Hrs:<br>
+											<span class="font-bold">{{ $totalWatchTime }}</span>
+										</p>
+									</div>
+								</div>
+								<div class="px-1 py-2">
+									@forelse($channel_list->get_podcast()->get() as $podcast_items)
+										<div class="w-full relative flex">
+											<div class="flex-shrink-0">
+												<?php  $podcast_img_path = $podcast_items->get_channel_photo->gallery_path ?>
+               									 <?php $podcast_s3_link = config('app.s3_public_link')."/users/podcast_img/".$podcast_img_path; ?>
+												<img class="w-12 h-12 mt-1 ml-1 rounded-md" src="{{ $podcast_s3_link }}" alt="">
+											</div>
+											<div class="flex-1 min-w-0">
+												<a>
+												<p class="mt-2 ml-3 text-sm font-bold text-gray-900">
+													{{$podcast_items->podcast_title}}
+												</p>
+												<p class=" text-gray-500 truncate text-md">
+													<p class="flex">
+														<svg xmlns="http://www.w3.org/2000/svg" class="text-gray-500 h-5 w-5 ml-3 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+														</svg>
+														<span class="truncate text-gray-500 text-sm">{{ $podcast_items->get_episodes->count() }}</span>
+													</p>
+									
+												</p>
+												</a>
+											</div>
+											<div class="pr-5">
+												<p class="text-gray-500 text-sm text-right">
+													Total Hrs:<br>
+													<span class="font-bold">{{ $totalWatchTime }}</span>
+												</p>
+											</div>
+										</div>
+									@empty
+									<p>No Podcast</p>
+								
+									@endforelse
+								</div>
+								
+								<div>
+
+								</div>
 					
-									<div class="shadow-lg rounded-lg overflow-hidden">
-					  <div class="py-3 px-5 bg-gray-50">
-					      Audience
-					  </div>
-					  <canvas class="p-10 " id="chartBar"></canvas>
+								<!-- More people... -->
+							</div>
+						</div>
 					</div>
 
-							<!-- Required chart.js -->
-							<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+				@endforeach
 
-							<!-- Chart bar -->
-							<script>
+				
+			</div>
 
-							  const labelsBarChart = [
-							    'Jan',
-							    'Feb',
-							    'Marc',
-							    'Apri',
-							    'May',
-							    'Jun',
-							    'Jul',
-							    'Aug',
-							    'Sep',
-							    'Oct',
-							    'Nov',
-							    'Dec',
-							  ];
-							  const dataBarChart = {
-							    labels: labelsBarChart,
-							    datasets: [{
-							      label: 'My First dataset',
-							      backgroundColor: '#f98b88',
-							      borderColor: 'hsl(252, 82.9%, 67.8%)',
-							      data: [{{$jan}},{{$feb}},{{$mar}},{{$apr}},{{$may}},{{$jun}},{{$jul}},{{$aug}},{{$sep}},{{$oct}},{{$nov}},{{$dec}}],
-							    }]
-							  };
+			
 
-							  const configBarChart = {
-							    type: 'bar',
-							    data: dataBarChart,
-							    options: {}
-							  };
+			<div class="grid grid-cols-3 gap-4 mt-10">
+				<div class="col-span-1">
+					<aside class=" bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
 
-
-							  var chartBar = new Chart(
-							    document.getElementById('chartBar'),
-							    configBarChart
-							  );
-							</script>
-
-				</div>
+						<div class="pb-5 space-y-6">
+							<h3 class="font-medium text-gray-900">Most Views </h3>
+							<ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
+								@foreach($mostViews as $mViews)
+								<li class="py-3 flex justify-between items-center">
+									<div class="flex items-center">
+									<img src="{{ asset('images/slider-img/slide5.jpg') }}" class="w-8 h-8 ">
+									<div class="ml-4 ">
+										<p class="text-sm font-medium text-gray-900">{{ $mViews->get_audio->audio_name }} </p>
+									<p class="text-sm text-gray-500">{{$mViews->get_audio->get_user->name}}</p>
+									</div>
+									
+									</div>
+									<button type="button" class="ml-6 bg-white rounded-md text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ $mViews->total }}<span class="sr-only"> Aimee Douglas</span></button>
+								</li>
+								@endforeach
+								
+							</ul>
+						</div>
 	
-
-
-
+						</aside>
 				</div>
-				<div class="xl:col-span-4 lg:col-span-12 md:col-span-12 sm:col-span-12">
+				<div class="col-span-1">
+					<aside class=" bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
 
+						<div class="pb-5 space-y-6">
+							<h3 class="font-medium text-gray-900">Recent Like</h3>
+							<ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
+								@foreach($recentLikes as $rLikes)
+								<li class="py-3 flex justify-between items-center">
+									<div class="flex items-center">
+									<img src="{{ asset('images/slider-img/slide5.jpg') }}" class="w-8 h-8 ">
+									<div class="ml-4 ">
+										<p class="text-sm font-medium text-gray-900">{{$rLikes->get_audio->audio_name}}</p>
+									<p class="text-sm text-gray-500">{{$rLikes->get_audio->get_user->name}}</p>
+									</div>
+									
+									</div>
+									<button type="button" class="ml-6 bg-white rounded-md text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Like<span class="sr-only"> Aimee Douglas</span></button>
+								</li>
+								@endforeach
+								
+							</ul>
+						</div>
+	
+						</aside>
+				</div>
+				<div class="col-span-1">
+						
+					<aside class="bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
 
-				<aside class=" bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
-
-		          <div class="pb-5 space-y-6">
-		              <h3 class="font-medium text-gray-900">Most Views </h3>
-		              <ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
-		                 @foreach($mostViews as $mViews)
-		                  <li class="py-3 flex justify-between items-center">
-		                    <div class="flex items-center">
-		                      <img src="{{ asset('images/slider-img/slide5.jpg') }}" class="w-8 h-8 ">
-		                      <div class="ml-4 ">
-		                      	 <p class="text-sm font-medium text-gray-900">{{ $mViews->get_audio->audio_name }} </p>
-		                      <p class="text-sm text-gray-500">{{$mViews->get_audio->get_user->name}}</p>
-		                      </div>
-		                     
-		                    </div>
-		                    <button type="button" class="ml-6 bg-white rounded-md text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ $mViews->total }}<span class="sr-only"> Aimee Douglas</span></button>
-		                  </li>
-		                @endforeach
-		                  
-		              </ul>
-		          </div>
-
-        		</aside>
-
-				<aside class="mt-5 bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
-
-		          <div class="pb-5 space-y-6">
-		              <h3 class="font-medium text-gray-900">Recent Like</h3>
-		              <ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
-		                 @foreach($recentLikes as $rLikes)
-		                  <li class="py-3 flex justify-between items-center">
-		                    <div class="flex items-center">
-		                      <img src="{{ asset('images/slider-img/slide5.jpg') }}" class="w-8 h-8 ">
-		                      <div class="ml-4 ">
-		                      	 <p class="text-sm font-medium text-gray-900">{{$rLikes->get_audio->audio_name}}</p>
-		                      <p class="text-sm text-gray-500">{{$rLikes->get_audio->get_user->name}}</p>
-		                      </div>
-		                     
-		                    </div>
-		                    <button type="button" class="ml-6 bg-white rounded-md text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Like<span class="sr-only"> Aimee Douglas</span></button>
-		                  </li>
-		                @endforeach
-		                  
-		              </ul>
-		          </div>
-
-        		</aside>
-
-        		<aside class="mt-5 bg-white p-5 rounded-lg border-gray-200 overflow-y-auto lg:block">
-
-		          <div class="pb-5 space-y-6">
-		              <h3 class="font-medium text-gray-900">Recent Comments</h3>
-		              <ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
-		                @foreach($recentComments as $rComments)
-		                  <li class="py-3 flex justify-between items-center">
-		                    <div class="flex items-center">
-		                      <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=1024&amp;h=1024&amp;q=80" alt="" class="w-8 h-8 rounded-full">
-		                      <div class="ml-4 ">
-		                      	 <p class="text-sm font-medium text-gray-900">{{$rComments->get_audio->audio_name}}</p>
-		                      	 <p class="text-sm text-gray-500">{{$rComments->coms_message}}</p>
-		                      </div>
-		                    </div>
-		                 <!--    <button type="button" class="ml-6 bg-white rounded-md text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Remove<span class="sr-only"> Aimee Douglas</span></button> -->
-		                  </li>
-		                @endforeach 
-		               
-		              </ul>
-		          </div>
-
-        		</aside>
-
+						<div class="pb-5 space-y-6">
+							<h3 class="font-medium text-gray-900">Recent Comments</h3>
+							<ul class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
+								@foreach($recentComments as $rComments)
+								<li class="py-3 flex justify-between items-center">
+									<div class="flex items-center">
+									<img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=1024&amp;h=1024&amp;q=80" alt="" class="w-8 h-8 rounded-full">
+									<div class="ml-4 ">
+										<p class="text-sm font-medium text-gray-900">{{$rComments->get_audio->audio_name}}</p>
+										<p class="text-sm text-gray-500">{{$rComments->coms_message}}</p>
+									</div>
+									</div>
+								<!--    <button type="button" class="ml-6 bg-white rounded-md text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Remove<span class="sr-only"> Aimee Douglas</span></button> -->
+								</li>
+								@endforeach 
+							
+							</ul>
+						</div>
+	
+						</aside>
 				</div>
 			</div>
 
