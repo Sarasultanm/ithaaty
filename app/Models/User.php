@@ -142,6 +142,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\AudioTimeStats', 'ats_ownerid','id');
     }   
 
+    public function get_eachaudiotimestats($audio_id){
+        return $this->hasMany('App\Models\UserChannel', 'channel_ownerid','id')->where(['ats_audioid'=>$audio_id]);
+    }
 
 
     public static function search($search){

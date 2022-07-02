@@ -9,6 +9,7 @@ use App\Models\UserFollow;
 use App\Models\UserViews;
 use App\Models\Audio;
 use App\Models\AudioTimeStats;
+use App\Models\UserChannel;
 use Auth;
 use Carbon\Carbon;
 
@@ -24,11 +25,60 @@ class EditorOverview extends Component
         redirect()->to('editor/s/'.$this->searchbar); 
 
     }
+	public function getTimeByString($watchtime){
+		$init = round($watchtime,0);
+		$day = floor($init / 86400);
+		$hours = floor(($init -($day*86400)) / 3600);
+		$minutes = floor(($init / 60) % 60);
+		$seconds = $init % 60;
+		
+		$totalInString = $hours.'hrs :'.$minutes.'min :'.$seconds.'s';
+
+		return $totalInString;
+	}
+
+
+	public function getTotalWatchTimePerAudio($audio_id){
+
+		$today = Carbon::now()->format('d');
+		$data = AudioTimeStats::where(['ats_ownerid'=>Auth::user()->id,'ats_audioid'=>$audio_id])->get();
+		$getWatchtime = 0;
+
+		foreach ($data->groupby('ats_userid') as $totaList){
+			$getWatchtime = $getWatchtime +  $totaList->max('ats_viewedtime');
+		}
+
+		// $init = round($getWatchtime,0);
+		// $day = floor($init / 86400);
+		// $hours = floor(($init -($day*86400)) / 3600);
+		// $minutes = floor(($init / 60) % 60);
+		// $seconds = $init % 60;
+		
+		// $totalInString = $hours.'hrs :'.$minutes.'min :'.$seconds.'s';
+
+		return $getWatchtime;
+
+
+	}
+
+	public function getTotalWatchByChannel(){
+
+		$channel = UserChannel::where('channel_ownerid',Auth::user()->id)->get();
+		$getChannelTotalHrs = 0;
+		foreach($channel->get_podcast()->get() as $podcast_items){
+
+
+
+
+		}
+	
+	}
 
 	public function getTotalWatchTime(){
 
 		$today = Carbon::now()->format('d');
-		$data = Auth::user()->get_audiotimestats()->get();
+		$data = AudioTimeStats::where(['ats_ownerid'=>Auth::user()->id])->get();
+		//$data = Auth::user()->get_audiotimestats()->get();
 		$getWatchtime = 0;
 
 		foreach ($data->groupby('ats_userid') as $totaList){
@@ -126,6 +176,7 @@ class EditorOverview extends Component
 		$todayWatchTime = $this->getTodaysWatchTime();
 		$monthlyWatchTime = $this->getMonthWatchTime();
         $audioList = Audio::orderBy('id', 'DESC')->where('audio_editor',Auth::user()->id);
+	
         return view('livewire.editor.editor-overview',compact('monthlyWatchTime','todayWatchTime','totalWatchTime','recentLikes','recentComments','jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec','followers','mostViews','topOneView','audioList'));
 
     }

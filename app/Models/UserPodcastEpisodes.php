@@ -29,6 +29,9 @@ class UserPodcastEpisodes extends Model
         return $this->belongsTo('App\Models\UserPodcasts', 'poditem_podcastid', 'id');
     }
     
+    public function get_audiotimestats(){
+        return $this->hasMany('App\Models\AudioTimeStats', 'ats_audioid','poditem_audioid');
+    } 
 
     
 }
