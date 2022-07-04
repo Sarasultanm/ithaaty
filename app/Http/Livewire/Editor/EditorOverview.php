@@ -124,8 +124,9 @@ class EditorOverview extends Component
 
 	public function getMonthWatchTime(){
 
-		$today = Carbon::now()->format('m');
-		$data = Auth::user()->get_audiotimestats()->whereMonth('created_at', date($today));
+		$today = Carbon::now()->month;
+		$data = AudioTimeStats::where('ats_ownerid',Auth::user()->id)->whereMonth('created_at', date('$today'));
+		// $data = Auth::user()->get_audiotimestats()->whereMonth('created_at', date($today));
 		$getWatchtime = 0;
 
 		foreach($data->get()->groupby('ats_userid') as $todayList ){

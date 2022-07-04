@@ -81,7 +81,7 @@
 
 			    <div class="px-4 py-5 sm:p-6">
 			      <dt class="text-base font-normal text-gray-900">
-			       Monthly Watch Time
+			       Monthly Watch Time {{ Carbon::now()->month; }}
 			      </dt>
 			      <dd class="flex items-baseline justify-between mt-1 md:block lg:flex">
 			        <div class="flex items-baseline text-2xl font-semibold text-custom-pink">
