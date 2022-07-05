@@ -16,4 +16,10 @@ class UserComments extends Model
     public function get_audio(){
         return $this->belongsTo('App\Models\Audio', 'coms_audioid', 'id');
     }
+
+    public function get_reply(){
+        return $this->hasMany('App\Models\UserReplys', 'rep_commentid','id');
+    }
+
+
 }

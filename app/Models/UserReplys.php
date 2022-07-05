@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class UserReplys extends Model
 {
     use HasFactory;
+
+    public function get_user(){
+        return $this->belongsTo('App\Models\User', 'rep_userid', 'id');
+    }
 }

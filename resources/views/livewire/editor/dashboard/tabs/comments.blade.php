@@ -52,6 +52,47 @@
                     </div>
                 </div>
             </div>
+            @if( $comments->get_reply->count() == 0)
+            <div class="">
+                <div class="mb-2 ml-8">
+                    <input
+                        type="text"
+                        name="email"
+                        id="email"
+                        placeholder="Reply"
+                        class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        wire:model.lazy="reply"
+                        wire:keydown.enter="saveReply({{ $audio->id }},{{$audio->audio_editor}},{{ $comments->id }})"
+                    />
+                </div>
+            </div>
+            @endif
+                @foreach ($comments->get_reply as $replies )
+                <div class="flex ml-8 space-x-3">
+                    <div class="flex-shrink-0">
+                        @if($replies->get_user->get_profilephoto->count() == 0)
+                        <img class="w-5 h-5 rounded-full" src="{{ asset('images/default_user.jpg') }}" alt="" />
+                        @else
+                        <?php $replyprofile_path = $replies->get_user->get_profilephoto->first()->gallery_path; ?>
+                        <img class="w-5 h-5 rounded-full" src="{{ asset('users/profile_img/'.$replyprofile_path) }}" alt="" />
+                        @endif
+                        
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="p-2 mb-3 bg-gray-100 rounded-md">
+                            <p class="text-xs font-medium text-gray-900">
+                                <a href="/editor/users//1" class="font-bold hover:underline">{{ $replies->get_user->name }}</a>
+                            </p>
+                            <p class="text-sm text-gray-500">
+                                {{ $replies->rep_message }}<br />
+                                <br />
+                                <span class="text-xs text-right text-gray-500"><i>Posted at: {{ $replies->created_at }}</i></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
             @endforeach
         </div>
     </div>

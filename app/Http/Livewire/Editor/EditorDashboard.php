@@ -22,6 +22,7 @@ use App\Models\UserAdsDisplay;
 use App\Models\AdsShow;
 use App\Models\UserChannel;
 use App\Models\UserChannelSub;
+use App\Models\UserReplys;
 
 use Auth;
 use Share;
@@ -54,7 +55,7 @@ class EditorDashboard extends Component
 	    public $title,$season,$episode,$category,$summary,$audiofile,$uploadType,$embedlink,$comments,$hashtags,$notes_message,$notes_time;
         public $report_type,$report_message;
 
-        public $searchbar,$seach_select,$recommended;
+        public $searchbar,$seach_select,$recommended,$reply;
         
 
         protected $listeners = [
@@ -336,6 +337,10 @@ class EditorDashboard extends Component
             $this->comments = null;
            
         }
+        public function clearReplyFields(){
+            $this->reply = null;
+           
+        }
         public function clearFieldsNotes(){
              $this->notes_time = null;
             $this->notes_message = null;
@@ -372,8 +377,43 @@ class EditorDashboard extends Component
              $this->clearFields();
 
             $this->emit('refreshParent');
-            redirect()->to('editor/dashboard'); 
+            //redirect()->to('editor/dashboard'); 
         }
+
+        
+        public function saveReply($id,$audio_editor,$comment_id){
+
+            $data = new UserReplys;
+            $data->rep_userid = Auth::User()->id;
+            $data->rep_audioid = $id;
+            $data->rep_commentid = $comment_id;
+            $data->rep_type = "reply";
+            $data->rep_message = $this->reply;
+            $data->rep_status = "active";
+            $data->save();
+
+            $notif = new UserNotifications;
+            $notif->notif_userid = Auth::User()->id;
+            $notif->notif_type = "reply";
+            $notif->notif_type_id = $data->id;
+            $notif->notif_message = "You are reply on the comments of";
+            $notif->status = "active";
+            $notif->save();
+
+            $notif1 = new UserNotifications;
+            $notif1->notif_userid = $audio_editor;
+            $notif1->notif_type = "commenting";
+            $notif1->notif_type_id = $data->id;
+            $notif1->notif_message = "reply on your comments";
+            $notif1->status = "active";
+            $notif1->save();
+
+           
+            $this->clearFields();
+
+           $this->emit('refreshParent');
+           //redirect()->to('editor/dashboard'); 
+       }
 
         public function saveNotes($id,$audio_editor){
 
@@ -638,6 +678,10 @@ class EditorDashboard extends Component
 
         return $result;
     }
+
+
+
+
 
 
     public function mount(BrowsersRepositories $BrowsersRepositories,

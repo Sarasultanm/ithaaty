@@ -214,9 +214,12 @@
                       Recommendation
                     </h2>
                 
-                    {{-- <div class="flow-root mt-6">
+                    <div class="flow-root mt-6">
                       <ul class="-my-4 divide-y divide-gray-200">
                         @foreach ($recommended as $reco )
+
+                          @if($this->get_if_friends($reco->notif_userid) == "Friends")
+
                           @if($reco->get_audio)
                             <li class="relative flex py-4 space-x-3">
                               <div class="flex-shrink-0">
@@ -252,10 +255,12 @@
                                 aria-hidden="true"></a>
                             </li>
                           @endif
+                          
+                          @endif
                         @endforeach
                   
                       </ul>
-                    </div> --}}
+                    </div>
                   
 
                   </div>
