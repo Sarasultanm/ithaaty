@@ -81,10 +81,7 @@
                       console.log('save on ended');  
                   }  
              </script>
-
-           
-
-             <audio  x-show="open"  
+             {{-- <audio  x-show="open"  
              id="my-video"
                class="video-js vjs-default-skin vjs-fluid"
                controls
@@ -108,10 +105,10 @@
                  >supports HTML5 video</a
                >
              </p>
-            </audio>
+            </audio> --}}
 
             <script> 
-                var player=videojs('my-video'); 
+                var player=videojs('my-video_html5_api'); 
                 player.nuevo({
                   qualityMenu: true,
                   buttonRewind: true,
