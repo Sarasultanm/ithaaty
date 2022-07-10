@@ -181,7 +181,7 @@ class AdsListRepositories
 
         $adslist = $this->getAdsList()
                         ->inRandomOrder()
-                        ->whereNull('adslist_type')
+                        ->where('adslist_type','Media Ads')
                         ->where('adslist_status','Confirm')
                         ->where('adslist_country', 'like', '%'.$users->country.'%')
                         ->get();
@@ -210,7 +210,7 @@ class AdsListRepositories
 
         $adslist = $this->getAdsList()
                         ->inRandomOrder()
-                        ->whereNull('adslist_type')
+                        ->where('adslist_type','Media Ads')
                         ->where('adslist_status','Confirm')
                         ->where('adslist_country', 'like', '%'.$users->country.'%')
                         ->count();

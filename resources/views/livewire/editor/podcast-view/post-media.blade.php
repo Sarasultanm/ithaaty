@@ -1,7 +1,7 @@
 @if($audio->audio_type == "Upload")
 
 <div  x-data="{ open: false }">
-    <div class="bg-white shadow p-1">        
+    <div class="p-1 bg-white shadow">        
             @if($audio->get_thumbnail->count() == 0)
               <?php $s3_thumbnail = "images/default_podcast.jpg"; ?>
             @else
@@ -118,11 +118,12 @@
                   buttonForward: true
                 });
             </script>
-
+            {{-- <p class="text-black">{{ $newNumAds }}</p> --}}
             @if($newNumAds != 0)
+           
               @foreach($newAdsList as $adsl)
-                @php 
-                        $videlink[] = $adsl->adslist_videolink;
+                @php
+                        $videlink[] = config('app.s3_public_link')."/ads/media_ads/".$adsl->get_gallery->gallery_path;
                         $skip[] = $adsl->adslist_adstype;
                         $displaytime[] = $adsl->adslist_displaytime;
                 @endphp
@@ -136,10 +137,10 @@
     {{-- <div class="mt-5" >
         <div  @click="open = !open" x-cloak >
           <button  x-show="!open"  onclick="reload()"
-                  class="text-white bg-custom-pink px-2 py-3 cursor-pointer shadow-md rounded-sm" 
+                  class="px-2 py-3 text-white rounded-sm shadow-md cursor-pointer bg-custom-pink" 
                   aria-hidden="true">Audio</button>
           <button  x-show="open"  onclick="reload()"
-                  class="text-white bg-custom-pink px-2 py-3 cursor-pointer shadow-md rounded-sm"  
+                  class="px-2 py-3 text-white rounded-sm shadow-md cursor-pointer bg-custom-pink"  
                   aria-hidden="true">Video</button>
         </div>
     </div> --}}
@@ -147,7 +148,7 @@
 </div>
 
           @elseif($audio->audio_type == "RSS") 
-  <div class="bg-white shadow p-1">        
+  <div class="p-1 bg-white shadow">        
         @if($audio->get_thumbnail->count() == 0)
            <?php $s3_thumbnail = "images/default_podcast.jpg"; ?>
         @else
@@ -193,13 +194,14 @@
         </script>
 
         @if($newNumAds != 0)
+       
         @foreach($newAdsList as $adsl)
           
-            <?php 
+            @php
                   $videlink[] = $adsl->adslist_videolink;
                   $skip[] = $adsl->adslist_adstype;
                   $displaytime[] = $adsl->adslist_displaytime;
-             ?>
+            @endphp
 
           @endforeach
 
@@ -210,7 +212,7 @@
   
   </div>
           @else
-<div class="bg-white shadow p-1">        
+<div class="p-1 bg-white shadow">        
     <div class="audio-embed-container">
        <?php echo $audio->audio_path; ?>
     </div>

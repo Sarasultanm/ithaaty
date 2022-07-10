@@ -72,6 +72,70 @@ class EditorAdsCreate extends Component
         $this->contextTitle = $this->adslist_name;
     }
 
+
+
+    public function addMediaAds($id){
+
+        $this->validate([
+            'contextTitle' => 'required',
+            'contextDescription' => 'required',
+            'contextUrlName' => 'required',
+            'contextUrlLink' => 'required',
+        ]);
+
+        $image = Controller::makeImage('media_adsvideo', $this->mediaAdsFile, 'ads/media_ads');
+
+
+        $data = new AdsList;
+        $data->adslist_id = $id;
+        $data->adslist_name = $this->contextTitle;
+        $data->adslist_videolink =  $image->id;
+        $data->adslist_type = "Media Ads";
+        $data->adslist_adstype =  $this->adslist_adstype;
+        $data->adslist_durationtype = "none";
+        $data->adslist_displaytime = $this->adslist_displaytime;
+        $data->adslist_status = "Pending";
+        $data->adslist_agebracket = $this->adslist_agebracket;
+        $data->adslist_country = $this->adslist_country;
+        $data->adslist_webname = $this->contextUrlName;
+        $data->adslist_weblink = $this->contextUrlLink;
+        $data->adslist_desc = $this->contextDescription;
+        $data->adslist_days = $this->adslist_days;
+        $data->adslist_videotype = "Upload";
+        $data->adslist_end = "none";
+
+        $data->save(); 
+
+
+        if($this->interest_option){
+            foreach($this->interest_option as $interest_item){
+                if($interest_item != 0){
+                    AdsInterest::create([
+                        'ai_ownerid'=>Auth::user()->id,
+                        'ai_adsid'=>$data->id,
+                        'ai_interestid'=>$interest_item,
+                        'ai_type'=>'interest',
+                        'ai_typestatus'=>'active'
+                    ]);
+                }
+            }
+        }
+
+
+
+
+       
+
+         session()->flash('status', 'New ads added as file');
+        redirect()->to('editor/ads');    
+
+
+
+    }
+
+
+
+
     public function addContextAds($id){
 
         $this->validate([

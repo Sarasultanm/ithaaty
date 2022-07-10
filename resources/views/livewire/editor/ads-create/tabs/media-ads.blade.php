@@ -92,10 +92,19 @@
 
       <div class="col-span-5">
 
-          @include('livewire.editor.ads-create.parts.payment-summary') 
-          
-      </div> 
 
+        @include('livewire.editor.ads-create.parts.interest') 
+
+
+        @include('livewire.editor.ads-create.parts.payment-summary') 
+        
+        <div class="pt-10 mt-3 mb-5 text-right ">
+                   
+            <button wire:click="addMediaAds({{$checkAds->first()->id}})" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-custom-pink hover:bg-green-700 sm:col-start-2 sm:text-md">
+              Save Ads
+            </button>
+        </div>
+    </div>
       
       
   </div>
