@@ -3,7 +3,7 @@
 
 <script>
   $(document).ready(function(){
-    $(".roll-skip-button").attr("id","skipAds");
+    $("#my-video_html5_api div.roll-skip-button").attr("id","skipAds");
       $('.roll-skip-button').click(function(){
           $(".click-me").click();
       })
@@ -20,7 +20,7 @@
             @endif
             <input type="hidden" id="video_id" value="{{ $audio->id }}">
             <script src="{{ asset('videojs/video.min.js') }}"></script>
-            <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
+            {{-- <script src="{{ asset('videojs/nuevo.min.js') }}"></script> --}}
 
               <video  x-show="!open"  
                 id="my-video_html5_api"
