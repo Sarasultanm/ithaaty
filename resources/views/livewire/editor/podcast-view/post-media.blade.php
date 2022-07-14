@@ -133,12 +133,11 @@
             @endif
     </div>
     <button wire:click="refreshData" class="click-me bg-custom-pink text-white hidden">Click Me</button>
-    <script>
+    {{-- <script>
       $('.roll-skip-button').click(function(){
           $(".click-me").click();
       })
-
-    </script>
+    </script> --}}
     {{-- <div class="mt-5" >
         <div  @click="open = !open" x-cloak >
           <button  x-show="!open"  onclick="reload()"
