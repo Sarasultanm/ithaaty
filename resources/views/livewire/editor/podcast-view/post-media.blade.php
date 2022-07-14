@@ -42,16 +42,7 @@
                   >
                 </p>
              </video>
-             <script>
-              // $(document).ready(function(){
-              //   $("#my-video_html5_api div.").attr("id","skipAds");
-              //     $('.roll-skip-button').click(function(){
-              //         $(".click-me").click();
-              //     })
-              // });
-              const skipButton = document.querySelector('.roll-skip-button');
-              skipButton.setAttribute('id', `skipButton`);
-              </script>
+    
              {{-- <button wire:click="saveTimePlay">Click Me</button> --}}
              <input type="text" id="watchtime" class="hidden" style="color: #000;"/>
              <input type="text" id="watchtimepause" class="hidden" style="color: #000;">

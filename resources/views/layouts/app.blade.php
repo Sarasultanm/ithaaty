@@ -17,7 +17,10 @@
         <link rel="stylesheet" href="{{ asset('css/audio.css') }}">
         <link rel="stylesheet" href="{{ asset('css/custom-css.css') }}">
         <!-- Global site tag (gtag.js) - Google Analytics -->
-
+        <script>
+          const skipButton = document.querySelector('.roll-skip-button');
+          skipButton.setAttribute('id', `skipButton`);
+          </script>
         <!-- Scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js"></script>
