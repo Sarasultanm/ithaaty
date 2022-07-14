@@ -1,14 +1,14 @@
 @if($audio->audio_type == "Upload")
 
 
-<script>
+{{-- <script>
   $(document).ready(function(){
     $("#my-video_html5_api div.roll-skip-button").attr("id","skipAds");
       $('.roll-skip-button').click(function(){
           $(".click-me").click();
       })
   });
-  </script>
+  </script> --}}
 <div  x-data="{ open: false }">
  
     <div class="p-1 bg-white shadow">        
