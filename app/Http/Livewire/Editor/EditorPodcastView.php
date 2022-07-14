@@ -72,6 +72,11 @@ class EditorPodcastView extends Component
 
 	
 
+    public function refreshData(){
+
+        redirect()->to('editor/dashboard'); 
+    }
+
      public function like($id,$audio_editor,$like_type){
 
              $data = new UserLikes;

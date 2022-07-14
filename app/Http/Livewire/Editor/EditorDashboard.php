@@ -288,7 +288,8 @@ class EditorDashboard extends Component
              $data->save();
             
             $this->emit('refreshParent');
-            redirect()->to('editor/dashboard'); 
+            
+            // redirect()->to('editor/dashboard'); 
         }
 
 

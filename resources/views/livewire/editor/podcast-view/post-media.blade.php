@@ -1,6 +1,8 @@
 @if($audio->audio_type == "Upload")
 
+
 <div  x-data="{ open: false }">
+
     <div class="p-1 bg-white shadow">        
             @if($audio->get_thumbnail->count() == 0)
               <?php $s3_thumbnail = "images/default_podcast.jpg"; ?>
@@ -130,7 +132,13 @@
               <script src="{{ asset('js/adsScript/'.$newNumAds.'-ads.js' ) }}" ></script> 
             @endif
     </div>
+    <button wire:click="refreshData" class="click-me bg-custom-pink text-white hidden">Click Me</button>
+    <script>
+      $('.roll-skip-button').click(function(){
+          $(".click-me").click();
+      })
 
+    </script>
     {{-- <div class="mt-5" >
         <div  @click="open = !open" x-cloak >
           <button  x-show="!open"  onclick="reload()"
