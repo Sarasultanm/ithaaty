@@ -320,7 +320,22 @@ class EditorPodcastView extends Component
 
             $now = Carbon::now();
             $expiredDate = Carbon::parse($premier_date)->format('d.m.Y h:m:sa');
-    
+
+            // if ($now->format('d.m.Y') >= $expiredDate){
+            //     return 'Play'.strtotime($now->format('d.m.Y h:m:sa'))." - ".$expiredDate;
+            // }else{
+            //     return 'Off'.$now->format('d.m.Y h:m:sa')." - ".$expiredDate; 
+            // }
+
+            // $result = $now->gt($premier_date);
+            // if($result == true){
+            //     return 'Active';
+            // }else{
+            //     return 'Expired';
+            // }
+
+            
+            
             if ($now->between($now->format('d.m.Y h:m:sa'), $expiredDate)) {
                 return 'Active';
             } else {

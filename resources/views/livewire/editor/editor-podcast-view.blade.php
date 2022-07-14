@@ -53,7 +53,7 @@
                       @php 
                           $premier_date = $audio->check_if_premier()->first()->ap_date;
                       @endphp
-                      
+                
                       @if($this->checkPremierDate($premier_date) == "Active")
                         <div class="relative p-2 mb-5  shadow-md bg-custom-pink">
                             <p class="text-white text-center">Premier on 
