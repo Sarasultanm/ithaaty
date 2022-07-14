@@ -1,11 +1,14 @@
 @if($audio->audio_type == "Upload")
 
+
 <script>
-  $(".roll-skip-button").attr("id","skipAds");
-  $('.roll-skip-button').click(function(){
-      $(".click-me").click();
-  })
-</script>
+  $(document).ready(function(){
+    $(".roll-skip-button").attr("id","skipAds");
+      $('.roll-skip-button').click(function(){
+          $(".click-me").click();
+      })
+  });
+  </script>
 <div  x-data="{ open: false }">
  
     <div class="p-1 bg-white shadow">        
