@@ -211,6 +211,7 @@
                                 </tr>
                               </thead>
                               <tbody class="bg-white divide-y divide-gray-200">
+                                @if($category_list)
                                 @foreach($category_list as $cat)
                                   <tr>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -227,6 +228,7 @@
                                     </td>
                                   </tr>
                                @endforeach
+                               @endif
                               </tbody>
                             </table>
                           </div>
@@ -308,7 +310,7 @@
                                      {{ $interest_item->description }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                     {{ $cat->created_at }}
+                                     {{ $interest_item->created_at }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                       <a href="#" class="text-orange-600 hover:text-orange-900">Details</a>
