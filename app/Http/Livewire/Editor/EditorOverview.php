@@ -10,6 +10,7 @@ use App\Models\UserViews;
 use App\Models\Audio;
 use App\Models\AudioTimeStats;
 use App\Models\UserChannel;
+use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 
@@ -60,6 +61,43 @@ class EditorOverview extends Component
 
 
 	}
+
+	public function getGenderPerAudio($audio_id){
+
+		$today = Carbon::now()->format('d');
+		$data = AudioTimeStats::where(['ats_ownerid'=>Auth::user()->id,'ats_audioid'=>$audio_id])->get();
+		$gender ="";
+		$female = 0;
+		$male = 0;
+		foreach ($data->groupby('ats_userid') as $totaList){
+			
+			$getUser = User::find($totaList->first()->ats_userid);
+			if($getUser->gender == "Female"){
+				$female++;
+			}else{
+				$male++;
+			}
+			$gender = $gender."-".$getUser->gender;
+			
+		}
+
+		// $init = round($getWatchtime,0);
+		// $day = floor($init / 86400);
+		// $hours = floor(($init -($day*86400)) / 3600);
+		// $minutes = floor(($init / 60) % 60);
+		// $seconds = $init % 60;
+		
+		// $totalInString = $hours.'hrs :'.$minutes.'min :'.$seconds.'s';
+		$dataReturn = array(
+			'gender' => $gender,
+			'totalfemale' => $female,
+			'totalmale' => $male
+		);
+		return $dataReturn;
+
+
+	}
+
 
 	public function getTotalWatchByChannel(){
 

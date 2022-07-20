@@ -105,9 +105,11 @@
 							@foreach($channel_list->get_podcast()->get() as $podcast_items)
 								@foreach ($podcast_items->get_episodes  as $episodes_list )
 									@if($episodes_list->get_audiotimestats->count() != 0)
-									@php
-											$getUserTotalHrs = $getUserTotalHrs +  $this->getTotalWatchTimePerAudio($episodes_list->poditem_audioid);
+										@php
+												$getUserTotalHrs = $getUserTotalHrs +  $this->getTotalWatchTimePerAudio($episodes_list->poditem_audioid);
+												
 										@endphp
+
 									@endif
 								@endforeach
 							@endforeach
@@ -215,8 +217,7 @@
 				</div>
 				@endif
 
-				{{-- @include('livewire.editor.overview.bar-graph') --}}
-	
+				
 				</div>
 
 			</div>
@@ -336,6 +337,8 @@
 														</div>
 														<div class="">
 															{{ $this->getTimeByString($this->getTotalWatchTimePerAudio($episodes_list->poditem_audioid))}}
+												
+															
 														</div>
 													
 														
@@ -454,8 +457,17 @@
             <!-- More questions... -->
 
 
+			<div class="grid grid-cols-10 gap-4 mt-10">
+				<div class="col-span-6">
+					@include('livewire.editor.overview.bar-graph')
+				</div>
+				<div class="col-span-4">
 
-
+					@include('livewire.editor.overview.gender-stats')
+				</div>
+			</div>
+			
+	
 
 
 
