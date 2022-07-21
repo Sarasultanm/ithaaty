@@ -50,6 +50,12 @@ class EditorPodcastView extends Component
 
     }
 
+    public function getTotalView($audio_id){
+        $data = AudioTimeStats::where('ats_audioid',$audio_id);
+
+        return $data->count();
+    }
+
 
     public static function checkFollow($id){
 

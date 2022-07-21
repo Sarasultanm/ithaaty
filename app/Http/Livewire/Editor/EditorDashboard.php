@@ -23,6 +23,7 @@ use App\Models\AdsShow;
 use App\Models\UserChannel;
 use App\Models\UserChannelSub;
 use App\Models\UserReplys;
+use App\Models\AudioTimeStats;
 
 use Auth;
 use Share;
@@ -70,6 +71,11 @@ class EditorDashboard extends Component
 
         }
 
+        public function getTotalView($audio_id){
+            $data = AudioTimeStats::where('ats_audioid',$audio_id);
+    
+            return $data->count();
+        }
 
         public function reportAudio($audio_id){
             $this->validate([

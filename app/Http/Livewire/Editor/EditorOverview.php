@@ -185,7 +185,7 @@ class EditorOverview extends Component
 
 	}
 
-
+	
 
 
     public function render()
