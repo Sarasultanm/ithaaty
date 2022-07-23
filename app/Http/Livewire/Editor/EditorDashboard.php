@@ -666,11 +666,19 @@ class EditorDashboard extends Component
         $now = Carbon::now();
         $expiredDate = Carbon::parse($premier_date)->format('d.m.Y h:m:sa');
 
-        if ($now->between($now->format('d.m.Y h:m:sa'), $expiredDate)) {
+        $checkDateInterval = $now->diffInDays($expiredDate, false);
+
+        if($checkDateInterval > 0){
             return 'Active';
-        } else {
+        }else{
             return 'Expired';
         }
+
+        // if ($now->between($now->format('d.m.Y h:m:sa'), $expiredDate)) {
+        //     return 'Active';
+        // } else {
+        //     return 'Expired';
+        // }
 
     }
 

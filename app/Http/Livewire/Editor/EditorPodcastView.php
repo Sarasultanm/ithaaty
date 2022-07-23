@@ -327,6 +327,11 @@ class EditorPodcastView extends Component
             $now = Carbon::now();
             $expiredDate = Carbon::parse($premier_date)->format('d.m.Y h:m:sa');
 
+
+            // $diffInDays = $now->diffInDays($expiredDate);
+
+            // $randomDays = rand(0, $diffInDays);
+
             // if ($now->format('d.m.Y') >= $expiredDate){
             //     return 'Play'.strtotime($now->format('d.m.Y h:m:sa'))." - ".$expiredDate;
             // }else{
@@ -339,14 +344,20 @@ class EditorPodcastView extends Component
             // }else{
             //     return 'Expired';
             // }
+           // Carbon::now()->diffInDays($row->expire_date, false) 
+            $checkDateInterval = $now->diffInDays($expiredDate, false);
 
-            
-            
-            if ($now->between($now->format('d.m.Y h:m:sa'), $expiredDate)) {
+            if($checkDateInterval > 0){
                 return 'Active';
-            } else {
+            }else{
                 return 'Expired';
             }
+            
+            // if ($now->between($now->format('d.m.Y h:m:sa'), $expiredDate)) {
+            //     return 'Active';
+            // } else {
+            //     return 'Expired';
+            // }
     
         }
 
