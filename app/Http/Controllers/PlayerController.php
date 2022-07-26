@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AudioTimeStats;
 use App\Models\Audio;
+use App\Models\UserViews;
 use Auth;
+
 
 class PlayerController extends Controller
 {
@@ -29,6 +31,17 @@ class PlayerController extends Controller
             'ats_audiolenght' => $request->video_lenght
         ]);
         
+        UserViews::create([
+            'view_userid'=> Auth::user()->id,
+            'view_audioid'=> $request->audioid,
+            'view_type'=>"view",
+            'view_status'=>"active",
+            'view_ownerid'=> $data->audio_editor,
+            'user_ip'=> $_SERVER['REMOTE_ADDR']
+        ]);
+
+
+
 
         return response()->json(['success'=>'Ajax request submitted successfully']);
 

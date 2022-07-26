@@ -13,7 +13,7 @@
             @endif
             <input type="hidden" id="video_id" value="{{ $audio->id }}">
             <script src="{{ asset('videojs/video.min.js') }}"></script>
-            <script src="{{ asset('videojs/nuevo.min.js') }}"></script>
+            {{-- <script src="{{ asset('videojs/nuevo.min.js') }}"></script> --}}
 
               <video  x-show="!open"  
                 id="my-video_html5_api"
@@ -134,7 +134,7 @@
               <script src="{{ asset('js/adsScript/'.$newNumAds.'-ads.js' ) }}" ></script> 
             @endif
     </div>
-    <button wire:click="refreshData" class="click-me bg-custom-pink text-white hidden">Click Me</button>
+    <button wire:click="refreshData" class="hidden text-white click-me bg-custom-pink">Click Me</button>
    
     {{-- <div class="mt-5" >
         <div  @click="open = !open" x-cloak >

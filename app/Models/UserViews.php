@@ -9,6 +9,16 @@ class UserViews extends Model
 {
     use HasFactory;
 
+
+    protected $fillable = [
+        'view_userid',
+        'view_audioid',
+        'view_type',
+        'view_status',
+        'view_ownerid',
+        'user_ip'
+    ];
+
     public function get_audio(){
         return $this->belongsTo('App\Models\Audio', 'view_audioid', 'id');
     }

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\UserViews;
 use App\Models\Category;
 use App\Models\UserComments;
+use App\Models\AudioTimeStats;
 use Auth;
 
 
@@ -26,6 +27,19 @@ class EditorPodcastDetail extends Component
         redirect()->to('editor/s/'.$this->searchbar); 
 
     }
+
+    public function getTotalView($audio_id){
+        $data = AudioTimeStats::where('ats_audioid',$audio_id);
+        $user = $data->groupBy('ats_userid')->distinct()->count('ats_userid');
+        $ip = UserViews::where('view_audioid',$audio_id)->distinct()->count('user_ip');
+        return array(
+            'totalView'=>$data->count(),
+            'userView'=>$user,
+            'ipad'=> $ip
+        );
+        //return $data->count();
+    }
+
 
     
 	public function mount($id)
