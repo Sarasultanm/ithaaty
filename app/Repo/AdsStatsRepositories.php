@@ -51,7 +51,7 @@ class AdsStatsRepositories
     }
     /* initialize */
 
-
+   
 
     public function getAdsStatById($id){
         return $this->getAdsStat()->find($id);

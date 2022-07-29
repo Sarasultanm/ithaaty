@@ -189,6 +189,104 @@
          
       </div>
 
+
+      <div class="col-span-3">
+        <div class="">
+                
+            <div class="overflow-hidden rounded-lg shadow-lg">
+              <div class="px-5 py-3 bg-gray-50">
+                  Ads Chart
+              </div>
+              <canvas class="p-10 " id="chartBar"></canvas>
+            </div>
+        
+            <!-- Required chart.js -->
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
+            <!-- Chart bar -->
+            <script>
+        
+                const labelsBarChart = [
+                'Jan',
+                'Feb',
+                'Marc',
+                'Apri',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec',
+                ];
+                const dataBarChart = {
+                labels: labelsBarChart,
+                datasets: [{
+                    label: 'My First dataset',
+                    backgroundColor: '#f98b88',
+                    borderColor: 'hsl(252, 82.9%, 67.8%)',
+                    data: [{{$jan}},{{$feb}},{{$mar}},{{$apr}},{{$may}},{{$jun}},{{$jul}},{{$aug}},{{$sep}},{{$oct}},{{$nov}},{{$dec}}],
+                }]
+                };
+        
+                const configBarChart = {
+                type: 'bar',
+                data: dataBarChart,
+                options: {}
+                };
+        
+        
+                var chartBar = new Chart(
+                document.getElementById('chartBar'),
+                configBarChart
+                );
+            </script>
+        
+        </div>
+    </div>
+    <div class="col-span-3">
+
+        <div class="overflow-hidden rounded-lg shadow-lg">
+            <div class="px-5 py-3 bg-gray-50">Gender</div>
+            <canvas class="p-10" id="chartPie"></canvas>
+          </div>
+         
+        <br>
+        
+          <!-- Required chart.js -->
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          
+          <!-- Chart pie -->
+          <script>
+            const TotalFemale = <?php echo $totalFemale; ?>;
+            const TotalMale = <?php echo $totalMale; ?>;
+            const dataPie = {
+              labels: ["Female", "Male"],
+              datasets: [
+                {
+                  label: "Gender Stats",
+                  data: [TotalFemale, TotalMale],
+                  backgroundColor: [
+                    "rgb(133, 105, 241)",
+                    "rgb(164, 101, 241)",
+                  ],
+                  hoverOffset: 4,
+                },
+              ],
+            };
+          
+            const configPie = {
+              type: "pie",
+              data: dataPie,
+              options: {},
+            };
+          
+            var chartBar = new Chart(document.getElementById("chartPie"), configPie);
+          </script>
+    </div>
+    
+
       
   </div>
 </section>
